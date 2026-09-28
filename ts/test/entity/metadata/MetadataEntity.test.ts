@@ -1,0 +1,176 @@
+
+
+import Path from 'node:path'
+import * as Fs from 'node:fs'
+
+import { test, describe, afterEach } from 'node:test'
+import assert from 'node:assert'
+import { createLiveTransport } from '../../live-runner'
+import { runLiveEntity } from '../../live-entity'
+
+
+import { ApicurioRegistrySDK, BaseFeature, stdutil } from '../../..'
+
+import {
+  envOverride,
+  liveClientOptions,
+  liveDelay,
+  loadEnvLocal,
+  makeCtrl,
+  makeMatch,
+  makeReqdata,
+  makeStepData,
+  makeValid,
+  maybeSkipControl,
+} from '../../utility'
+
+
+loadEnvLocal(__dirname + '/../../../.env.local')
+
+
+describe('MetadataEntity', async () => {
+
+  // Per-test live pacing. Delay is read from sdk-test-control.json's
+  // `test.live.delayMs`; only sleeps when APICURIO_REGISTRY_TEST_LIVE=TRUE.
+  afterEach(liveDelay('APICURIO_REGISTRY_TEST_LIVE'))
+
+  test('instance', async () => {
+    const testsdk = ApicurioRegistrySDK.test()
+    const ent = testsdk.Metadata()
+    assert(null != ent)
+  })
+
+
+  test('basic', async (t) => {
+
+    const live = 'TRUE' === process.env.APICURIO_REGISTRY_TEST_LIVE
+    for (const op of ['create', 'update', 'load']) {
+      if (!live && maybeSkipControl(t, 'entityOp', 'metadata.' + op, live)) return
+    }
+
+    
+    const setup = basicSetup()
+    if (setup.live) {
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"artifactId":{"a":true,"h":"Artifact Id","n":"artifactId","op":{"load":{"req":true,"type":"`$STRING`"}},"r":false,"t":"`$STRING`","key$":"artifactId","index$":0},"artifactType":{"a":true,"h":"Artifact Type","n":"artifactType","op":{"load":{"req":true,"type":"`$STRING`"}},"r":false,"t":"`$STRING`","key$":"artifactType","index$":1},"contentId":{"a":true,"h":"Content Id","n":"contentId","r":false,"t":"`$INTEGER`","key$":"contentId","index$":2},"contractMetadata":{"a":true,"h":"Contract Metadata","n":"contractMetadata","r":false,"sh":"Contract metadata projected from the artifact labels.","t":"`$OBJECT`","key$":"contractMetadata","index$":3},"createdOn":{"a":true,"fo":"date-time","h":"Created On","n":"createdOn","op":{"load":{"req":true,"type":"`$STRING`"}},"r":false,"t":"`$STRING`","key$":"createdOn","index$":4},"description":{"a":true,"h":"Description","n":"description","r":false,"t":"`$STRING`","key$":"description","index$":5},"globalId":{"a":true,"h":"Global Id","n":"globalId","r":false,"t":"`$INTEGER`","key$":"globalId","index$":6},"groupId":{"a":true,"h":"Group Id","n":"groupId","op":{"load":{"req":true,"type":"`$STRING`"}},"r":false,"t":"`$STRING`","key$":"groupId","index$":7},"labels":{"a":true,"h":"Labels","n":"labels","r":false,"t":"`$OBJECT`","key$":"labels","index$":8},"modifiedBy":{"a":true,"h":"Modified By","n":"modifiedBy","r":true,"t":"`$STRING`","key$":"modifiedBy","index$":9},"modifiedOn":{"a":true,"fo":"date-time","h":"Modified On","n":"modifiedOn","r":true,"t":"`$STRING`","key$":"modifiedOn","index$":10},"name":{"a":true,"h":"Name","n":"name","r":false,"t":"`$STRING`","key$":"name","index$":11},"owner":{"a":true,"h":"Owner","n":"owner","op":{"load":{"req":true,"type":"`$STRING`"}},"r":false,"t":"`$STRING`","key$":"owner","index$":12},"version":{"a":true,"h":"Version","n":"version","r":false,"t":"`$INTEGER`","key$":"version","index$":13}},"name":"metadata","op":{"create":{"input":"data","name":"create","points":[{"a":true,"co":{"id":"POST /groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}/render","source":"openapi3","version":2},"g":{"params":[{"a":true,"ex":"\"example-artifact\"","k":"param","n":"artifact_id","or":"artifact_id","r":true,"t":"`$STRING`","index$":0},{"a":true,"ex":"\"my-group\"","k":"param","n":"group_id","or":"group_id","r":true,"t":"`$STRING`","index$":1},{"a":true,"k":"param","n":"version_expression","or":"version_expression","r":true,"t":"`$STRING`","index$":2}]},"k":"http","m":"POST","o":"/groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}/render","q":{"$action":"render","exist":["artifact_id","group_id","version_expression"]},"r":{"param":{"artifactId":"artifact_id","groupId":"group_id","versionExpression":"version_expression"}},"s":[{"lit":"groups"},{"var":"group_id"},{"lit":"artifacts"},{"var":"artifact_id"},{"lit":"versions"},{"var":"version_expression"},{"lit":"render"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"create"},"load":{"input":"data","name":"load","points":[{"a":true,"co":{"id":"GET /groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}","source":"openapi3","version":2},"g":{"params":[{"a":true,"ex":"\"example-artifact\"","k":"param","n":"artifact_id","or":"artifact_id","r":true,"t":"`$STRING`","index$":0},{"a":true,"ex":"\"my-group\"","k":"param","n":"group_id","or":"group_id","r":true,"t":"`$STRING`","index$":1},{"a":true,"k":"param","n":"version_expression","or":"version_expression","r":true,"t":"`$STRING`","index$":2}]},"k":"http","m":"GET","o":"/groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}","q":{"exist":["artifact_id","group_id","version_expression"]},"r":{"param":{"artifactId":"artifact_id","groupId":"group_id","versionExpression":"version_expression"}},"s":[{"lit":"groups"},{"var":"group_id"},{"lit":"artifacts"},{"var":"artifact_id"},{"lit":"versions"},{"var":"version_expression"}],"t":{"req":"`reqdata`","res":"`body.labels`"},"index$":0},{"a":true,"co":{"id":"GET /groups/{groupId}/artifacts/{artifactId}","source":"openapi3","version":2},"g":{"params":[{"a":true,"ex":"\"example-artifact\"","k":"param","n":"artifact_id","or":"artifact_id","r":true,"t":"`$STRING`","index$":0},{"a":true,"ex":"\"my-group\"","k":"param","n":"group_id","or":"group_id","r":true,"t":"`$STRING`","index$":1}]},"k":"http","m":"GET","o":"/groups/{groupId}/artifacts/{artifactId}","q":{"exist":["artifact_id","group_id"]},"r":{"param":{"artifactId":"artifact_id","groupId":"group_id"}},"s":[{"lit":"groups"},{"var":"group_id"},{"lit":"artifacts"},{"var":"artifact_id"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":1}],"key$":"load"},"update":{"input":"data","name":"update","points":[{"a":true,"co":{"id":"PUT /groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}/state","source":"openapi3","version":2},"g":{"params":[{"a":true,"ex":"\"example-artifact\"","k":"param","n":"artifact_id","or":"artifact_id","r":true,"t":"`$STRING`","index$":0},{"a":true,"ex":"\"my-group\"","k":"param","n":"group_id","or":"group_id","r":true,"t":"`$STRING`","index$":1},{"a":true,"k":"param","n":"version_expression","or":"version_expression","r":true,"t":"`$STRING`","index$":2}],"query":[{"a":true,"k":"query","n":"dry_run","or":"dry_run","r":false,"t":"`$BOOLEAN`","index$":0}]},"k":"http","m":"PUT","o":"/groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}/state","q":{"$action":"state","exist":["artifact_id","dry_run","group_id","version_expression"]},"r":{"param":{"artifactId":"artifact_id","groupId":"group_id","versionExpression":"version_expression"}},"s":[{"lit":"groups"},{"var":"group_id"},{"lit":"artifacts"},{"var":"artifact_id"},{"lit":"versions"},{"var":"version_expression"},{"lit":"state"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0},{"a":true,"co":{"id":"PUT /groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}","source":"openapi3","version":2},"g":{"params":[{"a":true,"ex":"\"example-artifact\"","k":"param","n":"artifact_id","or":"artifact_id","r":true,"t":"`$STRING`","index$":0},{"a":true,"ex":"\"my-group\"","k":"param","n":"group_id","or":"group_id","r":true,"t":"`$STRING`","index$":1},{"a":true,"k":"param","n":"version_expression","or":"version_expression","r":true,"t":"`$STRING`","index$":2}]},"k":"http","m":"PUT","o":"/groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}","q":{"exist":["artifact_id","group_id","version_expression"]},"r":{"param":{"artifactId":"artifact_id","groupId":"group_id","versionExpression":"version_expression"}},"s":[{"lit":"groups"},{"var":"group_id"},{"lit":"artifacts"},{"var":"artifact_id"},{"lit":"versions"},{"var":"version_expression"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":1},{"a":true,"co":{"id":"PUT /groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}/content","source":"openapi3","version":2},"g":{"params":[{"a":true,"ex":"\"example-artifact\"","k":"param","n":"artifact_id","or":"artifact_id","r":true,"t":"`$STRING`","index$":0},{"a":true,"ex":"\"my-group\"","k":"param","n":"group_id","or":"group_id","r":true,"t":"`$STRING`","index$":1},{"a":true,"k":"param","n":"version_expression","or":"version_expression","r":true,"t":"`$STRING`","index$":2}]},"k":"http","m":"PUT","o":"/groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}/content","q":{"$action":"content","exist":["artifact_id","group_id","version_expression"]},"r":{"param":{"artifactId":"artifact_id","groupId":"group_id","versionExpression":"version_expression"}},"s":[{"lit":"groups"},{"var":"group_id"},{"lit":"artifacts"},{"var":"artifact_id"},{"lit":"versions"},{"var":"version_expression"},{"lit":"content"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":2},{"a":true,"co":{"id":"PUT /groups/{groupId}/artifacts/{artifactId}","source":"openapi3","version":2},"g":{"params":[{"a":true,"ex":"\"example-artifact\"","k":"param","n":"artifact_id","or":"artifact_id","r":true,"t":"`$STRING`","index$":0},{"a":true,"ex":"\"my-group\"","k":"param","n":"group_id","or":"group_id","r":true,"t":"`$STRING`","index$":1}]},"k":"http","m":"PUT","o":"/groups/{groupId}/artifacts/{artifactId}","q":{"exist":["artifact_id","group_id"]},"r":{"param":{"artifactId":"artifact_id","groupId":"group_id"}},"s":[{"lit":"groups"},{"var":"group_id"},{"lit":"artifacts"},{"var":"artifact_id"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":3}],"key$":"update"}},"relations":{"ancestors":[["$.main.kit.entity.group","$.main.kit.entity.artifact"],["$.main.kit.entity.group","$.main.kit.entity.artifact","$.main.kit.entity.version"]]},"key$":"metadata","name__orig":"metadata","Name":"Metadata","name_":"metadata","name-":"metadata","NAME":"METADATA","index$":29}, {"active":true,"entity":"metadata","key$":"BasicMetadataFlow","kind":"basic","name":"BasicMetadataFlow","param":{},"step":[{"a":true,"d":{},"i":{"ref":"metadata_ref01"},"m":{"artifact_id":"artifact01","group_id":"group01","version_expression":"version_expression01"},"o":"create","s":[],"v":[],"index$":0},{"a":true,"d":{"group_id":"group01"},"i":{"ref":"metadata_ref01","srcdatavar":"metadata_ref01_data","suffix":"_up0","textfield":"artifactId"},"m":{},"o":"update","s":[{"apply":"TextFieldMark","def":{"mark":"Mark01-metadata_ref01"}}],"v":[],"index$":1},{"a":true,"d":{},"i":{"ref":"metadata_ref01","srcdatavar":"metadata_ref01_data","suffix":"_dt0"},"m":{"group_id":"group01","id":"metadata01"},"o":"load","s":[],"v":[{"apply":"TextFieldMark","def":{"mark":"Mark01-metadata_ref01"}}],"index$":2}]}, 'Metadata', {"POST /groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}/render":{"protocol":"http","requestBody":{"description":"The variables to use for rendering the prompt template.","content":{"application/json":{"schema":{"title":"Root Type for RenderPromptRequest","description":"Request body for rendering a prompt template with variable substitution.","required":["variables"],"type":"object","properties":{"variables":{"description":"A map of variable names to their values. These will be substituted into the prompt template.","type":"object","additionalProperties":{}}},"example":{"variables":{"document":"The quick brown fox jumps over the lazy dog.","max_words":100,"style":"concise"}},"x-ref":"#/components/schemas/RenderPromptRequest"}}},"required":true},"parameters":[{"name":"groupId","description":"The artifact group ID.  Must be a string provided by the client, representing the name of the grouping of artifacts. Must follow the \".{1,512}\" pattern.","schema":{"description":"An ID of a single artifact group.","pattern":"^.{1,512}$","type":"string","example":"\"my-group\"","x-ref":"#/components/schemas/GroupId"},"in":"path","required":true,"index$":0},{"name":"artifactId","description":"The artifact ID.  Can be a string (client-provided) or UUID (server-generated), representing the unique artifact identifier. Must follow the \".{1,512}\" pattern.","schema":{"description":"The ID of a single artifact.","pattern":"^.{1,512}$","type":"string","example":"\"example-artifact\"","x-ref":"#/components/schemas/ArtifactId"},"in":"path","required":true,"index$":1},{"name":"versionExpression","description":"An expression resolvable to a specific version ID within the given group and artifact. The following rules apply:\n\n - If the expression is in the form \"branch={branchId}\", and artifact branch {branchId} exists: The expression is resolved to a version that the branch points to.\n - Otherwise: The expression is resolved to a version with the same ID, which must follow the \"[a-zA-Z0-9._\\\\-+]{1,256}\" pattern.","schema":{"type":"string"},"in":"path","required":true,"index$":2}]},"GET /groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}":{"protocol":"http","parameters":[{"name":"groupId","description":"The artifact group ID.  Must be a string provided by the client, representing the name of the grouping of artifacts. Must follow the \".{1,512}\" pattern.","schema":{"description":"An ID of a single artifact group.","pattern":"^.{1,512}$","type":"string","example":"\"my-group\"","x-ref":"#/components/schemas/GroupId"},"in":"path","required":true,"index$":0},{"name":"artifactId","description":"The artifact ID.  Can be a string (client-provided) or UUID (server-generated), representing the unique artifact identifier. Must follow the \".{1,512}\" pattern.","schema":{"description":"The ID of a single artifact.","pattern":"^.{1,512}$","type":"string","example":"\"example-artifact\"","x-ref":"#/components/schemas/ArtifactId"},"in":"path","required":true,"index$":1},{"name":"versionExpression","description":"An expression resolvable to a specific version ID within the given group and artifact. The following rules apply:\n\n - If the expression is in the form \"branch={branchId}\", and artifact branch {branchId} exists: The expression is resolved to a version that the branch points to.\n - Otherwise: The expression is resolved to a version with the same ID, which must follow the \"[a-zA-Z0-9._\\\\-+]{1,256}\" pattern.","schema":{"type":"string"},"in":"path","required":true,"index$":2}]},"GET /groups/{groupId}/artifacts/{artifactId}":{"protocol":"http","parameters":[{"name":"groupId","description":"The artifact group ID.  Must be a string provided by the client, representing the name of the grouping of artifacts. Must follow the \".{1,512}\" pattern.","schema":{"description":"An ID of a single artifact group.","pattern":"^.{1,512}$","type":"string","example":"\"my-group\"","x-ref":"#/components/schemas/GroupId"},"in":"path","required":true,"index$":0},{"name":"artifactId","description":"The artifact ID.  Can be a string (client-provided) or UUID (server-generated), representing the unique artifact identifier. Must follow the \".{1,512}\" pattern.","schema":{"description":"The ID of a single artifact.","pattern":"^.{1,512}$","type":"string","example":"\"example-artifact\"","x-ref":"#/components/schemas/ArtifactId"},"in":"path","required":true,"index$":1}]},"PUT /groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}/state":{"protocol":"http","requestBody":{"description":"The new state.","content":{"application/json":{"schema":{"title":"Root Type for WrappedVersionState","description":"","required":["state"],"type":"object","properties":{"state":{"description":"Describes the state of an artifact or artifact version.\n\n* ENABLED\n* DISABLED\n* DEPRECATED\n* DRAFT\n* SUNSET — Signals that a migration deadline has passed and the version will be removed. Requires transitioning through DEPRECATED first. Added in 3.3.0.\n","enum":["ENABLED","DISABLED","DEPRECATED","DRAFT","SUNSET"],"key$":"state","type":"string","x-codegen-package":"io.apicurio.registry.types","x-ref":"#/components/schemas/VersionState"}},"example":{"state":"ENABLED"},"x-ref":"#/components/schemas/WrappedVersionState"}}},"required":true},"parameters":[{"name":"groupId","description":"The artifact group ID.  Must be a string provided by the client, representing the name of the grouping of artifacts. Must follow the \".{1,512}\" pattern.","schema":{"description":"An ID of a single artifact group.","pattern":"^.{1,512}$","type":"string","example":"\"my-group\"","x-ref":"#/components/schemas/GroupId"},"in":"path","required":true,"index$":0},{"name":"artifactId","description":"The artifact ID.  Can be a string (client-provided) or UUID (server-generated), representing the unique artifact identifier. Must follow the \".{1,512}\" pattern.","schema":{"description":"The ID of a single artifact.","pattern":"^.{1,512}$","type":"string","example":"\"example-artifact\"","x-ref":"#/components/schemas/ArtifactId"},"in":"path","required":true,"index$":1},{"name":"versionExpression","description":"An expression resolvable to a specific version ID within the given group and artifact. The following rules apply:\n\n - If the expression is in the form \"branch={branchId}\", and artifact branch {branchId} exists: The expression is resolved to a version that the branch points to.\n - Otherwise: The expression is resolved to a version with the same ID, which must follow the \"[a-zA-Z0-9._\\\\-+]{1,256}\" pattern.","schema":{"type":"string"},"in":"path","required":true,"index$":2},{"name":"dryRun","description":"When set to `true`, the operation will not result in any changes. Instead, it\nwill return a result based on whether the operation **would have succeeded**.","schema":{"type":"boolean"},"in":"query","index$":3}]},"PUT /groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}":{"protocol":"http","requestBody":{"content":{"application/json":{"schema":{"title":"Root Type for EditableArtifactMetaData","description":"","type":"object","properties":{"name":{"type":"string","key$":"name"},"description":{"type":"string","key$":"description"},"labels":{"description":"","type":"object","additionalProperties":{"type":"string","key$":"additionalProperties"},"x-codegen-inline":true,"x-codegen-type":"StringMap","x-ref":"#/components/schemas/Labels","key$":"labels"}},"example":{"name":"Artifact Name","description":"The description of the artifact.","labels":{"custom-1":"foo","custom-2":"bar"}},"x-ref":"#/components/schemas/EditableVersionMetaData","index$":1}}},"required":true},"parameters":[{"name":"groupId","description":"The artifact group ID.  Must be a string provided by the client, representing the name of the grouping of artifacts. Must follow the \".{1,512}\" pattern.","schema":{"description":"An ID of a single artifact group.","pattern":"^.{1,512}$","type":"string","example":"\"my-group\"","x-ref":"#/components/schemas/GroupId"},"in":"path","required":true,"index$":0},{"name":"artifactId","description":"The artifact ID.  Can be a string (client-provided) or UUID (server-generated), representing the unique artifact identifier. Must follow the \".{1,512}\" pattern.","schema":{"description":"The ID of a single artifact.","pattern":"^.{1,512}$","type":"string","example":"\"example-artifact\"","x-ref":"#/components/schemas/ArtifactId"},"in":"path","required":true,"index$":1},{"name":"versionExpression","description":"An expression resolvable to a specific version ID within the given group and artifact. The following rules apply:\n\n - If the expression is in the form \"branch={branchId}\", and artifact branch {branchId} exists: The expression is resolved to a version that the branch points to.\n - Otherwise: The expression is resolved to a version with the same ID, which must follow the \"[a-zA-Z0-9._\\\\-+]{1,256}\" pattern.","schema":{"type":"string"},"in":"path","required":true,"index$":2}]},"PUT /groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}/content":{"protocol":"http","requestBody":{"description":"The new artifact version content.","content":{"application/json":{"schema":{"description":"","required":["content","contentType"],"type":"object","properties":{"content":{"description":"Raw content of the artifact version or a valid (and accessible) URL where the content can be found.","type":"string","example":"","key$":"content"},"references":{"description":"Collection of references to other artifacts.","type":"array","items":{"title":"Root Type for ArtifactReference","description":"A reference to a different artifact. Typically used with artifact types that can have dependencies like Protobuf.","required":["artifactId","groupId","name"],"type":"object","properties":{"groupId":{"type":"string","key$":"groupId"},"artifactId":{"type":"string","key$":"artifactId"},"version":{"type":"string","key$":"version"},"name":{"type":"string","key$":"name"}},"example":{"groupId":"mygroup","artifactId":"13842090-2ce3-11ec-8d3d-0242ac130003","version":"2","name":"foo.bar.Open"},"x-ref":"#/components/schemas/ArtifactReference"},"key$":"references"},"contentType":{"description":"The content-type, such as `application/json` or `text/xml`.","type":"string","key$":"contentType"},"encoding":{"description":"Optional encoding for the content property. When set to 'base64', the content value will be base64-decoded by the server before processing.","type":"string","enum":["base64"],"key$":"encoding"}},"x-ref":"#/components/schemas/VersionContent"}}},"required":true},"parameters":[{"name":"groupId","description":"The artifact group ID.  Must be a string provided by the client, representing the name of the grouping of artifacts. Must follow the \".{1,512}\" pattern.","schema":{"description":"An ID of a single artifact group.","pattern":"^.{1,512}$","type":"string","example":"\"my-group\"","x-ref":"#/components/schemas/GroupId"},"in":"path","required":true,"index$":0},{"name":"artifactId","description":"The artifact ID.  Can be a string (client-provided) or UUID (server-generated), representing the unique artifact identifier. Must follow the \".{1,512}\" pattern.","schema":{"description":"The ID of a single artifact.","pattern":"^.{1,512}$","type":"string","example":"\"example-artifact\"","x-ref":"#/components/schemas/ArtifactId"},"in":"path","required":true,"index$":1},{"name":"versionExpression","description":"An expression resolvable to a specific version ID within the given group and artifact. The following rules apply:\n\n - If the expression is in the form \"branch={branchId}\", and artifact branch {branchId} exists: The expression is resolved to a version that the branch points to.\n - Otherwise: The expression is resolved to a version with the same ID, which must follow the \"[a-zA-Z0-9._\\\\-+]{1,256}\" pattern.","schema":{"type":"string"},"in":"path","required":true,"index$":2}]},"PUT /groups/{groupId}/artifacts/{artifactId}":{"protocol":"http","requestBody":{"description":"Updated artifact metadata.","content":{"application/json":{"schema":{"title":"Root Type for EditableArtifactMetaData","description":"","type":"object","properties":{"name":{"type":"string","key$":"name"},"description":{"type":"string","key$":"description"},"labels":{"description":"","type":"object","additionalProperties":{"type":"string","key$":"additionalProperties"},"x-codegen-inline":true,"x-codegen-type":"StringMap","x-ref":"#/components/schemas/Labels","key$":"labels"},"owner":{"description":"","type":"string","key$":"owner"}},"example":{"name":"Artifact Name","description":"The description of the artifact.","owner":"user-1","labels":{"custom-1":"foo","custom-2":"bar"}},"x-ref":"#/components/schemas/EditableArtifactMetaData","index$":1}}},"required":true},"parameters":[{"name":"groupId","description":"The artifact group ID.  Must be a string provided by the client, representing the name of the grouping of artifacts. Must follow the \".{1,512}\" pattern.","schema":{"description":"An ID of a single artifact group.","pattern":"^.{1,512}$","type":"string","example":"\"my-group\"","x-ref":"#/components/schemas/GroupId"},"in":"path","required":true,"index$":0},{"name":"artifactId","description":"The artifact ID.  Can be a string (client-provided) or UUID (server-generated), representing the unique artifact identifier. Must follow the \".{1,512}\" pattern.","schema":{"description":"The ID of a single artifact.","pattern":"^.{1,512}$","type":"string","example":"\"example-artifact\"","x-ref":"#/components/schemas/ArtifactId"},"in":"path","required":true,"index$":1}]}})
+    }
+    const client = setup.client
+    const struct = setup.struct
+
+    const isempty = struct.isempty
+    const select = struct.select
+
+
+    // CREATE
+    const metadata_ref01_ent = client.Metadata()
+    let metadata_ref01_data = setup.data.new.metadata['metadata_ref01']
+    metadata_ref01_data['artifact_id'] = setup.idmap['artifact01']
+    metadata_ref01_data['group_id'] = setup.idmap['group01']
+    metadata_ref01_data['version_expression'] = setup.idmap['version_expression01']
+
+    metadata_ref01_data = (await metadata_ref01_ent.create(metadata_ref01_data)).data()
+    assert(null != metadata_ref01_data)
+
+
+    // UPDATE
+    const metadata_ref01_data_up0: any = {}
+    metadata_ref01_data_up0 ['group_id'] = setup.idmap['group_id']
+
+    const metadata_ref01_markdef_up0 = { name: 'artifactId', value: 'Mark01-metadata_ref01_' + setup.now }
+    ;(metadata_ref01_data_up0 as any)[metadata_ref01_markdef_up0.name] = metadata_ref01_markdef_up0.value
+
+    const metadata_ref01_resdata_up0 = (await metadata_ref01_ent.update(metadata_ref01_data_up0)).data()
+    assert(null != metadata_ref01_resdata_up0)
+
+    assert((metadata_ref01_resdata_up0 as any)[metadata_ref01_markdef_up0.name] === metadata_ref01_markdef_up0.value)
+
+
+
+  })
+})
+
+
+
+function basicSetup(extra?: any) {
+  // TODO: fix test def options
+  const options: any = {} // null
+
+  // TODO: needs test utility to resolve path
+  const entityDataFile =
+    Path.resolve(__dirname, 
+      '../../../../.sdk/test/entity/metadata/MetadataTestData.json')
+
+  // TODO: file ready util needed?
+  const entityDataSource = Fs.readFileSync(entityDataFile).toString('utf8')
+
+  // TODO: need a xlang JSON parse utility in voxgig/struct with better error msgs
+  const entityData = JSON.parse(entityDataSource)
+
+  options.entity = entityData.existing
+
+  let client = ApicurioRegistrySDK.test(options, extra)
+  const struct = client.utility().struct
+  const merge = struct.merge
+  const transform = struct.transform
+
+  let idmap = transform(
+    ['metadata01','metadata02','metadata03','group01','group02','group03','artifact01','artifact02','artifact03','version01','version02','version03','version_expression01'],
+    {
+      '`$PACK`': ['', {
+        '`$KEY`': '`$COPY`',
+        '`$VAL`': ['`$FORMAT`', 'upper', '`$COPY`']
+      }]
+    })
+
+  const env = envOverride({
+    'APICURIO_REGISTRY_TEST_METADATA_ENTID': idmap,
+    'APICURIO_REGISTRY_TEST_LIVE': 'FALSE',
+    'APICURIO_REGISTRY_TEST_EXPLAIN': 'FALSE',
+    'APICURIO_REGISTRY_SERVER_REGISTRY': "MY-REGISTRY-URL",
+  })
+
+  idmap = env['APICURIO_REGISTRY_TEST_METADATA_ENTID']
+
+  const live = 'TRUE' === env.APICURIO_REGISTRY_TEST_LIVE
+
+  const transport = createLiveTransport()
+  if (live) {
+    const rawIds = process.env['APICURIO_REGISTRY_TEST_METADATA_ENTID']
+    idmap = rawIds && rawIds.trim() ? JSON.parse(rawIds) : {}
+    if (!idmap || Array.isArray(idmap) || typeof idmap !== 'object') {
+      throw new Error('Live ENTID must be a JSON object')
+    }
+    client = new ApicurioRegistrySDK(merge([
+      // FIRST, so the generated fields below win: sdk-test-control.json's
+      // test.client.options adds to the live client, it does not redirect it.
+      liveClientOptions(),
+      {
+        server: {
+          registry: env.APICURIO_REGISTRY_SERVER_REGISTRY,
+        },
+      },
+      // 'extra || {}', not a bare 'extra': struct.merge returns UNDEFINED when the
+      // last entry is undefined, and basicSetup is normally called with no
+      // argument at all - so a bare 'extra' silently discarded the apikey
+      // and server values above and handed the SDK undefined. Harmless
+      // while there was nothing in that object; not harmless now.
+      extra || {},
+      { system: { fetch: transport.fetch } }
+    ]))
+  }
+
+  const setup = {
+    idmap,
+    env,
+    options,
+    client,
+    struct,
+    data: entityData,
+    explain: 'TRUE' === env.APICURIO_REGISTRY_TEST_EXPLAIN,
+    live,
+    transport,
+    now: Date.now(),
+  }
+
+  return setup
+}
+  

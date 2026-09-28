@@ -1,0 +1,28 @@
+# BasicUsageSummaryFlow
+
+main: kit: flow: BasicUsageSummaryFlow:
+{
+  entity: "usage_summary",
+  kind: "basic",
+  name: "BasicUsageSummaryFlow",
+  step: [
+    {
+      i: {
+        ref: "usage_summary_ref01",
+        srcdatavar: "usage_summary_ref01_data",
+        suffix: "_dt0"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-usage_summary_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicUsageSummaryFlow"
+}

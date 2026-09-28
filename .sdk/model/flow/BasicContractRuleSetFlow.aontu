@@ -1,0 +1,40 @@
+# BasicContractRuleSetFlow
+
+main: kit: flow: BasicContractRuleSetFlow:
+{
+  entity: "contract_rule_set",
+  kind: "basic",
+  name: "BasicContractRuleSetFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "contract_rule_set_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      i: {
+        ref: "contract_rule_set_ref01",
+        srcdatavar: "contract_rule_set_ref01_data",
+        suffix: "_up0"
+      }
+
+      o: "update",
+      s: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-contract_rule_set_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicContractRuleSetFlow"
+}

@@ -1,0 +1,52 @@
+# API Information
+
+
+main: {
+  kit: {
+    info: {
+      auth: false
+      contact: {
+        email: "cncf-apicurio-registry-dev@lists.cncf.io"
+        name: "Apicurio"
+        url: "https://github.com/apicurio/apicurio-registry"
+      }
+      description: `Apicurio Registry is a datastore for standard event schemas and API designs. Apicurio Registry enables developers to manage and share the structure of their data using a REST interface. For example, client applications can dynamically push or pull the latest updates to or from the registry without needing to redeploy. Apicurio Registry also enables developers to create rules that govern how registry content can evolve over time. For example, this includes rules for content validation and version compatibility.
+
+The Apicurio Registry REST API enables client applications to manage the artifacts in the registry. This API provides create, read, update, and delete operations for schema and API artifacts, rules, versions, and metadata. 
+
+The supported artifact types include:
+- Apache Avro schema
+- AsyncAPI specification
+- Google protocol buffers
+- GraphQL schema
+- JSON Schema
+- Kafka Connect schema
+- OpenAPI specification
+- Web Services Description Language
+- XML Schema Definition
+
+
+**Important**: The Apicurio Registry REST API is available from \`https://MY-REGISTRY-URL/apis/registry/v3\` by default. Therefore you must prefix all API operation paths with \`/apis/registry/v3\` in this case. For example: \`/apis/registry/v3/ids/globalIds/{globalId}\`.
+`
+      license: {
+        name: "Apache 2.0"
+        url: "https://www.apache.org/licenses/LICENSE-2.0"
+      }
+      servers: [
+        {
+          url: "https://{registry}/apis/registry/v3"
+          variables: {
+            registry: {
+              default: "MY-REGISTRY-URL"
+            }
+          }
+        }
+      ]
+      summary: "Apicurio Registry is a datastore for standard event schemas and API designs."
+      title: "Apicurio Registry API [v3]"
+      version: "3.3.x"
+      website: "https://github.com/apicurio/apicurio-registry"
+    }
+  }
+}
+

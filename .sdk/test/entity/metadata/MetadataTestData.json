@@ -1,0 +1,123 @@
+{
+  "existing": {
+    "metadata": {
+      "METADATA00": {
+        "artifactId": "s8c",
+        "artifactType": "s8d",
+        "contentId": 142,
+        "contractMetadata": {},
+        "createdOn": "s90",
+        "description": "s91",
+        "globalId": 146,
+        "groupId": "s93",
+        "labels": {},
+        "modifiedBy": "s95",
+        "modifiedOn": "s96",
+        "name": "s97",
+        "owner": "s98",
+        "version": 153,
+        "artifact_id": "ARTIFACT01",
+        "group_id": "GROUP01",
+        "version_expression": "VERSION_EXPRESSION01",
+        "id": "METADATA00"
+      },
+      "METADATA01": {
+        "artifactId": "s118",
+        "artifactType": "s119",
+        "contentId": 282,
+        "contractMetadata": {},
+        "createdOn": "s11c",
+        "description": "s11d",
+        "globalId": 286,
+        "groupId": "s11f",
+        "labels": {},
+        "modifiedBy": "s121",
+        "modifiedOn": "s122",
+        "name": "s123",
+        "owner": "s124",
+        "version": 293,
+        "artifact_id": "ARTIFACT01",
+        "group_id": "GROUP01",
+        "version_expression": "VERSION_EXPRESSION01",
+        "id": "METADATA01"
+      },
+      "METADATA02": {
+        "artifactId": "s1a4",
+        "artifactType": "s1a5",
+        "contentId": 422,
+        "contractMetadata": {},
+        "createdOn": "s1a8",
+        "description": "s1a9",
+        "globalId": 426,
+        "groupId": "s1ab",
+        "labels": {},
+        "modifiedBy": "s1ad",
+        "modifiedOn": "s1ae",
+        "name": "s1af",
+        "owner": "s1b0",
+        "version": 433,
+        "artifact_id": "ARTIFACT01",
+        "group_id": "GROUP01",
+        "version_expression": "VERSION_EXPRESSION01",
+        "id": "METADATA02"
+      }
+    }
+  },
+  "new": {
+    "metadata": {
+      "metadata_ref01": {
+        "artifactId": "s230",
+        "artifactType": "s231",
+        "contentId": 562,
+        "contractMetadata": {},
+        "createdOn": "s234",
+        "description": "s235",
+        "globalId": 566,
+        "groupId": "s237",
+        "labels": {},
+        "modifiedBy": "s239",
+        "modifiedOn": "s23a",
+        "name": "s23b",
+        "owner": "s23c",
+        "version": 573
+      }
+    }
+  },
+  "requests": {
+    "POST /groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}/render": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /groups/{groupId}/artifacts/{artifactId}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PUT /groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}/state": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PUT /groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PUT /groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}/content": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PUT /groups/{groupId}/artifacts/{artifactId}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

@@ -1,0 +1,160 @@
+# Entity: searched_branch
+
+main: kit: entity: searched_branch: {
+
+  alias: field: {}
+
+  fields: {
+    artifactId: {
+      h: "Artifact Id"
+      n: "artifactId"
+      r: true
+      t: "`$STRING`"
+    }
+    branchId: {
+      h: "Branch Id"
+      n: "branchId"
+      r: true
+      t: "`$STRING`"
+    }
+    createdOn: {
+      fo: "date-time"
+      h: "Created On"
+      n: "createdOn"
+      r: true
+      t: "`$STRING`"
+    }
+    description: {
+      h: "Description"
+      n: "description"
+      r: false
+      t: "`$STRING`"
+    }
+    groupId: {
+      h: "Group Id"
+      n: "groupId"
+      r: true
+      t: "`$STRING`"
+    }
+    modifiedBy: {
+      h: "Modified By"
+      n: "modifiedBy"
+      r: true
+      t: "`$STRING`"
+    }
+    modifiedOn: {
+      fo: "date-time"
+      h: "Modified On"
+      n: "modifiedOn"
+      r: true
+      t: "`$STRING`"
+    }
+    owner: {
+      h: "Owner"
+      n: "owner"
+      r: true
+      t: "`$STRING`"
+    }
+    systemDefined: {
+      h: "System Defined"
+      n: "systemDefined"
+      r: true
+      t: "`$BOOLEAN`"
+    }
+  }
+
+  name: "searched_branch"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /groups/{groupId}/artifacts/{artifactId}/branches"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                ex: "\"example-artifact\""
+                k: "param"
+                n: "artifact_id"
+                or: "artifact_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                ex: "\"my-group\""
+                k: "param"
+                n: "group_id"
+                or: "group_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                k: "query"
+                n: "limit"
+                or: "limit"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "offset"
+                or: "offset"
+                r: false
+                t: "`$INTEGER`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/groups/{groupId}/artifacts/{artifactId}/branches"
+          q: {
+            exist: [
+              "artifact_id"
+              "group_id"
+              "limit"
+              "offset"
+            ]
+          }
+          r: {
+            param: {
+              artifactId: "artifact_id"
+              groupId: "group_id"
+            }
+          }
+          s: [
+            {
+              lit: "groups"
+            }
+            {
+              var: "group_id"
+            }
+            {
+              lit: "artifacts"
+            }
+            {
+              var: "artifact_id"
+            }
+            {
+              lit: "branches"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.branches`"
+          }
+        }
+      ]
+    }
+  }
+
+
+  relations: ancestors: [
+    [path("$.main.kit.entity.group") path("$.main.kit.entity.artifact")]
+  ]
+
+}

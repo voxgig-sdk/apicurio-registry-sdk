@@ -1,0 +1,152 @@
+{
+  "existing": {
+    "contract": {
+      "CONTRACT00": {
+        "artifactId": "s6e",
+        "artifactType": "s6f",
+        "createdOn": "s70",
+        "description": "s71",
+        "groupId": "s72",
+        "id": "CONTRACT00",
+        "labels": {},
+        "modifiedBy": "s75",
+        "modifiedOn": "s76",
+        "name": "s77",
+        "owner": "s78",
+        "artifact_id": "ARTIFACT01",
+        "group_id": "GROUP01",
+        "version_id": "VERSION01"
+      },
+      "CONTRACT01": {
+        "artifactId": "sdc",
+        "artifactType": "sdd",
+        "createdOn": "sde",
+        "description": "sdf",
+        "groupId": "se0",
+        "id": "CONTRACT01",
+        "labels": {},
+        "modifiedBy": "se3",
+        "modifiedOn": "se4",
+        "name": "se5",
+        "owner": "se6",
+        "artifact_id": "ARTIFACT01",
+        "group_id": "GROUP01",
+        "version_id": "VERSION01"
+      },
+      "CONTRACT02": {
+        "artifactId": "s14a",
+        "artifactType": "s14b",
+        "createdOn": "s14c",
+        "description": "s14d",
+        "groupId": "s14e",
+        "id": "CONTRACT02",
+        "labels": {},
+        "modifiedBy": "s151",
+        "modifiedOn": "s152",
+        "name": "s153",
+        "owner": "s154",
+        "artifact_id": "ARTIFACT01",
+        "group_id": "GROUP01",
+        "version_id": "VERSION01"
+      }
+    }
+  },
+  "new": {
+    "contract": {
+      "contract_ref01": {
+        "artifactId": "s1b8",
+        "artifactType": "s1b9",
+        "createdOn": "s1ba",
+        "description": "s1bb",
+        "groupId": "s1bc",
+        "labels": {},
+        "modifiedBy": "s1bf",
+        "modifiedOn": "s1c0",
+        "name": "s1c1",
+        "owner": "s1c2"
+      }
+    }
+  },
+  "requests": {
+    "POST /groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}/contract/execute": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /groups/{groupId}/artifacts/{artifactId}/contract/migrate": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /groups/{groupId}/artifacts/{artifactId}/contract/promote": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /groups/{groupId}/artifacts/{artifactId}/contract/status": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /search/contracts": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /groups/{groupId}/artifacts/{artifactId}/contract/audit": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /groups/{groupId}/artifacts/{artifactId}/contract/compatibility-group": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /groups/{groupId}/artifacts/{artifactId}/contract/quality": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /groups/{groupId}/artifacts/{artifactId}/contract/export": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /groups/{groupId}/artifacts/{artifactId}/contract/metadata": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /groups/{groupId}/contracts/{contractId}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "DELETE /groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}/contract/ruleset": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "DELETE /groups/{groupId}/artifacts/{artifactId}/contract/ruleset": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "DELETE /groups/{groupId}/contracts/{contractId}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PUT /groups/{groupId}/artifacts/{artifactId}/contract/compatibility-group": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PUT /groups/{groupId}/artifacts/{artifactId}/contract/metadata": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

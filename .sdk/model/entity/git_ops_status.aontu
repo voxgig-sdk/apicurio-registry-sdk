@@ -1,0 +1,66 @@
+# Entity: git_ops_status
+
+main: kit: entity: git_ops_status: {
+
+  alias: field: {}
+
+  fields: {
+    context: {
+      h: "Context"
+      n: "context"
+      r: false
+      sh: "The file path or location where the error occurred."
+      t: "`$STRING`"
+    }
+    detail: {
+      h: "Detail"
+      n: "detail"
+      r: true
+      sh: "A human-readable description of the error."
+      t: "`$STRING`"
+    }
+    source: {
+      h: "Source"
+      n: "source"
+      r: false
+      sh: "The source ID (e.g., repository ID) where the error occurred."
+      t: "`$STRING`"
+    }
+  }
+
+  name: "git_ops_status"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /admin/gitops/status"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/admin/gitops/status"
+          s: [
+            {
+              lit: "admin"
+            }
+            {
+              lit: "gitops"
+            }
+            {
+              lit: "status"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

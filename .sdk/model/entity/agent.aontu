@@ -1,0 +1,246 @@
+# Entity: agent
+
+main: kit: entity: agent: {
+
+  alias: field: {}
+
+  fields: {
+    artifactId: {
+      h: "Artifact Id"
+      n: "artifactId"
+      r: false
+      t: "`$STRING`"
+    }
+    capabilities: {
+      h: "Capabilities"
+      n: "capabilities"
+      r: false
+      sh: "Capabilities of an A2A agent."
+      t: "`$OBJECT`"
+    }
+    createdOn: {
+      fo: "int64"
+      h: "Created On"
+      n: "createdOn"
+      r: false
+      t: "`$INTEGER`"
+    }
+    defaultInputModes: {
+      h: "Default Input Modes"
+      n: "defaultInputModes"
+      r: false
+      t: "`$ARRAY`"
+    }
+    defaultOutputModes: {
+      h: "Default Output Modes"
+      n: "defaultOutputModes"
+      r: false
+      t: "`$ARRAY`"
+    }
+    description: {
+      h: "Description"
+      n: "description"
+      r: false
+      t: "`$STRING`"
+    }
+    documentationUrl: {
+      h: "Documentation Url"
+      n: "documentationUrl"
+      r: false
+      t: "`$STRING`"
+    }
+    groupId: {
+      h: "Group Id"
+      n: "groupId"
+      r: false
+      t: "`$STRING`"
+    }
+    iconUrl: {
+      h: "Icon Url"
+      n: "iconUrl"
+      r: false
+      t: "`$STRING`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      r: false
+      t: "`$STRING`"
+    }
+    owner: {
+      h: "Owner"
+      n: "owner"
+      r: false
+      t: "`$STRING`"
+    }
+    protocolVersion: {
+      h: "Protocol Version"
+      n: "protocolVersion"
+      r: false
+      t: "`$STRING`"
+    }
+    provider: {
+      h: "Provider"
+      n: "provider"
+      r: false
+      sh: "Provider of an A2A agent."
+      t: "`$OBJECT`"
+    }
+    securityRequirements: {
+      h: "Security Requirements"
+      n: "securityRequirements"
+      r: false
+      t: "`$ARRAY`"
+    }
+    securitySchemes: {
+      h: "Security Schemes"
+      n: "securitySchemes"
+      r: false
+      t: "`$OBJECT`"
+    }
+    signatures: {
+      h: "Signatures"
+      n: "signatures"
+      r: false
+      t: "`$ARRAY`"
+    }
+    skills: {
+      h: "Skills"
+      n: "skills"
+      r: false
+      t: "`$ARRAY`"
+    }
+    supportedInterfaces: {
+      h: "Supported Interfaces"
+      n: "supportedInterfaces"
+      r: false
+      t: "`$ARRAY`"
+    }
+    version: {
+      h: "Version"
+      n: "version"
+      r: false
+      t: "`$STRING`"
+    }
+  }
+
+  name: "agent"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /well-known/agents"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "capability"
+                or: "capability"
+                r: false
+                t: "`$ARRAY`"
+              }
+              {
+                k: "query"
+                n: "input_mode"
+                or: "input_mode"
+                r: false
+                t: "`$ARRAY`"
+              }
+              {
+                ex: 20
+                k: "query"
+                n: "limit"
+                or: "limit"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "name"
+                or: "name"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: 0
+                k: "query"
+                n: "offset"
+                or: "offset"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "output_mode"
+                or: "output_mode"
+                r: false
+                t: "`$ARRAY`"
+              }
+              {
+                k: "query"
+                n: "skill"
+                or: "skill"
+                r: false
+                t: "`$ARRAY`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/well-known/agents"
+          q: {
+            exist: [
+              "capability"
+              "input_mode"
+              "limit"
+              "name"
+              "offset"
+              "output_mode"
+              "skill"
+            ]
+          }
+          s: [
+            {
+              lit: "well-known"
+            }
+            {
+              lit: "agents"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.agents`"
+          }
+        }
+        {
+          co: {
+            id: "GET /well-known/agent.json"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/well-known/agent.json"
+          s: [
+            {
+              lit: "well-known"
+            }
+            {
+              lit: "agent.json"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

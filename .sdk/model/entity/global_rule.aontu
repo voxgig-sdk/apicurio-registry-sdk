@@ -1,0 +1,137 @@
+# Entity: global_rule
+
+main: kit: entity: global_rule: {
+
+  alias: field: {}
+
+  fields: {
+    config: {
+      h: "Config"
+      n: "config"
+      r: true
+      t: "`$STRING`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      t: "`$STRING`"
+    }
+    ruleType: {
+      h: "Rule Type"
+      n: "ruleType"
+      r: false
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "global_rule"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /admin/rules"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/admin/rules"
+          s: [
+            {
+              lit: "admin"
+            }
+            {
+              lit: "rules"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    remove: {
+      name: "remove"
+      points: [
+        {
+          co: {
+            id: "DELETE /admin/rules/{ruleType}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                ex: "VALIDITY"
+                k: "param"
+                n: "id"
+                or: "rule_type"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "DELETE"
+          o: "/admin/rules/{ruleType}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              ruleType: "id"
+            }
+          }
+          s: [
+            {
+              lit: "admin"
+            }
+            {
+              lit: "rules"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "DELETE /admin/rules"
+            source: "openapi3"
+            version: 2
+          }
+          m: "DELETE"
+          o: "/admin/rules"
+          s: [
+            {
+              lit: "admin"
+            }
+            {
+              lit: "rules"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

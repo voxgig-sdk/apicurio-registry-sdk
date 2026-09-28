@@ -1,0 +1,187 @@
+# Entity: git_ops_validate_task
+
+main: kit: entity: git_ops_validate_task: {
+
+  alias: field: {}
+
+  fields: {
+    artifactCount: {
+      fo: "int32"
+      h: "Artifact Count"
+      n: "artifactCount"
+      r: false
+      sh: "Number of artifacts loaded during validation."
+      t: "`$INTEGER`"
+    }
+    completedAt: {
+      fo: "date-time"
+      h: "Completed At"
+      n: "completedAt"
+      r: false
+      sh: "ISO 8601 timestamp of when the task completed."
+      t: "`$STRING`"
+    }
+    createdAt: {
+      fo: "date-time"
+      h: "Created At"
+      n: "createdAt"
+      r: false
+      sh: "ISO 8601 timestamp of when the task was created."
+      t: "`$STRING`"
+    }
+    errors: {
+      h: "Errors"
+      n: "errors"
+      r: false
+      sh: "Validation errors."
+      t: "`$ARRAY`"
+    }
+    groupCount: {
+      fo: "int32"
+      h: "Group Count"
+      n: "groupCount"
+      r: false
+      sh: "Number of groups loaded during validation."
+      t: "`$INTEGER`"
+    }
+    ref: {
+      h: "Ref"
+      n: "ref"
+      r: false
+      sh: "Git ref being validated."
+      t: "`$STRING`"
+    }
+    repoId: {
+      h: "Repo Id"
+      n: "repoId"
+      r: false
+      sh: "Repository ID being validated."
+      t: "`$STRING`"
+    }
+    result: {
+      h: "Result"
+      n: "result"
+      r: false
+      sh: "Validation result: `success` (all checks passed) or `failure` (validation errors found)."
+      t: "`$STRING`"
+    }
+    state: {
+      h: "State"
+      n: "state"
+      r: true
+      sh: "Current task state: `pending` (queued, waiting for capacity), `submitted` (request sent to sidecar), `fetching` (sidecar is cloning), `validating` (registry is loading and validating), `completed` (finished with results), `failed` (an erro…"
+      t: "`$STRING`"
+    }
+    taskId: {
+      h: "Task Id"
+      n: "taskId"
+      r: true
+      sh: "Unique identifier for the validation task."
+      t: "`$STRING`"
+    }
+    type: {
+      h: "Type"
+      n: "type"
+      r: false
+      sh: "Validation type (`pull` or `push`)."
+      t: "`$STRING`"
+    }
+    versionCount: {
+      fo: "int32"
+      h: "Version Count"
+      n: "versionCount"
+      r: false
+      sh: "Number of artifact versions loaded during validation."
+      t: "`$INTEGER`"
+    }
+  }
+
+  name: "git_ops_validate_task"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /admin/gitops/validate"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/admin/gitops/validate"
+          s: [
+            {
+              lit: "admin"
+            }
+            {
+              lit: "gitops"
+            }
+            {
+              lit: "validate"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /admin/gitops/validate/{taskId}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "task_id"
+                or: "task_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/admin/gitops/validate/{taskId}"
+          q: {
+            exist: [
+              "task_id"
+            ]
+          }
+          r: {
+            param: {
+              taskId: "task_id"
+            }
+          }
+          s: [
+            {
+              lit: "admin"
+            }
+            {
+              lit: "gitops"
+            }
+            {
+              lit: "validate"
+            }
+            {
+              var: "task_id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

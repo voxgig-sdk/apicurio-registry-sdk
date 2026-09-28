@@ -1,0 +1,85 @@
+{
+  "existing": {
+    "agent_card": {
+      "AGENT_CARD00": {
+        "capabilities": {},
+        "defaultInputModes": [],
+        "defaultOutputModes": [],
+        "description": "s99",
+        "documentationUrl": "s9a",
+        "iconUrl": "s9b",
+        "name": "s9c",
+        "protocolVersion": "s9d",
+        "provider": {},
+        "securityRequirements": [],
+        "securitySchemes": {},
+        "signatures": [],
+        "skills": [],
+        "supportedInterfaces": [],
+        "version": "sa4"
+      },
+      "AGENT_CARD01": {
+        "capabilities": {},
+        "defaultInputModes": [],
+        "defaultOutputModes": [],
+        "description": "s12f",
+        "documentationUrl": "s130",
+        "iconUrl": "s131",
+        "name": "s132",
+        "protocolVersion": "s133",
+        "provider": {},
+        "securityRequirements": [],
+        "securitySchemes": {},
+        "signatures": [],
+        "skills": [],
+        "supportedInterfaces": [],
+        "version": "s13a"
+      },
+      "AGENT_CARD02": {
+        "capabilities": {},
+        "defaultInputModes": [],
+        "defaultOutputModes": [],
+        "description": "s1c5",
+        "documentationUrl": "s1c6",
+        "iconUrl": "s1c7",
+        "name": "s1c8",
+        "protocolVersion": "s1c9",
+        "provider": {},
+        "securityRequirements": [],
+        "securitySchemes": {},
+        "signatures": [],
+        "skills": [],
+        "supportedInterfaces": [],
+        "version": "s1d0"
+      }
+    }
+  },
+  "new": {
+    "agent_card": {
+      "agent_card_ref01": {
+        "capabilities": {},
+        "defaultInputModes": [],
+        "defaultOutputModes": [],
+        "description": "s25b",
+        "documentationUrl": "s25c",
+        "iconUrl": "s25d",
+        "name": "s25e",
+        "protocolVersion": "s25f",
+        "provider": {},
+        "securityRequirements": [],
+        "securitySchemes": {},
+        "signatures": [],
+        "skills": [],
+        "supportedInterfaces": [],
+        "version": "s266"
+      }
+    }
+  },
+  "requests": {
+    "GET /well-known/agent-card.json": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

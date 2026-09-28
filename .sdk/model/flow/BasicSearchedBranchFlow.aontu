@@ -1,0 +1,27 @@
+# BasicSearchedBranchFlow
+
+main: kit: flow: BasicSearchedBranchFlow:
+{
+  entity: "searched_branch",
+  kind: "basic",
+  name: "BasicSearchedBranchFlow",
+  step: [
+    {
+      m: {
+        artifact_id: "artifact01",
+        group_id: "group01"
+      }
+
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "searched_branch_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicSearchedBranchFlow"
+}

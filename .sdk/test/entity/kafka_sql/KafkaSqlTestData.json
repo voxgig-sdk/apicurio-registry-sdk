@@ -1,0 +1,32 @@
+{
+  "existing": {
+    "kafka_sql": {
+      "KAFKA_SQL00": {
+        "snapshotId": "sa",
+        "id": "KAFKA_SQL00"
+      },
+      "KAFKA_SQL01": {
+        "snapshotId": "s14",
+        "id": "KAFKA_SQL01"
+      },
+      "KAFKA_SQL02": {
+        "snapshotId": "s1e",
+        "id": "KAFKA_SQL02"
+      }
+    }
+  },
+  "new": {
+    "kafka_sql": {
+      "kafka_sql_ref01": {
+        "snapshotId": "s28"
+      }
+    }
+  },
+  "requests": {
+    "POST /admin/snapshots": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

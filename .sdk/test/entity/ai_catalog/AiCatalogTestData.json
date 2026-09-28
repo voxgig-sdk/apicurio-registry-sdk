@@ -1,0 +1,75 @@
+{
+  "existing": {
+    "ai_catalog": {
+      "AI_CATALOG00": {
+        "capabilities": [],
+        "description": "s65",
+        "displayName": "s66",
+        "identifier": "s67",
+        "representativeQueries": [],
+        "tags": [],
+        "type": "s6a",
+        "updatedAt": "s6b",
+        "url": "s6c",
+        "version": "s6d"
+      },
+      "AI_CATALOG01": {
+        "capabilities": [],
+        "description": "sc9",
+        "displayName": "sca",
+        "identifier": "scb",
+        "representativeQueries": [],
+        "tags": [],
+        "type": "sce",
+        "updatedAt": "scf",
+        "url": "sd0",
+        "version": "sd1"
+      },
+      "AI_CATALOG02": {
+        "capabilities": [],
+        "description": "s12d",
+        "displayName": "s12e",
+        "identifier": "s12f",
+        "representativeQueries": [],
+        "tags": [],
+        "type": "s132",
+        "updatedAt": "s133",
+        "url": "s134",
+        "version": "s135"
+      }
+    }
+  },
+  "new": {
+    "ai_catalog": {
+      "ai_catalog_ref01": {
+        "capabilities": [],
+        "description": "s191",
+        "displayName": "s192",
+        "identifier": "s193",
+        "representativeQueries": [],
+        "tags": [],
+        "type": "s196",
+        "updatedAt": "s197",
+        "url": "s198",
+        "version": "s199"
+      }
+    }
+  },
+  "requests": {
+    "GET /well-known/ard/agents": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /well-known/ai-catalog.json": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /well-known/ard.json": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

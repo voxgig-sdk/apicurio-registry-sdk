@@ -1,0 +1,58 @@
+{
+  "existing": {
+    "comment": {
+      "COMMENT00": {
+        "commentId": "s28",
+        "createdOn": "s29",
+        "owner": "s2a",
+        "value": "s2b",
+        "artifact_id": "ARTIFACT01",
+        "group_id": "GROUP01",
+        "version_expression": "VERSION_EXPRESSION01",
+        "id": "COMMENT00"
+      },
+      "COMMENT01": {
+        "commentId": "s50",
+        "createdOn": "s51",
+        "owner": "s52",
+        "value": "s53",
+        "artifact_id": "ARTIFACT01",
+        "group_id": "GROUP01",
+        "version_expression": "VERSION_EXPRESSION01",
+        "id": "COMMENT01"
+      },
+      "COMMENT02": {
+        "commentId": "s78",
+        "createdOn": "s79",
+        "owner": "s7a",
+        "value": "s7b",
+        "artifact_id": "ARTIFACT01",
+        "group_id": "GROUP01",
+        "version_expression": "VERSION_EXPRESSION01",
+        "id": "COMMENT02"
+      }
+    }
+  },
+  "new": {
+    "comment": {
+      "comment_ref01": {
+        "commentId": "sa0",
+        "createdOn": "sa1",
+        "owner": "sa2",
+        "value": "sa3"
+      }
+    }
+  },
+  "requests": {
+    "POST /groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}/comments": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}/comments": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

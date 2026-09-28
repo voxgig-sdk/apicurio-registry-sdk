@@ -1,0 +1,1222 @@
+# Entity: contract
+
+main: kit: entity: contract: {
+
+  alias: field: {}
+
+  fields: {
+    artifactId: {
+      h: "Artifact Id"
+      n: "artifactId"
+      r: true
+      t: "`$STRING`"
+    }
+    artifactType: {
+      h: "Artifact Type"
+      n: "artifactType"
+      r: true
+      t: "`$STRING`"
+    }
+    createdOn: {
+      fo: "date-time"
+      h: "Created On"
+      n: "createdOn"
+      r: true
+      t: "`$STRING`"
+    }
+    description: {
+      h: "Description"
+      n: "description"
+      r: false
+      t: "`$STRING`"
+    }
+    groupId: {
+      h: "Group Id"
+      n: "groupId"
+      r: true
+      t: "`$STRING`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      t: "`$STRING`"
+    }
+    labels: {
+      h: "Labels"
+      n: "labels"
+      r: false
+      t: "`$OBJECT`"
+    }
+    modifiedBy: {
+      h: "Modified By"
+      n: "modifiedBy"
+      r: true
+      t: "`$STRING`"
+    }
+    modifiedOn: {
+      fo: "date-time"
+      h: "Modified On"
+      n: "modifiedOn"
+      r: true
+      t: "`$STRING`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      r: false
+      t: "`$STRING`"
+    }
+    owner: {
+      h: "Owner"
+      n: "owner"
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "contract"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}/contract/execute"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "artifact_id"
+                or: "artifact_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "group_id"
+                or: "group_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "version_id"
+                or: "version_expression"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}/contract/execute"
+          q: {
+            "$action": "execute"
+            exist: [
+              "artifact_id"
+              "group_id"
+              "version_id"
+            ]
+          }
+          r: {
+            param: {
+              artifactId: "artifact_id"
+              groupId: "group_id"
+              versionExpression: "version_id"
+            }
+          }
+          s: [
+            {
+              lit: "groups"
+            }
+            {
+              var: "group_id"
+            }
+            {
+              lit: "artifacts"
+            }
+            {
+              var: "artifact_id"
+            }
+            {
+              lit: "versions"
+            }
+            {
+              var: "version_id"
+            }
+            {
+              lit: "contract"
+            }
+            {
+              lit: "execute"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "POST /groups/{groupId}/artifacts/{artifactId}/contract/migrate"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "artifact_id"
+                or: "artifact_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "group_id"
+                or: "group_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/groups/{groupId}/artifacts/{artifactId}/contract/migrate"
+          q: {
+            "$action": "migrate"
+            exist: [
+              "artifact_id"
+              "group_id"
+            ]
+          }
+          r: {
+            param: {
+              artifactId: "artifact_id"
+              groupId: "group_id"
+            }
+          }
+          s: [
+            {
+              lit: "groups"
+            }
+            {
+              var: "group_id"
+            }
+            {
+              lit: "artifacts"
+            }
+            {
+              var: "artifact_id"
+            }
+            {
+              lit: "contract"
+            }
+            {
+              lit: "migrate"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "POST /groups/{groupId}/artifacts/{artifactId}/contract/promote"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "artifact_id"
+                or: "artifact_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "group_id"
+                or: "group_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/groups/{groupId}/artifacts/{artifactId}/contract/promote"
+          q: {
+            "$action": "promote"
+            exist: [
+              "artifact_id"
+              "group_id"
+            ]
+          }
+          r: {
+            param: {
+              artifactId: "artifact_id"
+              groupId: "group_id"
+            }
+          }
+          s: [
+            {
+              lit: "groups"
+            }
+            {
+              var: "group_id"
+            }
+            {
+              lit: "artifacts"
+            }
+            {
+              var: "artifact_id"
+            }
+            {
+              lit: "contract"
+            }
+            {
+              lit: "promote"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "POST /groups/{groupId}/artifacts/{artifactId}/contract/status"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "artifact_id"
+                or: "artifact_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "group_id"
+                or: "group_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/groups/{groupId}/artifacts/{artifactId}/contract/status"
+          q: {
+            "$action": "status"
+            exist: [
+              "artifact_id"
+              "group_id"
+            ]
+          }
+          r: {
+            param: {
+              artifactId: "artifact_id"
+              groupId: "group_id"
+            }
+          }
+          s: [
+            {
+              lit: "groups"
+            }
+            {
+              var: "group_id"
+            }
+            {
+              lit: "artifacts"
+            }
+            {
+              var: "artifact_id"
+            }
+            {
+              lit: "contract"
+            }
+            {
+              lit: "status"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /search/contracts"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "compatibility_group"
+                or: "compatibility_group"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: 20
+                k: "query"
+                n: "limit"
+                or: "limit"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                ex: 0
+                k: "query"
+                n: "offset"
+                or: "offset"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "order"
+                or: "order"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "orderby"
+                or: "orderby"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "owner_team"
+                or: "owner_team"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "status"
+                or: "status"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/search/contracts"
+          q: {
+            exist: [
+              "compatibility_group"
+              "limit"
+              "offset"
+              "order"
+              "orderby"
+              "owner_team"
+              "status"
+            ]
+          }
+          s: [
+            {
+              lit: "search"
+            }
+            {
+              lit: "contracts"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.artifacts`"
+          }
+        }
+        {
+          co: {
+            id: "GET /groups/{groupId}/artifacts/{artifactId}/contract/audit"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "artifact_id"
+                or: "artifact_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "group_id"
+                or: "group_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                ex: 20
+                k: "query"
+                n: "limit"
+                or: "limit"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                ex: 0
+                k: "query"
+                n: "offset"
+                or: "offset"
+                r: false
+                t: "`$INTEGER`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/groups/{groupId}/artifacts/{artifactId}/contract/audit"
+          q: {
+            "$action": "audit"
+            exist: [
+              "artifact_id"
+              "group_id"
+              "limit"
+              "offset"
+            ]
+          }
+          r: {
+            param: {
+              artifactId: "artifact_id"
+              groupId: "group_id"
+            }
+          }
+          s: [
+            {
+              lit: "groups"
+            }
+            {
+              var: "group_id"
+            }
+            {
+              lit: "artifacts"
+            }
+            {
+              var: "artifact_id"
+            }
+            {
+              lit: "contract"
+            }
+            {
+              lit: "audit"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /groups/{groupId}/artifacts/{artifactId}/contract/compatibility-group"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "artifact_id"
+                or: "artifact_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "group_id"
+                or: "group_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                k: "query"
+                n: "contract_id"
+                or: "contract_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/groups/{groupId}/artifacts/{artifactId}/contract/compatibility-group"
+          q: {
+            "$action": "compatibility_group"
+            exist: [
+              "artifact_id"
+              "contract_id"
+              "group_id"
+            ]
+          }
+          r: {
+            param: {
+              artifactId: "artifact_id"
+              groupId: "group_id"
+            }
+          }
+          s: [
+            {
+              lit: "groups"
+            }
+            {
+              var: "group_id"
+            }
+            {
+              lit: "artifacts"
+            }
+            {
+              var: "artifact_id"
+            }
+            {
+              lit: "contract"
+            }
+            {
+              lit: "compatibility-group"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /groups/{groupId}/artifacts/{artifactId}/contract/quality"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "artifact_id"
+                or: "artifact_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "group_id"
+                or: "group_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                k: "query"
+                n: "contract_id"
+                or: "contract_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/groups/{groupId}/artifacts/{artifactId}/contract/quality"
+          q: {
+            "$action": "quality"
+            exist: [
+              "artifact_id"
+              "contract_id"
+              "group_id"
+            ]
+          }
+          r: {
+            param: {
+              artifactId: "artifact_id"
+              groupId: "group_id"
+            }
+          }
+          s: [
+            {
+              lit: "groups"
+            }
+            {
+              var: "group_id"
+            }
+            {
+              lit: "artifacts"
+            }
+            {
+              var: "artifact_id"
+            }
+            {
+              lit: "contract"
+            }
+            {
+              lit: "quality"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /groups/{groupId}/artifacts/{artifactId}/contract/export"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "artifact_id"
+                or: "artifact_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "group_id"
+                or: "group_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/groups/{groupId}/artifacts/{artifactId}/contract/export"
+          q: {
+            "$action": "export"
+            exist: [
+              "artifact_id"
+              "group_id"
+            ]
+          }
+          r: {
+            param: {
+              artifactId: "artifact_id"
+              groupId: "group_id"
+            }
+          }
+          s: [
+            {
+              lit: "groups"
+            }
+            {
+              var: "group_id"
+            }
+            {
+              lit: "artifacts"
+            }
+            {
+              var: "artifact_id"
+            }
+            {
+              lit: "contract"
+            }
+            {
+              lit: "export"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /groups/{groupId}/artifacts/{artifactId}/contract/metadata"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "artifact_id"
+                or: "artifact_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "group_id"
+                or: "group_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/groups/{groupId}/artifacts/{artifactId}/contract/metadata"
+          q: {
+            "$action": "metadata"
+            exist: [
+              "artifact_id"
+              "group_id"
+            ]
+          }
+          r: {
+            param: {
+              artifactId: "artifact_id"
+              groupId: "group_id"
+            }
+          }
+          s: [
+            {
+              lit: "groups"
+            }
+            {
+              var: "group_id"
+            }
+            {
+              lit: "artifacts"
+            }
+            {
+              var: "artifact_id"
+            }
+            {
+              lit: "contract"
+            }
+            {
+              lit: "metadata"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /groups/{groupId}/contracts/{contractId}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "group_id"
+                or: "group_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "id"
+                or: "contract_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/groups/{groupId}/contracts/{contractId}"
+          q: {
+            exist: [
+              "group_id"
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              contractId: "id"
+              groupId: "group_id"
+            }
+          }
+          s: [
+            {
+              lit: "groups"
+            }
+            {
+              var: "group_id"
+            }
+            {
+              lit: "contracts"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    remove: {
+      name: "remove"
+      points: [
+        {
+          co: {
+            id: "DELETE /groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}/contract/ruleset"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "artifact_id"
+                or: "artifact_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "group_id"
+                or: "group_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "version_id"
+                or: "version_expression"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "DELETE"
+          o: "/groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}/contract/ruleset"
+          q: {
+            "$action": "ruleset"
+            exist: [
+              "artifact_id"
+              "group_id"
+              "version_id"
+            ]
+          }
+          r: {
+            param: {
+              artifactId: "artifact_id"
+              groupId: "group_id"
+              versionExpression: "version_id"
+            }
+          }
+          s: [
+            {
+              lit: "groups"
+            }
+            {
+              var: "group_id"
+            }
+            {
+              lit: "artifacts"
+            }
+            {
+              var: "artifact_id"
+            }
+            {
+              lit: "versions"
+            }
+            {
+              var: "version_id"
+            }
+            {
+              lit: "contract"
+            }
+            {
+              lit: "ruleset"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "DELETE /groups/{groupId}/artifacts/{artifactId}/contract/ruleset"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "artifact_id"
+                or: "artifact_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "group_id"
+                or: "group_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "DELETE"
+          o: "/groups/{groupId}/artifacts/{artifactId}/contract/ruleset"
+          q: {
+            "$action": "ruleset"
+            exist: [
+              "artifact_id"
+              "group_id"
+            ]
+          }
+          r: {
+            param: {
+              artifactId: "artifact_id"
+              groupId: "group_id"
+            }
+          }
+          s: [
+            {
+              lit: "groups"
+            }
+            {
+              var: "group_id"
+            }
+            {
+              lit: "artifacts"
+            }
+            {
+              var: "artifact_id"
+            }
+            {
+              lit: "contract"
+            }
+            {
+              lit: "ruleset"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "DELETE /groups/{groupId}/contracts/{contractId}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "group_id"
+                or: "group_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "id"
+                or: "contract_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "DELETE"
+          o: "/groups/{groupId}/contracts/{contractId}"
+          q: {
+            exist: [
+              "group_id"
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              contractId: "id"
+              groupId: "group_id"
+            }
+          }
+          s: [
+            {
+              lit: "groups"
+            }
+            {
+              var: "group_id"
+            }
+            {
+              lit: "contracts"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    update: {
+      name: "update"
+      points: [
+        {
+          co: {
+            id: "PUT /groups/{groupId}/artifacts/{artifactId}/contract/compatibility-group"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "artifact_id"
+                or: "artifact_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "group_id"
+                or: "group_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "PUT"
+          o: "/groups/{groupId}/artifacts/{artifactId}/contract/compatibility-group"
+          q: {
+            "$action": "compatibility_group"
+            exist: [
+              "artifact_id"
+              "group_id"
+            ]
+          }
+          r: {
+            param: {
+              artifactId: "artifact_id"
+              groupId: "group_id"
+            }
+          }
+          s: [
+            {
+              lit: "groups"
+            }
+            {
+              var: "group_id"
+            }
+            {
+              lit: "artifacts"
+            }
+            {
+              var: "artifact_id"
+            }
+            {
+              lit: "contract"
+            }
+            {
+              lit: "compatibility-group"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "PUT /groups/{groupId}/artifacts/{artifactId}/contract/metadata"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "artifact_id"
+                or: "artifact_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "group_id"
+                or: "group_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "PUT"
+          o: "/groups/{groupId}/artifacts/{artifactId}/contract/metadata"
+          q: {
+            "$action": "metadata"
+            exist: [
+              "artifact_id"
+              "group_id"
+            ]
+          }
+          r: {
+            param: {
+              artifactId: "artifact_id"
+              groupId: "group_id"
+            }
+          }
+          s: [
+            {
+              lit: "groups"
+            }
+            {
+              var: "group_id"
+            }
+            {
+              lit: "artifacts"
+            }
+            {
+              var: "artifact_id"
+            }
+            {
+              lit: "contract"
+            }
+            {
+              lit: "metadata"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+  relations: ancestors: [
+    [path("$.main.kit.entity.group")]
+    [path("$.main.kit.entity.group") path("$.main.kit.entity.artifact")]
+    [path("$.main.kit.entity.group") path("$.main.kit.entity.artifact") path("$.main.kit.entity.version")]
+  ]
+
+}

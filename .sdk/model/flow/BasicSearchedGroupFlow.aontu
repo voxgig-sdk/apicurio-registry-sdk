@@ -1,0 +1,22 @@
+# BasicSearchedGroupFlow
+
+main: kit: flow: BasicSearchedGroupFlow:
+{
+  entity: "searched_group",
+  kind: "basic",
+  name: "BasicSearchedGroupFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "searched_group_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicSearchedGroupFlow"
+}

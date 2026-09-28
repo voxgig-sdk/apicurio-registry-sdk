@@ -1,0 +1,99 @@
+{
+  "existing": {
+    "branch": {
+      "BRANCH00": {
+        "artifactId": "s6e",
+        "branchId": "s6f",
+        "createdOn": "s70",
+        "description": "s71",
+        "groupId": "s72",
+        "id": "BRANCH00",
+        "modifiedBy": "s74",
+        "modifiedOn": "s75",
+        "owner": "s76",
+        "systemDefined": false,
+        "versions": [],
+        "artifact_id": "ARTIFACT01",
+        "group_id": "GROUP01"
+      },
+      "BRANCH01": {
+        "artifactId": "sdc",
+        "branchId": "sdd",
+        "createdOn": "sde",
+        "description": "sdf",
+        "groupId": "se0",
+        "id": "BRANCH01",
+        "modifiedBy": "se2",
+        "modifiedOn": "se3",
+        "owner": "se4",
+        "systemDefined": false,
+        "versions": [],
+        "artifact_id": "ARTIFACT01",
+        "group_id": "GROUP01"
+      },
+      "BRANCH02": {
+        "artifactId": "s14a",
+        "branchId": "s14b",
+        "createdOn": "s14c",
+        "description": "s14d",
+        "groupId": "s14e",
+        "id": "BRANCH02",
+        "modifiedBy": "s150",
+        "modifiedOn": "s151",
+        "owner": "s152",
+        "systemDefined": false,
+        "versions": [],
+        "artifact_id": "ARTIFACT01",
+        "group_id": "GROUP01"
+      }
+    }
+  },
+  "new": {
+    "branch": {
+      "branch_ref01": {
+        "artifactId": "s1b8",
+        "branchId": "s1b9",
+        "createdOn": "s1ba",
+        "description": "s1bb",
+        "groupId": "s1bc",
+        "modifiedBy": "s1be",
+        "modifiedOn": "s1bf",
+        "owner": "s1c0",
+        "systemDefined": false,
+        "versions": []
+      }
+    }
+  },
+  "requests": {
+    "POST /groups/{groupId}/artifacts/{artifactId}/branches/{branchId}/versions": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /groups/{groupId}/artifacts/{artifactId}/branches": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /groups/{groupId}/artifacts/{artifactId}/branches/{branchId}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "DELETE /groups/{groupId}/artifacts/{artifactId}/branches/{branchId}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PUT /groups/{groupId}/artifacts/{artifactId}/branches/{branchId}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PUT /groups/{groupId}/artifacts/{artifactId}/branches/{branchId}/versions": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

@@ -1,0 +1,60 @@
+# Entity: user_interface_config
+
+main: kit: entity: user_interface_config: {
+
+  alias: field: {}
+
+  fields: {
+    auth: {
+      h: "Auth"
+      n: "auth"
+      r: true
+      t: "`$OBJECT`"
+    }
+    features: {
+      h: "Features"
+      n: "features"
+      r: false
+      t: "`$OBJECT`"
+    }
+    ui: {
+      h: "Ui"
+      n: "ui"
+      r: false
+      t: "`$OBJECT`"
+    }
+  }
+
+  name: "user_interface_config"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /system/uiConfig"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/system/uiConfig"
+          s: [
+            {
+              lit: "system"
+            }
+            {
+              lit: "uiConfig"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

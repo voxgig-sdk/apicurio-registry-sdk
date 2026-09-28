@@ -1,0 +1,45 @@
+{
+  "existing": {
+    "role_mapping": {
+      "ROLE_MAPPING00": {
+        "id": "ROLE_MAPPING00",
+        "principalId": "s29",
+        "principalName": "s2a",
+        "role": "s2b"
+      },
+      "ROLE_MAPPING01": {
+        "id": "ROLE_MAPPING01",
+        "principalId": "s51",
+        "principalName": "s52",
+        "role": "s53"
+      },
+      "ROLE_MAPPING02": {
+        "id": "ROLE_MAPPING02",
+        "principalId": "s79",
+        "principalName": "s7a",
+        "role": "s7b"
+      }
+    }
+  },
+  "new": {
+    "role_mapping": {
+      "role_mapping_ref01": {
+        "principalId": "sa1",
+        "principalName": "sa2",
+        "role": "sa3"
+      }
+    }
+  },
+  "requests": {
+    "GET /admin/roleMappings": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /admin/roleMappings/{principalId}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

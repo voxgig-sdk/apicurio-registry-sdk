@@ -1,0 +1,44 @@
+# BasicConfigurationPropertyFlow
+
+main: kit: flow: BasicConfigurationPropertyFlow:
+{
+  entity: "configuration_property",
+  kind: "basic",
+  name: "BasicConfigurationPropertyFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "configuration_property_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      i: {
+        ref: "configuration_property_ref01",
+        srcdatavar: "configuration_property_ref01_data",
+        suffix: "_dt0"
+      }
+
+      m: {
+        id: "configuration_property01"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-configuration_property_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicConfigurationPropertyFlow"
+}

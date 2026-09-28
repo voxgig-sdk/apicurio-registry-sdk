@@ -1,0 +1,44 @@
+# BasicRoleMappingFlow
+
+main: kit: flow: BasicRoleMappingFlow:
+{
+  entity: "role_mapping",
+  kind: "basic",
+  name: "BasicRoleMappingFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "role_mapping_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      i: {
+        ref: "role_mapping_ref01",
+        srcdatavar: "role_mapping_ref01_data",
+        suffix: "_dt0"
+      }
+
+      m: {
+        id: "role_mapping01"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-role_mapping_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicRoleMappingFlow"
+}

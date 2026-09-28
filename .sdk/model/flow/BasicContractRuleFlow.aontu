@@ -1,0 +1,22 @@
+# BasicContractRuleFlow
+
+main: kit: flow: BasicContractRuleFlow:
+{
+  entity: "contract_rule",
+  kind: "basic",
+  name: "BasicContractRuleFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "contract_rule_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicContractRuleFlow"
+}

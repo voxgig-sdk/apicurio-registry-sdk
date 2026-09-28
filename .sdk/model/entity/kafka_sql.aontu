@@ -1,0 +1,48 @@
+# Entity: kafka_sql
+
+main: kit: entity: kafka_sql: {
+
+  alias: field: {}
+
+  fields: {
+    snapshotId: {
+      h: "Snapshot Id"
+      n: "snapshotId"
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
+  name: "kafka_sql"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /admin/snapshots"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/admin/snapshots"
+          s: [
+            {
+              lit: "admin"
+            }
+            {
+              lit: "snapshots"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

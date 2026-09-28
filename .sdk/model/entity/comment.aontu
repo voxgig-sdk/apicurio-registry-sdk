@@ -1,0 +1,208 @@
+# Entity: comment
+
+main: kit: entity: comment: {
+
+  alias: field: {}
+
+  fields: {
+    commentId: {
+      h: "Comment Id"
+      n: "commentId"
+      r: true
+      t: "`$STRING`"
+    }
+    createdOn: {
+      fo: "date-time"
+      h: "Created On"
+      n: "createdOn"
+      r: true
+      t: "`$STRING`"
+    }
+    owner: {
+      h: "Owner"
+      n: "owner"
+      r: true
+      t: "`$STRING`"
+    }
+    value: {
+      h: "Value"
+      n: "value"
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
+  name: "comment"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}/comments"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                ex: "\"example-artifact\""
+                k: "param"
+                n: "artifact_id"
+                or: "artifact_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                ex: "\"my-group\""
+                k: "param"
+                n: "group_id"
+                or: "group_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "version_expression"
+                or: "version_expression"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}/comments"
+          q: {
+            exist: [
+              "artifact_id"
+              "group_id"
+              "version_expression"
+            ]
+          }
+          r: {
+            param: {
+              artifactId: "artifact_id"
+              groupId: "group_id"
+              versionExpression: "version_expression"
+            }
+          }
+          s: [
+            {
+              lit: "groups"
+            }
+            {
+              var: "group_id"
+            }
+            {
+              lit: "artifacts"
+            }
+            {
+              var: "artifact_id"
+            }
+            {
+              lit: "versions"
+            }
+            {
+              var: "version_expression"
+            }
+            {
+              lit: "comments"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}/comments"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                ex: "\"example-artifact\""
+                k: "param"
+                n: "artifact_id"
+                or: "artifact_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                ex: "\"my-group\""
+                k: "param"
+                n: "group_id"
+                or: "group_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "version_expression"
+                or: "version_expression"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}/comments"
+          q: {
+            exist: [
+              "artifact_id"
+              "group_id"
+              "version_expression"
+            ]
+          }
+          r: {
+            param: {
+              artifactId: "artifact_id"
+              groupId: "group_id"
+              versionExpression: "version_expression"
+            }
+          }
+          s: [
+            {
+              lit: "groups"
+            }
+            {
+              var: "group_id"
+            }
+            {
+              lit: "artifacts"
+            }
+            {
+              var: "artifact_id"
+            }
+            {
+              lit: "versions"
+            }
+            {
+              var: "version_expression"
+            }
+            {
+              lit: "comments"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+  relations: ancestors: [
+    [path("$.main.kit.entity.group") path("$.main.kit.entity.artifact") path("$.main.kit.entity.version")]
+  ]
+
+}

@@ -1,0 +1,28 @@
+# BasicDeprecationReadinessFlow
+
+main: kit: flow: BasicDeprecationReadinessFlow:
+{
+  entity: "deprecation_readiness",
+  kind: "basic",
+  name: "BasicDeprecationReadinessFlow",
+  step: [
+    {
+      m: {
+        artifact_id: "artifact01",
+        group_id: "group01",
+        version_id: "version01"
+      }
+
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "deprecation_readiness_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicDeprecationReadinessFlow"
+}

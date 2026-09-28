@@ -1,0 +1,97 @@
+# Entity: contract_rule
+
+main: kit: entity: contract_rule: {
+
+  alias: field: {}
+
+  fields: {
+    artifactId: {
+      h: "Artifact Id"
+      n: "artifactId"
+      r: false
+      sh: "The artifact ID containing the rule."
+      t: "`$STRING`"
+    }
+    globalId: {
+      fo: "int64"
+      h: "Global Id"
+      n: "globalId"
+      r: false
+      sh: "The global ID of the version (null for artifact-level rules)."
+      t: "`$INTEGER`"
+    }
+    groupId: {
+      h: "Group Id"
+      n: "groupId"
+      r: false
+      sh: "The group ID of the artifact containing the rule."
+      t: "`$STRING`"
+    }
+    rule: {
+      h: "Rule"
+      n: "rule"
+      r: true
+      sh: "A single contract rule definition."
+      t: "`$OBJECT`"
+    }
+    ruleCategory: {
+      h: "Rule Category"
+      n: "ruleCategory"
+      r: false
+      sh: "The rule category (DOMAIN or MIGRATION)."
+      t: "`$STRING`"
+    }
+  }
+
+  name: "contract_rule"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /search/contract/rules"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "tag"
+                or: "tag"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/search/contract/rules"
+          q: {
+            exist: [
+              "tag"
+            ]
+          }
+          s: [
+            {
+              lit: "search"
+            }
+            {
+              lit: "contract"
+            }
+            {
+              lit: "rules"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

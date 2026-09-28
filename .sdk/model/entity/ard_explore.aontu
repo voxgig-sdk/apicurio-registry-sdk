@@ -1,0 +1,59 @@
+# Entity: ard_explore
+
+main: kit: entity: ard_explore: {
+
+  alias: field: {}
+
+  fields: {
+    query: {
+      h: "Query"
+      n: "query"
+      r: false
+      sh: "ARD search query."
+      t: "`$OBJECT`"
+    }
+    resultType: {
+      h: "Result Type"
+      n: "resultType"
+      r: true
+      sh: "Requested result type for the ARD POST /explore endpoint."
+      t: "`$OBJECT`"
+    }
+  }
+
+  name: "ard_explore"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /well-known/ard/explore"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/well-known/ard/explore"
+          s: [
+            {
+              lit: "well-known"
+            }
+            {
+              lit: "ard"
+            }
+            {
+              lit: "explore"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.facets`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

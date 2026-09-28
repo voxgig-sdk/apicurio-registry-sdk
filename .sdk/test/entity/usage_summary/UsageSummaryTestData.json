@@ -1,0 +1,40 @@
+{
+  "existing": {
+    "usage_summary": {
+      "USAGE_SUMMARY00": {
+        "active": 30,
+        "dead": 31,
+        "stale": 32,
+        "id": "USAGE_SUMMARY00"
+      },
+      "USAGE_SUMMARY01": {
+        "active": 60,
+        "dead": 61,
+        "stale": 62,
+        "id": "USAGE_SUMMARY01"
+      },
+      "USAGE_SUMMARY02": {
+        "active": 90,
+        "dead": 91,
+        "stale": 92,
+        "id": "USAGE_SUMMARY02"
+      }
+    }
+  },
+  "new": {
+    "usage_summary": {
+      "usage_summary_ref01": {
+        "active": 120,
+        "dead": 121,
+        "stale": 122
+      }
+    }
+  },
+  "requests": {
+    "GET /admin/usage/summary": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

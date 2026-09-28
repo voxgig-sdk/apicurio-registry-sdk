@@ -1,0 +1,2580 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Metadata | Apicurio Registry API [v3]</title><link rel="stylesheet" href="../assets/style.css"></head>
+<body><a class="skip" href="#content">Skip to content</a>
+<header class="site-header"><a class="site-title" href="../index.html">Apicurio Registry API [v3]<span>SDK documentation</span></a><div class="site-links"><a class="repo-link" href="https://github.com/voxgig-sdk/apicurio-registry-sdk">voxgig-sdk/apicurio-registry-sdk</a></div></header>
+<div class="site-notice" role="note"></div>
+<div class="shell"><nav class="site-nav" aria-label="Documentation"><div class="search"><label for="search">Search documentation</label><input id="search" type="search" data-base="../" placeholder="Find a guide or reference"><div id="results" aria-live="polite"></div></div><details><summary>Overview</summary><a href="../index.html">Apicurio Registry API [v3]</a></details>
+<details open><summary>API</summary><a href="../api/index.html">API overview</a>
+<a href="../api/admin.html">Admin</a>
+<a href="../api/agent.html">Agent</a>
+<a href="../api/agent_card.html">AgentCard</a>
+<a href="../api/ai_catalog.html">AiCatalog</a>
+<a href="../api/ard_explore.html">ArdExplore</a>
+<a href="../api/ard_search.html">ArdSearch</a>
+<a href="../api/artifact.html">Artifact</a>
+<a href="../api/artifact_reference.html">ArtifactReference</a>
+<a href="../api/artifact_rule.html">ArtifactRule</a>
+<a href="../api/artifact_type.html">ArtifactType</a>
+<a href="../api/branch.html">Branch</a>
+<a href="../api/comment.html">Comment</a>
+<a href="../api/configuration_property.html">ConfigurationProperty</a>
+<a href="../api/consumer_version_heatmap.html">ConsumerVersionHeatmap</a>
+<a href="../api/content.html">Content</a>
+<a href="../api/contract.html">Contract</a>
+<a href="../api/contract_rule.html">ContractRule</a>
+<a href="../api/contract_rule_set.html">ContractRuleSet</a>
+<a href="../api/create_artifact.html">CreateArtifact</a>
+<a href="../api/deprecation_readiness.html">DeprecationReadiness</a>
+<a href="../api/download_ref.html">DownloadRef</a>
+<a href="../api/git_op.html">GitOp</a>
+<a href="../api/git_ops_status.html">GitOpsStatus</a>
+<a href="../api/git_ops_validate_task.html">GitOpsValidateTask</a>
+<a href="../api/global_rule.html">GlobalRule</a>
+<a href="../api/group.html">Group</a>
+<a href="../api/group_rule.html">GroupRule</a>
+<a href="../api/kafka_sql.html">KafkaSql</a>
+<a href="../api/mcp_tool.html">McpTool</a>
+<a aria-current="page" href="../api/metadata.html">Metadata</a><div class="nav-sections"><a class="nav-section" href="#post-groupsgroupidartifactsartifactidversionsversionexpressionrender">POST /groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}/render</a>
+<a class="nav-section" href="#get-groupsgroupidartifactsartifactidversionsversionexpression">GET /groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}</a>
+<a class="nav-section" href="#get-groupsgroupidartifactsartifactid">GET /groups/{groupId}/artifacts/{artifactId}</a>
+<a class="nav-section" href="#put-groupsgroupidartifactsartifactidversionsversionexpressionstate">PUT /groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}/state</a>
+<a class="nav-section" href="#put-groupsgroupidartifactsartifactidversionsversionexpression">PUT /groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}</a>
+<a class="nav-section" href="#put-groupsgroupidartifactsartifactidversionsversionexpressioncontent">PUT /groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}/content</a>
+<a class="nav-section" href="#put-groupsgroupidartifactsartifactid">PUT /groups/{groupId}/artifacts/{artifactId}</a></div>
+<a href="../api/odcs_contract_result.html">OdcsContractResult</a>
+<a href="../api/odcs_contract_summary.html">OdcsContractSummary</a>
+<a href="../api/reference_graph.html">ReferenceGraph</a>
+<a href="../api/role_mapping.html">RoleMapping</a>
+<a href="../api/rule.html">Rule</a>
+<a href="../api/searched_branch.html">SearchedBranch</a>
+<a href="../api/searched_group.html">SearchedGroup</a>
+<a href="../api/system_info.html">SystemInfo</a>
+<a href="../api/usage_summary.html">UsageSummary</a>
+<a href="../api/user_info.html">UserInfo</a>
+<a href="../api/user_interface_config.html">UserInterfaceConfig</a>
+<a href="../api/version.html">Version</a>
+<a href="../api/well_known.html">WellKnown</a>
+<a href="../api/wrapped_version_state.html">WrappedVersionState</a></details>
+<details><summary>Guides</summary><a href="../guides/authentication.html">Authentication</a>
+<a href="../guides/first-call.html">Make your first API call</a>
+<a href="../guides/errors.html">Handle errors</a>
+<a href="../guides/concepts.html">Entities, SDKs, and tools</a></details>
+<details><summary>SDKs</summary><a href="../sdks/go.html">Golang</a>
+<a href="../sdks/lua.html">Lua</a>
+<a href="../sdks/php.html">PHP</a>
+<a href="../sdks/py.html">Python</a>
+<a href="../sdks/rb.html">Ruby</a>
+<a href="../sdks/ts.html">TypeScript</a></details>
+<details><summary>Tools</summary><a href="../tools/go-cli.html">Go CLI</a>
+<a href="../tools/go-mcp.html">Go MCP server</a></details>
+<details><summary>Features</summary><a href="../features/debug.html">Debug capture</a>
+<a href="../features/idempotency.html">Idempotency</a>
+<a href="../features/metrics.html">Metrics</a>
+<a href="../features/paging.html">Paging</a>
+<a href="../features/ratelimit.html">Rate limiting</a>
+<a href="../features/retry.html">Retry</a>
+<a href="../features/test.html">Test transport</a>
+<a href="../features/timeout.html">Timeout</a></details></nav><main id="content"><div class="page-context"><span class="section-dot" aria-hidden="true"></span>API</div><h1 id="metadata">Metadata</h1>
+<h2 id="operations">Operations</h2>
+<p>Every route this entity exposes. Each route links to its own reference on this page.</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Route</th>
+<th>SDK operation</th>
+<th>Returns</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>POST</code></td>
+<td><a href="#post-groupsgroupidartifactsartifactidversionsversionexpressionrender"><code>/groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}/render</code></a></td>
+<td><code>create</code></td>
+<td>The rendered prompt template</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><a href="#get-groupsgroupidartifactsartifactidversionsversionexpression"><code>/groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}</code></a></td>
+<td><code>load</code></td>
+<td>The artifact version's metadata</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><a href="#get-groupsgroupidartifactsartifactid"><code>/groups/{groupId}/artifacts/{artifactId}</code></a></td>
+<td><code>load</code></td>
+<td>The artifact's metadata</td>
+</tr>
+<tr>
+<td><code>PUT</code></td>
+<td><a href="#put-groupsgroupidartifactsartifactidversionsversionexpressionstate"><code>/groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}/state</code></a></td>
+<td><code>update</code></td>
+<td>The state was successfully updated</td>
+</tr>
+<tr>
+<td><code>PUT</code></td>
+<td><a href="#put-groupsgroupidartifactsartifactidversionsversionexpression"><code>/groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}</code></a></td>
+<td><code>update</code></td>
+<td>The artifact version's metadata was successfully updated</td>
+</tr>
+<tr>
+<td><code>PUT</code></td>
+<td><a href="#put-groupsgroupidartifactsartifactidversionsversionexpressioncontent"><code>/groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}/content</code></a></td>
+<td><code>update</code></td>
+<td>The artifact version content was successfully updated</td>
+</tr>
+<tr>
+<td><code>PUT</code></td>
+<td><a href="#put-groupsgroupidartifactsartifactid"><code>/groups/{groupId}/artifacts/{artifactId}</code></a></td>
+<td><code>update</code></td>
+<td>The artifact's metadata was updated</td>
+</tr>
+</tbody>
+</table>
+<h2 id="examples">Examples</h2>
+<p>One example per SDK, generated from the API model. The argument names are the parameters and fields of this entity, and the values are placeholders. The examples are not compiled or executed.</p>
+<h3 id="golang">Golang</h3>
+<p>Construct <code>client</code> as shown in the <a href="../sdks/go.html#set-up-the-client">Golang setup</a>, then call the operations:</p>
+<pre><code class="language-go">metadata, err := client.Metadata(nil).Load(map[string]any{&quot;artifact_id&quot;: &quot;example&quot;, &quot;group_id&quot;: &quot;example&quot;}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(metadata)
+created, err := client.Metadata(nil).Create(map[string]any{&quot;artifact_id&quot;: &quot;example&quot;, &quot;group_id&quot;: &quot;example&quot;, &quot;version_expression&quot;: &quot;example&quot;, &quot;modifiedBy&quot;: &quot;example&quot;, &quot;modifiedOn&quot;: &quot;example&quot;}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(created)
+updated, err := client.Metadata(nil).Update(map[string]any{&quot;artifact_id&quot;: &quot;example&quot;, &quot;group_id&quot;: &quot;example&quot;}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(updated)
+</code></pre>
+<h3 id="lua">Lua</h3>
+<p>Construct <code>client</code> as shown in the <a href="../sdks/lua.html#set-up-the-client">Lua setup</a>, then call the operations:</p>
+<pre><code class="language-lua">local metadata, err = client:Metadata():load({ artifact_id = &quot;example&quot;, group_id = &quot;example&quot; })
+local created, err = client:Metadata():create({ artifact_id = &quot;example&quot;, group_id = &quot;example&quot;, version_expression = &quot;example&quot;, modifiedBy = &quot;example&quot;, modifiedOn = &quot;example&quot; })
+local updated, err = client:Metadata():update({ artifact_id = &quot;example&quot;, group_id = &quot;example&quot; })
+</code></pre>
+<h3 id="php">PHP</h3>
+<p>Construct <code>client</code> as shown in the <a href="../sdks/php.html#set-up-the-client">PHP setup</a>, then call the operations:</p>
+<pre><code class="language-php">$metadata = $client-&gt;Metadata()-&gt;load([&quot;artifact_id&quot; =&gt; &quot;example&quot;, &quot;group_id&quot; =&gt; &quot;example&quot;]);
+$created = $client-&gt;Metadata()-&gt;create([&quot;artifact_id&quot; =&gt; &quot;example&quot;, &quot;group_id&quot; =&gt; &quot;example&quot;, &quot;version_expression&quot; =&gt; &quot;example&quot;, &quot;modifiedBy&quot; =&gt; &quot;example&quot;, &quot;modifiedOn&quot; =&gt; &quot;example&quot;]);
+$updated = $client-&gt;Metadata()-&gt;update([&quot;artifact_id&quot; =&gt; &quot;example&quot;, &quot;group_id&quot; =&gt; &quot;example&quot;]);
+</code></pre>
+<h3 id="python">Python</h3>
+<p>Construct <code>client</code> as shown in the <a href="../sdks/py.html#set-up-the-client">Python setup</a>, then call the operations:</p>
+<pre><code class="language-py">metadata = client.Metadata().load({&quot;artifact_id&quot;: &quot;example&quot;, &quot;group_id&quot;: &quot;example&quot;})
+created = client.Metadata().create({ &quot;artifact_id&quot;: &quot;example&quot;, &quot;group_id&quot;: &quot;example&quot;, &quot;version_expression&quot;: &quot;example&quot;, &quot;modifiedBy&quot;: &quot;example&quot;, &quot;modifiedOn&quot;: &quot;example&quot; })
+updated = client.Metadata().update({&quot;artifact_id&quot;: &quot;example&quot;, &quot;group_id&quot;: &quot;example&quot;})
+</code></pre>
+<h3 id="ruby">Ruby</h3>
+<p>Construct <code>client</code> as shown in the <a href="../sdks/rb.html#set-up-the-client">Ruby setup</a>, then call the operations:</p>
+<pre><code class="language-rb">metadata = client.Metadata.load({ &quot;artifact_id&quot; =&gt; &quot;example&quot;, &quot;group_id&quot; =&gt; &quot;example&quot; })
+created = client.Metadata.create({ &quot;artifact_id&quot; =&gt; &quot;example&quot;, &quot;group_id&quot; =&gt; &quot;example&quot;, &quot;version_expression&quot; =&gt; &quot;example&quot;, &quot;modifiedBy&quot; =&gt; &quot;example&quot;, &quot;modifiedOn&quot; =&gt; &quot;example&quot; })
+updated = client.Metadata.update({ &quot;artifact_id&quot; =&gt; &quot;example&quot;, &quot;group_id&quot; =&gt; &quot;example&quot; })
+</code></pre>
+<h3 id="typescript">TypeScript</h3>
+<p>Construct <code>client</code> as shown in the <a href="../sdks/ts.html#set-up-the-client">TypeScript setup</a>, then call the operations:</p>
+<pre><code class="language-ts">const metadata = await client.Metadata().load({ artifact_id: &quot;example&quot;, group_id: &quot;example&quot; })
+const created = await client.Metadata().create({ artifact_id: &quot;example&quot;, group_id: &quot;example&quot;, version_expression: &quot;example&quot;, modifiedBy: &quot;example&quot;, modifiedOn: &quot;example&quot; })
+const updated = await client.Metadata().update({ artifact_id: &quot;example&quot;, group_id: &quot;example&quot; })
+</code></pre>
+<h2 id="fields">Fields</h2>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>artifactId</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Artifact Id</td>
+</tr>
+<tr>
+<td><code>artifactType</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Artifact Type</td>
+</tr>
+<tr>
+<td><code>contentId</code></td>
+<td><code>integer</code></td>
+<td>No</td>
+<td>Content Id</td>
+</tr>
+<tr>
+<td><code>contractMetadata</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>Contract metadata projected from the artifact labels.</td>
+</tr>
+<tr>
+<td><code>createdOn</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Created On</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Description</td>
+</tr>
+<tr>
+<td><code>globalId</code></td>
+<td><code>integer</code></td>
+<td>No</td>
+<td>Global Id</td>
+</tr>
+<tr>
+<td><code>groupId</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Group Id</td>
+</tr>
+<tr>
+<td><code>labels</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>Labels</td>
+</tr>
+<tr>
+<td><code>modifiedBy</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Modified By</td>
+</tr>
+<tr>
+<td><code>modifiedOn</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Modified On</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Name</td>
+</tr>
+<tr>
+<td><code>owner</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Owner</td>
+</tr>
+<tr>
+<td><code>version</code></td>
+<td><code>integer</code></td>
+<td>No</td>
+<td>Version</td>
+</tr>
+</tbody>
+</table>
+<h2 id="create">create</h2>
+<h3 id="post-groupsgroupidartifactsartifactidversionsversionexpressionrender" class="operation" data-method="post"><code>POST</code> /groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}/render</h3>
+<p>Operation ID: <code>renderPromptTemplate</code>.</p>
+<h4 id="parameters">Parameters</h4>
+<p>| Parameter | In | Type | Required | Description |
+| --- | --- | --- | --- |
+| <code>groupId</code> | <code>path</code> | <code>string</code> | Yes | The artifact group ID. Must be a string provided by the client, representing the name of the grouping of artifacts. Must follow the &quot;.{1,512}&quot; pattern. |
+| <code>artifactId</code> | <code>path</code> | <code>string</code> | Yes | The artifact ID. Can be a string (client-provided) or UUID (server-generated), representing the unique artifact identifier. Must follow the &quot;.{1,512}&quot; pattern. |
+| <code>versionExpression</code> | <code>path</code> | <code>string</code> | Yes | An expression resolvable to a specific version ID within the given group and artifact. The following rules apply: - If the expression is in the form &quot;branch={branchId}&quot;, and artifact branch {branchId} exists: The expression is resolved to a version that the branch points to. - Otherwise: The expression is resolved to a version with the same ID, which must follow the &quot;[a-zA-Z0-9._\-+]{1,256}&quot; pattern. |</p>
+<h4 id="request-body">Request body</h4>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>variables</code></td>
+<td><code>object</code></td>
+<td>Yes</td>
+<td>A map of variable names to their values. These will be substituted into the prompt template.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="responses">Responses</h4>
+<h5 id="200-the-rendered-prompt-template" class="status" data-status="2xx">200: The rendered prompt template</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>artifactId</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The artifact ID.</td>
+</tr>
+<tr>
+<td><code>groupId</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The group ID of the artifact.</td>
+</tr>
+<tr>
+<td><code>rendered</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The rendered prompt with all variables substituted.</td>
+</tr>
+<tr>
+<td><code>validationErrors</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>Any validation errors encountered when validating variables against the template schema.</td>
+</tr>
+<tr>
+<td><code>validationErrors[].actualType</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The actual type that was provided.</td>
+</tr>
+<tr>
+<td><code>validationErrors[].expectedType</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The expected type of the variable.</td>
+</tr>
+<tr>
+<td><code>validationErrors[].message</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A description of the validation error.</td>
+</tr>
+<tr>
+<td><code>validationErrors[].variableName</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The name of the variable that failed validation.</td>
+</tr>
+<tr>
+<td><code>version</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The version of the artifact that was rendered.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="400-common-response-for-all-operations-that-can-return-a-400-error" class="status" data-status="4xx">400: Common response for all operations that can return a <code>400</code> error</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>detail</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A human-readable explanation specific to this occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>instance</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference that identifies the specific occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The name of the error (typically a server exception class name).</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>The HTTP status code.</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A short, human-readable summary of the problem type.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference [RFC3986] that identifies the problem type.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="401-common-response-for-all-operations-that-can-return-a-401-error-indicating-authentication-is-required" class="status" data-status="4xx">401: Common response for all operations that can return a <code>401</code> error indicating authentication is required</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>detail</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A human-readable explanation specific to this occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>instance</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference that identifies the specific occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The name of the error (typically a server exception class name).</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>The HTTP status code.</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A short, human-readable summary of the problem type.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference [RFC3986] that identifies the problem type.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="403-common-response-for-all-operations-that-can-return-a-403-error-indicating-the-user-is-authenticated-but-not-authorized" class="status" data-status="4xx">403: Common response for all operations that can return a <code>403</code> error indicating the user is authenticated but not authorized</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>detail</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A human-readable explanation specific to this occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>instance</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference that identifies the specific occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The name of the error (typically a server exception class name).</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>The HTTP status code.</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A short, human-readable summary of the problem type.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference [RFC3986] that identifies the problem type.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="404-common-response-for-all-operations-that-can-return-a-404-error" class="status" data-status="4xx">404: Common response for all operations that can return a <code>404</code> error</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>detail</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A human-readable explanation specific to this occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>instance</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference that identifies the specific occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The name of the error (typically a server exception class name).</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>The HTTP status code.</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A short, human-readable summary of the problem type.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference [RFC3986] that identifies the problem type.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="500-common-response-for-all-operations-that-can-fail-with-an-unexpected-server-error" class="status" data-status="5xx">500: Common response for all operations that can fail with an unexpected server error</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>detail</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A human-readable explanation specific to this occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>instance</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference that identifies the specific occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The name of the error (typically a server exception class name).</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>The HTTP status code.</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A short, human-readable summary of the problem type.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference [RFC3986] that identifies the problem type.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="load">load</h2>
+<h3 id="get-groupsgroupidartifactsartifactidversionsversionexpression" class="operation" data-method="get"><code>GET</code> /groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}</h3>
+<p>Operation ID: <code>getArtifactVersionMetaData</code>.</p>
+<h4 id="parameters-1">Parameters</h4>
+<p>| Parameter | In | Type | Required | Description |
+| --- | --- | --- | --- |
+| <code>groupId</code> | <code>path</code> | <code>string</code> | Yes | The artifact group ID. Must be a string provided by the client, representing the name of the grouping of artifacts. Must follow the &quot;.{1,512}&quot; pattern. |
+| <code>artifactId</code> | <code>path</code> | <code>string</code> | Yes | The artifact ID. Can be a string (client-provided) or UUID (server-generated), representing the unique artifact identifier. Must follow the &quot;.{1,512}&quot; pattern. |
+| <code>versionExpression</code> | <code>path</code> | <code>string</code> | Yes | An expression resolvable to a specific version ID within the given group and artifact. The following rules apply: - If the expression is in the form &quot;branch={branchId}&quot;, and artifact branch {branchId} exists: The expression is resolved to a version that the branch points to. - Otherwise: The expression is resolved to a version with the same ID, which must follow the &quot;[a-zA-Z0-9._\-+]{1,256}&quot; pattern. |</p>
+<h4 id="responses-1">Responses</h4>
+<h5 id="200-the-artifact-version39s-metadata" class="status" data-status="2xx">200: The artifact version's metadata</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>artifactId</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>artifactType</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>contentId</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>createdOn</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>globalId</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>groupId</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>labels</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>modifiedBy</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>modifiedOn</code></td>
+<td><code>string (date-time)</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>owner</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>state</code></td>
+<td><code>enum: ENABLED, DISABLED, DEPRECATED, DRAFT, SUNSET</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>version</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A single version of an artifact. Can be provided by the client when creating a new version, or it can be server-generated. The value can be any string unique to the artifact, but it is recommended to use a simple integer or a semver value.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="400-common-response-for-all-operations-that-can-return-a-400-error-1" class="status" data-status="4xx">400: Common response for all operations that can return a <code>400</code> error</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>detail</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A human-readable explanation specific to this occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>instance</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference that identifies the specific occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The name of the error (typically a server exception class name).</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>The HTTP status code.</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A short, human-readable summary of the problem type.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference [RFC3986] that identifies the problem type.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="401-common-response-for-all-operations-that-can-return-a-401-error-indicating-authentication-is-required-1" class="status" data-status="4xx">401: Common response for all operations that can return a <code>401</code> error indicating authentication is required</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>detail</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A human-readable explanation specific to this occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>instance</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference that identifies the specific occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The name of the error (typically a server exception class name).</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>The HTTP status code.</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A short, human-readable summary of the problem type.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference [RFC3986] that identifies the problem type.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="403-common-response-for-all-operations-that-can-return-a-403-error-indicating-the-user-is-authenticated-but-not-authorized-1" class="status" data-status="4xx">403: Common response for all operations that can return a <code>403</code> error indicating the user is authenticated but not authorized</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>detail</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A human-readable explanation specific to this occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>instance</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference that identifies the specific occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The name of the error (typically a server exception class name).</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>The HTTP status code.</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A short, human-readable summary of the problem type.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference [RFC3986] that identifies the problem type.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="404-common-response-for-all-operations-that-can-return-a-404-error-1" class="status" data-status="4xx">404: Common response for all operations that can return a <code>404</code> error</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>detail</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A human-readable explanation specific to this occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>instance</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference that identifies the specific occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The name of the error (typically a server exception class name).</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>The HTTP status code.</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A short, human-readable summary of the problem type.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference [RFC3986] that identifies the problem type.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="500-common-response-for-all-operations-that-can-fail-with-an-unexpected-server-error-1" class="status" data-status="5xx">500: Common response for all operations that can fail with an unexpected server error</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>detail</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A human-readable explanation specific to this occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>instance</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference that identifies the specific occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The name of the error (typically a server exception class name).</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>The HTTP status code.</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A short, human-readable summary of the problem type.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference [RFC3986] that identifies the problem type.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="get-groupsgroupidartifactsartifactid" class="operation" data-method="get"><code>GET</code> /groups/{groupId}/artifacts/{artifactId}</h3>
+<p>Operation ID: <code>getArtifactMetaData</code>.</p>
+<h4 id="parameters-2">Parameters</h4>
+<p>| Parameter | In | Type | Required | Description |
+| --- | --- | --- | --- |
+| <code>groupId</code> | <code>path</code> | <code>string</code> | Yes | The artifact group ID. Must be a string provided by the client, representing the name of the grouping of artifacts. Must follow the &quot;.{1,512}&quot; pattern. |
+| <code>artifactId</code> | <code>path</code> | <code>string</code> | Yes | The artifact ID. Can be a string (client-provided) or UUID (server-generated), representing the unique artifact identifier. Must follow the &quot;.{1,512}&quot; pattern. |</p>
+<h4 id="responses-2">Responses</h4>
+<h5 id="200-the-artifact39s-metadata" class="status" data-status="2xx">200: The artifact's metadata</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>artifactId</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>artifactType</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>contractMetadata</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>Contract metadata projected from the artifact labels. Only present when data contracts are enabled and contract labels exist.</td>
+</tr>
+<tr>
+<td><code>contractMetadata.classification</code></td>
+<td><code>enum: PUBLIC, INTERNAL, CONFIDENTIAL, RESTRICTED</code></td>
+<td>No</td>
+<td>Data classification level.</td>
+</tr>
+<tr>
+<td><code>contractMetadata.compatibilityGroup</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Compatibility group for schema evolution scoping.</td>
+</tr>
+<tr>
+<td><code>contractMetadata.deprecatedDate</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>ISO-8601 date when contract was deprecated.</td>
+</tr>
+<tr>
+<td><code>contractMetadata.deprecationReason</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Reason for deprecation.</td>
+</tr>
+<tr>
+<td><code>contractMetadata.ownerDomain</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The domain the contract belongs to.</td>
+</tr>
+<tr>
+<td><code>contractMetadata.ownerTeam</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The team that owns the contract.</td>
+</tr>
+<tr>
+<td><code>contractMetadata.stableDate</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>ISO-8601 date when contract became stable.</td>
+</tr>
+<tr>
+<td><code>contractMetadata.stage</code></td>
+<td><code>enum: DEV, STAGE, PROD</code></td>
+<td>No</td>
+<td>Promotion stage.</td>
+</tr>
+<tr>
+<td><code>contractMetadata.status</code></td>
+<td><code>enum: DRAFT, STABLE, DEPRECATED</code></td>
+<td>No</td>
+<td>The contract lifecycle status.</td>
+</tr>
+<tr>
+<td><code>contractMetadata.supportContact</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Support contact email.</td>
+</tr>
+<tr>
+<td><code>createdOn</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>groupId</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>labels</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>modifiedBy</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>modifiedOn</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>owner</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h5 id="401-common-response-for-all-operations-that-can-return-a-401-error-indicating-authentication-is-required-2" class="status" data-status="4xx">401: Common response for all operations that can return a <code>401</code> error indicating authentication is required</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>detail</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A human-readable explanation specific to this occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>instance</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference that identifies the specific occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The name of the error (typically a server exception class name).</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>The HTTP status code.</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A short, human-readable summary of the problem type.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference [RFC3986] that identifies the problem type.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="403-common-response-for-all-operations-that-can-return-a-403-error-indicating-the-user-is-authenticated-but-not-authorized-2" class="status" data-status="4xx">403: Common response for all operations that can return a <code>403</code> error indicating the user is authenticated but not authorized</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>detail</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A human-readable explanation specific to this occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>instance</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference that identifies the specific occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The name of the error (typically a server exception class name).</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>The HTTP status code.</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A short, human-readable summary of the problem type.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference [RFC3986] that identifies the problem type.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="404-common-response-for-all-operations-that-can-return-a-404-error-2" class="status" data-status="4xx">404: Common response for all operations that can return a <code>404</code> error</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>detail</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A human-readable explanation specific to this occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>instance</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference that identifies the specific occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The name of the error (typically a server exception class name).</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>The HTTP status code.</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A short, human-readable summary of the problem type.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference [RFC3986] that identifies the problem type.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="500-common-response-for-all-operations-that-can-fail-with-an-unexpected-server-error-2" class="status" data-status="5xx">500: Common response for all operations that can fail with an unexpected server error</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>detail</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A human-readable explanation specific to this occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>instance</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference that identifies the specific occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The name of the error (typically a server exception class name).</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>The HTTP status code.</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A short, human-readable summary of the problem type.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference [RFC3986] that identifies the problem type.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="update">update</h2>
+<h3 id="put-groupsgroupidartifactsartifactidversionsversionexpressionstate" class="operation" data-method="put"><code>PUT</code> /groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}/state</h3>
+<p>Operation ID: <code>updateArtifactVersionState</code>.</p>
+<h4 id="parameters-3">Parameters</h4>
+<p>| Parameter | In | Type | Required | Description |
+| --- | --- | --- | --- |
+| <code>groupId</code> | <code>path</code> | <code>string</code> | Yes | The artifact group ID. Must be a string provided by the client, representing the name of the grouping of artifacts. Must follow the &quot;.{1,512}&quot; pattern. |
+| <code>artifactId</code> | <code>path</code> | <code>string</code> | Yes | The artifact ID. Can be a string (client-provided) or UUID (server-generated), representing the unique artifact identifier. Must follow the &quot;.{1,512}&quot; pattern. |
+| <code>versionExpression</code> | <code>path</code> | <code>string</code> | Yes | An expression resolvable to a specific version ID within the given group and artifact. The following rules apply: - If the expression is in the form &quot;branch={branchId}&quot;, and artifact branch {branchId} exists: The expression is resolved to a version that the branch points to. - Otherwise: The expression is resolved to a version with the same ID, which must follow the &quot;[a-zA-Z0-9._\-+]{1,256}&quot; pattern. |
+| <code>dryRun</code> | <code>query</code> | <code>boolean</code> | No | When set to <code>true</code>, the operation will not result in any changes. Instead, it will return a result based on whether the operation <strong>would have succeeded</strong>. |</p>
+<h4 id="request-body-1">Request body</h4>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>state</code></td>
+<td><code>enum: ENABLED, DISABLED, DEPRECATED, DRAFT, SUNSET</code></td>
+<td>Yes</td>
+<td>Describes the state of an artifact or artifact version. * ENABLED * DISABLED * DEPRECATED * DRAFT * SUNSET, Signals that a migration deadline has passed and the version will be removed. Requires transitioning through DEPRECATED first. Added in 3.3.0.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="responses-3">Responses</h4>
+<h5 id="204-the-state-was-successfully-updated" class="status" data-status="2xx">204: The state was successfully updated</h5>
+<h5 id="400-common-response-for-all-operations-that-can-return-a-400-error-2" class="status" data-status="4xx">400: Common response for all operations that can return a <code>400</code> error</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>detail</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A human-readable explanation specific to this occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>instance</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference that identifies the specific occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The name of the error (typically a server exception class name).</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>The HTTP status code.</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A short, human-readable summary of the problem type.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference [RFC3986] that identifies the problem type.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="401-common-response-for-all-operations-that-can-return-a-401-error-indicating-authentication-is-required-3" class="status" data-status="4xx">401: Common response for all operations that can return a <code>401</code> error indicating authentication is required</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>detail</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A human-readable explanation specific to this occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>instance</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference that identifies the specific occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The name of the error (typically a server exception class name).</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>The HTTP status code.</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A short, human-readable summary of the problem type.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference [RFC3986] that identifies the problem type.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="403-common-response-for-all-operations-that-can-return-a-403-error-indicating-the-user-is-authenticated-but-not-authorized-3" class="status" data-status="4xx">403: Common response for all operations that can return a <code>403</code> error indicating the user is authenticated but not authorized</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>detail</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A human-readable explanation specific to this occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>instance</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference that identifies the specific occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The name of the error (typically a server exception class name).</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>The HTTP status code.</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A short, human-readable summary of the problem type.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference [RFC3986] that identifies the problem type.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="404-common-response-for-all-operations-that-can-return-a-404-error-3" class="status" data-status="4xx">404: Common response for all operations that can return a <code>404</code> error</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>detail</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A human-readable explanation specific to this occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>instance</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference that identifies the specific occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The name of the error (typically a server exception class name).</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>The HTTP status code.</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A short, human-readable summary of the problem type.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference [RFC3986] that identifies the problem type.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="409-common-response-used-when-an-input-conflicts-with-existing-data" class="status" data-status="4xx">409: Common response used when an input conflicts with existing data</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>detail</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A human-readable explanation specific to this occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>instance</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference that identifies the specific occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The name of the error (typically a server exception class name).</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>The HTTP status code.</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A short, human-readable summary of the problem type.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference [RFC3986] that identifies the problem type.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="500-common-response-for-all-operations-that-can-fail-with-an-unexpected-server-error-3" class="status" data-status="5xx">500: Common response for all operations that can fail with an unexpected server error</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>detail</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A human-readable explanation specific to this occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>instance</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference that identifies the specific occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The name of the error (typically a server exception class name).</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>The HTTP status code.</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A short, human-readable summary of the problem type.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference [RFC3986] that identifies the problem type.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="put-groupsgroupidartifactsartifactidversionsversionexpression" class="operation" data-method="put"><code>PUT</code> /groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}</h3>
+<p>Operation ID: <code>updateArtifactVersionMetaData</code>.</p>
+<h4 id="parameters-4">Parameters</h4>
+<p>| Parameter | In | Type | Required | Description |
+| --- | --- | --- | --- |
+| <code>groupId</code> | <code>path</code> | <code>string</code> | Yes | The artifact group ID. Must be a string provided by the client, representing the name of the grouping of artifacts. Must follow the &quot;.{1,512}&quot; pattern. |
+| <code>artifactId</code> | <code>path</code> | <code>string</code> | Yes | The artifact ID. Can be a string (client-provided) or UUID (server-generated), representing the unique artifact identifier. Must follow the &quot;.{1,512}&quot; pattern. |
+| <code>versionExpression</code> | <code>path</code> | <code>string</code> | Yes | An expression resolvable to a specific version ID within the given group and artifact. The following rules apply: - If the expression is in the form &quot;branch={branchId}&quot;, and artifact branch {branchId} exists: The expression is resolved to a version that the branch points to. - Otherwise: The expression is resolved to a version with the same ID, which must follow the &quot;[a-zA-Z0-9._\-+]{1,256}&quot; pattern. |</p>
+<h4 id="request-body-2">Request body</h4>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>description</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>labels</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h4 id="responses-4">Responses</h4>
+<h5 id="204-the-artifact-version39s-metadata-was-successfully-updated" class="status" data-status="2xx">204: The artifact version's metadata was successfully updated</h5>
+<h5 id="400-common-response-for-all-operations-that-can-return-a-400-error-3" class="status" data-status="4xx">400: Common response for all operations that can return a <code>400</code> error</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>detail</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A human-readable explanation specific to this occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>instance</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference that identifies the specific occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The name of the error (typically a server exception class name).</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>The HTTP status code.</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A short, human-readable summary of the problem type.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference [RFC3986] that identifies the problem type.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="401-common-response-for-all-operations-that-can-return-a-401-error-indicating-authentication-is-required-4" class="status" data-status="4xx">401: Common response for all operations that can return a <code>401</code> error indicating authentication is required</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>detail</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A human-readable explanation specific to this occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>instance</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference that identifies the specific occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The name of the error (typically a server exception class name).</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>The HTTP status code.</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A short, human-readable summary of the problem type.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference [RFC3986] that identifies the problem type.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="403-common-response-for-all-operations-that-can-return-a-403-error-indicating-the-user-is-authenticated-but-not-authorized-4" class="status" data-status="4xx">403: Common response for all operations that can return a <code>403</code> error indicating the user is authenticated but not authorized</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>detail</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A human-readable explanation specific to this occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>instance</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference that identifies the specific occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The name of the error (typically a server exception class name).</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>The HTTP status code.</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A short, human-readable summary of the problem type.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference [RFC3986] that identifies the problem type.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="404-common-response-for-all-operations-that-can-return-a-404-error-4" class="status" data-status="4xx">404: Common response for all operations that can return a <code>404</code> error</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>detail</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A human-readable explanation specific to this occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>instance</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference that identifies the specific occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The name of the error (typically a server exception class name).</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>The HTTP status code.</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A short, human-readable summary of the problem type.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference [RFC3986] that identifies the problem type.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="500-common-response-for-all-operations-that-can-fail-with-an-unexpected-server-error-4" class="status" data-status="5xx">500: Common response for all operations that can fail with an unexpected server error</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>detail</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A human-readable explanation specific to this occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>instance</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference that identifies the specific occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The name of the error (typically a server exception class name).</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>The HTTP status code.</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A short, human-readable summary of the problem type.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference [RFC3986] that identifies the problem type.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="put-groupsgroupidartifactsartifactidversionsversionexpressioncontent" class="operation" data-method="put"><code>PUT</code> /groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}/content</h3>
+<p>Operation ID: <code>updateArtifactVersionContent</code>.</p>
+<h4 id="parameters-5">Parameters</h4>
+<p>| Parameter | In | Type | Required | Description |
+| --- | --- | --- | --- |
+| <code>groupId</code> | <code>path</code> | <code>string</code> | Yes | The artifact group ID. Must be a string provided by the client, representing the name of the grouping of artifacts. Must follow the &quot;.{1,512}&quot; pattern. |
+| <code>artifactId</code> | <code>path</code> | <code>string</code> | Yes | The artifact ID. Can be a string (client-provided) or UUID (server-generated), representing the unique artifact identifier. Must follow the &quot;.{1,512}&quot; pattern. |
+| <code>versionExpression</code> | <code>path</code> | <code>string</code> | Yes | An expression resolvable to a specific version ID within the given group and artifact. The following rules apply: - If the expression is in the form &quot;branch={branchId}&quot;, and artifact branch {branchId} exists: The expression is resolved to a version that the branch points to. - Otherwise: The expression is resolved to a version with the same ID, which must follow the &quot;[a-zA-Z0-9._\-+]{1,256}&quot; pattern. |</p>
+<h4 id="request-body-3">Request body</h4>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>content</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Raw content of the artifact version or a valid (and accessible) URL where the content can be found.</td>
+</tr>
+<tr>
+<td><code>contentType</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The content-type, such as <code>application/json</code> or <code>text/xml</code>.</td>
+</tr>
+<tr>
+<td><code>encoding</code></td>
+<td><code>enum: base64</code></td>
+<td>No</td>
+<td>Optional encoding for the content property. When set to 'base64', the content value will be base64-decoded by the server before processing.</td>
+</tr>
+<tr>
+<td><code>references</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>Collection of references to other artifacts.</td>
+</tr>
+<tr>
+<td><code>references[].artifactId</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>references[].groupId</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>references[].name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>references[].version</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h4 id="responses-5">Responses</h4>
+<h5 id="204-the-artifact-version-content-was-successfully-updated" class="status" data-status="2xx">204: The artifact version content was successfully updated</h5>
+<h5 id="401-common-response-for-all-operations-that-can-return-a-401-error-indicating-authentication-is-required-5" class="status" data-status="4xx">401: Common response for all operations that can return a <code>401</code> error indicating authentication is required</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>detail</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A human-readable explanation specific to this occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>instance</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference that identifies the specific occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The name of the error (typically a server exception class name).</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>The HTTP status code.</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A short, human-readable summary of the problem type.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference [RFC3986] that identifies the problem type.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="403-common-response-for-all-operations-that-can-return-a-403-error-indicating-the-user-is-authenticated-but-not-authorized-5" class="status" data-status="4xx">403: Common response for all operations that can return a <code>403</code> error indicating the user is authenticated but not authorized</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>detail</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A human-readable explanation specific to this occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>instance</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference that identifies the specific occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The name of the error (typically a server exception class name).</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>The HTTP status code.</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A short, human-readable summary of the problem type.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference [RFC3986] that identifies the problem type.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="404-common-response-for-all-operations-that-can-return-a-404-error-5" class="status" data-status="4xx">404: Common response for all operations that can return a <code>404</code> error</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>detail</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A human-readable explanation specific to this occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>instance</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference that identifies the specific occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The name of the error (typically a server exception class name).</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>The HTTP status code.</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A short, human-readable summary of the problem type.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference [RFC3986] that identifies the problem type.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="405-common-response-for-all-operations-that-can-fail-due-to-method-not-allowed-or-disabled" class="status" data-status="4xx">405: Common response for all operations that can fail due to method not allowed or disabled</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>detail</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A human-readable explanation specific to this occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>instance</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference that identifies the specific occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The name of the error (typically a server exception class name).</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>The HTTP status code.</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A short, human-readable summary of the problem type.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference [RFC3986] that identifies the problem type.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="409-common-response-used-when-an-input-conflicts-with-existing-data-1" class="status" data-status="4xx">409: Common response used when an input conflicts with existing data</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>detail</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A human-readable explanation specific to this occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>instance</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference that identifies the specific occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The name of the error (typically a server exception class name).</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>The HTTP status code.</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A short, human-readable summary of the problem type.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference [RFC3986] that identifies the problem type.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="500-common-response-for-all-operations-that-can-fail-with-an-unexpected-server-error-5" class="status" data-status="5xx">500: Common response for all operations that can fail with an unexpected server error</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>detail</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A human-readable explanation specific to this occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>instance</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference that identifies the specific occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The name of the error (typically a server exception class name).</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>The HTTP status code.</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A short, human-readable summary of the problem type.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference [RFC3986] that identifies the problem type.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="put-groupsgroupidartifactsartifactid" class="operation" data-method="put"><code>PUT</code> /groups/{groupId}/artifacts/{artifactId}</h3>
+<p>Operation ID: <code>updateArtifactMetaData</code>.</p>
+<h4 id="parameters-6">Parameters</h4>
+<p>| Parameter | In | Type | Required | Description |
+| --- | --- | --- | --- |
+| <code>groupId</code> | <code>path</code> | <code>string</code> | Yes | The artifact group ID. Must be a string provided by the client, representing the name of the grouping of artifacts. Must follow the &quot;.{1,512}&quot; pattern. |
+| <code>artifactId</code> | <code>path</code> | <code>string</code> | Yes | The artifact ID. Can be a string (client-provided) or UUID (server-generated), representing the unique artifact identifier. Must follow the &quot;.{1,512}&quot; pattern. |</p>
+<h4 id="request-body-4">Request body</h4>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>description</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>labels</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>owner</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h4 id="responses-6">Responses</h4>
+<h5 id="204-the-artifact39s-metadata-was-updated" class="status" data-status="2xx">204: The artifact's metadata was updated</h5>
+<h5 id="401-common-response-for-all-operations-that-can-return-a-401-error-indicating-authentication-is-required-6" class="status" data-status="4xx">401: Common response for all operations that can return a <code>401</code> error indicating authentication is required</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>detail</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A human-readable explanation specific to this occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>instance</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference that identifies the specific occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The name of the error (typically a server exception class name).</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>The HTTP status code.</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A short, human-readable summary of the problem type.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference [RFC3986] that identifies the problem type.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="403-common-response-for-all-operations-that-can-return-a-403-error-indicating-the-user-is-authenticated-but-not-authorized-6" class="status" data-status="4xx">403: Common response for all operations that can return a <code>403</code> error indicating the user is authenticated but not authorized</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>detail</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A human-readable explanation specific to this occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>instance</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference that identifies the specific occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The name of the error (typically a server exception class name).</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>The HTTP status code.</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A short, human-readable summary of the problem type.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference [RFC3986] that identifies the problem type.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="404-common-response-for-all-operations-that-can-return-a-404-error-6" class="status" data-status="4xx">404: Common response for all operations that can return a <code>404</code> error</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>detail</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A human-readable explanation specific to this occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>instance</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference that identifies the specific occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The name of the error (typically a server exception class name).</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>The HTTP status code.</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A short, human-readable summary of the problem type.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference [RFC3986] that identifies the problem type.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="500-common-response-for-all-operations-that-can-fail-with-an-unexpected-server-error-6" class="status" data-status="5xx">500: Common response for all operations that can fail with an unexpected server error</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>detail</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A human-readable explanation specific to this occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>instance</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference that identifies the specific occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The name of the error (typically a server exception class name).</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>The HTTP status code.</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A short, human-readable summary of the problem type.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference [RFC3986] that identifies the problem type.</td>
+</tr>
+</tbody>
+</table>
+</main></div>
+<script src="../assets/search.js" defer></script></body></html>

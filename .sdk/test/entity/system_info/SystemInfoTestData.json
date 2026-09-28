@@ -1,0 +1,44 @@
+{
+  "existing": {
+    "system_info": {
+      "SYSTEM_INFO00": {
+        "builtOn": "s28",
+        "description": "s29",
+        "name": "s2a",
+        "version": "s2b",
+        "id": "SYSTEM_INFO00"
+      },
+      "SYSTEM_INFO01": {
+        "builtOn": "s50",
+        "description": "s51",
+        "name": "s52",
+        "version": "s53",
+        "id": "SYSTEM_INFO01"
+      },
+      "SYSTEM_INFO02": {
+        "builtOn": "s78",
+        "description": "s79",
+        "name": "s7a",
+        "version": "s7b",
+        "id": "SYSTEM_INFO02"
+      }
+    }
+  },
+  "new": {
+    "system_info": {
+      "system_info_ref01": {
+        "builtOn": "sa0",
+        "description": "sa1",
+        "name": "sa2",
+        "version": "sa3"
+      }
+    }
+  },
+  "requests": {
+    "GET /system/info": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

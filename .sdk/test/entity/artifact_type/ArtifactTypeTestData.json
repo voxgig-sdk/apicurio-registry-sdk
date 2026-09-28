@@ -1,0 +1,29 @@
+{
+  "existing": {
+    "artifact_type": {
+      "ARTIFACT_TYPE00": {
+        "name": "sa"
+      },
+      "ARTIFACT_TYPE01": {
+        "name": "s14"
+      },
+      "ARTIFACT_TYPE02": {
+        "name": "s1e"
+      }
+    }
+  },
+  "new": {
+    "artifact_type": {
+      "artifact_type_ref01": {
+        "name": "s28"
+      }
+    }
+  },
+  "requests": {
+    "GET /admin/config/artifactTypes": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

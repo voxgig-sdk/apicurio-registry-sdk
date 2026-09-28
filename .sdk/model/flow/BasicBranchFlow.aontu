@@ -1,0 +1,86 @@
+# BasicBranchFlow
+
+main: kit: flow: BasicBranchFlow:
+{
+  entity: "branch",
+  kind: "basic",
+  name: "BasicBranchFlow",
+  step: [
+    {
+      i: {
+        ref: "branch_ref01"
+      }
+
+      m: {
+        artifact_id: "artifact01",
+        group_id: "group01"
+      }
+
+      o: "create"
+    }
+
+    {
+      d: {
+        artifact_id: "artifact01",
+        group_id: "group01"
+      }
+
+      i: {
+        ref: "branch_ref01",
+        srcdatavar: "branch_ref01_data",
+        suffix: "_up0",
+        textfield: "artifactId"
+      }
+
+      o: "update",
+      s: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-branch_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      i: {
+        ref: "branch_ref01",
+        srcdatavar: "branch_ref01_data",
+        suffix: "_dt0"
+      }
+
+      m: {
+        artifact_id: "artifact01",
+        group_id: "group01",
+        id: "branch01"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-branch_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      i: {
+        ref: "branch_ref01",
+        suffix: "_rm0"
+      }
+
+      m: {
+        artifact_id: "artifact01",
+        group_id: "group01",
+        id: "branch01"
+      }
+
+      o: "remove"
+    }
+  ],
+  "key$": "BasicBranchFlow"
+}

@@ -1,0 +1,773 @@
+# Entity: artifact
+
+main: kit: entity: artifact: {
+
+  alias: field: {}
+
+  fields: {
+    artifactId: {
+      h: "Artifact Id"
+      n: "artifactId"
+      r: true
+      t: "`$STRING`"
+    }
+    artifactType: {
+      h: "Artifact Type"
+      n: "artifactType"
+      r: true
+      t: "`$STRING`"
+    }
+    artifacts: {
+      h: "Artifacts"
+      n: "artifacts"
+      r: true
+      sh: "The artifacts returned in the result set."
+      t: "`$ARRAY`"
+    }
+    count: {
+      h: "Count"
+      n: "count"
+      r: true
+      sh: "The total number of artifacts that matched the query that produced the result set (may be more than the number of artifacts in the result set)."
+      t: "`$INTEGER`"
+    }
+    createdOn: {
+      fo: "date-time"
+      h: "Created On"
+      n: "createdOn"
+      r: true
+      t: "`$STRING`"
+    }
+    description: {
+      h: "Description"
+      n: "description"
+      r: false
+      t: "`$STRING`"
+    }
+    groupId: {
+      h: "Group Id"
+      n: "groupId"
+      r: true
+      t: "`$STRING`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      t: "`$STRING`"
+    }
+    labels: {
+      h: "Labels"
+      n: "labels"
+      r: false
+      t: "`$OBJECT`"
+    }
+    modifiedBy: {
+      h: "Modified By"
+      n: "modifiedBy"
+      r: true
+      t: "`$STRING`"
+    }
+    modifiedOn: {
+      fo: "date-time"
+      h: "Modified On"
+      n: "modifiedOn"
+      r: true
+      t: "`$STRING`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      r: false
+      t: "`$STRING`"
+    }
+    owner: {
+      h: "Owner"
+      n: "owner"
+      r: true
+      t: "`$STRING`"
+    }
+    versions: {
+      h: "Versions"
+      n: "versions"
+      r: true
+      t: "`$ARRAY`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "artifact"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /search/artifacts"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                ex: "AVRO"
+                k: "query"
+                n: "artifact_type"
+                or: "artifact_type"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "canonical"
+                or: "canonical"
+                r: false
+                t: "`$BOOLEAN`"
+              }
+              {
+                k: "query"
+                n: "group_id"
+                or: "group_id"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: 20
+                k: "query"
+                n: "limit"
+                or: "limit"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                ex: 0
+                k: "query"
+                n: "offset"
+                or: "offset"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "order"
+                or: "order"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "orderby"
+                or: "orderby"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: false
+                k: "query"
+                n: "skip_count"
+                or: "skip_count"
+                r: false
+                t: "`$BOOLEAN`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/search/artifacts"
+          q: {
+            exist: [
+              "artifact_type"
+              "canonical"
+              "group_id"
+              "limit"
+              "offset"
+              "order"
+              "orderby"
+              "skip_count"
+            ]
+          }
+          s: [
+            {
+              lit: "search"
+            }
+            {
+              lit: "artifacts"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /search/artifacts"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "artifact_id"
+                or: "artifact_id"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "AVRO"
+                k: "query"
+                n: "artifact_type"
+                or: "artifact_type"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "content_id"
+                or: "content_id"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "description"
+                or: "description"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "global_id"
+                or: "global_id"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "group_id"
+                or: "group_id"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "label"
+                or: "label"
+                r: false
+                t: "`$ARRAY`"
+              }
+              {
+                ex: 20
+                k: "query"
+                n: "limit"
+                or: "limit"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "name"
+                or: "name"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: 0
+                k: "query"
+                n: "offset"
+                or: "offset"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "order"
+                or: "order"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "orderby"
+                or: "orderby"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: false
+                k: "query"
+                n: "skip_count"
+                or: "skip_count"
+                r: false
+                t: "`$BOOLEAN`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/search/artifacts"
+          q: {
+            exist: [
+              "artifact_id"
+              "artifact_type"
+              "content_id"
+              "description"
+              "global_id"
+              "group_id"
+              "label"
+              "limit"
+              "name"
+              "offset"
+              "order"
+              "orderby"
+              "skip_count"
+            ]
+          }
+          s: [
+            {
+              lit: "search"
+            }
+            {
+              lit: "artifacts"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.artifacts`"
+          }
+        }
+        {
+          co: {
+            id: "GET /groups/{groupId}/artifacts"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                ex: "\"my-group\""
+                k: "param"
+                n: "group_id"
+                or: "group_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                k: "query"
+                n: "limit"
+                or: "limit"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "offset"
+                or: "offset"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "order"
+                or: "order"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "orderby"
+                or: "orderby"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: false
+                k: "query"
+                n: "skip_count"
+                or: "skip_count"
+                r: false
+                t: "`$BOOLEAN`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/groups/{groupId}/artifacts"
+          q: {
+            exist: [
+              "group_id"
+              "limit"
+              "offset"
+              "order"
+              "orderby"
+              "skip_count"
+            ]
+          }
+          r: {
+            param: {
+              groupId: "group_id"
+            }
+          }
+          s: [
+            {
+              lit: "groups"
+            }
+            {
+              var: "group_id"
+            }
+            {
+              lit: "artifacts"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.artifacts`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /ids/globalIds/{globalId}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "global_id"
+                or: "global_id"
+                r: true
+                t: "`$INTEGER`"
+              }
+            ]
+            query: [
+              {
+                k: "query"
+                n: "reference"
+                or: "reference"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "return_artifact_type"
+                or: "return_artifact_type"
+                r: false
+                t: "`$BOOLEAN`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/ids/globalIds/{globalId}"
+          q: {
+            exist: [
+              "global_id"
+              "reference"
+              "return_artifact_type"
+            ]
+          }
+          r: {
+            param: {
+              globalId: "global_id"
+            }
+          }
+          s: [
+            {
+              lit: "ids"
+            }
+            {
+              lit: "globalIds"
+            }
+            {
+              var: "global_id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /admin/usage/artifacts/{groupId}/{artifactId}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "artifact_id"
+                or: "artifact_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "group_id"
+                or: "group_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/admin/usage/artifacts/{groupId}/{artifactId}"
+          q: {
+            exist: [
+              "artifact_id"
+              "group_id"
+            ]
+          }
+          r: {
+            param: {
+              artifactId: "artifact_id"
+              groupId: "group_id"
+            }
+          }
+          s: [
+            {
+              lit: "admin"
+            }
+            {
+              lit: "usage"
+            }
+            {
+              lit: "artifacts"
+            }
+            {
+              var: "group_id"
+            }
+            {
+              var: "artifact_id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /ids/contentHashes/{contentHash}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "content_hash"
+                or: "content_hash"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/ids/contentHashes/{contentHash}"
+          q: {
+            exist: [
+              "content_hash"
+            ]
+          }
+          r: {
+            param: {
+              contentHash: "content_hash"
+            }
+          }
+          s: [
+            {
+              lit: "ids"
+            }
+            {
+              lit: "contentHashes"
+            }
+            {
+              var: "content_hash"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /ids/contentIds/{contentId}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "content_id"
+                or: "content_id"
+                r: true
+                t: "`$INTEGER`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/ids/contentIds/{contentId}"
+          q: {
+            exist: [
+              "content_id"
+            ]
+          }
+          r: {
+            param: {
+              contentId: "content_id"
+            }
+          }
+          s: [
+            {
+              lit: "ids"
+            }
+            {
+              lit: "contentIds"
+            }
+            {
+              var: "content_id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    remove: {
+      name: "remove"
+      points: [
+        {
+          co: {
+            id: "DELETE /groups/{groupId}/artifacts/{artifactId}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                ex: "\"my-group\""
+                k: "param"
+                n: "group_id"
+                or: "group_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                ex: "\"example-artifact\""
+                k: "param"
+                n: "id"
+                or: "artifact_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "DELETE"
+          o: "/groups/{groupId}/artifacts/{artifactId}"
+          q: {
+            exist: [
+              "group_id"
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              artifactId: "id"
+              groupId: "group_id"
+            }
+          }
+          s: [
+            {
+              lit: "groups"
+            }
+            {
+              var: "group_id"
+            }
+            {
+              lit: "artifacts"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "DELETE /groups/{groupId}/artifacts"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                ex: "\"my-group\""
+                k: "param"
+                n: "group_id"
+                or: "group_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "DELETE"
+          o: "/groups/{groupId}/artifacts"
+          q: {
+            exist: [
+              "group_id"
+            ]
+          }
+          r: {
+            param: {
+              groupId: "group_id"
+            }
+          }
+          s: [
+            {
+              lit: "groups"
+            }
+            {
+              var: "group_id"
+            }
+            {
+              lit: "artifacts"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+  relations: ancestors: [
+    [path("$.main.kit.entity.group")]
+  ]
+
+}

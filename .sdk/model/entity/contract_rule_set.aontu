@@ -1,0 +1,374 @@
+# Entity: contract_rule_set
+
+main: kit: entity: contract_rule_set: {
+
+  alias: field: {}
+
+  fields: {
+    domainRules: {
+      h: "Domain Rules"
+      n: "domainRules"
+      r: false
+      sh: "Rules for domain validation."
+      t: "`$ARRAY`"
+    }
+    migrationRules: {
+      h: "Migration Rules"
+      n: "migrationRules"
+      r: false
+      sh: "Rules for version migration."
+      t: "`$ARRAY`"
+    }
+  }
+
+  name: "contract_rule_set"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}/contract/ruleset"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "artifact_id"
+                or: "artifact_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "group_id"
+                or: "group_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "version_id"
+                or: "version_expression"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}/contract/ruleset"
+          q: {
+            exist: [
+              "artifact_id"
+              "group_id"
+              "version_id"
+            ]
+          }
+          r: {
+            param: {
+              artifactId: "artifact_id"
+              groupId: "group_id"
+              versionExpression: "version_id"
+            }
+          }
+          s: [
+            {
+              lit: "groups"
+            }
+            {
+              var: "group_id"
+            }
+            {
+              lit: "artifacts"
+            }
+            {
+              var: "artifact_id"
+            }
+            {
+              lit: "versions"
+            }
+            {
+              var: "version_id"
+            }
+            {
+              lit: "contract"
+            }
+            {
+              lit: "ruleset"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /groups/{groupId}/artifacts/{artifactId}/contract/ruleset"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "artifact_id"
+                or: "artifact_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "group_id"
+                or: "group_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/groups/{groupId}/artifacts/{artifactId}/contract/ruleset"
+          q: {
+            exist: [
+              "artifact_id"
+              "group_id"
+            ]
+          }
+          r: {
+            param: {
+              artifactId: "artifact_id"
+              groupId: "group_id"
+            }
+          }
+          s: [
+            {
+              lit: "groups"
+            }
+            {
+              var: "group_id"
+            }
+            {
+              lit: "artifacts"
+            }
+            {
+              var: "artifact_id"
+            }
+            {
+              lit: "contract"
+            }
+            {
+              lit: "ruleset"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /admin/contracts/ruleset"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/admin/contracts/ruleset"
+          s: [
+            {
+              lit: "admin"
+            }
+            {
+              lit: "contracts"
+            }
+            {
+              lit: "ruleset"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    update: {
+      name: "update"
+      points: [
+        {
+          co: {
+            id: "PUT /groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}/contract/ruleset"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "artifact_id"
+                or: "artifact_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "group_id"
+                or: "group_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "version_id"
+                or: "version_expression"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "PUT"
+          o: "/groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}/contract/ruleset"
+          q: {
+            exist: [
+              "artifact_id"
+              "group_id"
+              "version_id"
+            ]
+          }
+          r: {
+            param: {
+              artifactId: "artifact_id"
+              groupId: "group_id"
+              versionExpression: "version_id"
+            }
+          }
+          s: [
+            {
+              lit: "groups"
+            }
+            {
+              var: "group_id"
+            }
+            {
+              lit: "artifacts"
+            }
+            {
+              var: "artifact_id"
+            }
+            {
+              lit: "versions"
+            }
+            {
+              var: "version_id"
+            }
+            {
+              lit: "contract"
+            }
+            {
+              lit: "ruleset"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "PUT /groups/{groupId}/artifacts/{artifactId}/contract/ruleset"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "artifact_id"
+                or: "artifact_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "group_id"
+                or: "group_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "PUT"
+          o: "/groups/{groupId}/artifacts/{artifactId}/contract/ruleset"
+          q: {
+            exist: [
+              "artifact_id"
+              "group_id"
+            ]
+          }
+          r: {
+            param: {
+              artifactId: "artifact_id"
+              groupId: "group_id"
+            }
+          }
+          s: [
+            {
+              lit: "groups"
+            }
+            {
+              var: "group_id"
+            }
+            {
+              lit: "artifacts"
+            }
+            {
+              var: "artifact_id"
+            }
+            {
+              lit: "contract"
+            }
+            {
+              lit: "ruleset"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "PUT /admin/contracts/ruleset"
+            source: "openapi3"
+            version: 2
+          }
+          m: "PUT"
+          o: "/admin/contracts/ruleset"
+          s: [
+            {
+              lit: "admin"
+            }
+            {
+              lit: "contracts"
+            }
+            {
+              lit: "ruleset"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+  relations: ancestors: [
+    [path("$.main.kit.entity.group") path("$.main.kit.entity.artifact")]
+    [path("$.main.kit.entity.group") path("$.main.kit.entity.artifact") path("$.main.kit.entity.version")]
+  ]
+
+}

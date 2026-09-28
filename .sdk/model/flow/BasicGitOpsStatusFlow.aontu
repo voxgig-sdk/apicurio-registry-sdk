@@ -1,0 +1,22 @@
+# BasicGitOpsStatusFlow
+
+main: kit: flow: BasicGitOpsStatusFlow:
+{
+  entity: "git_ops_status",
+  kind: "basic",
+  name: "BasicGitOpsStatusFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "git_ops_status_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicGitOpsStatusFlow"
+}

@@ -1,0 +1,101 @@
+# Entity: odcs_contract_summary
+
+main: kit: entity: odcs_contract_summary: {
+
+  alias: field: {}
+
+  fields: {
+    contractId: {
+      h: "Contract Id"
+      n: "contractId"
+      r: false
+      sh: "The contract artifact ID."
+      t: "`$STRING`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      r: false
+      sh: "The contract display name."
+      t: "`$STRING`"
+    }
+  }
+
+  name: "odcs_contract_summary"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /groups/{groupId}/contracts"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "group_id"
+                or: "group_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                k: "query"
+                n: "limit"
+                or: "limit"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "offset"
+                or: "offset"
+                r: false
+                t: "`$INTEGER`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/groups/{groupId}/contracts"
+          q: {
+            exist: [
+              "group_id"
+              "limit"
+              "offset"
+            ]
+          }
+          r: {
+            param: {
+              groupId: "group_id"
+            }
+          }
+          s: [
+            {
+              lit: "groups"
+            }
+            {
+              var: "group_id"
+            }
+            {
+              lit: "contracts"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+  relations: ancestors: [
+    [path("$.main.kit.entity.group")]
+  ]
+
+}

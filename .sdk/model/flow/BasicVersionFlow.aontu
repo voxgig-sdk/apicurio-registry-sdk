@@ -1,0 +1,129 @@
+# BasicVersionFlow
+
+main: kit: flow: BasicVersionFlow:
+{
+  entity: "version",
+  kind: "basic",
+  name: "BasicVersionFlow",
+  step: [
+    {
+      i: {
+        ref: "version_ref01"
+      }
+
+      m: {
+        artifact_id: "artifact01",
+        branch_id: "branch01",
+        group_id: "group01",
+        version_id: "version01"
+      }
+
+      o: "create"
+    }
+
+    {
+      m: {
+        artifact_id: "artifact01",
+        branch_id: "branch01",
+        group_id: "group01"
+      }
+
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "version_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      d: {
+        artifact_id: "artifact01",
+        group_id: "group01",
+        version_id: "version01"
+      }
+
+      i: {
+        ref: "version_ref01",
+        srcdatavar: "version_ref01_data",
+        suffix: "_up0",
+        textfield: "artifactId"
+      }
+
+      o: "update",
+      s: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-version_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      i: {
+        ref: "version_ref01",
+        srcdatavar: "version_ref01_data",
+        suffix: "_dt0"
+      }
+
+      m: {
+        artifact_id: "artifact01",
+        group_id: "group01",
+        id: "version01"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-version_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      i: {
+        ref: "version_ref01",
+        suffix: "_rm0"
+      }
+
+      m: {
+        artifact_id: "artifact01",
+        group_id: "group01",
+        id: "version01"
+      }
+
+      o: "remove"
+    }
+
+    {
+      i: {
+        suffix: "_rt0"
+      }
+
+      m: {
+        artifact_id: "artifact01",
+        branch_id: "branch01",
+        group_id: "group01"
+      }
+
+      o: "list",
+      v: [
+        {
+          apply: "ItemNotExists",
+          def: {
+            ref: "version_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicVersionFlow"
+}

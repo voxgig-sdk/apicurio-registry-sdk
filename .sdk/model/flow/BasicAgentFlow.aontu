@@ -1,0 +1,22 @@
+# BasicAgentFlow
+
+main: kit: flow: BasicAgentFlow:
+{
+  entity: "agent",
+  kind: "basic",
+  name: "BasicAgentFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "agent_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicAgentFlow"
+}

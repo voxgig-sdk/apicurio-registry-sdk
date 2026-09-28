@@ -1,0 +1,37 @@
+# BasicArtifactRuleFlow
+
+main: kit: flow: BasicArtifactRuleFlow:
+{
+  entity: "artifact_rule",
+  kind: "basic",
+  name: "BasicArtifactRuleFlow",
+  step: [
+    {
+      i: {
+        ref: "artifact_rule_ref01"
+      }
+
+      m: {
+        artifact_id: "artifact01",
+        group_id: "group01"
+      }
+
+      o: "create"
+    }
+
+    {
+      i: {
+        ref: "artifact_rule_ref01",
+        suffix: "_rm0"
+      }
+
+      m: {
+        group_id: "group01",
+        id: "artifact_rule01"
+      }
+
+      o: "remove"
+    }
+  ],
+  "key$": "BasicArtifactRuleFlow"
+}

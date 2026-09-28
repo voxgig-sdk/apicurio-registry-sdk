@@ -1,0 +1,42 @@
+# BasicCommentFlow
+
+main: kit: flow: BasicCommentFlow:
+{
+  entity: "comment",
+  kind: "basic",
+  name: "BasicCommentFlow",
+  step: [
+    {
+      i: {
+        ref: "comment_ref01"
+      }
+
+      m: {
+        artifact_id: "artifact01",
+        group_id: "group01",
+        version_expression: "version_expression01"
+      }
+
+      o: "create"
+    }
+
+    {
+      m: {
+        artifact_id: "artifact01",
+        group_id: "group01",
+        version_expression: "version_expression01"
+      }
+
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "comment_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicCommentFlow"
+}

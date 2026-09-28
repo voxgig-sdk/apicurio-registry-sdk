@@ -1,0 +1,22 @@
+# BasicCreateArtifactFlow
+
+main: kit: flow: BasicCreateArtifactFlow:
+{
+  entity: "create_artifact",
+  kind: "basic",
+  name: "BasicCreateArtifactFlow",
+  step: [
+    {
+      i: {
+        ref: "create_artifact_ref01"
+      }
+
+      m: {
+        group_id: "group01"
+      }
+
+      o: "create"
+    }
+  ],
+  "key$": "BasicCreateArtifactFlow"
+}

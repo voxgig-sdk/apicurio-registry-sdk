@@ -1,0 +1,57 @@
+{
+  "existing": {
+    "mcp_tool": {
+      "MCP_TOOL00": {
+        "artifactId": "s50",
+        "createdOn": 81,
+        "description": "s52",
+        "groupId": "s53",
+        "name": "s54",
+        "owner": "s55",
+        "parameters": [],
+        "title": "s57"
+      },
+      "MCP_TOOL01": {
+        "artifactId": "sa0",
+        "createdOn": 161,
+        "description": "sa2",
+        "groupId": "sa3",
+        "name": "sa4",
+        "owner": "sa5",
+        "parameters": [],
+        "title": "sa7"
+      },
+      "MCP_TOOL02": {
+        "artifactId": "sf0",
+        "createdOn": 241,
+        "description": "sf2",
+        "groupId": "sf3",
+        "name": "sf4",
+        "owner": "sf5",
+        "parameters": [],
+        "title": "sf7"
+      }
+    }
+  },
+  "new": {
+    "mcp_tool": {
+      "mcp_tool_ref01": {
+        "artifactId": "s140",
+        "createdOn": 321,
+        "description": "s142",
+        "groupId": "s143",
+        "name": "s144",
+        "owner": "s145",
+        "parameters": [],
+        "title": "s147"
+      }
+    }
+  },
+  "requests": {
+    "GET /well-known/mcp-tools": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

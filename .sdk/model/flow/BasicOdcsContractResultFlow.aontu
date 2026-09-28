@@ -1,0 +1,44 @@
+# BasicOdcsContractResultFlow
+
+main: kit: flow: BasicOdcsContractResultFlow:
+{
+  entity: "odcs_contract_result",
+  kind: "basic",
+  name: "BasicOdcsContractResultFlow",
+  step: [
+    {
+      i: {
+        ref: "odcs_contract_result_ref01"
+      }
+
+      m: {
+        group_id: "group01"
+      }
+
+      o: "create"
+    }
+
+    {
+      d: {
+        group_id: "group01"
+      }
+
+      i: {
+        ref: "odcs_contract_result_ref01",
+        srcdatavar: "odcs_contract_result_ref01_data",
+        suffix: "_up0"
+      }
+
+      o: "update",
+      s: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-odcs_contract_result_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicOdcsContractResultFlow"
+}

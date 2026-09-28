@@ -1,0 +1,46 @@
+{
+  "existing": {
+    "global_rule": {
+      "GLOBAL_RULE00": {
+        "config": "s1e",
+        "id": "GLOBAL_RULE00",
+        "ruleType": "s20"
+      },
+      "GLOBAL_RULE01": {
+        "config": "s3c",
+        "id": "GLOBAL_RULE01",
+        "ruleType": "s3e"
+      },
+      "GLOBAL_RULE02": {
+        "config": "s5a",
+        "id": "GLOBAL_RULE02",
+        "ruleType": "s5c"
+      }
+    }
+  },
+  "new": {
+    "global_rule": {
+      "global_rule_ref01": {
+        "config": "s78",
+        "ruleType": "s7a"
+      }
+    }
+  },
+  "requests": {
+    "POST /admin/rules": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "DELETE /admin/rules/{ruleType}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "DELETE /admin/rules": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

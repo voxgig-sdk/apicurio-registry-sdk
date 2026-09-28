@@ -1,0 +1,144 @@
+# Entity: create_artifact
+
+main: kit: entity: create_artifact: {
+
+  alias: field: {}
+
+  fields: {
+    artifact: {
+      h: "Artifact"
+      n: "artifact"
+      r: true
+      t: "`$OBJECT`"
+    }
+    artifactId: {
+      h: "Artifact Id"
+      n: "artifactId"
+      r: true
+      t: "`$STRING`"
+    }
+    artifactType: {
+      h: "Artifact Type"
+      n: "artifactType"
+      r: false
+      t: "`$STRING`"
+    }
+    description: {
+      h: "Description"
+      n: "description"
+      r: false
+      t: "`$STRING`"
+    }
+    firstVersion: {
+      h: "First Version"
+      n: "firstVersion"
+      r: true
+      t: "`$OBJECT`"
+    }
+    labels: {
+      h: "Labels"
+      n: "labels"
+      r: false
+      t: "`$OBJECT`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      r: false
+      t: "`$STRING`"
+    }
+    version: {
+      h: "Version"
+      n: "version"
+      r: true
+      t: "`$OBJECT`"
+    }
+  }
+
+  name: "create_artifact"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /groups/{groupId}/artifacts"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                ex: "\"my-group\""
+                k: "param"
+                n: "group_id"
+                or: "group_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                k: "query"
+                n: "canonical"
+                or: "canonical"
+                r: false
+                t: "`$BOOLEAN`"
+              }
+              {
+                k: "query"
+                n: "dry_run"
+                or: "dry_run"
+                r: false
+                t: "`$BOOLEAN`"
+              }
+              {
+                k: "query"
+                n: "if_exist"
+                or: "if_exist"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/groups/{groupId}/artifacts"
+          q: {
+            exist: [
+              "canonical"
+              "dry_run"
+              "group_id"
+              "if_exist"
+            ]
+          }
+          r: {
+            param: {
+              groupId: "group_id"
+            }
+          }
+          s: [
+            {
+              lit: "groups"
+            }
+            {
+              var: "group_id"
+            }
+            {
+              lit: "artifacts"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+  relations: ancestors: [
+    [path("$.main.kit.entity.group")]
+  ]
+
+}

@@ -1,0 +1,48 @@
+{
+  "existing": {
+    "user_info": {
+      "USER_INFO00": {
+        "admin": true,
+        "developer": false,
+        "displayName": "s34",
+        "username": "s35",
+        "viewer": true,
+        "id": "USER_INFO00"
+      },
+      "USER_INFO01": {
+        "admin": true,
+        "developer": false,
+        "displayName": "s66",
+        "username": "s67",
+        "viewer": true,
+        "id": "USER_INFO01"
+      },
+      "USER_INFO02": {
+        "admin": true,
+        "developer": false,
+        "displayName": "s98",
+        "username": "s99",
+        "viewer": true,
+        "id": "USER_INFO02"
+      }
+    }
+  },
+  "new": {
+    "user_info": {
+      "user_info_ref01": {
+        "admin": true,
+        "developer": false,
+        "displayName": "sca",
+        "username": "scb",
+        "viewer": true
+      }
+    }
+  },
+  "requests": {
+    "GET /users/me": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

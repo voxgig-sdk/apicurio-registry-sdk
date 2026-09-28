@@ -1,0 +1,70 @@
+{
+  "existing": {
+    "contract_rule_set": {
+      "CONTRACT_RULE_SET00": {
+        "domainRules": [],
+        "migrationRules": [],
+        "artifact_id": "ARTIFACT01",
+        "group_id": "GROUP01",
+        "version_id": "VERSION01",
+        "id": "CONTRACT_RULE_SET00"
+      },
+      "CONTRACT_RULE_SET01": {
+        "domainRules": [],
+        "migrationRules": [],
+        "artifact_id": "ARTIFACT01",
+        "group_id": "GROUP01",
+        "version_id": "VERSION01",
+        "id": "CONTRACT_RULE_SET01"
+      },
+      "CONTRACT_RULE_SET02": {
+        "domainRules": [],
+        "migrationRules": [],
+        "artifact_id": "ARTIFACT01",
+        "group_id": "GROUP01",
+        "version_id": "VERSION01",
+        "id": "CONTRACT_RULE_SET02"
+      }
+    }
+  },
+  "new": {
+    "contract_rule_set": {
+      "contract_rule_set_ref01": {
+        "domainRules": [],
+        "migrationRules": []
+      }
+    }
+  },
+  "requests": {
+    "GET /groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}/contract/ruleset": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /groups/{groupId}/artifacts/{artifactId}/contract/ruleset": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /admin/contracts/ruleset": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PUT /groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}/contract/ruleset": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PUT /groups/{groupId}/artifacts/{artifactId}/contract/ruleset": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PUT /admin/contracts/ruleset": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

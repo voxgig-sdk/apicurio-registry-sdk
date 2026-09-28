@@ -1,0 +1,98 @@
+{
+  "existing": {
+    "artifact_reference": {
+      "ARTIFACT_REFERENCE00": {
+        "artifactId": "s50",
+        "content": "s51",
+        "contentType": "s52",
+        "encoding": "s53",
+        "groupId": "s54",
+        "name": "s55",
+        "references": [],
+        "version": "s57",
+        "artifact_id": "ARTIFACT01",
+        "group_id": "GROUP01",
+        "version_expression": "VERSION_EXPRESSION01",
+        "global_id_id": "GLOBAL_ID01",
+        "content_hash_id": "CONTENT_HASH01",
+        "content_id_id": "CONTENT_ID01",
+        "id": "ARTIFACT_REFERENCE00"
+      },
+      "ARTIFACT_REFERENCE01": {
+        "artifactId": "sa0",
+        "content": "sa1",
+        "contentType": "sa2",
+        "encoding": "sa3",
+        "groupId": "sa4",
+        "name": "sa5",
+        "references": [],
+        "version": "sa7",
+        "artifact_id": "ARTIFACT01",
+        "group_id": "GROUP01",
+        "version_expression": "VERSION_EXPRESSION01",
+        "global_id_id": "GLOBAL_ID01",
+        "content_hash_id": "CONTENT_HASH01",
+        "content_id_id": "CONTENT_ID01",
+        "id": "ARTIFACT_REFERENCE01"
+      },
+      "ARTIFACT_REFERENCE02": {
+        "artifactId": "sf0",
+        "content": "sf1",
+        "contentType": "sf2",
+        "encoding": "sf3",
+        "groupId": "sf4",
+        "name": "sf5",
+        "references": [],
+        "version": "sf7",
+        "artifact_id": "ARTIFACT01",
+        "group_id": "GROUP01",
+        "version_expression": "VERSION_EXPRESSION01",
+        "global_id_id": "GLOBAL_ID01",
+        "content_hash_id": "CONTENT_HASH01",
+        "content_id_id": "CONTENT_ID01",
+        "id": "ARTIFACT_REFERENCE02"
+      }
+    }
+  },
+  "new": {
+    "artifact_reference": {
+      "artifact_reference_ref01": {
+        "artifactId": "s140",
+        "content": "s141",
+        "contentType": "s142",
+        "encoding": "s143",
+        "groupId": "s144",
+        "name": "s145",
+        "references": [],
+        "version": "s147"
+      }
+    }
+  },
+  "requests": {
+    "POST /content/references": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}/references": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /ids/globalIds/{globalId}/references": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /ids/contentHashes/{contentHash}/references": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /ids/contentIds/{contentId}/references": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

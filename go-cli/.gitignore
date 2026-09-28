@@ -1,0 +1,4 @@
+/dist/
+/apicurio-registry-cli
+/go-cli
+.jostraca/

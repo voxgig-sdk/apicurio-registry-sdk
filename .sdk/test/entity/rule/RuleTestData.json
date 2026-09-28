@@ -1,0 +1,82 @@
+{
+  "existing": {
+    "rule": {
+      "RULE00": {
+        "config": "s1e",
+        "id": "RULE00",
+        "ruleType": "s20",
+        "artifact_id": "ARTIFACT01",
+        "group_id": "GROUP01"
+      },
+      "RULE01": {
+        "config": "s3c",
+        "id": "RULE01",
+        "ruleType": "s3e",
+        "artifact_id": "ARTIFACT01",
+        "group_id": "GROUP01"
+      },
+      "RULE02": {
+        "config": "s5a",
+        "id": "RULE02",
+        "ruleType": "s5c",
+        "artifact_id": "ARTIFACT01",
+        "group_id": "GROUP01"
+      }
+    }
+  },
+  "new": {
+    "rule": {
+      "rule_ref01": {
+        "config": "s78",
+        "ruleType": "s7a"
+      }
+    }
+  },
+  "requests": {
+    "GET /groups/{groupId}/artifacts/{artifactId}/rules": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /groups/{groupId}/rules": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /admin/rules": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /groups/{groupId}/artifacts/{artifactId}/rules/{ruleType}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /groups/{groupId}/rules/{ruleType}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /admin/rules/{ruleType}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PUT /groups/{groupId}/artifacts/{artifactId}/rules/{ruleType}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PUT /groups/{groupId}/rules/{ruleType}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PUT /admin/rules/{ruleType}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

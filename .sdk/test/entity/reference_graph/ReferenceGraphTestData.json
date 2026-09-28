@@ -1,0 +1,50 @@
+{
+  "existing": {
+    "reference_graph": {
+      "REFERENCE_GRAPH00": {
+        "edges": [],
+        "metadata": {},
+        "nodes": [],
+        "root": {},
+        "artifact_id": "ARTIFACT01",
+        "group_id": "GROUP01",
+        "version_id": "VERSION01"
+      },
+      "REFERENCE_GRAPH01": {
+        "edges": [],
+        "metadata": {},
+        "nodes": [],
+        "root": {},
+        "artifact_id": "ARTIFACT01",
+        "group_id": "GROUP01",
+        "version_id": "VERSION01"
+      },
+      "REFERENCE_GRAPH02": {
+        "edges": [],
+        "metadata": {},
+        "nodes": [],
+        "root": {},
+        "artifact_id": "ARTIFACT01",
+        "group_id": "GROUP01",
+        "version_id": "VERSION01"
+      }
+    }
+  },
+  "new": {
+    "reference_graph": {
+      "reference_graph_ref01": {
+        "edges": [],
+        "metadata": {},
+        "nodes": [],
+        "root": {}
+      }
+    }
+  },
+  "requests": {
+    "GET /groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}/references/graph": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

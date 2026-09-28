@@ -1,0 +1,46 @@
+{
+  "existing": {
+    "deprecation_readiness": {
+      "DEPRECATION_READINESS00": {
+        "clientId": "s1e",
+        "fetchCount": 31,
+        "lastFetched": 32,
+        "artifact_id": "ARTIFACT01",
+        "group_id": "GROUP01",
+        "version_id": "VERSION01"
+      },
+      "DEPRECATION_READINESS01": {
+        "clientId": "s3c",
+        "fetchCount": 61,
+        "lastFetched": 62,
+        "artifact_id": "ARTIFACT01",
+        "group_id": "GROUP01",
+        "version_id": "VERSION01"
+      },
+      "DEPRECATION_READINESS02": {
+        "clientId": "s5a",
+        "fetchCount": 91,
+        "lastFetched": 92,
+        "artifact_id": "ARTIFACT01",
+        "group_id": "GROUP01",
+        "version_id": "VERSION01"
+      }
+    }
+  },
+  "new": {
+    "deprecation_readiness": {
+      "deprecation_readiness_ref01": {
+        "clientId": "s78",
+        "fetchCount": 121,
+        "lastFetched": 122
+      }
+    }
+  },
+  "requests": {
+    "GET /admin/usage/artifacts/{groupId}/{artifactId}/versions/{version}/deprecation-readiness": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

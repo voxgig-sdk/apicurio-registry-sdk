@@ -1,0 +1,18 @@
+# BasicContentFlow
+
+main: kit: flow: BasicContentFlow:
+{
+  entity: "content",
+  kind: "basic",
+  name: "BasicContentFlow",
+  step: [
+    {
+      i: {
+        ref: "content_ref01"
+      }
+
+      o: "create"
+    }
+  ],
+  "key$": "BasicContentFlow"
+}

@@ -1,0 +1,26 @@
+# BasicOdcsContractSummaryFlow
+
+main: kit: flow: BasicOdcsContractSummaryFlow:
+{
+  entity: "odcs_contract_summary",
+  kind: "basic",
+  name: "BasicOdcsContractSummaryFlow",
+  step: [
+    {
+      m: {
+        group_id: "group01"
+      }
+
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "odcs_contract_summary_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicOdcsContractSummaryFlow"
+}

@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>SearchedGroup | Apicurio Registry API [v3]</title><link rel="stylesheet" href="../assets/style.css"></head>
+<body><a class="skip" href="#content">Skip to content</a>
+<header class="site-header"><a class="site-title" href="../index.html">Apicurio Registry API [v3]<span>SDK documentation</span></a><div class="site-links"><a class="repo-link" href="https://github.com/voxgig-sdk/apicurio-registry-sdk">voxgig-sdk/apicurio-registry-sdk</a></div></header>
+<div class="site-notice" role="note"></div>
+<div class="shell"><nav class="site-nav" aria-label="Documentation"><div class="search"><label for="search">Search documentation</label><input id="search" type="search" data-base="../" placeholder="Find a guide or reference"><div id="results" aria-live="polite"></div></div><details><summary>Overview</summary><a href="../index.html">Apicurio Registry API [v3]</a></details>
+<details open><summary>API</summary><a href="../api/index.html">API overview</a>
+<a href="../api/admin.html">Admin</a>
+<a href="../api/agent.html">Agent</a>
+<a href="../api/agent_card.html">AgentCard</a>
+<a href="../api/ai_catalog.html">AiCatalog</a>
+<a href="../api/ard_explore.html">ArdExplore</a>
+<a href="../api/ard_search.html">ArdSearch</a>
+<a href="../api/artifact.html">Artifact</a>
+<a href="../api/artifact_reference.html">ArtifactReference</a>
+<a href="../api/artifact_rule.html">ArtifactRule</a>
+<a href="../api/artifact_type.html">ArtifactType</a>
+<a href="../api/branch.html">Branch</a>
+<a href="../api/comment.html">Comment</a>
+<a href="../api/configuration_property.html">ConfigurationProperty</a>
+<a href="../api/consumer_version_heatmap.html">ConsumerVersionHeatmap</a>
+<a href="../api/content.html">Content</a>
+<a href="../api/contract.html">Contract</a>
+<a href="../api/contract_rule.html">ContractRule</a>
+<a href="../api/contract_rule_set.html">ContractRuleSet</a>
+<a href="../api/create_artifact.html">CreateArtifact</a>
+<a href="../api/deprecation_readiness.html">DeprecationReadiness</a>
+<a href="../api/download_ref.html">DownloadRef</a>
+<a href="../api/git_op.html">GitOp</a>
+<a href="../api/git_ops_status.html">GitOpsStatus</a>
+<a href="../api/git_ops_validate_task.html">GitOpsValidateTask</a>
+<a href="../api/global_rule.html">GlobalRule</a>
+<a href="../api/group.html">Group</a>
+<a href="../api/group_rule.html">GroupRule</a>
+<a href="../api/kafka_sql.html">KafkaSql</a>
+<a href="../api/mcp_tool.html">McpTool</a>
+<a href="../api/metadata.html">Metadata</a>
+<a href="../api/odcs_contract_result.html">OdcsContractResult</a>
+<a href="../api/odcs_contract_summary.html">OdcsContractSummary</a>
+<a href="../api/reference_graph.html">ReferenceGraph</a>
+<a href="../api/role_mapping.html">RoleMapping</a>
+<a href="../api/rule.html">Rule</a>
+<a href="../api/searched_branch.html">SearchedBranch</a>
+<a aria-current="page" href="../api/searched_group.html">SearchedGroup</a><div class="nav-sections"><a class="nav-section" href="#get-searchgroups">GET /search/groups</a></div>
+<a href="../api/system_info.html">SystemInfo</a>
+<a href="../api/usage_summary.html">UsageSummary</a>
+<a href="../api/user_info.html">UserInfo</a>
+<a href="../api/user_interface_config.html">UserInterfaceConfig</a>
+<a href="../api/version.html">Version</a>
+<a href="../api/well_known.html">WellKnown</a>
+<a href="../api/wrapped_version_state.html">WrappedVersionState</a></details>
+<details><summary>Guides</summary><a href="../guides/authentication.html">Authentication</a>
+<a href="../guides/first-call.html">Make your first API call</a>
+<a href="../guides/errors.html">Handle errors</a>
+<a href="../guides/concepts.html">Entities, SDKs, and tools</a></details>
+<details><summary>SDKs</summary><a href="../sdks/go.html">Golang</a>
+<a href="../sdks/lua.html">Lua</a>
+<a href="../sdks/php.html">PHP</a>
+<a href="../sdks/py.html">Python</a>
+<a href="../sdks/rb.html">Ruby</a>
+<a href="../sdks/ts.html">TypeScript</a></details>
+<details><summary>Tools</summary><a href="../tools/go-cli.html">Go CLI</a>
+<a href="../tools/go-mcp.html">Go MCP server</a></details>
+<details><summary>Features</summary><a href="../features/debug.html">Debug capture</a>
+<a href="../features/idempotency.html">Idempotency</a>
+<a href="../features/metrics.html">Metrics</a>
+<a href="../features/paging.html">Paging</a>
+<a href="../features/ratelimit.html">Rate limiting</a>
+<a href="../features/retry.html">Retry</a>
+<a href="../features/test.html">Test transport</a>
+<a href="../features/timeout.html">Timeout</a></details></nav><main id="content"><div class="page-context"><span class="section-dot" aria-hidden="true"></span>API</div><h1 id="searchedgroup">SearchedGroup</h1>
+<h2 id="operations">Operations</h2>
+<p>Every route this entity exposes. Each route links to its own reference on this page.</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Route</th>
+<th>SDK operation</th>
+<th>Returns</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GET</code></td>
+<td><a href="#get-searchgroups"><code>/search/groups</code></a></td>
+<td><code>list</code></td>
+<td>On a successful response, returns a result set of groups - one for each group in the registry that matches the criteria</td>
+</tr>
+</tbody>
+</table>
+<h2 id="examples">Examples</h2>
+<p>One example per SDK, generated from the API model. The argument names are the parameters and fields of this entity, and the values are placeholders. The examples are not compiled or executed.</p>
+<h3 id="golang">Golang</h3>
+<p>Construct <code>client</code> as shown in the <a href="../sdks/go.html#set-up-the-client">Golang setup</a>, then call the operations:</p>
+<pre><code class="language-go">searched_groups, err := client.SearchedGroup(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(searched_groups)
+</code></pre>
+<h3 id="lua">Lua</h3>
+<p>Construct <code>client</code> as shown in the <a href="../sdks/lua.html#set-up-the-client">Lua setup</a>, then call the operations:</p>
+<pre><code class="language-lua">local searched_groups, err = client:SearchedGroup():list()
+</code></pre>
+<h3 id="php">PHP</h3>
+<p>Construct <code>client</code> as shown in the <a href="../sdks/php.html#set-up-the-client">PHP setup</a>, then call the operations:</p>
+<pre><code class="language-php">$searched_groups = $client-&gt;SearchedGroup()-&gt;list();
+</code></pre>
+<h3 id="python">Python</h3>
+<p>Construct <code>client</code> as shown in the <a href="../sdks/py.html#set-up-the-client">Python setup</a>, then call the operations:</p>
+<pre><code class="language-py">searched_groups = client.SearchedGroup().list()
+</code></pre>
+<h3 id="ruby">Ruby</h3>
+<p>Construct <code>client</code> as shown in the <a href="../sdks/rb.html#set-up-the-client">Ruby setup</a>, then call the operations:</p>
+<pre><code class="language-rb">searched_groups = client.SearchedGroup.list()
+</code></pre>
+<h3 id="typescript">TypeScript</h3>
+<p>Construct <code>client</code> as shown in the <a href="../sdks/ts.html#set-up-the-client">TypeScript setup</a>, then call the operations:</p>
+<pre><code class="language-ts">const searched_groups = await client.SearchedGroup().list()
+</code></pre>
+<h2 id="fields">Fields</h2>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>createdOn</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Created On</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Description</td>
+</tr>
+<tr>
+<td><code>groupId</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Group Id</td>
+</tr>
+<tr>
+<td><code>labels</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>Labels</td>
+</tr>
+<tr>
+<td><code>modifiedBy</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Modified By</td>
+</tr>
+<tr>
+<td><code>modifiedOn</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Modified On</td>
+</tr>
+<tr>
+<td><code>owner</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Owner</td>
+</tr>
+</tbody>
+</table>
+<h2 id="list">list</h2>
+<h3 id="get-searchgroups" class="operation" data-method="get"><code>GET</code> /search/groups</h3>
+<p>Operation ID: <code>searchGroups</code>.</p>
+<h4 id="parameters">Parameters</h4>
+<p>| Parameter | In | Type | Required | Description |
+| --- | --- | --- | --- |
+| <code>offset</code> | <code>query</code> | <code>integer</code> | No | The number of artifacts to skip before starting to collect the result set. Defaults to 0. |
+| <code>limit</code> | <code>query</code> | <code>integer</code> | No | The number of artifacts to return. Defaults to 20. |
+| <code>order</code> | <code>query</code> | <code>enum: asc, desc</code> | No | Sort order, ascending (<code>asc</code>) or descending (<code>desc</code>). |
+| <code>orderby</code> | <code>query</code> | <code>enum: groupId, createdOn, modifiedOn</code> | No | The field to sort by. Can be one of: * <code>name</code> * <code>createdOn</code> |
+| <code>labels</code> | <code>query</code> | <code>array of string</code> | No | Filter by one or more name/value label. Separate each name/value pair using a colon, which splits on the last colon (for example <code>labels=foo:bar</code> matches key <code>foo</code> and value <code>bar</code>). Note: the key:value query treats the last colon as the delimiter, so values containing colons cannot be matched via this syntax (they remain matchable via key-only queries). |
+| <code>description</code> | <code>query</code> | <code>string</code> | No | Filter by description. |
+| <code>groupId</code> | <code>query</code> | <code>string</code> | No | Filter by group name. |</p>
+<h4 id="responses">Responses</h4>
+<h5 id="200-on-a-successful-response-returns-a-result-set-of-groups---one-for-each-group-in-the-registry-that-matches-the-criteria" class="status" data-status="2xx">200: On a successful response, returns a result set of groups - one for each group in the registry that matches the criteria</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>count</code></td>
+<td><code>integer</code></td>
+<td>Yes</td>
+<td>The total number of groups that matched the query that produced the result set (may be more than the number of groups in the result set).</td>
+</tr>
+<tr>
+<td><code>groups</code></td>
+<td><code>array of object</code></td>
+<td>Yes</td>
+<td>The groups returned in the result set.</td>
+</tr>
+<tr>
+<td><code>groups[].createdOn</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>groups[].description</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>groups[].groupId</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>groups[].labels</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>groups[].modifiedBy</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>groups[].modifiedOn</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>groups[].owner</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h5 id="401-common-response-for-all-operations-that-can-return-a-401-error-indicating-authentication-is-required" class="status" data-status="4xx">401: Common response for all operations that can return a <code>401</code> error indicating authentication is required</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>detail</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A human-readable explanation specific to this occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>instance</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference that identifies the specific occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The name of the error (typically a server exception class name).</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>The HTTP status code.</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A short, human-readable summary of the problem type.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference [RFC3986] that identifies the problem type.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="403-common-response-for-all-operations-that-can-return-a-403-error-indicating-the-user-is-authenticated-but-not-authorized" class="status" data-status="4xx">403: Common response for all operations that can return a <code>403</code> error indicating the user is authenticated but not authorized</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>detail</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A human-readable explanation specific to this occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>instance</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference that identifies the specific occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The name of the error (typically a server exception class name).</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>The HTTP status code.</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A short, human-readable summary of the problem type.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference [RFC3986] that identifies the problem type.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="500-common-response-for-all-operations-that-can-fail-with-an-unexpected-server-error" class="status" data-status="5xx">500: Common response for all operations that can fail with an unexpected server error</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>detail</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A human-readable explanation specific to this occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>instance</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference that identifies the specific occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The name of the error (typically a server exception class name).</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>The HTTP status code.</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A short, human-readable summary of the problem type.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference [RFC3986] that identifies the problem type.</td>
+</tr>
+</tbody>
+</table>
+</main></div>
+<script src="../assets/search.js" defer></script></body></html>

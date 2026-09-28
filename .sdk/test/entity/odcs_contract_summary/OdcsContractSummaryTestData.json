@@ -1,0 +1,36 @@
+{
+  "existing": {
+    "odcs_contract_summary": {
+      "ODCS_CONTRACT_SUMMARY00": {
+        "contractId": "s14",
+        "name": "s15",
+        "group_id": "GROUP01"
+      },
+      "ODCS_CONTRACT_SUMMARY01": {
+        "contractId": "s28",
+        "name": "s29",
+        "group_id": "GROUP01"
+      },
+      "ODCS_CONTRACT_SUMMARY02": {
+        "contractId": "s3c",
+        "name": "s3d",
+        "group_id": "GROUP01"
+      }
+    }
+  },
+  "new": {
+    "odcs_contract_summary": {
+      "odcs_contract_summary_ref01": {
+        "contractId": "s50",
+        "name": "s51"
+      }
+    }
+  },
+  "requests": {
+    "GET /groups/{groupId}/contracts": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

@@ -1,0 +1,28 @@
+# BasicUserInterfaceConfigFlow
+
+main: kit: flow: BasicUserInterfaceConfigFlow:
+{
+  entity: "user_interface_config",
+  kind: "basic",
+  name: "BasicUserInterfaceConfigFlow",
+  step: [
+    {
+      i: {
+        ref: "user_interface_config_ref01",
+        srcdatavar: "user_interface_config_ref01_data",
+        suffix: "_dt0"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-user_interface_config_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicUserInterfaceConfigFlow"
+}

@@ -1,0 +1,48 @@
+{
+  "existing": {
+    "ard_search": {
+      "ARD_SEARCH00": {
+        "federation": "s32",
+        "pageSize": 51,
+        "pageToken": "s34",
+        "query": {},
+        "results": [],
+        "id": "ARD_SEARCH00"
+      },
+      "ARD_SEARCH01": {
+        "federation": "s64",
+        "pageSize": 101,
+        "pageToken": "s66",
+        "query": {},
+        "results": [],
+        "id": "ARD_SEARCH01"
+      },
+      "ARD_SEARCH02": {
+        "federation": "s96",
+        "pageSize": 151,
+        "pageToken": "s98",
+        "query": {},
+        "results": [],
+        "id": "ARD_SEARCH02"
+      }
+    }
+  },
+  "new": {
+    "ard_search": {
+      "ard_search_ref01": {
+        "federation": "sc8",
+        "pageSize": 201,
+        "pageToken": "sca",
+        "query": {},
+        "results": []
+      }
+    }
+  },
+  "requests": {
+    "POST /well-known/ard/search": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

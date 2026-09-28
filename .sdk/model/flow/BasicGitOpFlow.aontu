@@ -1,0 +1,31 @@
+# BasicGitOpFlow
+
+main: kit: flow: BasicGitOpFlow:
+{
+  entity: "git_op",
+  kind: "basic",
+  name: "BasicGitOpFlow",
+  step: [
+    {
+      i: {
+        ref: "git_op_ref01"
+      }
+
+      o: "create"
+    }
+
+    {
+      i: {
+        ref: "git_op_ref01",
+        suffix: "_rm0"
+      }
+
+      m: {
+        id: "git_op01"
+      }
+
+      o: "remove"
+    }
+  ],
+  "key$": "BasicGitOpFlow"
+}

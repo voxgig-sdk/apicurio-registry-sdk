@@ -1,0 +1,70 @@
+<?php
+declare(strict_types=1);
+
+// ApicurioRegistry SDK utility registration
+
+require_once __DIR__ . '/../core/UtilityType.php';
+require_once __DIR__ . '/Clean.php';
+require_once __DIR__ . '/Done.php';
+require_once __DIR__ . '/MakeError.php';
+require_once __DIR__ . '/FeatureAdd.php';
+require_once __DIR__ . '/FeatureHook.php';
+require_once __DIR__ . '/FeatureInit.php';
+require_once __DIR__ . '/Fetcher.php';
+require_once __DIR__ . '/MakeFetchDef.php';
+require_once __DIR__ . '/MakeContext.php';
+require_once __DIR__ . '/MakeOptions.php';
+require_once __DIR__ . '/MakeRequest.php';
+require_once __DIR__ . '/MakeResponse.php';
+require_once __DIR__ . '/MakeResult.php';
+require_once __DIR__ . '/MakePoint.php';
+require_once __DIR__ . '/MakeSpec.php';
+require_once __DIR__ . '/MakeUrl.php';
+require_once __DIR__ . '/Param.php';
+require_once __DIR__ . '/PrepareAuth.php';
+require_once __DIR__ . '/PrepareBody.php';
+require_once __DIR__ . '/Graphql.php';
+require_once __DIR__ . '/PrepareHeaders.php';
+require_once __DIR__ . '/PrepareMethod.php';
+require_once __DIR__ . '/PrepareParams.php';
+require_once __DIR__ . '/PreparePath.php';
+require_once __DIR__ . '/PrepareQuery.php';
+require_once __DIR__ . '/ResultBasic.php';
+require_once __DIR__ . '/ResultBody.php';
+require_once __DIR__ . '/ResultHeaders.php';
+require_once __DIR__ . '/TransformRequest.php';
+require_once __DIR__ . '/TransformResponse.php';
+
+ApicurioRegistryUtility::setRegistrar(function (ApicurioRegistryUtility $u): void {
+    $u->clean = [ApicurioRegistryClean::class, 'call'];
+    $u->done = [ApicurioRegistryDone::class, 'call'];
+    $u->make_error = [ApicurioRegistryMakeError::class, 'call'];
+    $u->feature_add = [ApicurioRegistryFeatureAdd::class, 'call'];
+    $u->feature_hook = [ApicurioRegistryFeatureHook::class, 'call'];
+    $u->feature_init = [ApicurioRegistryFeatureInit::class, 'call'];
+    $u->fetcher = [ApicurioRegistryFetcher::class, 'call'];
+    $u->make_fetch_def = [ApicurioRegistryMakeFetchDef::class, 'call'];
+    $u->make_context = [ApicurioRegistryMakeContext::class, 'call'];
+    $u->make_options = [ApicurioRegistryMakeOptions::class, 'call'];
+    $u->make_request = [ApicurioRegistryMakeRequest::class, 'call'];
+    $u->make_response = [ApicurioRegistryMakeResponse::class, 'call'];
+    $u->make_result = [ApicurioRegistryMakeResult::class, 'call'];
+    $u->make_point = [ApicurioRegistryMakePoint::class, 'call'];
+    $u->make_spec = [ApicurioRegistryMakeSpec::class, 'call'];
+    $u->make_url = [ApicurioRegistryMakeUrl::class, 'call'];
+    $u->param = [ApicurioRegistryParam::class, 'call'];
+    $u->prepare_auth = [ApicurioRegistryPrepareAuth::class, 'call'];
+    $u->prepare_body = [ApicurioRegistryPrepareBody::class, 'call'];
+    $u->prepare_headers = [ApicurioRegistryPrepareHeaders::class, 'call'];
+    $u->prepare_method = [ApicurioRegistryPrepareMethod::class, 'call'];
+    $u->prepare_params = [ApicurioRegistryPrepareParams::class, 'call'];
+    $u->prepare_path = [ApicurioRegistryPreparePath::class, 'call'];
+    $u->prepare_query = [ApicurioRegistryPrepareQuery::class, 'call'];
+    $u->graphql_body = [ApicurioRegistryGraphql::class, 'body'];
+    $u->graphql_errors = [ApicurioRegistryGraphql::class, 'errors'];
+    $u->result_basic = [ApicurioRegistryResultBasic::class, 'call'];
+    $u->result_body = [ApicurioRegistryResultBody::class, 'call'];
+    $u->result_headers = [ApicurioRegistryResultHeaders::class, 'call'];
+    $u->transform_request = [ApicurioRegistryTransformRequest::class, 'call'];
+    $u->transform_response = [ApicurioRegistryTransformResponse::class, 'call'];
+});

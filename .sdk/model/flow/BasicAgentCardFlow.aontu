@@ -1,0 +1,22 @@
+# BasicAgentCardFlow
+
+main: kit: flow: BasicAgentCardFlow:
+{
+  entity: "agent_card",
+  kind: "basic",
+  name: "BasicAgentCardFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "agent_card_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicAgentCardFlow"
+}

@@ -1,0 +1,35 @@
+# BasicGroupRuleFlow
+
+main: kit: flow: BasicGroupRuleFlow:
+{
+  entity: "group_rule",
+  kind: "basic",
+  name: "BasicGroupRuleFlow",
+  step: [
+    {
+      i: {
+        ref: "group_rule_ref01"
+      }
+
+      m: {
+        group_id: "group01"
+      }
+
+      o: "create"
+    }
+
+    {
+      i: {
+        ref: "group_rule_ref01",
+        suffix: "_rm0"
+      }
+
+      m: {
+        id: "group_rule01"
+      }
+
+      o: "remove"
+    }
+  ],
+  "key$": "BasicGroupRuleFlow"
+}

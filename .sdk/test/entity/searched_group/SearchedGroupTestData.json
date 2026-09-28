@@ -1,0 +1,53 @@
+{
+  "existing": {
+    "searched_group": {
+      "SEARCHED_GROUP00": {
+        "createdOn": "s46",
+        "description": "s47",
+        "groupId": "s48",
+        "labels": {},
+        "modifiedBy": "s4a",
+        "modifiedOn": "s4b",
+        "owner": "s4c"
+      },
+      "SEARCHED_GROUP01": {
+        "createdOn": "s8c",
+        "description": "s8d",
+        "groupId": "s8e",
+        "labels": {},
+        "modifiedBy": "s90",
+        "modifiedOn": "s91",
+        "owner": "s92"
+      },
+      "SEARCHED_GROUP02": {
+        "createdOn": "sd2",
+        "description": "sd3",
+        "groupId": "sd4",
+        "labels": {},
+        "modifiedBy": "sd6",
+        "modifiedOn": "sd7",
+        "owner": "sd8"
+      }
+    }
+  },
+  "new": {
+    "searched_group": {
+      "searched_group_ref01": {
+        "createdOn": "s118",
+        "description": "s119",
+        "groupId": "s11a",
+        "labels": {},
+        "modifiedBy": "s11c",
+        "modifiedOn": "s11d",
+        "owner": "s11e"
+      }
+    }
+  },
+  "requests": {
+    "GET /search/groups": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

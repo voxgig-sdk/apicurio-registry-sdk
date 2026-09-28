@@ -1,0 +1,27 @@
+# BasicGlobalRuleFlow
+
+main: kit: flow: BasicGlobalRuleFlow:
+{
+  entity: "global_rule",
+  kind: "basic",
+  name: "BasicGlobalRuleFlow",
+  step: [
+    {
+      i: {
+        ref: "global_rule_ref01"
+      }
+
+      o: "create"
+    }
+
+    {
+      i: {
+        ref: "global_rule_ref01",
+        suffix: "_rm0"
+      }
+
+      o: "remove"
+    }
+  ],
+  "key$": "BasicGlobalRuleFlow"
+}

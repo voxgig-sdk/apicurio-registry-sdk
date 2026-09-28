@@ -1,0 +1,163 @@
+# Entity: odcs_contract_result
+
+main: kit: entity: odcs_contract_result: {
+
+  alias: field: {}
+
+  fields: {
+    labelsApplied: {
+      fo: "int32"
+      h: "Labels Applied"
+      n: "labelsApplied"
+      r: false
+      sh: "Number of contract.* labels set on the schema artifact."
+      t: "`$INTEGER`"
+    }
+    rulesApplied: {
+      fo: "int32"
+      h: "Rules Applied"
+      n: "rulesApplied"
+      r: false
+      sh: "Number of CEL quality rules projected onto the schema artifact."
+      t: "`$INTEGER`"
+    }
+    tagsApplied: {
+      fo: "int32"
+      h: "Tags Applied"
+      n: "tagsApplied"
+      r: false
+      sh: "Number of field-tag.* labels set on the schema artifact version."
+      t: "`$INTEGER`"
+    }
+    warnings: {
+      h: "Warnings"
+      n: "warnings"
+      r: false
+      sh: "Any warnings encountered during projection."
+      t: "`$ARRAY`"
+    }
+  }
+
+  name: "odcs_contract_result"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /groups/{groupId}/contracts"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "group_id"
+                or: "group_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/groups/{groupId}/contracts"
+          q: {
+            exist: [
+              "group_id"
+            ]
+          }
+          r: {
+            param: {
+              groupId: "group_id"
+            }
+          }
+          s: [
+            {
+              lit: "groups"
+            }
+            {
+              var: "group_id"
+            }
+            {
+              lit: "contracts"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.projection`"
+          }
+        }
+      ]
+    }
+    update: {
+      name: "update"
+      points: [
+        {
+          co: {
+            id: "PUT /groups/{groupId}/contracts/{contractId}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "contract_id"
+                or: "contract_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "group_id"
+                or: "group_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "PUT"
+          o: "/groups/{groupId}/contracts/{contractId}"
+          q: {
+            exist: [
+              "contract_id"
+              "group_id"
+            ]
+          }
+          r: {
+            param: {
+              contractId: "contract_id"
+              groupId: "group_id"
+            }
+          }
+          s: [
+            {
+              lit: "groups"
+            }
+            {
+              var: "group_id"
+            }
+            {
+              lit: "contracts"
+            }
+            {
+              var: "contract_id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.projection`"
+          }
+        }
+      ]
+    }
+  }
+
+
+  relations: ancestors: [
+    [path("$.main.kit.entity.group")]
+    [path("$.main.kit.entity.group") path("$.main.kit.entity.contract")]
+  ]
+
+}

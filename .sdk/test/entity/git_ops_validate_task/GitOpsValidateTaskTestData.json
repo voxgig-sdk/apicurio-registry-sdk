@@ -1,0 +1,84 @@
+{
+  "existing": {
+    "git_ops_validate_task": {
+      "GIT_OPS_VALIDATE_TASK00": {
+        "artifactCount": 120,
+        "completedAt": "s79",
+        "createdAt": "s7a",
+        "errors": [],
+        "groupCount": 124,
+        "ref": "s7d",
+        "repoId": "s7e",
+        "result": "s7f",
+        "state": "s80",
+        "taskId": "s81",
+        "type": "s82",
+        "versionCount": 131,
+        "task_id": "TASK01",
+        "id": "GIT_OPS_VALIDATE_TASK00"
+      },
+      "GIT_OPS_VALIDATE_TASK01": {
+        "artifactCount": 240,
+        "completedAt": "sf1",
+        "createdAt": "sf2",
+        "errors": [],
+        "groupCount": 244,
+        "ref": "sf5",
+        "repoId": "sf6",
+        "result": "sf7",
+        "state": "sf8",
+        "taskId": "sf9",
+        "type": "sfa",
+        "versionCount": 251,
+        "task_id": "TASK01",
+        "id": "GIT_OPS_VALIDATE_TASK01"
+      },
+      "GIT_OPS_VALIDATE_TASK02": {
+        "artifactCount": 360,
+        "completedAt": "s169",
+        "createdAt": "s16a",
+        "errors": [],
+        "groupCount": 364,
+        "ref": "s16d",
+        "repoId": "s16e",
+        "result": "s16f",
+        "state": "s170",
+        "taskId": "s171",
+        "type": "s172",
+        "versionCount": 371,
+        "task_id": "TASK01",
+        "id": "GIT_OPS_VALIDATE_TASK02"
+      }
+    }
+  },
+  "new": {
+    "git_ops_validate_task": {
+      "git_ops_validate_task_ref01": {
+        "artifactCount": 480,
+        "completedAt": "s1e1",
+        "createdAt": "s1e2",
+        "errors": [],
+        "groupCount": 484,
+        "ref": "s1e5",
+        "repoId": "s1e6",
+        "result": "s1e7",
+        "state": "s1e8",
+        "taskId": "s1e9",
+        "type": "s1ea",
+        "versionCount": 491
+      }
+    }
+  },
+  "requests": {
+    "GET /admin/gitops/validate": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /admin/gitops/validate/{taskId}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

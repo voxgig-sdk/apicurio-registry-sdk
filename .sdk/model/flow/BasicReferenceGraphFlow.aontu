@@ -1,0 +1,28 @@
+# BasicReferenceGraphFlow
+
+main: kit: flow: BasicReferenceGraphFlow:
+{
+  entity: "reference_graph",
+  kind: "basic",
+  name: "BasicReferenceGraphFlow",
+  step: [
+    {
+      m: {
+        artifact_id: "artifact01",
+        group_id: "group01",
+        version_id: "version01"
+      }
+
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "reference_graph_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicReferenceGraphFlow"
+}

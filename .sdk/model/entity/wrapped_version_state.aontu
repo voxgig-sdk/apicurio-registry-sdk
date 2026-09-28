@@ -1,0 +1,108 @@
+# Entity: wrapped_version_state
+
+main: kit: entity: wrapped_version_state: {
+
+  alias: field: {}
+
+  fields: {
+    state: {
+      h: "State"
+      n: "state"
+      r: true
+      sh: "Describes the state of an artifact or artifact version."
+      t: "`$STRING`"
+    }
+  }
+
+  name: "wrapped_version_state"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}/state"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                ex: "\"example-artifact\""
+                k: "param"
+                n: "artifact_id"
+                or: "artifact_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                ex: "\"my-group\""
+                k: "param"
+                n: "group_id"
+                or: "group_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "version_expression"
+                or: "version_expression"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}/state"
+          q: {
+            exist: [
+              "artifact_id"
+              "group_id"
+              "version_expression"
+            ]
+          }
+          r: {
+            param: {
+              artifactId: "artifact_id"
+              groupId: "group_id"
+              versionExpression: "version_expression"
+            }
+          }
+          s: [
+            {
+              lit: "groups"
+            }
+            {
+              var: "group_id"
+            }
+            {
+              lit: "artifacts"
+            }
+            {
+              var: "artifact_id"
+            }
+            {
+              lit: "versions"
+            }
+            {
+              var: "version_expression"
+            }
+            {
+              lit: "state"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+  relations: ancestors: [
+    [path("$.main.kit.entity.group") path("$.main.kit.entity.artifact") path("$.main.kit.entity.version")]
+  ]
+
+}

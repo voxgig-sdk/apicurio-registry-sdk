@@ -1,0 +1,44 @@
+# BasicGitOpsValidateTaskFlow
+
+main: kit: flow: BasicGitOpsValidateTaskFlow:
+{
+  entity: "git_ops_validate_task",
+  kind: "basic",
+  name: "BasicGitOpsValidateTaskFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "git_ops_validate_task_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      i: {
+        ref: "git_ops_validate_task_ref01",
+        srcdatavar: "git_ops_validate_task_ref01_data",
+        suffix: "_dt0"
+      }
+
+      m: {
+        id: "git_ops_validate_task01"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-git_ops_validate_task_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicGitOpsValidateTaskFlow"
+}

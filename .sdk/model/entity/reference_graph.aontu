@@ -1,0 +1,152 @@
+# Entity: reference_graph
+
+main: kit: entity: reference_graph: {
+
+  alias: field: {}
+
+  fields: {
+    edges: {
+      h: "Edges"
+      n: "edges"
+      r: true
+      sh: "All edges (references) in the graph."
+      t: "`$ARRAY`"
+    }
+    metadata: {
+      h: "Metadata"
+      n: "metadata"
+      r: true
+      sh: "Metadata about the graph structure."
+      t: "`$OBJECT`"
+    }
+    nodes: {
+      h: "Nodes"
+      n: "nodes"
+      r: true
+      sh: "All nodes in the graph, including the root."
+      t: "`$ARRAY`"
+    }
+    root: {
+      h: "Root"
+      n: "root"
+      r: true
+      sh: "The root node of the graph (the artifact for which references were requested)."
+      t: "`$OBJECT`"
+    }
+  }
+
+  name: "reference_graph"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}/references/graph"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                ex: "\"example-artifact\""
+                k: "param"
+                n: "artifact_id"
+                or: "artifact_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                ex: "\"my-group\""
+                k: "param"
+                n: "group_id"
+                or: "group_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "version_id"
+                or: "version_expression"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                ex: 3
+                k: "query"
+                n: "depth"
+                or: "depth"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                ex: "\"OUTBOUND\""
+                k: "query"
+                n: "direction"
+                or: "direction"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}/references/graph"
+          q: {
+            exist: [
+              "artifact_id"
+              "depth"
+              "direction"
+              "group_id"
+              "version_id"
+            ]
+          }
+          r: {
+            param: {
+              artifactId: "artifact_id"
+              groupId: "group_id"
+              versionExpression: "version_id"
+            }
+          }
+          s: [
+            {
+              lit: "groups"
+            }
+            {
+              var: "group_id"
+            }
+            {
+              lit: "artifacts"
+            }
+            {
+              var: "artifact_id"
+            }
+            {
+              lit: "versions"
+            }
+            {
+              var: "version_id"
+            }
+            {
+              lit: "references"
+            }
+            {
+              lit: "graph"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+  relations: ancestors: [
+    [path("$.main.kit.entity.group") path("$.main.kit.entity.artifact") path("$.main.kit.entity.version")]
+  ]
+
+}

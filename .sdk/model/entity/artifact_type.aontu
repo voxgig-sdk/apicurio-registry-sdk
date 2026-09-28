@@ -1,0 +1,51 @@
+# Entity: artifact_type
+
+main: kit: entity: artifact_type: {
+
+  alias: field: {}
+
+  fields: {
+    name: {
+      h: "Name"
+      n: "name"
+      r: false
+      t: "`$STRING`"
+    }
+  }
+
+  name: "artifact_type"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /admin/config/artifactTypes"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/admin/config/artifactTypes"
+          s: [
+            {
+              lit: "admin"
+            }
+            {
+              lit: "config"
+            }
+            {
+              lit: "artifactTypes"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

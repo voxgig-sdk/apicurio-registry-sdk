@@ -1,0 +1,143 @@
+# Entity: git_op
+
+main: kit: entity: git_op: {
+
+  alias: field: {}
+
+  fields: {
+    ref: {
+      h: "Ref"
+      n: "ref"
+      r: true
+      sh: "Git ref to validate (branch name, tag, or PR ref like `refs/pull/42/head`)."
+      t: "`$STRING`"
+    }
+    repoId: {
+      h: "Repo Id"
+      n: "repoId"
+      r: true
+      sh: "Repository ID to validate against."
+      t: "`$STRING`"
+    }
+    type: {
+      h: "Type"
+      n: "type"
+      r: false
+      sh: "Validation type."
+      t: "`$STRING`"
+    }
+  }
+
+  name: "git_op"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /admin/gitops/sync"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/admin/gitops/sync"
+          s: [
+            {
+              lit: "admin"
+            }
+            {
+              lit: "gitops"
+            }
+            {
+              lit: "sync"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "POST /admin/gitops/validate"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/admin/gitops/validate"
+          s: [
+            {
+              lit: "admin"
+            }
+            {
+              lit: "gitops"
+            }
+            {
+              lit: "validate"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    remove: {
+      name: "remove"
+      points: [
+        {
+          co: {
+            id: "DELETE /admin/gitops/validate/{taskId}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "task_id"
+                or: "task_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "DELETE"
+          o: "/admin/gitops/validate/{taskId}"
+          q: {
+            exist: [
+              "task_id"
+            ]
+          }
+          r: {
+            param: {
+              taskId: "task_id"
+            }
+          }
+          s: [
+            {
+              lit: "admin"
+            }
+            {
+              lit: "gitops"
+            }
+            {
+              lit: "validate"
+            }
+            {
+              var: "task_id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

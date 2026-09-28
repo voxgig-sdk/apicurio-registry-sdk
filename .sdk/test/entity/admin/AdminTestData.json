@@ -1,0 +1,72 @@
+{
+  "existing": {
+    "admin": {
+      "ADMIN00": {
+        "role": "s14",
+        "value": "s15",
+        "principal_id": "PRINCIPAL01",
+        "property_name": "PROPERTY_NAME01",
+        "id": "ADMIN00"
+      },
+      "ADMIN01": {
+        "role": "s28",
+        "value": "s29",
+        "principal_id": "PRINCIPAL01",
+        "property_name": "PROPERTY_NAME01",
+        "id": "ADMIN01"
+      },
+      "ADMIN02": {
+        "role": "s3c",
+        "value": "s3d",
+        "principal_id": "PRINCIPAL01",
+        "property_name": "PROPERTY_NAME01",
+        "id": "ADMIN02"
+      }
+    }
+  },
+  "new": {
+    "admin": {
+      "admin_ref01": {
+        "role": "s50",
+        "value": "s51"
+      }
+    }
+  },
+  "requests": {
+    "POST /admin/import": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /admin/roleMappings": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "DELETE /admin/roleMappings/{principalId}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "DELETE /admin/config/properties/{propertyName}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "DELETE /admin/contracts/ruleset": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PUT /admin/roleMappings/{principalId}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PUT /admin/config/properties/{propertyName}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

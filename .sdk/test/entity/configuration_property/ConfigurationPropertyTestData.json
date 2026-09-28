@@ -1,0 +1,53 @@
+{
+  "existing": {
+    "configuration_property": {
+      "CONFIGURATION_PROPERTY00": {
+        "description": "s3c",
+        "id": "CONFIGURATION_PROPERTY00",
+        "label": "s3e",
+        "name": "s3f",
+        "type": "s40",
+        "value": "s41"
+      },
+      "CONFIGURATION_PROPERTY01": {
+        "description": "s78",
+        "id": "CONFIGURATION_PROPERTY01",
+        "label": "s7a",
+        "name": "s7b",
+        "type": "s7c",
+        "value": "s7d"
+      },
+      "CONFIGURATION_PROPERTY02": {
+        "description": "sb4",
+        "id": "CONFIGURATION_PROPERTY02",
+        "label": "sb6",
+        "name": "sb7",
+        "type": "sb8",
+        "value": "sb9"
+      }
+    }
+  },
+  "new": {
+    "configuration_property": {
+      "configuration_property_ref01": {
+        "description": "sf0",
+        "label": "sf2",
+        "name": "sf3",
+        "type": "sf4",
+        "value": "sf5"
+      }
+    }
+  },
+  "requests": {
+    "GET /admin/config/properties": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /admin/config/properties/{propertyName}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

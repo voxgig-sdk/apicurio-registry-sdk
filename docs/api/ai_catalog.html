@@ -1,0 +1,1094 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>AiCatalog | Apicurio Registry API [v3]</title><link rel="stylesheet" href="../assets/style.css"></head>
+<body><a class="skip" href="#content">Skip to content</a>
+<header class="site-header"><a class="site-title" href="../index.html">Apicurio Registry API [v3]<span>SDK documentation</span></a><div class="site-links"><a class="repo-link" href="https://github.com/voxgig-sdk/apicurio-registry-sdk">voxgig-sdk/apicurio-registry-sdk</a></div></header>
+<div class="site-notice" role="note"></div>
+<div class="shell"><nav class="site-nav" aria-label="Documentation"><div class="search"><label for="search">Search documentation</label><input id="search" type="search" data-base="../" placeholder="Find a guide or reference"><div id="results" aria-live="polite"></div></div><details><summary>Overview</summary><a href="../index.html">Apicurio Registry API [v3]</a></details>
+<details open><summary>API</summary><a href="../api/index.html">API overview</a>
+<a href="../api/admin.html">Admin</a>
+<a href="../api/agent.html">Agent</a>
+<a href="../api/agent_card.html">AgentCard</a>
+<a aria-current="page" href="../api/ai_catalog.html">AiCatalog</a><div class="nav-sections"><a class="nav-section" href="#get-well-knownardagents">GET /well-known/ard/agents</a>
+<a class="nav-section" href="#get-well-knownai-catalogjson">GET /well-known/ai-catalog.json</a>
+<a class="nav-section" href="#get-well-knownardjson">GET /well-known/ard.json</a></div>
+<a href="../api/ard_explore.html">ArdExplore</a>
+<a href="../api/ard_search.html">ArdSearch</a>
+<a href="../api/artifact.html">Artifact</a>
+<a href="../api/artifact_reference.html">ArtifactReference</a>
+<a href="../api/artifact_rule.html">ArtifactRule</a>
+<a href="../api/artifact_type.html">ArtifactType</a>
+<a href="../api/branch.html">Branch</a>
+<a href="../api/comment.html">Comment</a>
+<a href="../api/configuration_property.html">ConfigurationProperty</a>
+<a href="../api/consumer_version_heatmap.html">ConsumerVersionHeatmap</a>
+<a href="../api/content.html">Content</a>
+<a href="../api/contract.html">Contract</a>
+<a href="../api/contract_rule.html">ContractRule</a>
+<a href="../api/contract_rule_set.html">ContractRuleSet</a>
+<a href="../api/create_artifact.html">CreateArtifact</a>
+<a href="../api/deprecation_readiness.html">DeprecationReadiness</a>
+<a href="../api/download_ref.html">DownloadRef</a>
+<a href="../api/git_op.html">GitOp</a>
+<a href="../api/git_ops_status.html">GitOpsStatus</a>
+<a href="../api/git_ops_validate_task.html">GitOpsValidateTask</a>
+<a href="../api/global_rule.html">GlobalRule</a>
+<a href="../api/group.html">Group</a>
+<a href="../api/group_rule.html">GroupRule</a>
+<a href="../api/kafka_sql.html">KafkaSql</a>
+<a href="../api/mcp_tool.html">McpTool</a>
+<a href="../api/metadata.html">Metadata</a>
+<a href="../api/odcs_contract_result.html">OdcsContractResult</a>
+<a href="../api/odcs_contract_summary.html">OdcsContractSummary</a>
+<a href="../api/reference_graph.html">ReferenceGraph</a>
+<a href="../api/role_mapping.html">RoleMapping</a>
+<a href="../api/rule.html">Rule</a>
+<a href="../api/searched_branch.html">SearchedBranch</a>
+<a href="../api/searched_group.html">SearchedGroup</a>
+<a href="../api/system_info.html">SystemInfo</a>
+<a href="../api/usage_summary.html">UsageSummary</a>
+<a href="../api/user_info.html">UserInfo</a>
+<a href="../api/user_interface_config.html">UserInterfaceConfig</a>
+<a href="../api/version.html">Version</a>
+<a href="../api/well_known.html">WellKnown</a>
+<a href="../api/wrapped_version_state.html">WrappedVersionState</a></details>
+<details><summary>Guides</summary><a href="../guides/authentication.html">Authentication</a>
+<a href="../guides/first-call.html">Make your first API call</a>
+<a href="../guides/errors.html">Handle errors</a>
+<a href="../guides/concepts.html">Entities, SDKs, and tools</a></details>
+<details><summary>SDKs</summary><a href="../sdks/go.html">Golang</a>
+<a href="../sdks/lua.html">Lua</a>
+<a href="../sdks/php.html">PHP</a>
+<a href="../sdks/py.html">Python</a>
+<a href="../sdks/rb.html">Ruby</a>
+<a href="../sdks/ts.html">TypeScript</a></details>
+<details><summary>Tools</summary><a href="../tools/go-cli.html">Go CLI</a>
+<a href="../tools/go-mcp.html">Go MCP server</a></details>
+<details><summary>Features</summary><a href="../features/debug.html">Debug capture</a>
+<a href="../features/idempotency.html">Idempotency</a>
+<a href="../features/metrics.html">Metrics</a>
+<a href="../features/paging.html">Paging</a>
+<a href="../features/ratelimit.html">Rate limiting</a>
+<a href="../features/retry.html">Retry</a>
+<a href="../features/test.html">Test transport</a>
+<a href="../features/timeout.html">Timeout</a></details></nav><main id="content"><div class="page-context"><span class="section-dot" aria-hidden="true"></span>API</div><h1 id="aicatalog">AiCatalog</h1>
+<h2 id="operations">Operations</h2>
+<p>Every route this entity exposes. Each route links to its own reference on this page.</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Route</th>
+<th>SDK operation</th>
+<th>Returns</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GET</code></td>
+<td><a href="#get-well-knownardagents"><code>/well-known/ard/agents</code></a></td>
+<td><code>list</code></td>
+<td>ARD agent listing</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><a href="#get-well-knownai-catalogjson"><code>/well-known/ai-catalog.json</code></a></td>
+<td><code>list</code></td>
+<td>The AI Catalog document</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><a href="#get-well-knownardjson"><code>/well-known/ard.json</code></a></td>
+<td><code>list</code></td>
+<td>The AI Catalog document (ARD v0.91 normative path)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="examples">Examples</h2>
+<p>One example per SDK, generated from the API model. The argument names are the parameters and fields of this entity, and the values are placeholders. The examples are not compiled or executed.</p>
+<h3 id="golang">Golang</h3>
+<p>Construct <code>client</code> as shown in the <a href="../sdks/go.html#set-up-the-client">Golang setup</a>, then call the operations:</p>
+<pre><code class="language-go">ai_catalogs, err := client.AiCatalog(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(ai_catalogs)
+</code></pre>
+<h3 id="lua">Lua</h3>
+<p>Construct <code>client</code> as shown in the <a href="../sdks/lua.html#set-up-the-client">Lua setup</a>, then call the operations:</p>
+<pre><code class="language-lua">local ai_catalogs, err = client:AiCatalog():list()
+</code></pre>
+<h3 id="php">PHP</h3>
+<p>Construct <code>client</code> as shown in the <a href="../sdks/php.html#set-up-the-client">PHP setup</a>, then call the operations:</p>
+<pre><code class="language-php">$ai_catalogs = $client-&gt;AiCatalog()-&gt;list();
+</code></pre>
+<h3 id="python">Python</h3>
+<p>Construct <code>client</code> as shown in the <a href="../sdks/py.html#set-up-the-client">Python setup</a>, then call the operations:</p>
+<pre><code class="language-py">ai_catalogs = client.AiCatalog().list()
+</code></pre>
+<h3 id="ruby">Ruby</h3>
+<p>Construct <code>client</code> as shown in the <a href="../sdks/rb.html#set-up-the-client">Ruby setup</a>, then call the operations:</p>
+<pre><code class="language-rb">ai_catalogs = client.AiCatalog.list()
+</code></pre>
+<h3 id="typescript">TypeScript</h3>
+<p>Construct <code>client</code> as shown in the <a href="../sdks/ts.html#set-up-the-client">TypeScript setup</a>, then call the operations:</p>
+<pre><code class="language-ts">const ai_catalogs = await client.AiCatalog().list()
+</code></pre>
+<h2 id="fields">Fields</h2>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>capabilities</code></td>
+<td><code>array</code></td>
+<td>No</td>
+<td>Capabilities</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Description</td>
+</tr>
+<tr>
+<td><code>displayName</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Display Name</td>
+</tr>
+<tr>
+<td><code>identifier</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Identifier</td>
+</tr>
+<tr>
+<td><code>representativeQueries</code></td>
+<td><code>array</code></td>
+<td>No</td>
+<td>Representative Queries</td>
+</tr>
+<tr>
+<td><code>tags</code></td>
+<td><code>array</code></td>
+<td>No</td>
+<td>Tags</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Type</td>
+</tr>
+<tr>
+<td><code>updatedAt</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Updated At</td>
+</tr>
+<tr>
+<td><code>url</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Url</td>
+</tr>
+<tr>
+<td><code>version</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Version</td>
+</tr>
+</tbody>
+</table>
+<h2 id="list">list</h2>
+<h3 id="get-well-knownardagents" class="operation" data-method="get"><code>GET</code> /well-known/ard/agents</h3>
+<p>Operation ID: <code>ardListAgents</code>.</p>
+<h4 id="parameters">Parameters</h4>
+<p>| Parameter | In | Type | Required | Description |
+| --- | --- | --- | --- |
+| <code>filter</code> | <code>query</code> | <code>string</code> | No |  |
+| <code>orderBy</code> | <code>query</code> | <code>string</code> | No |  |
+| <code>pageSize</code> | <code>query</code> | <code>integer</code> | No |  |
+| <code>pageToken</code> | <code>query</code> | <code>string</code> | No |  |</p>
+<h4 id="responses">Responses</h4>
+<h5 id="200-ard-agent-listing" class="status" data-status="2xx">200: ARD agent listing</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entries</code></td>
+<td><code>array of object</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>entries[].capabilities</code></td>
+<td><code>array of string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>entries[].description</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>entries[].displayName</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>entries[].identifier</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>entries[].representativeQueries</code></td>
+<td><code>array of string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>entries[].tags</code></td>
+<td><code>array of string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>entries[].type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>entries[].updatedAt</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>entries[].url</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>entries[].version</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>host</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>Information about the AI Catalog host (this registry instance).</td>
+</tr>
+<tr>
+<td><code>host.displayName</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>host.documentationUrl</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>host.identifier</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>host.logoUrl</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>nextPageToken</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Opaque pagination token for retrieving the next page of ARD list results. Only populated by the ARD <code>GET /agents</code> endpoint; absent from the static <code>/.well-known/ai-catalog.json</code> projection.</td>
+</tr>
+<tr>
+<td><code>specVersion</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h5 id="400-common-response-for-all-operations-that-can-return-a-400-error" class="status" data-status="4xx">400: Common response for all operations that can return a <code>400</code> error</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>detail</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A human-readable explanation specific to this occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>instance</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference that identifies the specific occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The name of the error (typically a server exception class name).</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>The HTTP status code.</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A short, human-readable summary of the problem type.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference [RFC3986] that identifies the problem type.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="401-common-response-for-all-operations-that-can-return-a-401-error-indicating-authentication-is-required" class="status" data-status="4xx">401: Common response for all operations that can return a <code>401</code> error indicating authentication is required</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>detail</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A human-readable explanation specific to this occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>instance</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference that identifies the specific occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The name of the error (typically a server exception class name).</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>The HTTP status code.</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A short, human-readable summary of the problem type.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference [RFC3986] that identifies the problem type.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="403-common-response-for-all-operations-that-can-return-a-403-error-indicating-the-user-is-authenticated-but-not-authorized" class="status" data-status="4xx">403: Common response for all operations that can return a <code>403</code> error indicating the user is authenticated but not authorized</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>detail</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A human-readable explanation specific to this occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>instance</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference that identifies the specific occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The name of the error (typically a server exception class name).</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>The HTTP status code.</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A short, human-readable summary of the problem type.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference [RFC3986] that identifies the problem type.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="500-common-response-for-all-operations-that-can-fail-with-an-unexpected-server-error" class="status" data-status="5xx">500: Common response for all operations that can fail with an unexpected server error</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>detail</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A human-readable explanation specific to this occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>instance</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference that identifies the specific occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The name of the error (typically a server exception class name).</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>The HTTP status code.</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A short, human-readable summary of the problem type.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference [RFC3986] that identifies the problem type.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="get-well-knownai-catalogjson" class="operation" data-method="get"><code>GET</code> /well-known/ai-catalog.json</h3>
+<p>Operation ID: <code>getAiCatalog</code>.</p>
+<h4 id="responses-1">Responses</h4>
+<h5 id="200-the-ai-catalog-document" class="status" data-status="2xx">200: The AI Catalog document</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entries</code></td>
+<td><code>array of object</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>entries[].capabilities</code></td>
+<td><code>array of string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>entries[].description</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>entries[].displayName</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>entries[].identifier</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>entries[].representativeQueries</code></td>
+<td><code>array of string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>entries[].tags</code></td>
+<td><code>array of string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>entries[].type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>entries[].updatedAt</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>entries[].url</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>entries[].version</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>host</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>Information about the AI Catalog host (this registry instance).</td>
+</tr>
+<tr>
+<td><code>host.displayName</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>host.documentationUrl</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>host.identifier</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>host.logoUrl</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>nextPageToken</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Opaque pagination token for retrieving the next page of ARD list results. Only populated by the ARD <code>GET /agents</code> endpoint; absent from the static <code>/.well-known/ai-catalog.json</code> projection.</td>
+</tr>
+<tr>
+<td><code>specVersion</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h5 id="401-common-response-for-all-operations-that-can-return-a-401-error-indicating-authentication-is-required-1" class="status" data-status="4xx">401: Common response for all operations that can return a <code>401</code> error indicating authentication is required</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>detail</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A human-readable explanation specific to this occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>instance</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference that identifies the specific occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The name of the error (typically a server exception class name).</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>The HTTP status code.</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A short, human-readable summary of the problem type.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference [RFC3986] that identifies the problem type.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="403-common-response-for-all-operations-that-can-return-a-403-error-indicating-the-user-is-authenticated-but-not-authorized-1" class="status" data-status="4xx">403: Common response for all operations that can return a <code>403</code> error indicating the user is authenticated but not authorized</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>detail</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A human-readable explanation specific to this occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>instance</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference that identifies the specific occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The name of the error (typically a server exception class name).</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>The HTTP status code.</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A short, human-readable summary of the problem type.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference [RFC3986] that identifies the problem type.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="500-common-response-for-all-operations-that-can-fail-with-an-unexpected-server-error-1" class="status" data-status="5xx">500: Common response for all operations that can fail with an unexpected server error</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>detail</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A human-readable explanation specific to this occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>instance</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference that identifies the specific occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The name of the error (typically a server exception class name).</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>The HTTP status code.</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A short, human-readable summary of the problem type.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference [RFC3986] that identifies the problem type.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="get-well-knownardjson" class="operation" data-method="get"><code>GET</code> /well-known/ard.json</h3>
+<p>Operation ID: <code>getArdManifest</code>.</p>
+<h4 id="responses-2">Responses</h4>
+<h5 id="200-the-ai-catalog-document-ard-v091-normative-path" class="status" data-status="2xx">200: The AI Catalog document (ARD v0.91 normative path)</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entries</code></td>
+<td><code>array of object</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>entries[].capabilities</code></td>
+<td><code>array of string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>entries[].description</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>entries[].displayName</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>entries[].identifier</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>entries[].representativeQueries</code></td>
+<td><code>array of string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>entries[].tags</code></td>
+<td><code>array of string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>entries[].type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>entries[].updatedAt</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>entries[].url</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>entries[].version</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>host</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>Information about the AI Catalog host (this registry instance).</td>
+</tr>
+<tr>
+<td><code>host.displayName</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>host.documentationUrl</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>host.identifier</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>host.logoUrl</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>nextPageToken</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Opaque pagination token for retrieving the next page of ARD list results. Only populated by the ARD <code>GET /agents</code> endpoint; absent from the static <code>/.well-known/ai-catalog.json</code> projection.</td>
+</tr>
+<tr>
+<td><code>specVersion</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h5 id="401-common-response-for-all-operations-that-can-return-a-401-error-indicating-authentication-is-required-2" class="status" data-status="4xx">401: Common response for all operations that can return a <code>401</code> error indicating authentication is required</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>detail</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A human-readable explanation specific to this occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>instance</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference that identifies the specific occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The name of the error (typically a server exception class name).</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>The HTTP status code.</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A short, human-readable summary of the problem type.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference [RFC3986] that identifies the problem type.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="403-common-response-for-all-operations-that-can-return-a-403-error-indicating-the-user-is-authenticated-but-not-authorized-2" class="status" data-status="4xx">403: Common response for all operations that can return a <code>403</code> error indicating the user is authenticated but not authorized</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>detail</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A human-readable explanation specific to this occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>instance</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference that identifies the specific occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The name of the error (typically a server exception class name).</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>The HTTP status code.</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A short, human-readable summary of the problem type.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference [RFC3986] that identifies the problem type.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="500-common-response-for-all-operations-that-can-fail-with-an-unexpected-server-error-2" class="status" data-status="5xx">500: Common response for all operations that can fail with an unexpected server error</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>detail</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A human-readable explanation specific to this occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>instance</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference that identifies the specific occurrence of the problem.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The name of the error (typically a server exception class name).</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>The HTTP status code.</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A short, human-readable summary of the problem type.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A URI reference [RFC3986] that identifies the problem type.</td>
+</tr>
+</tbody>
+</table>
+</main></div>
+<script src="../assets/search.js" defer></script></body></html>

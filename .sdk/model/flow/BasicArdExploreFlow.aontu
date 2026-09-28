@@ -1,0 +1,18 @@
+# BasicArdExploreFlow
+
+main: kit: flow: BasicArdExploreFlow:
+{
+  entity: "ard_explore",
+  kind: "basic",
+  name: "BasicArdExploreFlow",
+  step: [
+    {
+      i: {
+        ref: "ard_explore_ref01"
+      }
+
+      o: "create"
+    }
+  ],
+  "key$": "BasicArdExploreFlow"
+}

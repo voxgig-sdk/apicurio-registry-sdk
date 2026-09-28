@@ -1,0 +1,34 @@
+# BasicWrappedVersionStateFlow
+
+main: kit: flow: BasicWrappedVersionStateFlow:
+{
+  entity: "wrapped_version_state",
+  kind: "basic",
+  name: "BasicWrappedVersionStateFlow",
+  step: [
+    {
+      i: {
+        ref: "wrapped_version_state_ref01",
+        srcdatavar: "wrapped_version_state_ref01_data",
+        suffix: "_dt0"
+      }
+
+      m: {
+        artifact_id: "artifact01",
+        group_id: "group01",
+        id: "wrapped_version_state01"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-wrapped_version_state_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicWrappedVersionStateFlow"
+}

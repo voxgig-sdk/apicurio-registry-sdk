@@ -1,0 +1,72 @@
+# Entity: user_info
+
+main: kit: entity: user_info: {
+
+  alias: field: {}
+
+  fields: {
+    admin: {
+      h: "Admin"
+      n: "admin"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    developer: {
+      h: "Developer"
+      n: "developer"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    displayName: {
+      h: "Display Name"
+      n: "displayName"
+      r: false
+      t: "`$STRING`"
+    }
+    username: {
+      h: "Username"
+      n: "username"
+      r: false
+      t: "`$STRING`"
+    }
+    viewer: {
+      h: "Viewer"
+      n: "viewer"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+  }
+
+  name: "user_info"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /users/me"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/users/me"
+          s: [
+            {
+              lit: "users"
+            }
+            {
+              lit: "me"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

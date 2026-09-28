@@ -1,0 +1,41 @@
+{
+  "existing": {
+    "wrapped_version_state": {
+      "WRAPPED_VERSION_STATE00": {
+        "state": "sa",
+        "artifact_id": "ARTIFACT01",
+        "group_id": "GROUP01",
+        "version_expression": "VERSION_EXPRESSION01",
+        "id": "WRAPPED_VERSION_STATE00"
+      },
+      "WRAPPED_VERSION_STATE01": {
+        "state": "s14",
+        "artifact_id": "ARTIFACT01",
+        "group_id": "GROUP01",
+        "version_expression": "VERSION_EXPRESSION01",
+        "id": "WRAPPED_VERSION_STATE01"
+      },
+      "WRAPPED_VERSION_STATE02": {
+        "state": "s1e",
+        "artifact_id": "ARTIFACT01",
+        "group_id": "GROUP01",
+        "version_expression": "VERSION_EXPRESSION01",
+        "id": "WRAPPED_VERSION_STATE02"
+      }
+    }
+  },
+  "new": {
+    "wrapped_version_state": {
+      "wrapped_version_state_ref01": {
+        "state": "s28"
+      }
+    }
+  },
+  "requests": {
+    "GET /groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}/state": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

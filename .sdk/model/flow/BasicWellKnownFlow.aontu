@@ -1,0 +1,33 @@
+# BasicWellKnownFlow
+
+main: kit: flow: BasicWellKnownFlow:
+{
+  entity: "well_known",
+  kind: "basic",
+  name: "BasicWellKnownFlow",
+  step: [
+    {
+      i: {
+        ref: "well_known_ref01",
+        srcdatavar: "well_known_ref01_data",
+        suffix: "_dt0"
+      }
+
+      m: {
+        id: "well_known01",
+        schema_type: "schema_type01"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-well_known_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicWellKnownFlow"
+}

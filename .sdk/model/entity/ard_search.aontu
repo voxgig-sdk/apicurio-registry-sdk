@@ -1,0 +1,76 @@
+# Entity: ard_search
+
+main: kit: entity: ard_search: {
+
+  alias: field: {}
+
+  fields: {
+    federation: {
+      h: "Federation"
+      n: "federation"
+      r: false
+      t: "`$STRING`"
+    }
+    pageSize: {
+      h: "Page Size"
+      n: "pageSize"
+      r: false
+      t: "`$INTEGER`"
+    }
+    pageToken: {
+      h: "Page Token"
+      n: "pageToken"
+      r: false
+      t: "`$STRING`"
+    }
+    query: {
+      h: "Query"
+      n: "query"
+      r: true
+      sh: "ARD search query."
+      t: "`$OBJECT`"
+    }
+    results: {
+      h: "Results"
+      n: "results"
+      r: true
+      t: "`$ARRAY`"
+    }
+  }
+
+  name: "ard_search"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /well-known/ard/search"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/well-known/ard/search"
+          s: [
+            {
+              lit: "well-known"
+            }
+            {
+              lit: "ard"
+            }
+            {
+              lit: "search"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

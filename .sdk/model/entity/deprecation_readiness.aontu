@@ -1,0 +1,122 @@
+# Entity: deprecation_readiness
+
+main: kit: entity: deprecation_readiness: {
+
+  alias: field: {}
+
+  fields: {
+    clientId: {
+      h: "Client Id"
+      n: "clientId"
+      r: false
+      t: "`$STRING`"
+    }
+    fetchCount: {
+      fo: "int64"
+      h: "Fetch Count"
+      n: "fetchCount"
+      r: false
+      t: "`$INTEGER`"
+    }
+    lastFetched: {
+      fo: "int64"
+      h: "Last Fetched"
+      n: "lastFetched"
+      r: false
+      t: "`$INTEGER`"
+    }
+  }
+
+  name: "deprecation_readiness"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /admin/usage/artifacts/{groupId}/{artifactId}/versions/{version}/deprecation-readiness"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "artifact_id"
+                or: "artifact_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "group_id"
+                or: "group_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "version_id"
+                or: "version"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/admin/usage/artifacts/{groupId}/{artifactId}/versions/{version}/deprecation-readiness"
+          q: {
+            exist: [
+              "artifact_id"
+              "group_id"
+              "version_id"
+            ]
+          }
+          r: {
+            param: {
+              artifactId: "artifact_id"
+              groupId: "group_id"
+              version: "version_id"
+            }
+          }
+          s: [
+            {
+              lit: "admin"
+            }
+            {
+              lit: "usage"
+            }
+            {
+              lit: "artifacts"
+            }
+            {
+              var: "group_id"
+            }
+            {
+              var: "artifact_id"
+            }
+            {
+              lit: "versions"
+            }
+            {
+              var: "version_id"
+            }
+            {
+              lit: "deprecation-readiness"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.activeConsumers`"
+          }
+        }
+      ]
+    }
+  }
+
+
+  relations: ancestors: [
+    [path("$.main.kit.entity.artifact") path("$.main.kit.entity.version")]
+  ]
+
+}

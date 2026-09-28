@@ -1,0 +1,84 @@
+{
+  "existing": {
+    "group": {
+      "GROUP00": {
+        "artifactsType": "s64",
+        "createdOn": "s65",
+        "description": "s66",
+        "groupId": "s67",
+        "id": "GROUP00",
+        "labels": {},
+        "modifiedBy": "s6a",
+        "modifiedOn": "s6b",
+        "owner": "s6c",
+        "properties": {}
+      },
+      "GROUP01": {
+        "artifactsType": "sc8",
+        "createdOn": "sc9",
+        "description": "sca",
+        "groupId": "scb",
+        "id": "GROUP01",
+        "labels": {},
+        "modifiedBy": "sce",
+        "modifiedOn": "scf",
+        "owner": "sd0",
+        "properties": {}
+      },
+      "GROUP02": {
+        "artifactsType": "s12c",
+        "createdOn": "s12d",
+        "description": "s12e",
+        "groupId": "s12f",
+        "id": "GROUP02",
+        "labels": {},
+        "modifiedBy": "s132",
+        "modifiedOn": "s133",
+        "owner": "s134",
+        "properties": {}
+      }
+    }
+  },
+  "new": {
+    "group": {
+      "group_ref01": {
+        "artifactsType": "s190",
+        "createdOn": "s191",
+        "description": "s192",
+        "groupId": "s193",
+        "labels": {},
+        "modifiedBy": "s196",
+        "modifiedOn": "s197",
+        "owner": "s198",
+        "properties": {}
+      }
+    }
+  },
+  "requests": {
+    "POST /groups": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /groups": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /groups/{groupId}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "DELETE /groups/{groupId}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PUT /groups/{groupId}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

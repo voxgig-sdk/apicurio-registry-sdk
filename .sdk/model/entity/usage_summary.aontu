@@ -1,0 +1,66 @@
+# Entity: usage_summary
+
+main: kit: entity: usage_summary: {
+
+  alias: field: {}
+
+  fields: {
+    active: {
+      fo: "int32"
+      h: "Active"
+      n: "active"
+      r: true
+      t: "`$INTEGER`"
+    }
+    dead: {
+      fo: "int32"
+      h: "Dead"
+      n: "dead"
+      r: true
+      t: "`$INTEGER`"
+    }
+    stale: {
+      fo: "int32"
+      h: "Stale"
+      n: "stale"
+      r: true
+      t: "`$INTEGER`"
+    }
+  }
+
+  name: "usage_summary"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /admin/usage/summary"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/admin/usage/summary"
+          s: [
+            {
+              lit: "admin"
+            }
+            {
+              lit: "usage"
+            }
+            {
+              lit: "summary"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

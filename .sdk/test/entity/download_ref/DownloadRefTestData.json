@@ -1,0 +1,36 @@
+{
+  "existing": {
+    "download_ref": {
+      "DOWNLOAD_REF00": {
+        "downloadId": "s14",
+        "href": "s15",
+        "id": "DOWNLOAD_REF00"
+      },
+      "DOWNLOAD_REF01": {
+        "downloadId": "s28",
+        "href": "s29",
+        "id": "DOWNLOAD_REF01"
+      },
+      "DOWNLOAD_REF02": {
+        "downloadId": "s3c",
+        "href": "s3d",
+        "id": "DOWNLOAD_REF02"
+      }
+    }
+  },
+  "new": {
+    "download_ref": {
+      "download_ref_ref01": {
+        "downloadId": "s50",
+        "href": "s51"
+      }
+    }
+  },
+  "requests": {
+    "GET /admin/export": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

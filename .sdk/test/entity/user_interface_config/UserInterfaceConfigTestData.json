@@ -1,0 +1,40 @@
+{
+  "existing": {
+    "user_interface_config": {
+      "USER_INTERFACE_CONFIG00": {
+        "auth": {},
+        "features": {},
+        "ui": {},
+        "id": "USER_INTERFACE_CONFIG00"
+      },
+      "USER_INTERFACE_CONFIG01": {
+        "auth": {},
+        "features": {},
+        "ui": {},
+        "id": "USER_INTERFACE_CONFIG01"
+      },
+      "USER_INTERFACE_CONFIG02": {
+        "auth": {},
+        "features": {},
+        "ui": {},
+        "id": "USER_INTERFACE_CONFIG02"
+      }
+    }
+  },
+  "new": {
+    "user_interface_config": {
+      "user_interface_config_ref01": {
+        "auth": {},
+        "features": {},
+        "ui": {}
+      }
+    }
+  },
+  "requests": {
+    "GET /system/uiConfig": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

@@ -1,0 +1,78 @@
+# Entity: download_ref
+
+main: kit: entity: download_ref: {
+
+  alias: field: {}
+
+  fields: {
+    downloadId: {
+      h: "Download Id"
+      n: "downloadId"
+      r: true
+      t: "`$STRING`"
+    }
+    href: {
+      h: "Href"
+      n: "href"
+      r: false
+      t: "`$STRING`"
+    }
+  }
+
+  name: "download_ref"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /admin/export"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "for_browser"
+                or: "for_browser"
+                r: false
+                t: "`$BOOLEAN`"
+              }
+              {
+                k: "query"
+                n: "group_id"
+                or: "group_id"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/admin/export"
+          q: {
+            exist: [
+              "for_browser"
+              "group_id"
+            ]
+          }
+          s: [
+            {
+              lit: "admin"
+            }
+            {
+              lit: "export"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

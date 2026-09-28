@@ -1,0 +1,231 @@
+# Entity: well_known
+
+main: kit: entity: well_known: {
+
+  alias: field: {}
+
+  fields: {
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+    parts: [
+      "group_id"
+      "artifact_id"
+    ]
+    sep: "/"
+  }
+
+  name: "well_known"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /well-known/agents/{groupId}/{artifactId}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "artifact_id"
+                or: "artifact_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "group_id"
+                or: "group_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                k: "query"
+                n: "version"
+                or: "version"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/well-known/agents/{groupId}/{artifactId}"
+          q: {
+            exist: [
+              "artifact_id"
+              "group_id"
+              "version"
+            ]
+          }
+          r: {
+            param: {
+              artifactId: "artifact_id"
+              groupId: "group_id"
+            }
+          }
+          s: [
+            {
+              lit: "well-known"
+            }
+            {
+              lit: "agents"
+            }
+            {
+              var: "group_id"
+            }
+            {
+              var: "artifact_id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /well-known/mcp-tools/{groupId}/{artifactId}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "artifact_id"
+                or: "artifact_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "group_id"
+                or: "group_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                k: "query"
+                n: "version"
+                or: "version"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/well-known/mcp-tools/{groupId}/{artifactId}"
+          q: {
+            exist: [
+              "artifact_id"
+              "group_id"
+              "version"
+            ]
+          }
+          r: {
+            param: {
+              artifactId: "artifact_id"
+              groupId: "group_id"
+            }
+          }
+          s: [
+            {
+              lit: "well-known"
+            }
+            {
+              lit: "mcp-tools"
+            }
+            {
+              var: "group_id"
+            }
+            {
+              var: "artifact_id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /well-known/schemas/{schemaType}/{version}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "schema_type"
+                or: "schema_type"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "version"
+                or: "version"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/well-known/schemas/{schemaType}/{version}"
+          q: {
+            exist: [
+              "schema_type"
+              "version"
+            ]
+          }
+          r: {
+            param: {
+              schemaType: "schema_type"
+            }
+          }
+          s: [
+            {
+              lit: "well-known"
+            }
+            {
+              lit: "schemas"
+            }
+            {
+              var: "schema_type"
+            }
+            {
+              var: "version"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+  relations: ancestors: [
+    [path("$.main.kit.entity.agent")]
+    [path("$.main.kit.entity.mcp_tool")]
+  ]
+
+}

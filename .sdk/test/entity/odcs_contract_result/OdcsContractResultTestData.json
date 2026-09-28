@@ -1,0 +1,55 @@
+{
+  "existing": {
+    "odcs_contract_result": {
+      "ODCS_CONTRACT_RESULT00": {
+        "labelsApplied": 40,
+        "rulesApplied": 41,
+        "tagsApplied": 42,
+        "warnings": [],
+        "group_id": "GROUP01",
+        "contract_id": "CONTRACT01",
+        "id": "ODCS_CONTRACT_RESULT00"
+      },
+      "ODCS_CONTRACT_RESULT01": {
+        "labelsApplied": 80,
+        "rulesApplied": 81,
+        "tagsApplied": 82,
+        "warnings": [],
+        "group_id": "GROUP01",
+        "contract_id": "CONTRACT01",
+        "id": "ODCS_CONTRACT_RESULT01"
+      },
+      "ODCS_CONTRACT_RESULT02": {
+        "labelsApplied": 120,
+        "rulesApplied": 121,
+        "tagsApplied": 122,
+        "warnings": [],
+        "group_id": "GROUP01",
+        "contract_id": "CONTRACT01",
+        "id": "ODCS_CONTRACT_RESULT02"
+      }
+    }
+  },
+  "new": {
+    "odcs_contract_result": {
+      "odcs_contract_result_ref01": {
+        "labelsApplied": 160,
+        "rulesApplied": 161,
+        "tagsApplied": 162,
+        "warnings": []
+      }
+    }
+  },
+  "requests": {
+    "POST /groups/{groupId}/contracts": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PUT /groups/{groupId}/contracts/{contractId}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

@@ -1,0 +1,18 @@
+# BasicArdSearchFlow
+
+main: kit: flow: BasicArdSearchFlow:
+{
+  entity: "ard_search",
+  kind: "basic",
+  name: "BasicArdSearchFlow",
+  step: [
+    {
+      i: {
+        ref: "ard_search_ref01"
+      }
+
+      o: "create"
+    }
+  ],
+  "key$": "BasicArdSearchFlow"
+}

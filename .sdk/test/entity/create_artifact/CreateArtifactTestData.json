@@ -1,0 +1,63 @@
+{
+  "existing": {
+    "create_artifact": {
+      "CREATE_ARTIFACT00": {
+        "artifact": {},
+        "artifactId": "s51",
+        "artifactType": "s52",
+        "description": "s53",
+        "firstVersion": {},
+        "labels": {},
+        "name": "s56",
+        "version": {},
+        "group_id": "GROUP01",
+        "id": "CREATE_ARTIFACT00"
+      },
+      "CREATE_ARTIFACT01": {
+        "artifact": {},
+        "artifactId": "sa1",
+        "artifactType": "sa2",
+        "description": "sa3",
+        "firstVersion": {},
+        "labels": {},
+        "name": "sa6",
+        "version": {},
+        "group_id": "GROUP01",
+        "id": "CREATE_ARTIFACT01"
+      },
+      "CREATE_ARTIFACT02": {
+        "artifact": {},
+        "artifactId": "sf1",
+        "artifactType": "sf2",
+        "description": "sf3",
+        "firstVersion": {},
+        "labels": {},
+        "name": "sf6",
+        "version": {},
+        "group_id": "GROUP01",
+        "id": "CREATE_ARTIFACT02"
+      }
+    }
+  },
+  "new": {
+    "create_artifact": {
+      "create_artifact_ref01": {
+        "artifact": {},
+        "artifactId": "s141",
+        "artifactType": "s142",
+        "description": "s143",
+        "firstVersion": {},
+        "labels": {},
+        "name": "s146",
+        "version": {}
+      }
+    }
+  },
+  "requests": {
+    "POST /groups/{groupId}/artifacts": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

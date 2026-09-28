@@ -1,0 +1,49 @@
+{
+  "existing": {
+    "well_known": {
+      "WELL_KNOWN00": {
+        "id": "WELL_KNOWN00",
+        "artifact_id": "ARTIFACT01",
+        "group_id": "GROUP01",
+        "schema_type": "SCHEMA_TYPE01",
+        "version": "VERSION01"
+      },
+      "WELL_KNOWN01": {
+        "id": "WELL_KNOWN01",
+        "artifact_id": "ARTIFACT01",
+        "group_id": "GROUP01",
+        "schema_type": "SCHEMA_TYPE01",
+        "version": "VERSION01"
+      },
+      "WELL_KNOWN02": {
+        "id": "WELL_KNOWN02",
+        "artifact_id": "ARTIFACT01",
+        "group_id": "GROUP01",
+        "schema_type": "SCHEMA_TYPE01",
+        "version": "VERSION01"
+      }
+    }
+  },
+  "new": {
+    "well_known": {
+      "well_known_ref01": {}
+    }
+  },
+  "requests": {
+    "GET /well-known/agents/{groupId}/{artifactId}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /well-known/mcp-tools/{groupId}/{artifactId}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /well-known/schemas/{schemaType}/{version}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

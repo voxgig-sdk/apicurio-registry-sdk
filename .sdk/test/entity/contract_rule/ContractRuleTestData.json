@@ -1,0 +1,45 @@
+{
+  "existing": {
+    "contract_rule": {
+      "CONTRACT_RULE00": {
+        "artifactId": "s32",
+        "globalId": 51,
+        "groupId": "s34",
+        "rule": {},
+        "ruleCategory": "s36"
+      },
+      "CONTRACT_RULE01": {
+        "artifactId": "s64",
+        "globalId": 101,
+        "groupId": "s66",
+        "rule": {},
+        "ruleCategory": "s68"
+      },
+      "CONTRACT_RULE02": {
+        "artifactId": "s96",
+        "globalId": 151,
+        "groupId": "s98",
+        "rule": {},
+        "ruleCategory": "s9a"
+      }
+    }
+  },
+  "new": {
+    "contract_rule": {
+      "contract_rule_ref01": {
+        "artifactId": "sc8",
+        "globalId": 201,
+        "groupId": "sca",
+        "rule": {},
+        "ruleCategory": "scc"
+      }
+    }
+  },
+  "requests": {
+    "GET /search/contract/rules": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

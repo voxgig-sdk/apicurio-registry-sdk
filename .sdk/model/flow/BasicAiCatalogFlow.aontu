@@ -1,0 +1,22 @@
+# BasicAiCatalogFlow
+
+main: kit: flow: BasicAiCatalogFlow:
+{
+  entity: "ai_catalog",
+  kind: "basic",
+  name: "BasicAiCatalogFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "ai_catalog_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicAiCatalogFlow"
+}

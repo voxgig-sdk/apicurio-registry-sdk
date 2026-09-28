@@ -1,0 +1,207 @@
+
+
+import Path from 'node:path'
+import * as Fs from 'node:fs'
+
+import { test, describe, afterEach } from 'node:test'
+import assert from 'node:assert'
+import { createLiveTransport } from '../../live-runner'
+import { runLiveEntity } from '../../live-entity'
+
+
+import { ApicurioRegistrySDK, BaseFeature, stdutil } from '../../..'
+
+import {
+  envOverride,
+  liveClientOptions,
+  liveDelay,
+  loadEnvLocal,
+  makeCtrl,
+  makeMatch,
+  makeReqdata,
+  makeStepData,
+  makeValid,
+  maybeSkipControl,
+} from '../../utility'
+
+
+loadEnvLocal(__dirname + '/../../../.env.local')
+
+
+describe('ContractEntity', async () => {
+
+  // Per-test live pacing. Delay is read from sdk-test-control.json's
+  // `test.live.delayMs`; only sleeps when APICURIO_REGISTRY_TEST_LIVE=TRUE.
+  afterEach(liveDelay('APICURIO_REGISTRY_TEST_LIVE'))
+
+  test('instance', async () => {
+    const testsdk = ApicurioRegistrySDK.test()
+    const ent = testsdk.Contract()
+    assert(null != ent)
+  })
+
+
+  test('basic', async (t) => {
+
+    const live = 'TRUE' === process.env.APICURIO_REGISTRY_TEST_LIVE
+    for (const op of ['create', 'list', 'update', 'load', 'remove']) {
+      if (!live && maybeSkipControl(t, 'entityOp', 'contract.' + op, live)) return
+    }
+
+    
+    const setup = basicSetup()
+    if (setup.live) {
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"artifactId":{"a":true,"h":"Artifact Id","n":"artifactId","r":true,"t":"`$STRING`","key$":"artifactId","index$":0},"artifactType":{"a":true,"h":"Artifact Type","n":"artifactType","r":true,"t":"`$STRING`","key$":"artifactType","index$":1},"createdOn":{"a":true,"fo":"date-time","h":"Created On","n":"createdOn","r":true,"t":"`$STRING`","key$":"createdOn","index$":2},"description":{"a":true,"h":"Description","n":"description","r":false,"t":"`$STRING`","key$":"description","index$":3},"groupId":{"a":true,"h":"Group Id","n":"groupId","r":true,"t":"`$STRING`","key$":"groupId","index$":4},"id":{"a":true,"h":"Id","n":"id","r":false,"t":"`$STRING`","key$":"id","index$":5},"labels":{"a":true,"h":"Labels","n":"labels","r":false,"t":"`$OBJECT`","key$":"labels","index$":6},"modifiedBy":{"a":true,"h":"Modified By","n":"modifiedBy","r":true,"t":"`$STRING`","key$":"modifiedBy","index$":7},"modifiedOn":{"a":true,"fo":"date-time","h":"Modified On","n":"modifiedOn","r":true,"t":"`$STRING`","key$":"modifiedOn","index$":8},"name":{"a":true,"h":"Name","n":"name","r":false,"t":"`$STRING`","key$":"name","index$":9},"owner":{"a":true,"h":"Owner","n":"owner","r":true,"t":"`$STRING`","key$":"owner","index$":10}},"id":{"field":"id","name":"id"},"name":"contract","op":{"create":{"input":"data","name":"create","points":[{"a":true,"co":{"id":"POST /groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}/contract/execute","source":"openapi3","version":2},"g":{"params":[{"a":true,"k":"param","n":"artifact_id","or":"artifact_id","r":true,"t":"`$STRING`","index$":0},{"a":true,"k":"param","n":"group_id","or":"group_id","r":true,"t":"`$STRING`","index$":1},{"a":true,"k":"param","n":"version_id","or":"version_expression","r":true,"t":"`$STRING`","index$":2}]},"k":"http","m":"POST","o":"/groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}/contract/execute","q":{"$action":"execute","exist":["artifact_id","group_id","version_id"]},"r":{"param":{"artifactId":"artifact_id","groupId":"group_id","versionExpression":"version_id"}},"s":[{"lit":"groups"},{"var":"group_id"},{"lit":"artifacts"},{"var":"artifact_id"},{"lit":"versions"},{"var":"version_id"},{"lit":"contract"},{"lit":"execute"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0},{"a":true,"co":{"id":"POST /groups/{groupId}/artifacts/{artifactId}/contract/migrate","source":"openapi3","version":2},"g":{"params":[{"a":true,"k":"param","n":"artifact_id","or":"artifact_id","r":true,"t":"`$STRING`","index$":0},{"a":true,"k":"param","n":"group_id","or":"group_id","r":true,"t":"`$STRING`","index$":1}]},"k":"http","m":"POST","o":"/groups/{groupId}/artifacts/{artifactId}/contract/migrate","q":{"$action":"migrate","exist":["artifact_id","group_id"]},"r":{"param":{"artifactId":"artifact_id","groupId":"group_id"}},"s":[{"lit":"groups"},{"var":"group_id"},{"lit":"artifacts"},{"var":"artifact_id"},{"lit":"contract"},{"lit":"migrate"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":1},{"a":true,"co":{"id":"POST /groups/{groupId}/artifacts/{artifactId}/contract/promote","source":"openapi3","version":2},"g":{"params":[{"a":true,"k":"param","n":"artifact_id","or":"artifact_id","r":true,"t":"`$STRING`","index$":0},{"a":true,"k":"param","n":"group_id","or":"group_id","r":true,"t":"`$STRING`","index$":1}]},"k":"http","m":"POST","o":"/groups/{groupId}/artifacts/{artifactId}/contract/promote","q":{"$action":"promote","exist":["artifact_id","group_id"]},"r":{"param":{"artifactId":"artifact_id","groupId":"group_id"}},"s":[{"lit":"groups"},{"var":"group_id"},{"lit":"artifacts"},{"var":"artifact_id"},{"lit":"contract"},{"lit":"promote"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":2},{"a":true,"co":{"id":"POST /groups/{groupId}/artifacts/{artifactId}/contract/status","source":"openapi3","version":2},"g":{"params":[{"a":true,"k":"param","n":"artifact_id","or":"artifact_id","r":true,"t":"`$STRING`","index$":0},{"a":true,"k":"param","n":"group_id","or":"group_id","r":true,"t":"`$STRING`","index$":1}]},"k":"http","m":"POST","o":"/groups/{groupId}/artifacts/{artifactId}/contract/status","q":{"$action":"status","exist":["artifact_id","group_id"]},"r":{"param":{"artifactId":"artifact_id","groupId":"group_id"}},"s":[{"lit":"groups"},{"var":"group_id"},{"lit":"artifacts"},{"var":"artifact_id"},{"lit":"contract"},{"lit":"status"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":3}],"key$":"create"},"list":{"input":"data","name":"list","points":[{"a":true,"co":{"id":"GET /search/contracts","source":"openapi3","version":2},"g":{"query":[{"a":true,"k":"query","n":"compatibility_group","or":"compatibility_group","r":false,"t":"`$STRING`","index$":0},{"a":true,"ex":20,"k":"query","n":"limit","or":"limit","r":false,"t":"`$INTEGER`","index$":1},{"a":true,"ex":0,"k":"query","n":"offset","or":"offset","r":false,"t":"`$INTEGER`","index$":2},{"a":true,"k":"query","n":"order","or":"order","r":false,"t":"`$STRING`","index$":3},{"a":true,"k":"query","n":"orderby","or":"orderby","r":false,"t":"`$STRING`","index$":4},{"a":true,"k":"query","n":"owner_team","or":"owner_team","r":false,"t":"`$STRING`","index$":5},{"a":true,"k":"query","n":"status","or":"status","r":false,"t":"`$STRING`","index$":6}]},"k":"http","m":"GET","o":"/search/contracts","q":{"exist":["compatibility_group","limit","offset","order","orderby","owner_team","status"]},"r":{},"s":[{"lit":"search"},{"lit":"contracts"}],"t":{"req":"`reqdata`","res":"`body.artifacts`"},"index$":0},{"a":true,"co":{"id":"GET /groups/{groupId}/artifacts/{artifactId}/contract/audit","source":"openapi3","version":2},"g":{"params":[{"a":true,"k":"param","n":"artifact_id","or":"artifact_id","r":true,"t":"`$STRING`","index$":0},{"a":true,"k":"param","n":"group_id","or":"group_id","r":true,"t":"`$STRING`","index$":1}],"query":[{"a":true,"ex":20,"k":"query","n":"limit","or":"limit","r":false,"t":"`$INTEGER`","index$":0},{"a":true,"ex":0,"k":"query","n":"offset","or":"offset","r":false,"t":"`$INTEGER`","index$":1}]},"k":"http","m":"GET","o":"/groups/{groupId}/artifacts/{artifactId}/contract/audit","q":{"$action":"audit","exist":["artifact_id","group_id","limit","offset"]},"r":{"param":{"artifactId":"artifact_id","groupId":"group_id"}},"s":[{"lit":"groups"},{"var":"group_id"},{"lit":"artifacts"},{"var":"artifact_id"},{"lit":"contract"},{"lit":"audit"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":1}],"key$":"list"},"load":{"input":"data","name":"load","points":[{"a":true,"co":{"id":"GET /groups/{groupId}/artifacts/{artifactId}/contract/compatibility-group","source":"openapi3","version":2},"g":{"params":[{"a":true,"k":"param","n":"artifact_id","or":"artifact_id","r":true,"t":"`$STRING`","index$":0},{"a":true,"k":"param","n":"group_id","or":"group_id","r":true,"t":"`$STRING`","index$":1}],"query":[{"a":true,"k":"query","n":"contract_id","or":"contract_id","r":true,"t":"`$STRING`","index$":0}]},"k":"http","m":"GET","o":"/groups/{groupId}/artifacts/{artifactId}/contract/compatibility-group","q":{"$action":"compatibility_group","exist":["artifact_id","contract_id","group_id"]},"r":{"param":{"artifactId":"artifact_id","groupId":"group_id"}},"s":[{"lit":"groups"},{"var":"group_id"},{"lit":"artifacts"},{"var":"artifact_id"},{"lit":"contract"},{"lit":"compatibility-group"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0},{"a":true,"co":{"id":"GET /groups/{groupId}/artifacts/{artifactId}/contract/quality","source":"openapi3","version":2},"g":{"params":[{"a":true,"k":"param","n":"artifact_id","or":"artifact_id","r":true,"t":"`$STRING`","index$":0},{"a":true,"k":"param","n":"group_id","or":"group_id","r":true,"t":"`$STRING`","index$":1}],"query":[{"a":true,"k":"query","n":"contract_id","or":"contract_id","r":true,"t":"`$STRING`","index$":0}]},"k":"http","m":"GET","o":"/groups/{groupId}/artifacts/{artifactId}/contract/quality","q":{"$action":"quality","exist":["artifact_id","contract_id","group_id"]},"r":{"param":{"artifactId":"artifact_id","groupId":"group_id"}},"s":[{"lit":"groups"},{"var":"group_id"},{"lit":"artifacts"},{"var":"artifact_id"},{"lit":"contract"},{"lit":"quality"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":1},{"a":true,"co":{"id":"GET /groups/{groupId}/artifacts/{artifactId}/contract/export","source":"openapi3","version":2},"g":{"params":[{"a":true,"k":"param","n":"artifact_id","or":"artifact_id","r":true,"t":"`$STRING`","index$":0},{"a":true,"k":"param","n":"group_id","or":"group_id","r":true,"t":"`$STRING`","index$":1}]},"k":"http","m":"GET","o":"/groups/{groupId}/artifacts/{artifactId}/contract/export","q":{"$action":"export","exist":["artifact_id","group_id"]},"r":{"param":{"artifactId":"artifact_id","groupId":"group_id"}},"s":[{"lit":"groups"},{"var":"group_id"},{"lit":"artifacts"},{"var":"artifact_id"},{"lit":"contract"},{"lit":"export"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":2},{"a":true,"co":{"id":"GET /groups/{groupId}/artifacts/{artifactId}/contract/metadata","source":"openapi3","version":2},"g":{"params":[{"a":true,"k":"param","n":"artifact_id","or":"artifact_id","r":true,"t":"`$STRING`","index$":0},{"a":true,"k":"param","n":"group_id","or":"group_id","r":true,"t":"`$STRING`","index$":1}]},"k":"http","m":"GET","o":"/groups/{groupId}/artifacts/{artifactId}/contract/metadata","q":{"$action":"metadata","exist":["artifact_id","group_id"]},"r":{"param":{"artifactId":"artifact_id","groupId":"group_id"}},"s":[{"lit":"groups"},{"var":"group_id"},{"lit":"artifacts"},{"var":"artifact_id"},{"lit":"contract"},{"lit":"metadata"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":3},{"a":true,"co":{"id":"GET /groups/{groupId}/contracts/{contractId}","source":"openapi3","version":2},"g":{"params":[{"a":true,"k":"param","n":"group_id","or":"group_id","r":true,"t":"`$STRING`","index$":0},{"a":true,"k":"param","n":"id","or":"contract_id","r":true,"t":"`$STRING`","index$":1}]},"k":"http","m":"GET","o":"/groups/{groupId}/contracts/{contractId}","q":{"exist":["group_id","id"]},"r":{"param":{"contractId":"id","groupId":"group_id"}},"s":[{"lit":"groups"},{"var":"group_id"},{"lit":"contracts"},{"var":"id"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":4}],"key$":"load"},"remove":{"input":"data","name":"remove","points":[{"a":true,"co":{"id":"DELETE /groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}/contract/ruleset","source":"openapi3","version":2},"g":{"params":[{"a":true,"k":"param","n":"artifact_id","or":"artifact_id","r":true,"t":"`$STRING`","index$":0},{"a":true,"k":"param","n":"group_id","or":"group_id","r":true,"t":"`$STRING`","index$":1},{"a":true,"k":"param","n":"version_id","or":"version_expression","r":true,"t":"`$STRING`","index$":2}]},"k":"http","m":"DELETE","o":"/groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}/contract/ruleset","q":{"$action":"ruleset","exist":["artifact_id","group_id","version_id"]},"r":{"param":{"artifactId":"artifact_id","groupId":"group_id","versionExpression":"version_id"}},"s":[{"lit":"groups"},{"var":"group_id"},{"lit":"artifacts"},{"var":"artifact_id"},{"lit":"versions"},{"var":"version_id"},{"lit":"contract"},{"lit":"ruleset"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0},{"a":true,"co":{"id":"DELETE /groups/{groupId}/artifacts/{artifactId}/contract/ruleset","source":"openapi3","version":2},"g":{"params":[{"a":true,"k":"param","n":"artifact_id","or":"artifact_id","r":true,"t":"`$STRING`","index$":0},{"a":true,"k":"param","n":"group_id","or":"group_id","r":true,"t":"`$STRING`","index$":1}]},"k":"http","m":"DELETE","o":"/groups/{groupId}/artifacts/{artifactId}/contract/ruleset","q":{"$action":"ruleset","exist":["artifact_id","group_id"]},"r":{"param":{"artifactId":"artifact_id","groupId":"group_id"}},"s":[{"lit":"groups"},{"var":"group_id"},{"lit":"artifacts"},{"var":"artifact_id"},{"lit":"contract"},{"lit":"ruleset"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":1},{"a":true,"co":{"id":"DELETE /groups/{groupId}/contracts/{contractId}","source":"openapi3","version":2},"g":{"params":[{"a":true,"k":"param","n":"group_id","or":"group_id","r":true,"t":"`$STRING`","index$":0},{"a":true,"k":"param","n":"id","or":"contract_id","r":true,"t":"`$STRING`","index$":1}]},"k":"http","m":"DELETE","o":"/groups/{groupId}/contracts/{contractId}","q":{"exist":["group_id","id"]},"r":{"param":{"contractId":"id","groupId":"group_id"}},"s":[{"lit":"groups"},{"var":"group_id"},{"lit":"contracts"},{"var":"id"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":2}],"key$":"remove"},"update":{"input":"data","name":"update","points":[{"a":true,"co":{"id":"PUT /groups/{groupId}/artifacts/{artifactId}/contract/compatibility-group","source":"openapi3","version":2},"g":{"params":[{"a":true,"k":"param","n":"artifact_id","or":"artifact_id","r":true,"t":"`$STRING`","index$":0},{"a":true,"k":"param","n":"group_id","or":"group_id","r":true,"t":"`$STRING`","index$":1}]},"k":"http","m":"PUT","o":"/groups/{groupId}/artifacts/{artifactId}/contract/compatibility-group","q":{"$action":"compatibility_group","exist":["artifact_id","group_id"]},"r":{"param":{"artifactId":"artifact_id","groupId":"group_id"}},"s":[{"lit":"groups"},{"var":"group_id"},{"lit":"artifacts"},{"var":"artifact_id"},{"lit":"contract"},{"lit":"compatibility-group"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0},{"a":true,"co":{"id":"PUT /groups/{groupId}/artifacts/{artifactId}/contract/metadata","source":"openapi3","version":2},"g":{"params":[{"a":true,"k":"param","n":"artifact_id","or":"artifact_id","r":true,"t":"`$STRING`","index$":0},{"a":true,"k":"param","n":"group_id","or":"group_id","r":true,"t":"`$STRING`","index$":1}]},"k":"http","m":"PUT","o":"/groups/{groupId}/artifacts/{artifactId}/contract/metadata","q":{"$action":"metadata","exist":["artifact_id","group_id"]},"r":{"param":{"artifactId":"artifact_id","groupId":"group_id"}},"s":[{"lit":"groups"},{"var":"group_id"},{"lit":"artifacts"},{"var":"artifact_id"},{"lit":"contract"},{"lit":"metadata"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":1}],"key$":"update"}},"relations":{"ancestors":[["$.main.kit.entity.group"],["$.main.kit.entity.group","$.main.kit.entity.artifact"],["$.main.kit.entity.group","$.main.kit.entity.artifact","$.main.kit.entity.version"]]},"key$":"contract","name__orig":"contract","Name":"Contract","name_":"contract","name-":"contract","NAME":"CONTRACT","index$":15}, {"active":true,"entity":"contract","key$":"BasicContractFlow","kind":"basic","name":"BasicContractFlow","param":{},"step":[{"a":true,"d":{},"i":{"ref":"contract_ref01"},"m":{"artifact_id":"artifact01","group_id":"group01"},"o":"create","s":[],"v":[],"index$":0},{"a":true,"d":{},"i":{},"m":{"artifact_id":"artifact01","group_id":"group01"},"o":"list","s":[],"v":[{"apply":"ItemExists","def":{"ref":"contract_ref01"}}],"index$":1},{"a":true,"d":{"group_id":"group01"},"i":{"ref":"contract_ref01","srcdatavar":"contract_ref01_data","suffix":"_up0","textfield":"artifactId"},"m":{},"o":"update","s":[{"apply":"TextFieldMark","def":{"mark":"Mark01-contract_ref01"}}],"v":[],"index$":2},{"a":true,"d":{},"i":{"ref":"contract_ref01","srcdatavar":"contract_ref01_data","suffix":"_dt0"},"m":{"group_id":"group01","id":"contract01"},"o":"load","s":[],"v":[{"apply":"TextFieldMark","def":{"mark":"Mark01-contract_ref01"}}],"index$":3},{"a":true,"d":{},"i":{"ref":"contract_ref01","suffix":"_rm0"},"m":{"group_id":"group01","id":"contract01"},"o":"remove","s":[],"v":[],"index$":4},{"a":true,"d":{},"i":{"suffix":"_rt0"},"m":{"artifact_id":"artifact01","group_id":"group01"},"o":"list","s":[],"v":[{"apply":"ItemNotExists","def":{"ref":"contract_ref01"}}],"index$":5}]}, 'Contract', {"POST /groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}/contract/execute":{"protocol":"http","requestBody":{"content":{"application/json":{"schema":{"type":"object","properties":{"mode":{"type":"string","enum":["WRITE","READ"]},"record":{"type":"object","additionalProperties":true}},"required":["mode","record"]}}},"required":true},"parameters":[{"name":"groupId","schema":{"type":"string"},"in":"path","required":true,"index$":0},{"name":"artifactId","schema":{"type":"string"},"in":"path","required":true,"index$":1},{"name":"versionExpression","schema":{"type":"string"},"in":"path","required":true,"index$":2}]},"POST /groups/{groupId}/artifacts/{artifactId}/contract/migrate":{"protocol":"http","requestBody":{"content":{"application/json":{"schema":{"type":"object","properties":{"fromVersion":{"type":"string"},"toVersion":{"type":"string"},"record":{"type":"object","additionalProperties":true}},"required":["fromVersion","toVersion","record"]}}},"required":true},"parameters":[{"name":"groupId","schema":{"type":"string"},"in":"path","required":true,"index$":0},{"name":"artifactId","schema":{"type":"string"},"in":"path","required":true,"index$":1}]},"POST /groups/{groupId}/artifacts/{artifactId}/contract/promote":{"protocol":"http","requestBody":{"content":{"application/json":{"schema":{"type":"object","properties":{"contractId":{"type":"string"},"targetStage":{"type":"string","enum":["DEV","STAGE","PROD"]}},"required":["contractId","targetStage"]}}},"required":true},"parameters":[{"name":"groupId","schema":{"type":"string"},"in":"path","required":true,"index$":0},{"name":"artifactId","schema":{"type":"string"},"in":"path","required":true,"index$":1}]},"POST /groups/{groupId}/artifacts/{artifactId}/contract/status":{"protocol":"http","requestBody":{"content":{"application/json":{"schema":{"title":"ContractStatusTransition","description":"Request body for transitioning the contract lifecycle status.","required":["status"],"type":"object","properties":{"status":{"description":"The target lifecycle status. Valid transitions: DRAFT to STABLE, DRAFT to DEPRECATED, STABLE to DEPRECATED.","type":"string","enum":["DRAFT","STABLE","DEPRECATED"]}},"x-ref":"#/components/schemas/ContractStatusTransition"}}},"required":true},"parameters":[{"name":"groupId","description":"The artifact group ID.","schema":{"type":"string"},"in":"path","required":true,"index$":0},{"name":"artifactId","description":"The artifact ID.","schema":{"type":"string"},"in":"path","required":true,"index$":1}]},"GET /search/contracts":{"protocol":"http","parameters":[{"name":"status","description":"Filter by contract status (DRAFT, STABLE, DEPRECATED).","schema":{"type":"string"},"in":"query","required":false,"index$":0},{"name":"ownerTeam","description":"Filter by owner team.","schema":{"type":"string"},"in":"query","required":false,"index$":1},{"name":"compatibilityGroup","description":"Filter by compatibility group.","schema":{"type":"string"},"in":"query","required":false,"index$":2},{"name":"offset","description":"Number of results to skip.","schema":{"type":"integer","default":0},"in":"query","required":false,"index$":3},{"name":"limit","description":"Maximum number of results to return.","schema":{"type":"integer","default":20},"in":"query","required":false,"index$":4},{"name":"order","description":"Sort order (asc or desc).","schema":{"type":"string","enum":["asc","desc"]},"in":"query","required":false,"index$":5},{"name":"orderby","description":"Field to sort by.","schema":{"type":"string","enum":["name","createdOn","modifiedOn"]},"in":"query","required":false,"index$":6}]},"GET /groups/{groupId}/artifacts/{artifactId}/contract/audit":{"protocol":"http","parameters":[{"name":"groupId","schema":{"type":"string"},"in":"path","required":true,"index$":0},{"name":"artifactId","schema":{"type":"string"},"in":"path","required":true,"index$":1},{"name":"offset","schema":{"type":"integer","default":0},"in":"query","required":false,"index$":2},{"name":"limit","schema":{"type":"integer","default":20},"in":"query","required":false,"index$":3}]},"GET /groups/{groupId}/artifacts/{artifactId}/contract/compatibility-group":{"protocol":"http","parameters":[{"name":"groupId","schema":{"type":"string"},"in":"path","required":true,"index$":0},{"name":"artifactId","schema":{"type":"string"},"in":"path","required":true,"index$":1},{"name":"contractId","schema":{"type":"string"},"in":"query","required":true,"index$":2}]},"GET /groups/{groupId}/artifacts/{artifactId}/contract/quality":{"protocol":"http","parameters":[{"name":"groupId","schema":{"type":"string"},"in":"path","required":true,"index$":0},{"name":"artifactId","schema":{"type":"string"},"in":"path","required":true,"index$":1},{"name":"contractId","schema":{"type":"string"},"in":"query","required":true,"index$":2}]},"GET /groups/{groupId}/artifacts/{artifactId}/contract/export":{"protocol":"http","parameters":[{"name":"groupId","description":"The artifact group ID.","schema":{"type":"string"},"in":"path","required":true,"index$":0},{"name":"artifactId","description":"The artifact ID.","schema":{"type":"string"},"in":"path","required":true,"index$":1}]},"GET /groups/{groupId}/artifacts/{artifactId}/contract/metadata":{"protocol":"http","parameters":[{"name":"groupId","description":"The artifact group ID.","schema":{"type":"string"},"in":"path","required":true,"index$":0},{"name":"artifactId","description":"The artifact ID.","schema":{"type":"string"},"in":"path","required":true,"index$":1}]},"GET /groups/{groupId}/contracts/{contractId}":{"protocol":"http","parameters":[{"name":"groupId","description":"The group ID.","schema":{"type":"string"},"in":"path","required":true,"index$":0},{"name":"contractId","description":"The contract ID.","schema":{"type":"string"},"in":"path","required":true,"index$":1}]},"DELETE /groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}/contract/ruleset":{"protocol":"http","parameters":[{"name":"groupId","description":"The artifact group ID.","schema":{"type":"string"},"in":"path","required":true,"index$":0},{"name":"artifactId","description":"The artifact ID.","schema":{"type":"string"},"in":"path","required":true,"index$":1},{"name":"versionExpression","description":"An expression resolvable to a specific version ID within the given group and artifact. The following rules apply:\n\n - If the expression is in the form \"branch={branchId}\", and artifact branch {branchId} exists: The expression is resolved to a version that the branch points to.\n - Otherwise: The expression is resolved to a version with the same ID, which must follow the \"[a-zA-Z0-9._\\\\-+]{1,256}\" pattern.","schema":{"type":"string"},"in":"path","required":true,"index$":2}]},"DELETE /groups/{groupId}/artifacts/{artifactId}/contract/ruleset":{"protocol":"http","parameters":[{"name":"groupId","description":"The artifact group ID.","schema":{"type":"string"},"in":"path","required":true,"index$":0},{"name":"artifactId","description":"The artifact ID.","schema":{"type":"string"},"in":"path","required":true,"index$":1}]},"DELETE /groups/{groupId}/contracts/{contractId}":{"protocol":"http","parameters":[{"name":"groupId","description":"The group ID.","schema":{"type":"string"},"in":"path","required":true,"index$":0},{"name":"contractId","description":"The contract ID.","schema":{"type":"string"},"in":"path","required":true,"index$":1}]},"PUT /groups/{groupId}/artifacts/{artifactId}/contract/compatibility-group":{"protocol":"http","requestBody":{"content":{"application/json":{"schema":{"type":"object","properties":{"contractId":{"type":"string"},"compatibilityGroup":{"type":"string"}},"required":["contractId","compatibilityGroup"]}}},"required":true},"parameters":[{"name":"groupId","schema":{"type":"string"},"in":"path","required":true,"index$":0},{"name":"artifactId","schema":{"type":"string"},"in":"path","required":true,"index$":1}]},"PUT /groups/{groupId}/artifacts/{artifactId}/contract/metadata":{"protocol":"http","requestBody":{"content":{"application/json":{"schema":{"title":"EditableContractMetadata","description":"Editable contract metadata fields.","type":"object","properties":{"status":{"description":"The contract lifecycle status.","type":"string","enum":["DRAFT","STABLE","DEPRECATED"]},"ownerTeam":{"description":"The team that owns the contract.","type":"string"},"ownerDomain":{"description":"The domain the contract belongs to.","type":"string"},"supportContact":{"description":"Support contact email.","type":"string"},"classification":{"description":"Data classification level.","type":"string","enum":["PUBLIC","INTERNAL","CONFIDENTIAL","RESTRICTED"]},"stage":{"description":"Promotion stage.","type":"string","enum":["DEV","STAGE","PROD"]},"compatibilityGroup":{"description":"Compatibility group for schema evolution scoping.","type":"string"}},"x-ref":"#/components/schemas/EditableContractMetadata"}}},"required":true},"parameters":[{"name":"groupId","description":"The artifact group ID.","schema":{"type":"string"},"in":"path","required":true,"index$":0},{"name":"artifactId","description":"The artifact ID.","schema":{"type":"string"},"in":"path","required":true,"index$":1}]}})
+    }
+    const client = setup.client
+    const struct = setup.struct
+
+    const isempty = struct.isempty
+    const select = struct.select
+
+
+    // CREATE
+    const contract_ref01_ent = client.Contract()
+    let contract_ref01_data = setup.data.new.contract['contract_ref01']
+    contract_ref01_data['artifact_id'] = setup.idmap['artifact01']
+    contract_ref01_data['group_id'] = setup.idmap['group01']
+
+    contract_ref01_data = (await contract_ref01_ent.create(contract_ref01_data)).data()
+    assert(null != contract_ref01_data.id)
+
+
+    // LIST
+    const contract_ref01_match: any = {}
+    contract_ref01_match['artifact_id'] = setup.idmap['artifact01']
+    contract_ref01_match['group_id'] = setup.idmap['group01']
+
+    const contract_ref01_list = (await contract_ref01_ent.list(contract_ref01_match)).map((e: any) => e.data())
+
+    assert(!isempty(select(contract_ref01_list, { id: contract_ref01_data.id })))
+
+
+    // UPDATE
+    const contract_ref01_data_up0: any = {}
+    contract_ref01_data_up0.id = contract_ref01_data.id
+    contract_ref01_data_up0 ['group_id'] = setup.idmap['group_id']
+
+    const contract_ref01_markdef_up0 = { name: 'artifactId', value: 'Mark01-contract_ref01_' + setup.now }
+    ;(contract_ref01_data_up0 as any)[contract_ref01_markdef_up0.name] = contract_ref01_markdef_up0.value
+
+    const contract_ref01_resdata_up0 = (await contract_ref01_ent.update(contract_ref01_data_up0)).data()
+    assert(contract_ref01_resdata_up0.id === contract_ref01_data_up0.id)
+
+    assert((contract_ref01_resdata_up0 as any)[contract_ref01_markdef_up0.name] === contract_ref01_markdef_up0.value)
+
+
+    // LOAD
+    const contract_ref01_match_dt0: any = {}
+    contract_ref01_match_dt0.id = contract_ref01_data.id
+    const contract_ref01_data_dt0 = (await contract_ref01_ent.load(contract_ref01_match_dt0)).data()
+    assert(contract_ref01_data_dt0.id === contract_ref01_data.id)
+
+
+    // REMOVE
+    const contract_ref01_match_rm0: any = { id: contract_ref01_data.id }
+    await contract_ref01_ent.remove(contract_ref01_match_rm0)
+  
+
+    // LIST
+    const contract_ref01_match_rt0: any = {}
+    contract_ref01_match_rt0['artifact_id'] = setup.idmap['artifact01']
+    contract_ref01_match_rt0['group_id'] = setup.idmap['group01']
+
+    const contract_ref01_list_rt0 = (await contract_ref01_ent.list(contract_ref01_match_rt0)).map((e: any) => e.data())
+
+    assert(isempty(select(contract_ref01_list_rt0, { id: contract_ref01_data.id })))
+
+
+  })
+})
+
+
+
+function basicSetup(extra?: any) {
+  // TODO: fix test def options
+  const options: any = {} // null
+
+  // TODO: needs test utility to resolve path
+  const entityDataFile =
+    Path.resolve(__dirname, 
+      '../../../../.sdk/test/entity/contract/ContractTestData.json')
+
+  // TODO: file ready util needed?
+  const entityDataSource = Fs.readFileSync(entityDataFile).toString('utf8')
+
+  // TODO: need a xlang JSON parse utility in voxgig/struct with better error msgs
+  const entityData = JSON.parse(entityDataSource)
+
+  options.entity = entityData.existing
+
+  let client = ApicurioRegistrySDK.test(options, extra)
+  const struct = client.utility().struct
+  const merge = struct.merge
+  const transform = struct.transform
+
+  let idmap = transform(
+    ['contract01','contract02','contract03','group01','group02','group03','artifact01','artifact02','artifact03','version01','version02','version03'],
+    {
+      '`$PACK`': ['', {
+        '`$KEY`': '`$COPY`',
+        '`$VAL`': ['`$FORMAT`', 'upper', '`$COPY`']
+      }]
+    })
+
+  const env = envOverride({
+    'APICURIO_REGISTRY_TEST_CONTRACT_ENTID': idmap,
+    'APICURIO_REGISTRY_TEST_LIVE': 'FALSE',
+    'APICURIO_REGISTRY_TEST_EXPLAIN': 'FALSE',
+    'APICURIO_REGISTRY_SERVER_REGISTRY': "MY-REGISTRY-URL",
+  })
+
+  idmap = env['APICURIO_REGISTRY_TEST_CONTRACT_ENTID']
+
+  const live = 'TRUE' === env.APICURIO_REGISTRY_TEST_LIVE
+
+  const transport = createLiveTransport()
+  if (live) {
+    const rawIds = process.env['APICURIO_REGISTRY_TEST_CONTRACT_ENTID']
+    idmap = rawIds && rawIds.trim() ? JSON.parse(rawIds) : {}
+    if (!idmap || Array.isArray(idmap) || typeof idmap !== 'object') {
+      throw new Error('Live ENTID must be a JSON object')
+    }
+    client = new ApicurioRegistrySDK(merge([
+      // FIRST, so the generated fields below win: sdk-test-control.json's
+      // test.client.options adds to the live client, it does not redirect it.
+      liveClientOptions(),
+      {
+        server: {
+          registry: env.APICURIO_REGISTRY_SERVER_REGISTRY,
+        },
+      },
+      // 'extra || {}', not a bare 'extra': struct.merge returns UNDEFINED when the
+      // last entry is undefined, and basicSetup is normally called with no
+      // argument at all - so a bare 'extra' silently discarded the apikey
+      // and server values above and handed the SDK undefined. Harmless
+      // while there was nothing in that object; not harmless now.
+      extra || {},
+      { system: { fetch: transport.fetch } }
+    ]))
+  }
+
+  const setup = {
+    idmap,
+    env,
+    options,
+    client,
+    struct,
+    data: entityData,
+    explain: 'TRUE' === env.APICURIO_REGISTRY_TEST_EXPLAIN,
+    live,
+    transport,
+    now: Date.now(),
+  }
+
+  return setup
+}
+  

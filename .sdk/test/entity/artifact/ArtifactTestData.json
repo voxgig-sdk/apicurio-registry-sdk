@@ -1,0 +1,135 @@
+{
+  "existing": {
+    "artifact": {
+      "ARTIFACT00": {
+        "artifactId": "s8c",
+        "artifactType": "s8d",
+        "artifacts": [],
+        "count": 143,
+        "createdOn": "s90",
+        "description": "s91",
+        "groupId": "s92",
+        "id": "ARTIFACT00",
+        "labels": {},
+        "modifiedBy": "s95",
+        "modifiedOn": "s96",
+        "name": "s97",
+        "owner": "s98",
+        "versions": [],
+        "group_id": "GROUP01",
+        "global_id": "GLOBAL01",
+        "artifact_id": "ARTIFACT01",
+        "content_hash": "CONTENT_HASH01",
+        "content_id": "CONTENT01"
+      },
+      "ARTIFACT01": {
+        "artifactId": "s118",
+        "artifactType": "s119",
+        "artifacts": [],
+        "count": 283,
+        "createdOn": "s11c",
+        "description": "s11d",
+        "groupId": "s11e",
+        "id": "ARTIFACT01",
+        "labels": {},
+        "modifiedBy": "s121",
+        "modifiedOn": "s122",
+        "name": "s123",
+        "owner": "s124",
+        "versions": [],
+        "group_id": "GROUP01",
+        "global_id": "GLOBAL01",
+        "artifact_id": "ARTIFACT01",
+        "content_hash": "CONTENT_HASH01",
+        "content_id": "CONTENT01"
+      },
+      "ARTIFACT02": {
+        "artifactId": "s1a4",
+        "artifactType": "s1a5",
+        "artifacts": [],
+        "count": 423,
+        "createdOn": "s1a8",
+        "description": "s1a9",
+        "groupId": "s1aa",
+        "id": "ARTIFACT02",
+        "labels": {},
+        "modifiedBy": "s1ad",
+        "modifiedOn": "s1ae",
+        "name": "s1af",
+        "owner": "s1b0",
+        "versions": [],
+        "group_id": "GROUP01",
+        "global_id": "GLOBAL01",
+        "artifact_id": "ARTIFACT01",
+        "content_hash": "CONTENT_HASH01",
+        "content_id": "CONTENT01"
+      }
+    }
+  },
+  "new": {
+    "artifact": {
+      "artifact_ref01": {
+        "artifactId": "s230",
+        "artifactType": "s231",
+        "artifacts": [],
+        "count": 563,
+        "createdOn": "s234",
+        "description": "s235",
+        "groupId": "s236",
+        "labels": {},
+        "modifiedBy": "s239",
+        "modifiedOn": "s23a",
+        "name": "s23b",
+        "owner": "s23c",
+        "versions": []
+      }
+    }
+  },
+  "requests": {
+    "POST /search/artifacts": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /search/artifacts": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /groups/{groupId}/artifacts": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /ids/globalIds/{globalId}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /admin/usage/artifacts/{groupId}/{artifactId}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /ids/contentHashes/{contentHash}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /ids/contentIds/{contentId}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "DELETE /groups/{groupId}/artifacts/{artifactId}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "DELETE /groups/{groupId}/artifacts": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

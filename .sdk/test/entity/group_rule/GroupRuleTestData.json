@@ -1,0 +1,49 @@
+{
+  "existing": {
+    "group_rule": {
+      "GROUP_RULE00": {
+        "config": "s1e",
+        "id": "GROUP_RULE00",
+        "ruleType": "s20",
+        "group_id": "GROUP01"
+      },
+      "GROUP_RULE01": {
+        "config": "s3c",
+        "id": "GROUP_RULE01",
+        "ruleType": "s3e",
+        "group_id": "GROUP01"
+      },
+      "GROUP_RULE02": {
+        "config": "s5a",
+        "id": "GROUP_RULE02",
+        "ruleType": "s5c",
+        "group_id": "GROUP01"
+      }
+    }
+  },
+  "new": {
+    "group_rule": {
+      "group_rule_ref01": {
+        "config": "s78",
+        "ruleType": "s7a"
+      }
+    }
+  },
+  "requests": {
+    "POST /groups/{groupId}/rules": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "DELETE /groups/{groupId}/rules/{ruleType}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "DELETE /groups/{groupId}/rules": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

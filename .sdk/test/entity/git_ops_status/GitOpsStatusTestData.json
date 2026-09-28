@@ -1,0 +1,37 @@
+{
+  "existing": {
+    "git_ops_status": {
+      "GIT_OPS_STATUS00": {
+        "context": "s1e",
+        "detail": "s1f",
+        "source": "s20"
+      },
+      "GIT_OPS_STATUS01": {
+        "context": "s3c",
+        "detail": "s3d",
+        "source": "s3e"
+      },
+      "GIT_OPS_STATUS02": {
+        "context": "s5a",
+        "detail": "s5b",
+        "source": "s5c"
+      }
+    }
+  },
+  "new": {
+    "git_ops_status": {
+      "git_ops_status_ref01": {
+        "context": "s78",
+        "detail": "s79",
+        "source": "s7a"
+      }
+    }
+  },
+  "requests": {
+    "GET /admin/gitops/status": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

@@ -1,0 +1,60 @@
+# Entity: content
+
+main: kit: entity: content: {
+
+  alias: field: {}
+
+  name: "content"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /content/canonicalize"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                ex: "AVRO"
+                k: "query"
+                n: "artifact_type"
+                or: "artifact_type"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/content/canonicalize"
+          q: {
+            "$action": "canonicalize"
+            exist: [
+              "artifact_type"
+            ]
+          }
+          s: [
+            {
+              lit: "content"
+            }
+            {
+              lit: "canonicalize"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+  fields: {
+  }
+
+
+
+}

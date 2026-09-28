@@ -1,0 +1,36 @@
+{
+  "existing": {
+    "ard_explore": {
+      "ARD_EXPLORE00": {
+        "query": {},
+        "resultType": {},
+        "id": "ARD_EXPLORE00"
+      },
+      "ARD_EXPLORE01": {
+        "query": {},
+        "resultType": {},
+        "id": "ARD_EXPLORE01"
+      },
+      "ARD_EXPLORE02": {
+        "query": {},
+        "resultType": {},
+        "id": "ARD_EXPLORE02"
+      }
+    }
+  },
+  "new": {
+    "ard_explore": {
+      "ard_explore_ref01": {
+        "query": {},
+        "resultType": {}
+      }
+    }
+  },
+  "requests": {
+    "POST /well-known/ard/explore": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

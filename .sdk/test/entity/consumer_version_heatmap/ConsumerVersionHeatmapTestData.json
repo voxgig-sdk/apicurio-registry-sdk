@@ -1,0 +1,47 @@
+{
+  "existing": {
+    "consumer_version_heatmap": {
+      "CONSUMER_VERSION_HEATMAP00": {
+        "clientId": "s28",
+        "driftAlert": false,
+        "versions": {},
+        "versionsBehind": 43,
+        "artifact_id": "ARTIFACT01",
+        "group_id": "GROUP01"
+      },
+      "CONSUMER_VERSION_HEATMAP01": {
+        "clientId": "s50",
+        "driftAlert": false,
+        "versions": {},
+        "versionsBehind": 83,
+        "artifact_id": "ARTIFACT01",
+        "group_id": "GROUP01"
+      },
+      "CONSUMER_VERSION_HEATMAP02": {
+        "clientId": "s78",
+        "driftAlert": false,
+        "versions": {},
+        "versionsBehind": 123,
+        "artifact_id": "ARTIFACT01",
+        "group_id": "GROUP01"
+      }
+    }
+  },
+  "new": {
+    "consumer_version_heatmap": {
+      "consumer_version_heatmap_ref01": {
+        "clientId": "sa0",
+        "driftAlert": false,
+        "versions": {},
+        "versionsBehind": 163
+      }
+    }
+  },
+  "requests": {
+    "GET /admin/usage/artifacts/{groupId}/{artifactId}/heatmap": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

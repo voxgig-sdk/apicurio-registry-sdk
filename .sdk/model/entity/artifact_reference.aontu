@@ -1,0 +1,361 @@
+# Entity: artifact_reference
+
+main: kit: entity: artifact_reference: {
+
+  alias: field: {}
+
+  fields: {
+    artifactId: {
+      h: "Artifact Id"
+      n: "artifactId"
+      r: true
+      t: "`$STRING`"
+    }
+    content: {
+      h: "Content"
+      n: "content"
+      r: true
+      sh: "Raw content of the artifact version or a valid (and accessible) URL where the content can be found."
+      t: "`$STRING`"
+    }
+    contentType: {
+      h: "Content Type"
+      n: "contentType"
+      r: true
+      sh: "The content-type, such as `application/json` or `text/xml`."
+      t: "`$STRING`"
+    }
+    encoding: {
+      h: "Encoding"
+      n: "encoding"
+      r: false
+      sh: "Optional encoding for the content property."
+      t: "`$STRING`"
+    }
+    groupId: {
+      h: "Group Id"
+      n: "groupId"
+      r: true
+      t: "`$STRING`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      r: true
+      t: "`$STRING`"
+    }
+    references: {
+      h: "References"
+      n: "references"
+      r: false
+      sh: "Collection of references to other artifacts."
+      t: "`$ARRAY`"
+    }
+    version: {
+      h: "Version"
+      n: "version"
+      r: false
+      t: "`$STRING`"
+    }
+  }
+
+  name: "artifact_reference"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /content/references"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "artifact_type"
+                or: "artifact_type"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/content/references"
+          q: {
+            exist: [
+              "artifact_type"
+            ]
+          }
+          s: [
+            {
+              lit: "content"
+            }
+            {
+              lit: "references"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}/references"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                ex: "\"example-artifact\""
+                k: "param"
+                n: "artifact_id"
+                or: "artifact_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                ex: "\"my-group\""
+                k: "param"
+                n: "group_id"
+                or: "group_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "version_expression"
+                or: "version_expression"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                ex: "\"INBOUND\""
+                k: "query"
+                n: "ref_type"
+                or: "ref_type"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}/references"
+          q: {
+            exist: [
+              "artifact_id"
+              "group_id"
+              "ref_type"
+              "version_expression"
+            ]
+          }
+          r: {
+            param: {
+              artifactId: "artifact_id"
+              groupId: "group_id"
+              versionExpression: "version_expression"
+            }
+          }
+          s: [
+            {
+              lit: "groups"
+            }
+            {
+              var: "group_id"
+            }
+            {
+              lit: "artifacts"
+            }
+            {
+              var: "artifact_id"
+            }
+            {
+              lit: "versions"
+            }
+            {
+              var: "version_expression"
+            }
+            {
+              lit: "references"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /ids/globalIds/{globalId}/references"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "global_id_id"
+                or: "global_id"
+                r: true
+                t: "`$INTEGER`"
+              }
+            ]
+            query: [
+              {
+                ex: "\"INBOUND\""
+                k: "query"
+                n: "ref_type"
+                or: "ref_type"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/ids/globalIds/{globalId}/references"
+          q: {
+            exist: [
+              "global_id_id"
+              "ref_type"
+            ]
+          }
+          r: {
+            param: {
+              globalId: "global_id_id"
+            }
+          }
+          s: [
+            {
+              lit: "ids"
+            }
+            {
+              lit: "globalIds"
+            }
+            {
+              var: "global_id_id"
+            }
+            {
+              lit: "references"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /ids/contentHashes/{contentHash}/references"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "content_hash_id"
+                or: "content_hash"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/ids/contentHashes/{contentHash}/references"
+          q: {
+            exist: [
+              "content_hash_id"
+            ]
+          }
+          r: {
+            param: {
+              contentHash: "content_hash_id"
+            }
+          }
+          s: [
+            {
+              lit: "ids"
+            }
+            {
+              lit: "contentHashes"
+            }
+            {
+              var: "content_hash_id"
+            }
+            {
+              lit: "references"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /ids/contentIds/{contentId}/references"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "content_id_id"
+                or: "content_id"
+                r: true
+                t: "`$INTEGER`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/ids/contentIds/{contentId}/references"
+          q: {
+            exist: [
+              "content_id_id"
+            ]
+          }
+          r: {
+            param: {
+              contentId: "content_id_id"
+            }
+          }
+          s: [
+            {
+              lit: "ids"
+            }
+            {
+              lit: "contentIds"
+            }
+            {
+              var: "content_id_id"
+            }
+            {
+              lit: "references"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+  relations: ancestors: [
+    [path("$.main.kit.entity.group") path("$.main.kit.entity.artifact") path("$.main.kit.entity.version")]
+  ]
+
+}

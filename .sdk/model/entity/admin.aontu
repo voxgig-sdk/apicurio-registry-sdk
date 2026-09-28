@@ -1,0 +1,336 @@
+# Entity: admin
+
+main: kit: entity: admin: {
+
+  alias: field: {}
+
+  fields: {
+    role: {
+      h: "Role"
+      n: "role"
+      r: true
+      t: "`$STRING`"
+    }
+    value: {
+      h: "Value"
+      n: "value"
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
+  name: "admin"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /admin/import"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "x_registry_preserve_content_id"
+                or: "x_registry_preserve_content_id"
+                r: false
+                t: "`$BOOLEAN`"
+              }
+              {
+                k: "header"
+                n: "x_registry_preserve_global_id"
+                or: "x_registry_preserve_global_id"
+                r: false
+                t: "`$BOOLEAN`"
+              }
+            ]
+            query: [
+              {
+                k: "query"
+                n: "require_empty_registry"
+                or: "require_empty_registry"
+                r: false
+                t: "`$BOOLEAN`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/admin/import"
+          q: {
+            "$action": "import"
+            exist: [
+              "require_empty_registry"
+              "x_registry_preserve_content_id"
+              "x_registry_preserve_global_id"
+            ]
+          }
+          s: [
+            {
+              lit: "admin"
+            }
+            {
+              lit: "import"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "POST /admin/roleMappings"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/admin/roleMappings"
+          q: {
+            "$action": "role_mapping"
+          }
+          s: [
+            {
+              lit: "admin"
+            }
+            {
+              lit: "roleMappings"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    remove: {
+      name: "remove"
+      points: [
+        {
+          co: {
+            id: "DELETE /admin/roleMappings/{principalId}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "principal_id"
+                or: "principal_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "DELETE"
+          o: "/admin/roleMappings/{principalId}"
+          q: {
+            exist: [
+              "principal_id"
+            ]
+          }
+          r: {
+            param: {
+              principalId: "principal_id"
+            }
+          }
+          s: [
+            {
+              lit: "admin"
+            }
+            {
+              lit: "roleMappings"
+            }
+            {
+              var: "principal_id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "DELETE /admin/config/properties/{propertyName}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "property_name"
+                or: "property_name"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "DELETE"
+          o: "/admin/config/properties/{propertyName}"
+          q: {
+            exist: [
+              "property_name"
+            ]
+          }
+          r: {
+            param: {
+              propertyName: "property_name"
+            }
+          }
+          s: [
+            {
+              lit: "admin"
+            }
+            {
+              lit: "config"
+            }
+            {
+              lit: "properties"
+            }
+            {
+              var: "property_name"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "DELETE /admin/contracts/ruleset"
+            source: "openapi3"
+            version: 2
+          }
+          m: "DELETE"
+          o: "/admin/contracts/ruleset"
+          s: [
+            {
+              lit: "admin"
+            }
+            {
+              lit: "contracts"
+            }
+            {
+              lit: "ruleset"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    update: {
+      name: "update"
+      points: [
+        {
+          co: {
+            id: "PUT /admin/roleMappings/{principalId}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "principal_id"
+                or: "principal_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "PUT"
+          o: "/admin/roleMappings/{principalId}"
+          q: {
+            exist: [
+              "principal_id"
+            ]
+          }
+          r: {
+            param: {
+              principalId: "principal_id"
+            }
+          }
+          s: [
+            {
+              lit: "admin"
+            }
+            {
+              lit: "roleMappings"
+            }
+            {
+              var: "principal_id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "PUT /admin/config/properties/{propertyName}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "property_name"
+                or: "property_name"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "PUT"
+          o: "/admin/config/properties/{propertyName}"
+          q: {
+            exist: [
+              "property_name"
+            ]
+          }
+          r: {
+            param: {
+              propertyName: "property_name"
+            }
+          }
+          s: [
+            {
+              lit: "admin"
+            }
+            {
+              lit: "config"
+            }
+            {
+              lit: "properties"
+            }
+            {
+              var: "property_name"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+  relations: ancestors: [
+    [path("$.main.kit.entity.role_mapping")]
+  ]
+
+}

@@ -1,0 +1,43 @@
+# BasicArtifactReferenceFlow
+
+main: kit: flow: BasicArtifactReferenceFlow:
+{
+  entity: "artifact_reference",
+  kind: "basic",
+  name: "BasicArtifactReferenceFlow",
+  step: [
+    {
+      i: {
+        ref: "artifact_reference_ref01"
+      }
+
+      m: {
+        artifact_id: "artifact01",
+        content_hash_id: "content_hash01",
+        content_id_id: "content_id01",
+        global_id_id: "global_id01",
+        group_id: "group01",
+        version_expression: "version_expression01"
+      }
+
+      o: "create"
+    }
+
+    {
+      m: {
+        content_id_id: "content_id01"
+      }
+
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "artifact_reference_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicArtifactReferenceFlow"
+}

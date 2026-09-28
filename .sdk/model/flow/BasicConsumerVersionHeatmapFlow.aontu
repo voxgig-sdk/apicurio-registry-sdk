@@ -1,0 +1,27 @@
+# BasicConsumerVersionHeatmapFlow
+
+main: kit: flow: BasicConsumerVersionHeatmapFlow:
+{
+  entity: "consumer_version_heatmap",
+  kind: "basic",
+  name: "BasicConsumerVersionHeatmapFlow",
+  step: [
+    {
+      m: {
+        artifact_id: "artifact01",
+        group_id: "group01"
+      }
+
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "consumer_version_heatmap_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicConsumerVersionHeatmapFlow"
+}

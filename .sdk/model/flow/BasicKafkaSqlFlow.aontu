@@ -1,0 +1,18 @@
+# BasicKafkaSqlFlow
+
+main: kit: flow: BasicKafkaSqlFlow:
+{
+  entity: "kafka_sql",
+  kind: "basic",
+  name: "BasicKafkaSqlFlow",
+  step: [
+    {
+      i: {
+        ref: "kafka_sql_ref01"
+      }
+
+      o: "create"
+    }
+  ],
+  "key$": "BasicKafkaSqlFlow"
+}

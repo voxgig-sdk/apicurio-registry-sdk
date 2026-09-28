@@ -1,0 +1,67 @@
+{
+  "existing": {
+    "searched_branch": {
+      "SEARCHED_BRANCH00": {
+        "artifactId": "s5a",
+        "branchId": "s5b",
+        "createdOn": "s5c",
+        "description": "s5d",
+        "groupId": "s5e",
+        "modifiedBy": "s5f",
+        "modifiedOn": "s60",
+        "owner": "s61",
+        "systemDefined": true,
+        "artifact_id": "ARTIFACT01",
+        "group_id": "GROUP01"
+      },
+      "SEARCHED_BRANCH01": {
+        "artifactId": "sb4",
+        "branchId": "sb5",
+        "createdOn": "sb6",
+        "description": "sb7",
+        "groupId": "sb8",
+        "modifiedBy": "sb9",
+        "modifiedOn": "sba",
+        "owner": "sbb",
+        "systemDefined": true,
+        "artifact_id": "ARTIFACT01",
+        "group_id": "GROUP01"
+      },
+      "SEARCHED_BRANCH02": {
+        "artifactId": "s10e",
+        "branchId": "s10f",
+        "createdOn": "s110",
+        "description": "s111",
+        "groupId": "s112",
+        "modifiedBy": "s113",
+        "modifiedOn": "s114",
+        "owner": "s115",
+        "systemDefined": true,
+        "artifact_id": "ARTIFACT01",
+        "group_id": "GROUP01"
+      }
+    }
+  },
+  "new": {
+    "searched_branch": {
+      "searched_branch_ref01": {
+        "artifactId": "s168",
+        "branchId": "s169",
+        "createdOn": "s16a",
+        "description": "s16b",
+        "groupId": "s16c",
+        "modifiedBy": "s16d",
+        "modifiedOn": "s16e",
+        "owner": "s16f",
+        "systemDefined": true
+      }
+    }
+  },
+  "requests": {
+    "GET /groups/{groupId}/artifacts/{artifactId}/branches": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

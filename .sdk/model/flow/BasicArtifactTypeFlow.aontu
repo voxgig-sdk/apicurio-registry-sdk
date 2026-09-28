@@ -1,0 +1,22 @@
+# BasicArtifactTypeFlow
+
+main: kit: flow: BasicArtifactTypeFlow:
+{
+  entity: "artifact_type",
+  kind: "basic",
+  name: "BasicArtifactTypeFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "artifact_type_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicArtifactTypeFlow"
+}
