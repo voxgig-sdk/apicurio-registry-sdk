@@ -1,5 +1,15 @@
 {
   "openapi": "3.0.3",
+  "servers": [
+    {
+      "url": "https://{registry}/apis/registry/v3",
+      "variables": {
+        "registry": {
+          "default": "MY-REGISTRY-URL"
+        }
+      }
+    }
+  ],
   "info": {
     "title": "Apicurio Registry API [v3]",
     "version": "3.3.x",
