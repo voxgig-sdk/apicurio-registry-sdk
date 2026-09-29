@@ -1,6 +1,6 @@
 # Apicurio Registry: the Voxgig SDK and the Kiota SDK compared
 
-Vergleich: Kiota. Compared with @apicurio/apicurio-registry-sdk 3.3.3 (TypeScript, Kiota preview) and apicurioregistrysdk 3.3.3 (Python). Spec: apicurio-registry tag 3.3.3 common/src/main/resources/META-INF/openapi.json, OAS 3.0.3, 82 paths / 132 ops, Apache 2.0. Added 2026-09-28.
+Vergleich: Kiota. Compared with @apicurio/apicurio-registry-sdk 3.3.3 (TypeScript, Kiota preview) and apicurioregistrysdk 3.3.3 (Python). Spec: apicurio-registry tag 3.3.3 common/src/main/resources/META-INF/openapi.json, OAS 3.0.3, 82 paths / 132 ops, Apache 2.0. Added 2026-09-28. Rebuilt 2026-09-29 on sdkgen 4.32.1 and apidef 8.22.0.
 
 This repository is on the admin **vergleich** list. It is built only to be compared, and it is not published.
 
@@ -8,15 +8,15 @@ This repository is on the admin **vergleich** list. It is built only to be compa
 
 | | Voxgig | Kiota |
 |---|---|---|
-| SDK | this repository, commit `7783d8f`: eight targets (go, go-cli, go-mcp, ts, py, rb, lua, php) | `@apicurio/apicurio-registry-sdk@3.3.3` (TypeScript) |
+| SDK | this repository, commit `2277c42`: eight targets (go, go-cli, go-mcp, ts, py, rb, lua, php) | `@apicurio/apicurio-registry-sdk@3.3.3` (TypeScript) |
 | Input | `apicurio-registry-openapi.json`: OAS 3.0.3, `info.version` 3.3.x, 82 paths, 132 operations | the vendor's own generation; the note above names the definition version it came from |
 | Operations callable | 132 of 132 | 132 operation methods |
-| Entities | 44 | not applicable |
-| ts package | 2.71 MB, 420 files | 0.64 MB, 115 files |
+| Entities | 43 | not applicable |
+| ts package | 2.74 MB, 416 files | 0.64 MB, 115 files |
 | Runtime dependencies | 0 | 0 + 6 peer |
-| Generated tests | ts 377 pass / 0 fail; py 372 pass; rb 396 runs / 0 fail; lua 370 pass / 0 fail; php 396 tests, 0 fail; go, go-cli, go-mcp build, vet and test | not run: a published package |
+| Generated tests | ts 509 pass / 0 fail / 8 skipped; py 372 pass / 57 skipped; rb 396 runs / 0 fail; lua 370 pass / 0 fail; php 396 tests / 0 fail; go, go-cli, go-mcp build, vet and test | not run: a published package |
 | Determinism | a second generation on the same toolchain is byte-identical | not measured |
-| Scenario against a mock | 2 of 4 steps right, 2 returned wrong data, 0 request violations (static) | 4 of 4 steps right, 0 request violations (static) |
+| Scenario against a mock | 4 of 4 steps right, 0 returned wrong data, 0 request violations (static) | 4 of 4 steps right, 0 request violations (static) |
 
 ## Features
 
@@ -69,15 +69,15 @@ Voxgig's features are opt-in; these builds enable the standard set. The Kiota co
 
 Each SDK lists one resource, loads and removes the first item it listed, and creates one from the definition's own example or required fields, against a mock built from the same vendor definition. The mock is Prism: static mode answers with the definition's examples, and dynamic mode generates schema-valid data. Each SDK is credited with its better mode. Request violations are Prism's verdicts on what the SDK sent.
 
-- **Voxgig, static:** 2 of 4 steps right, 0 request violations.
+- **Voxgig, static:** 4 of 4 steps right, 0 request violations.
   - ✓ `list`
-  - ⚠ `load`: returned the group's labels map (empty), not the group
-  - ⚠ `create`: returned the group's labels map, not the group
+  - ✓ `load`
+  - ✓ `create`
   - ✓ `remove`
-- **Voxgig, dynamic:** 2 of 4 steps right, 0 request violations.
+- **Voxgig, dynamic:** 4 of 4 steps right, 0 request violations.
   - ✓ `list`
-  - ⚠ `load`: returned the group's labels map (empty), not the group
-  - ⚠ `create`: returned the group's labels map, not the group
+  - ✓ `load`
+  - ✓ `create`
   - ✓ `remove`
 - **Kiota, static:** 4 of 4 steps right, 0 request violations.
   - ✗ `create-default-compressed`: {"additionalData":{"error":{"code":"invalid_json","message":"Invalid JSON"}},"responseStatusCode":400,"responseHeaders":{"access-control-allow-credentials":["tr
@@ -94,10 +94,10 @@ Each SDK lists one resource, loads and removes the first item it listed, and cre
 
 ## Voxgig toolchain findings
 
-- **UNWRAP** (@voxgig/apidef 8.17.2). The response transform that says where an operation's data sits is inferred wrongly for several resources, in both directions. A schema whose one object-valued property is ordinary data is taken for an envelope (Apicurio's `labels`, SaladCloud's `container`), and a real envelope is missed when it is composed with allOf (Lob) or sits beside another property (Neon's `projects` beside `pagination`). The SDKs' own tests cannot see it, because they mock from the same model; a mock built from the vendor definition does. Here: apicurio group load and create: `body.labels`, the group's labels map, because `labels` is GroupMetaData's one object-valued property. Reported, not changed: heuristic design in apidef.
-- **QUERY-ECHO** (@voxgig/sdkgen 4.30.3 (PrepareQuery: ts, js and rb read the field; other targets not checked)). Every match field, path parameters included, is also sent as a query parameter: GET /video/v1/assets/a1?id=a1 (Mux), GET /assistant/asst_1?id=asst_1 (Vapi), DELETE .../containers/web?id=web&organization_name=acme&project_id=demo (SaladCloud). prepareQuery excludes names in point.params, but the generated config carries path parameters in point.args.params (which prepareParams reads), so nothing is excluded. Harmless to a lenient server, rejected by a strict one. Prism logs paths without query strings, so its runs did not show it. Reported, not changed: the same exclusion exists per target.
-- **DOCS-QA** (@voxgig/docgen 0.29.2 (the generated Documentation workflow)). The generated API pages quote each vendor's own descriptions, and the Documentation workflow runs its prose checks over them. Vale reads identifiers such as `asset_id` as misspellings (272 errors on Mux, 44 on Neon), and docgen's own rules reject the vendor's repeated words and first-person prose (Apicurio). Vapi and Maxio fail the same step. Every SDK's tests pass on every target; only the documentation check fails. Reported, not changed: whether a vendor's text is prose-checked is docgen's design. Lob and Novu fail earlier, at generation, on the unpatched YAML parser (Y1-Y3). SaladCloud's pages pass the check; only the deploy fails, because GitHub Pages is not enabled for the repository.
-- **SERVERS** (@voxgig/apidef 8.17.2). apidef requires servers[0].url; Apicurio's definition ships none because the registry is self-hosted. The server its own description states was injected, as the cedar fleet did for customs-window. Recorded in PROVENANCE.md.
+- **UNWRAP** (@voxgig/apidef). The response transform that says where an operation's data sits was inferred wrongly for several resources in the first build. Here: a group's load and create read `body.labels`, because `labels` is GroupMetaData's one object-valued property. Fixed in apidef 8.18.0 (voxgig/apidef#100), which reads a single item beside other data as a record.
+- **QUERY-ECHO** (@voxgig/sdkgen, PrepareQuery). Every match field, path parameters included, was also sent as a query parameter, such as `?id=` on a load. Fixed in voxgig/sdkgen#222, released in 4.31.0: query parameters go out under the definition's names, and the rebuild's scenario requests carry no echoed parameter.
+- **DOCS-QA** (@voxgig/docgen, the generated Documentation workflow). The generated API pages quote the vendor's own descriptions, and the workflow runs its prose checks over them, so the step fails on the vendor's identifiers and repeated words rather than on anything the generator wrote. Open: voxgig/docgen#33.
+- **SERVERS** (@voxgig/apidef). apidef required servers[0].url, and Apicurio's definition ships none because the registry is self-hosted. apidef 8.20.0 accepts a definition with no server; this build keeps the server the definition's own description states, injected and recorded in PROVENANCE.md, and you pass your host as the `registry` server variable.
 
 ## Kiota SDK notes
 
@@ -109,4 +109,6 @@ Each SDK lists one resource, loads and removes the first item it listed, and cre
 - Package size and file count: `npm pack --dry-run` for the Voxgig ts target, and the registry's `dist.unpackedSize` and `dist.fileCount` for the compared package.
 - Tests: `admin/scripts/cedar-test-all.sh` runs each target's generated suite.
 - Features: read from the code of the published package, crediting a feature only for a mechanism, not a word in the API's own models.
-
+- Rebuild: 2026-09-29, on create-sdkgen 0.30.4, sdkgen 4.32.1, apidef 8.22.0, model 12.0.0 and @tabnas/yaml 0.5.14, all as published, with no overlay.
+- Tests on the rebuild: all eight targets, the lua suite under Lua 5.4 with busted 2.2.0.
+- Scenario on the rebuild: the Voxgig side was re-run on 2026-09-29; the compared SDK's run is from 2026-09-28, and its package is unchanged. The generated create input honours the definition's minimums, which the first run did not.
