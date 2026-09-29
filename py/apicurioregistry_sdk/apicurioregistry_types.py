@@ -44,17 +44,13 @@ class AdminRemoveMatch(TypedDict):
 
 
 class Agent(TypedDict, total=False):
-    artifactId: str
     capabilities: dict
-    createdOn: int
     defaultInputModes: list
     defaultOutputModes: list
     description: str
     documentationUrl: str
-    groupId: str
     iconUrl: str
     name: str
-    owner: str
     protocolVersion: str
     provider: dict
     securityRequirements: list
@@ -66,13 +62,21 @@ class Agent(TypedDict, total=False):
 
 
 class AgentListMatch(TypedDict, total=False):
-    capability: list
-    input_mode: list
-    limit: int
+    capabilities: dict
+    defaultInputModes: list
+    defaultOutputModes: list
+    description: str
+    documentationUrl: str
+    iconUrl: str
     name: str
-    offset: int
-    output_mode: list
-    skill: list
+    protocolVersion: str
+    provider: dict
+    securityRequirements: list
+    securitySchemes: dict
+    signatures: list
+    skills: list
+    supportedInterfaces: list
+    version: str
 
 
 class AgentCard(TypedDict, total=False):
@@ -140,20 +144,16 @@ class AiCatalogListMatch(TypedDict, total=False):
     version: str
 
 
-class ArdExploreRequired(TypedDict):
-    resultType: dict
-
-
-class ArdExplore(ArdExploreRequired, total=False):
+class ArdExplore(TypedDict, total=False):
+    facets: dict
     query: dict
+    resultType: str
 
 
-class ArdExploreCreateDataRequired(TypedDict):
-    resultType: dict
-
-
-class ArdExploreCreateData(ArdExploreCreateDataRequired, total=False):
+class ArdExploreCreateData(TypedDict, total=False):
+    facets: dict
     query: dict
+    resultType: str
 
 
 class ArdSearchRequired(TypedDict):
@@ -633,22 +633,12 @@ class DownloadRefLoadMatch(TypedDict, total=False):
     group_id: str
 
 
-class GitOpRequired(TypedDict):
-    ref: str
-    repoId: str
+class GitOp(TypedDict):
+    pass
 
 
-class GitOp(GitOpRequired, total=False):
-    type: str
-
-
-class GitOpCreateDataRequired(TypedDict):
-    ref: str
-    repoId: str
-
-
-class GitOpCreateData(GitOpCreateDataRequired, total=False):
-    type: str
+class GitOpCreateData(TypedDict):
+    pass
 
 
 class GitOpRemoveMatch(TypedDict):
@@ -707,11 +697,35 @@ class GitOpsValidateTaskListMatch(TypedDict, total=False):
     versionCount: int
 
 
+class GitOpsValidateTaskCreateDataRequired(TypedDict):
+    state: str
+    taskId: str
+
+
+class GitOpsValidateTaskCreateData(GitOpsValidateTaskCreateDataRequired, total=False):
+    artifactCount: int
+    completedAt: str
+    createdAt: str
+    errors: list
+    groupCount: int
+    ref: str
+    repoId: str
+    result: str
+    type: str
+    versionCount: int
+
+
 class GlobalRuleRequired(TypedDict):
     config: str
 
 
 class GlobalRule(GlobalRuleRequired, total=False):
+    id: str
+    ruleType: str
+
+
+class GlobalRuleListMatch(TypedDict, total=False):
+    config: str
     id: str
     ruleType: str
 
@@ -729,17 +743,18 @@ class GlobalRuleRemoveMatch(TypedDict):
     id: str
 
 
-class Group(TypedDict, total=False):
-    artifactsType: str
+class GroupRequired(TypedDict):
     createdOn: str
-    description: str
     groupId: str
-    id: str
-    labels: dict
     modifiedBy: str
     modifiedOn: str
     owner: str
-    properties: dict
+
+
+class Group(GroupRequired, total=False):
+    description: str
+    id: str
+    labels: dict
 
 
 class GroupLoadMatch(TypedDict):
@@ -753,17 +768,18 @@ class GroupListMatch(TypedDict, total=False):
     orderby: str
 
 
-class GroupCreateData(TypedDict, total=False):
-    artifactsType: str
+class GroupCreateDataRequired(TypedDict):
     createdOn: str
-    description: str
     groupId: str
-    id: str
-    labels: dict
     modifiedBy: str
     modifiedOn: str
     owner: str
-    properties: dict
+
+
+class GroupCreateData(GroupCreateDataRequired, total=False):
+    description: str
+    id: str
+    labels: dict
 
 
 class GroupUpdateDataRequired(TypedDict):
@@ -771,7 +787,6 @@ class GroupUpdateDataRequired(TypedDict):
 
 
 class GroupUpdateData(GroupUpdateDataRequired, total=False):
-    artifactsType: str
     createdOn: str
     description: str
     groupId: str
@@ -779,7 +794,6 @@ class GroupUpdateData(GroupUpdateDataRequired, total=False):
     modifiedBy: str
     modifiedOn: str
     owner: str
-    properties: dict
 
 
 class GroupRemoveMatch(TypedDict):
@@ -820,42 +834,25 @@ class KafkaSqlCreateData(TypedDict):
     snapshotId: str
 
 
-class McpTool(TypedDict, total=False):
-    artifactId: str
-    createdOn: int
-    description: str
-    groupId: str
-    name: str
-    owner: str
-    parameters: list
-    title: str
-
-
-class McpToolListMatch(TypedDict, total=False):
-    limit: int
-    name: str
-    offset: int
-    parameter: list
-
-
 class MetadataRequired(TypedDict):
-    modifiedBy: str
-    modifiedOn: str
-
-
-class Metadata(MetadataRequired, total=False):
     artifactId: str
     artifactType: str
     contentId: int
-    contractMetadata: dict
     createdOn: str
-    description: str
     globalId: int
+    owner: str
+    version: str
+
+
+class Metadata(MetadataRequired, total=False):
+    contractMetadata: dict
+    description: str
     groupId: str
     labels: dict
+    modifiedBy: str
+    modifiedOn: str
     name: str
-    owner: str
-    version: int
+    state: str
 
 
 class MetadataLoadMatchRequired(TypedDict):
@@ -871,23 +868,24 @@ class MetadataCreateDataRequired(TypedDict):
     artifact_id: str
     group_id: str
     version_expression: str
-    modifiedBy: str
-    modifiedOn: str
-
-
-class MetadataCreateData(MetadataCreateDataRequired, total=False):
     artifactId: str
     artifactType: str
     contentId: int
-    contractMetadata: dict
     createdOn: str
-    description: str
     globalId: int
+    owner: str
+    version: str
+
+
+class MetadataCreateData(MetadataCreateDataRequired, total=False):
+    contractMetadata: dict
+    description: str
     groupId: str
     labels: dict
+    modifiedBy: str
+    modifiedOn: str
     name: str
-    owner: str
-    version: int
+    state: str
 
 
 class MetadataUpdateDataRequired(TypedDict):
@@ -910,14 +908,14 @@ class MetadataUpdateData(MetadataUpdateDataRequired, total=False):
     modifiedOn: str
     name: str
     owner: str
-    version: int
+    state: str
+    version: str
 
 
 class OdcsContractResult(TypedDict, total=False):
-    labelsApplied: int
-    rulesApplied: int
-    tagsApplied: int
-    warnings: list
+    contractId: str
+    projection: dict
+    version: str
 
 
 class OdcsContractResultCreateDataRequired(TypedDict):
@@ -925,10 +923,9 @@ class OdcsContractResultCreateDataRequired(TypedDict):
 
 
 class OdcsContractResultCreateData(OdcsContractResultCreateDataRequired, total=False):
-    labelsApplied: int
-    rulesApplied: int
-    tagsApplied: int
-    warnings: list
+    contractId: str
+    projection: dict
+    version: str
 
 
 class OdcsContractResultUpdateDataRequired(TypedDict):
@@ -937,10 +934,9 @@ class OdcsContractResultUpdateDataRequired(TypedDict):
 
 
 class OdcsContractResultUpdateData(OdcsContractResultUpdateDataRequired, total=False):
-    labelsApplied: int
-    rulesApplied: int
-    tagsApplied: int
-    warnings: list
+    contractId: str
+    projection: dict
+    version: str
 
 
 class OdcsContractSummary(TypedDict, total=False):
@@ -994,6 +990,16 @@ class RoleMappingListMatch(TypedDict, total=False):
     offset: int
 
 
+class RoleMappingCreateDataRequired(TypedDict):
+    principalId: str
+    role: str
+
+
+class RoleMappingCreateData(RoleMappingCreateDataRequired, total=False):
+    id: str
+    principalName: str
+
+
 class RuleRequired(TypedDict):
     config: str
 
@@ -1012,10 +1018,12 @@ class RuleLoadMatch(RuleLoadMatchRequired, total=False):
     group_id: str
 
 
-class RuleListMatch(TypedDict, total=False):
-    config: str
-    id: str
-    ruleType: str
+class RuleListMatchRequired(TypedDict):
+    group_id: str
+
+
+class RuleListMatch(RuleListMatchRequired, total=False):
+    artifact_id: str
 
 
 class RuleUpdateDataRequired(TypedDict):
@@ -1143,8 +1151,8 @@ class VersionRequired(TypedDict):
     createdOn: str
     globalId: int
     owner: str
-    state: str
     value: str
+    version: str
     versions: list
 
 
@@ -1158,7 +1166,7 @@ class Version(VersionRequired, total=False):
     modifiedBy: str
     modifiedOn: str
     name: str
-    version: str
+    state: str
 
 
 class VersionLoadMatchRequired(TypedDict):
@@ -1202,6 +1210,7 @@ class VersionCreateDataRequired(TypedDict):
     globalId: int
     owner: str
     value: str
+    version: str
     versions: list
 
 
@@ -1225,7 +1234,6 @@ class VersionCreateData(VersionCreateDataRequired, total=False):
     modifiedBy: str
     modifiedOn: str
     name: str
-    version: str
 
 
 class VersionUpdateDataRequired(TypedDict):
@@ -1271,7 +1279,19 @@ class VersionRemoveMatch(VersionRemoveMatchRequired, total=False):
 
 
 class WellKnown(TypedDict, total=False):
+    artifactId: str
+    capabilities: dict
+    createdOn: int
+    description: str
+    groupId: str
     id: str
+    name: str
+    owner: str
+    parameters: list
+    skills: list
+    supportedInterfaces: list
+    title: str
+    version: str
 
 
 class WellKnownLoadMatchRequired(TypedDict):
@@ -1281,6 +1301,16 @@ class WellKnownLoadMatchRequired(TypedDict):
 
 class WellKnownLoadMatch(WellKnownLoadMatchRequired, total=False):
     version: str
+
+
+class WellKnownListMatch(TypedDict, total=False):
+    capability: list
+    input_mode: list
+    limit: int
+    name: str
+    offset: int
+    output_mode: list
+    skill: list
 
 
 class WrappedVersionState(TypedDict):

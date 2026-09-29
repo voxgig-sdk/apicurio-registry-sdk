@@ -28,7 +28,6 @@
 @"./group.aontu"
 @"./group_rule.aontu"
 @"./kafka_sql.aontu"
-@"./mcp_tool.aontu"
 @"./metadata.aontu"
 @"./odcs_contract_result.aontu"
 @"./odcs_contract_summary.aontu"

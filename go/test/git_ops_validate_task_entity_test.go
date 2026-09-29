@@ -80,7 +80,7 @@ func TestGitOpsValidateTaskEntity(t *testing.T) {
 		if setup.live {
 			_mode = "live"
 		}
-		for _, _op := range []string{"list", "load"} {
+		for _, _op := range []string{"create", "list", "load"} {
 			if _shouldSkip, _reason := isControlSkipped("entityOp", "git_ops_validate_task." + _op, _mode); _shouldSkip {
 				if _reason == "" {
 					_reason = "skipped via sdk-test-control.json"
@@ -97,18 +97,21 @@ func TestGitOpsValidateTaskEntity(t *testing.T) {
 		}
 		client := setup.client
 
-		// Bootstrap entity data from existing test data (no create step in flow).
-		gitOpsValidateTaskRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath(setup.data, "existing.git_ops_validate_task")))
-		var gitOpsValidateTaskRef01Data map[string]any
-		if len(gitOpsValidateTaskRef01DataRaw) > 0 {
-			gitOpsValidateTaskRef01Data = core.ToMapAny(gitOpsValidateTaskRef01DataRaw[0][1])
+		// CREATE
+		gitOpsValidateTaskRef01Ent := client.GitOpsValidateTask(nil)
+		gitOpsValidateTaskRef01Data := core.ToMapAny(vs.GetProp(
+			vs.GetPath(setup.data, []any{"new", "git_ops_validate_task"}), "git_ops_validate_task_ref01"))
+
+		gitOpsValidateTaskRef01DataResult, err := gitOpsValidateTaskRef01Ent.Create(gitOpsValidateTaskRef01Data, nil)
+		if err != nil {
+			t.Fatalf("create failed: %v", err)
 		}
-		// Discard guards against Go's unused-var check when the flow's steps
-		// happen not to consume the bootstrap data (e.g. list-only flows).
-		_ = gitOpsValidateTaskRef01Data
+		gitOpsValidateTaskRef01Data = core.ToMapAny(entityData(gitOpsValidateTaskRef01DataResult))
+		if gitOpsValidateTaskRef01Data == nil {
+			t.Fatal("expected create result to be a map")
+		}
 
 		// LIST
-		gitOpsValidateTaskRef01Ent := client.GitOpsValidateTask(nil)
 		gitOpsValidateTaskRef01Match := map[string]any{}
 
 		gitOpsValidateTaskRef01ListResult, err := gitOpsValidateTaskRef01Ent.List(gitOpsValidateTaskRef01Match, nil)

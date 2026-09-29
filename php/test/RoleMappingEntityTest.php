@@ -62,7 +62,7 @@ class RoleMappingEntityTest extends TestCase
         $setup = role_mapping_basic_setup(null);
         // Per-op sdk-test-control.json skip.
         $_live = !empty($setup["live"]);
-        foreach (["list", "load"] as $_op) {
+        foreach (["create", "list", "load"] as $_op) {
             [$_shouldSkip, $_reason] = Runner::is_control_skipped("entityOp", "role_mapping." . $_op, $_live ? "live" : "unit");
             if ($_shouldSkip) {
                 $this->markTestSkipped($_reason ?? "skipped via sdk-test-control.json");
@@ -77,20 +77,26 @@ class RoleMappingEntityTest extends TestCase
         }
         $client = $setup["client"];
 
-        // Bootstrap entity data from existing test data.
-        $role_mapping_ref01_data_raw = Vs::items(Helpers::to_map(
-            Vs::getpath($setup["data"], "existing.role_mapping")));
-        $role_mapping_ref01_data = null;
-        if (count($role_mapping_ref01_data_raw) > 0) {
-            $role_mapping_ref01_data = Helpers::to_map($role_mapping_ref01_data_raw[0][1]);
-        }
+        // CREATE
+        $role_mapping_ref01_ent = $client->RoleMapping(null);
+        $role_mapping_ref01_data = Helpers::to_map(Vs::getprop(
+            Vs::getpath($setup["data"], "new.role_mapping"), "role_mapping_ref01"));
+
+        $role_mapping_ref01_data_result = $role_mapping_ref01_ent->create($role_mapping_ref01_data, null);
+        $role_mapping_ref01_data = Helpers::to_map(is_object($role_mapping_ref01_data_result) && method_exists($role_mapping_ref01_data_result, 'data_get') ? $role_mapping_ref01_data_result->data_get() : $role_mapping_ref01_data_result);
+        $this->assertNotNull($role_mapping_ref01_data);
+        $this->assertNotNull($role_mapping_ref01_data["id"]);
 
         // LIST
-        $role_mapping_ref01_ent = $client->RoleMapping(null);
         $role_mapping_ref01_match = [];
 
         $role_mapping_ref01_list_result = $role_mapping_ref01_ent->list($role_mapping_ref01_match, null);
         $this->assertIsArray($role_mapping_ref01_list_result);
+
+        $found_item = sdk_select(
+            Runner::entity_list_to_data($role_mapping_ref01_list_result),
+            ["id" => $role_mapping_ref01_data["id"]]);
+        $this->assertNotEmpty($found_item);
 
         // LOAD
         $role_mapping_ref01_match_dt0 = [

@@ -184,7 +184,6 @@ func MakeConfig() map[string]any {
 				"group": map[string]any{},
 				"group_rule": map[string]any{},
 				"kafka_sql": map[string]any{},
-				"mcp_tool": map[string]any{},
 				"metadata": map[string]any{},
 				"odcs_contract_result": map[string]any{},
 				"odcs_contract_summary": map[string]any{},
@@ -249,13 +248,13 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "x_registry_preserve_content_id",
-											"orig": "x_registry_preserve_content_id",
+											"orig": "X-Registry-Preserve-ContentId",
 											"type": "`$BOOLEAN`",
 											"kind": "header",
 										},
 										map[string]any{
 											"name": "x_registry_preserve_global_id",
-											"orig": "x_registry_preserve_global_id",
+											"orig": "X-Registry-Preserve-GlobalId",
 											"type": "`$BOOLEAN`",
 											"kind": "header",
 										},
@@ -263,7 +262,7 @@ func MakeConfig() map[string]any {
 									"query": []any{
 										map[string]any{
 											"name": "require_empty_registry",
-											"orig": "require_empty_registry",
+											"orig": "requireEmptyRegistry",
 											"type": "`$BOOLEAN`",
 											"kind": "query",
 										},
@@ -276,32 +275,6 @@ func MakeConfig() map[string]any {
 										"x_registry_preserve_content_id",
 										"x_registry_preserve_global_id",
 									},
-								},
-							},
-							map[string]any{
-								"kind": "http",
-								"method": "POST",
-								"orig": "/admin/roleMappings",
-								"segments": []any{
-									map[string]any{
-										"lit": "admin",
-									},
-									map[string]any{
-										"lit": "roleMappings",
-									},
-								},
-								"parts": []any{
-									"admin",
-									"roleMappings",
-								},
-								"rename": map[string]any{},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body`",
-								},
-								"args": map[string]any{},
-								"select": map[string]any{
-									"$action": "role_mapping",
 								},
 							},
 						},
@@ -343,7 +316,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "principal_id",
-											"orig": "principal_id",
+											"orig": "principalId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -393,7 +366,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "property_name",
-											"orig": "property_name",
+											"orig": "propertyName",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -473,7 +446,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "principal_id",
-											"orig": "principal_id",
+											"orig": "principalId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -523,7 +496,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "property_name",
-											"orig": "property_name",
+											"orig": "propertyName",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -550,21 +523,10 @@ func MakeConfig() map[string]any {
 			"agent": map[string]any{
 				"fields": []any{
 					map[string]any{
-						"name": "artifactId",
-						"title": "Artifact Id",
-						"type": "`$STRING`",
-					},
-					map[string]any{
 						"name": "capabilities",
 						"title": "Capabilities",
 						"type": "`$OBJECT`",
 						"short": "Capabilities of an A2A agent.",
-					},
-					map[string]any{
-						"name": "createdOn",
-						"title": "Created On",
-						"type": "`$INTEGER`",
-						"format": "int64",
 					},
 					map[string]any{
 						"name": "defaultInputModes",
@@ -587,11 +549,6 @@ func MakeConfig() map[string]any {
 						"type": "`$STRING`",
 					},
 					map[string]any{
-						"name": "groupId",
-						"title": "Group Id",
-						"type": "`$STRING`",
-					},
-					map[string]any{
 						"name": "iconUrl",
 						"title": "Icon Url",
 						"type": "`$STRING`",
@@ -599,11 +556,6 @@ func MakeConfig() map[string]any {
 					map[string]any{
 						"name": "name",
 						"title": "Name",
-						"type": "`$STRING`",
-					},
-					map[string]any{
-						"name": "owner",
-						"title": "Owner",
 						"type": "`$STRING`",
 					},
 					map[string]any{
@@ -654,87 +606,6 @@ func MakeConfig() map[string]any {
 						"input": "data",
 						"name": "list",
 						"points": []any{
-							map[string]any{
-								"kind": "http",
-								"method": "GET",
-								"orig": "/well-known/agents",
-								"segments": []any{
-									map[string]any{
-										"lit": "well-known",
-									},
-									map[string]any{
-										"lit": "agents",
-									},
-								},
-								"parts": []any{
-									"well-known",
-									"agents",
-								},
-								"rename": map[string]any{},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body.agents`",
-								},
-								"args": map[string]any{
-									"query": []any{
-										map[string]any{
-											"name": "capability",
-											"orig": "capability",
-											"type": "`$ARRAY`",
-											"kind": "query",
-										},
-										map[string]any{
-											"name": "input_mode",
-											"orig": "input_mode",
-											"type": "`$ARRAY`",
-											"kind": "query",
-										},
-										map[string]any{
-											"name": "limit",
-											"orig": "limit",
-											"type": "`$INTEGER`",
-											"kind": "query",
-											"example": 20,
-										},
-										map[string]any{
-											"name": "name",
-											"orig": "name",
-											"type": "`$STRING`",
-											"kind": "query",
-										},
-										map[string]any{
-											"name": "offset",
-											"orig": "offset",
-											"type": "`$INTEGER`",
-											"kind": "query",
-											"example": 0,
-										},
-										map[string]any{
-											"name": "output_mode",
-											"orig": "output_mode",
-											"type": "`$ARRAY`",
-											"kind": "query",
-										},
-										map[string]any{
-											"name": "skill",
-											"orig": "skill",
-											"type": "`$ARRAY`",
-											"kind": "query",
-										},
-									},
-								},
-								"select": map[string]any{
-									"exist": []any{
-										"capability",
-										"input_mode",
-										"limit",
-										"name",
-										"offset",
-										"output_mode",
-										"skill",
-									},
-								},
-							},
 							map[string]any{
 								"kind": "http",
 								"method": "GET",
@@ -979,20 +850,20 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "order_by",
-											"orig": "order_by",
+											"orig": "orderBy",
 											"type": "`$STRING`",
 											"kind": "query",
 										},
 										map[string]any{
 											"name": "page_size",
-											"orig": "page_size",
+											"orig": "pageSize",
 											"type": "`$INTEGER`",
 											"kind": "query",
 											"example": 20,
 										},
 										map[string]any{
 											"name": "page_token",
-											"orig": "page_token",
+											"orig": "pageToken",
 											"type": "`$STRING`",
 											"kind": "query",
 										},
@@ -1065,6 +936,12 @@ func MakeConfig() map[string]any {
 			"ard_explore": map[string]any{
 				"fields": []any{
 					map[string]any{
+						"name": "facets",
+						"title": "Facets",
+						"type": "`$OBJECT`",
+						"short": "Facets keyed by the requested facet field name.",
+					},
+					map[string]any{
 						"name": "query",
 						"title": "Query",
 						"type": "`$OBJECT`",
@@ -1073,8 +950,13 @@ func MakeConfig() map[string]any {
 					map[string]any{
 						"name": "resultType",
 						"title": "Result Type",
-						"type": "`$OBJECT`",
-						"req": true,
+						"type": "`$STRING`",
+						"op": map[string]any{
+							"create": map[string]any{
+								"req": true,
+								"type": "`$OBJECT`",
+							},
+						},
 						"short": "Requested result type for the ARD POST /explore endpoint.",
 					},
 				},
@@ -1107,7 +989,7 @@ func MakeConfig() map[string]any {
 								"rename": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body.facets`",
+									"res": "`body`",
 								},
 								"args": map[string]any{},
 								"select": map[string]any{},
@@ -1313,7 +1195,7 @@ func MakeConfig() map[string]any {
 									"query": []any{
 										map[string]any{
 											"name": "artifact_type",
-											"orig": "artifact_type",
+											"orig": "artifactType",
 											"type": "`$STRING`",
 											"kind": "query",
 											"example": "AVRO",
@@ -1326,7 +1208,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "group_id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "query",
 										},
@@ -1358,7 +1240,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "skip_count",
-											"orig": "skip_count",
+											"orig": "skipCount",
 											"type": "`$BOOLEAN`",
 											"kind": "query",
 											"example": false,
@@ -1409,20 +1291,20 @@ func MakeConfig() map[string]any {
 									"query": []any{
 										map[string]any{
 											"name": "artifact_id",
-											"orig": "artifact_id",
+											"orig": "artifactId",
 											"type": "`$STRING`",
 											"kind": "query",
 										},
 										map[string]any{
 											"name": "artifact_type",
-											"orig": "artifact_type",
+											"orig": "artifactType",
 											"type": "`$STRING`",
 											"kind": "query",
 											"example": "AVRO",
 										},
 										map[string]any{
 											"name": "content_id",
-											"orig": "content_id",
+											"orig": "contentId",
 											"type": "`$INTEGER`",
 											"kind": "query",
 										},
@@ -1434,19 +1316,19 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "global_id",
-											"orig": "global_id",
+											"orig": "globalId",
 											"type": "`$INTEGER`",
 											"kind": "query",
 										},
 										map[string]any{
 											"name": "group_id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "query",
 										},
 										map[string]any{
 											"name": "label",
-											"orig": "label",
+											"orig": "labels",
 											"type": "`$ARRAY`",
 											"kind": "query",
 										},
@@ -1484,7 +1366,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "skip_count",
-											"orig": "skip_count",
+											"orig": "skipCount",
 											"type": "`$BOOLEAN`",
 											"kind": "query",
 											"example": false,
@@ -1542,7 +1424,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "group_id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -1576,7 +1458,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "skip_count",
-											"orig": "skip_count",
+											"orig": "skipCount",
 											"type": "`$BOOLEAN`",
 											"kind": "query",
 											"example": false,
@@ -1633,7 +1515,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "global_id",
-											"orig": "global_id",
+											"orig": "globalId",
 											"type": "`$INTEGER`",
 											"kind": "param",
 											"reqd": true,
@@ -1642,13 +1524,13 @@ func MakeConfig() map[string]any {
 									"query": []any{
 										map[string]any{
 											"name": "reference",
-											"orig": "reference",
+											"orig": "references",
 											"type": "`$STRING`",
 											"kind": "query",
 										},
 										map[string]any{
 											"name": "return_artifact_type",
-											"orig": "return_artifact_type",
+											"orig": "returnArtifactType",
 											"type": "`$BOOLEAN`",
 											"kind": "query",
 										},
@@ -1704,14 +1586,14 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "artifact_id",
-											"orig": "artifact_id",
+											"orig": "artifactId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
 										},
 										map[string]any{
 											"name": "group_id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -1758,7 +1640,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "content_hash",
-											"orig": "content_hash",
+											"orig": "contentHash",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -1804,7 +1686,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "content_id",
-											"orig": "content_id",
+											"orig": "contentId",
 											"type": "`$INTEGER`",
 											"kind": "param",
 											"reqd": true,
@@ -1861,7 +1743,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "group_id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -1869,7 +1751,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "id",
-											"orig": "artifact_id",
+											"orig": "artifactId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -1917,7 +1799,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "group_id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -2025,7 +1907,7 @@ func MakeConfig() map[string]any {
 									"query": []any{
 										map[string]any{
 											"name": "artifact_type",
-											"orig": "artifact_type",
+											"orig": "artifactType",
 											"type": "`$STRING`",
 											"kind": "query",
 										},
@@ -2094,7 +1976,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "artifact_id",
-											"orig": "artifact_id",
+											"orig": "artifactId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -2102,7 +1984,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "group_id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -2110,7 +1992,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "version_expression",
-											"orig": "version_expression",
+											"orig": "versionExpression",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -2119,7 +2001,7 @@ func MakeConfig() map[string]any {
 									"query": []any{
 										map[string]any{
 											"name": "ref_type",
-											"orig": "ref_type",
+											"orig": "refType",
 											"type": "`$STRING`",
 											"kind": "query",
 											"example": "\"INBOUND\"",
@@ -2172,7 +2054,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "global_id_id",
-											"orig": "global_id",
+											"orig": "globalId",
 											"type": "`$INTEGER`",
 											"kind": "param",
 											"reqd": true,
@@ -2181,7 +2063,7 @@ func MakeConfig() map[string]any {
 									"query": []any{
 										map[string]any{
 											"name": "ref_type",
-											"orig": "ref_type",
+											"orig": "refType",
 											"type": "`$STRING`",
 											"kind": "query",
 											"example": "\"INBOUND\"",
@@ -2232,7 +2114,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "content_hash_id",
-											"orig": "content_hash",
+											"orig": "contentHash",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -2282,7 +2164,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "content_id_id",
-											"orig": "content_id",
+											"orig": "contentId",
 											"type": "`$INTEGER`",
 											"kind": "param",
 											"reqd": true,
@@ -2379,7 +2261,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "group_id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -2387,7 +2269,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "id",
-											"orig": "artifact_id",
+											"orig": "artifactId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -2455,7 +2337,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "artifact_id",
-											"orig": "artifact_id",
+											"orig": "artifactId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -2463,7 +2345,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "group_id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -2471,7 +2353,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "id",
-											"orig": "rule_type",
+											"orig": "ruleType",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -2528,7 +2410,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "group_id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -2536,7 +2418,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "id",
-											"orig": "artifact_id",
+											"orig": "artifactId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -2744,7 +2626,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "artifact_id",
-											"orig": "artifact_id",
+											"orig": "artifactId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -2752,7 +2634,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "group_id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -2760,7 +2642,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "id",
-											"orig": "branch_id",
+											"orig": "branchId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -2819,7 +2701,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "artifact_id",
-											"orig": "artifact_id",
+											"orig": "artifactId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -2827,7 +2709,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "group_id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -2895,7 +2777,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "artifact_id",
-											"orig": "artifact_id",
+											"orig": "artifactId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -2903,7 +2785,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "group_id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -2911,7 +2793,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "id",
-											"orig": "branch_id",
+											"orig": "branchId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -2980,7 +2862,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "artifact_id",
-											"orig": "artifact_id",
+											"orig": "artifactId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -2988,7 +2870,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "group_id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -2996,7 +2878,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "id",
-											"orig": "branch_id",
+											"orig": "branchId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -3065,7 +2947,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "artifact_id",
-											"orig": "artifact_id",
+											"orig": "artifactId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -3073,7 +2955,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "group_id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -3081,7 +2963,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "id",
-											"orig": "branch_id",
+											"orig": "branchId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -3148,7 +3030,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "artifact_id",
-											"orig": "artifact_id",
+											"orig": "artifactId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -3156,7 +3038,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "group_id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -3164,7 +3046,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "id",
-											"orig": "branch_id",
+											"orig": "branchId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -3278,7 +3160,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "artifact_id",
-											"orig": "artifact_id",
+											"orig": "artifactId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -3286,7 +3168,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "group_id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -3294,7 +3176,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "version_expression",
-											"orig": "version_expression",
+											"orig": "versionExpression",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -3366,7 +3248,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "artifact_id",
-											"orig": "artifact_id",
+											"orig": "artifactId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -3374,7 +3256,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "group_id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -3382,7 +3264,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "version_expression",
-											"orig": "version_expression",
+											"orig": "versionExpression",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -3529,7 +3411,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "id",
-											"orig": "property_name",
+											"orig": "propertyName",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -3626,14 +3508,14 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "artifact_id",
-											"orig": "artifact_id",
+											"orig": "artifactId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
 										},
 										map[string]any{
 											"name": "group_id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -3691,7 +3573,7 @@ func MakeConfig() map[string]any {
 									"query": []any{
 										map[string]any{
 											"name": "artifact_type",
-											"orig": "artifact_type",
+											"orig": "artifactType",
 											"type": "`$STRING`",
 											"kind": "query",
 											"reqd": true,
@@ -3845,21 +3727,21 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "artifact_id",
-											"orig": "artifact_id",
+											"orig": "artifactId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
 										},
 										map[string]any{
 											"name": "group_id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
 										},
 										map[string]any{
 											"name": "version_id",
-											"orig": "version_expression",
+											"orig": "versionExpression",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -3921,14 +3803,14 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "artifact_id",
-											"orig": "artifact_id",
+											"orig": "artifactId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
 										},
 										map[string]any{
 											"name": "group_id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -3989,14 +3871,14 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "artifact_id",
-											"orig": "artifact_id",
+											"orig": "artifactId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
 										},
 										map[string]any{
 											"name": "group_id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -4057,14 +3939,14 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "artifact_id",
-											"orig": "artifact_id",
+											"orig": "artifactId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
 										},
 										map[string]any{
 											"name": "group_id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -4110,7 +3992,7 @@ func MakeConfig() map[string]any {
 									"query": []any{
 										map[string]any{
 											"name": "compatibility_group",
-											"orig": "compatibility_group",
+											"orig": "compatibilityGroup",
 											"type": "`$STRING`",
 											"kind": "query",
 										},
@@ -4142,7 +4024,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "owner_team",
-											"orig": "owner_team",
+											"orig": "ownerTeam",
 											"type": "`$STRING`",
 											"kind": "query",
 										},
@@ -4212,14 +4094,14 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "artifact_id",
-											"orig": "artifact_id",
+											"orig": "artifactId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
 										},
 										map[string]any{
 											"name": "group_id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -4304,14 +4186,14 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "artifact_id",
-											"orig": "artifact_id",
+											"orig": "artifactId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
 										},
 										map[string]any{
 											"name": "group_id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -4320,7 +4202,7 @@ func MakeConfig() map[string]any {
 									"query": []any{
 										map[string]any{
 											"name": "contract_id",
-											"orig": "contract_id",
+											"orig": "contractId",
 											"type": "`$STRING`",
 											"kind": "query",
 											"reqd": true,
@@ -4382,14 +4264,14 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "artifact_id",
-											"orig": "artifact_id",
+											"orig": "artifactId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
 										},
 										map[string]any{
 											"name": "group_id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -4398,7 +4280,7 @@ func MakeConfig() map[string]any {
 									"query": []any{
 										map[string]any{
 											"name": "contract_id",
-											"orig": "contract_id",
+											"orig": "contractId",
 											"type": "`$STRING`",
 											"kind": "query",
 											"reqd": true,
@@ -4460,14 +4342,14 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "artifact_id",
-											"orig": "artifact_id",
+											"orig": "artifactId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
 										},
 										map[string]any{
 											"name": "group_id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -4528,14 +4410,14 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "artifact_id",
-											"orig": "artifact_id",
+											"orig": "artifactId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
 										},
 										map[string]any{
 											"name": "group_id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -4588,14 +4470,14 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "group_id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
 										},
 										map[string]any{
 											"name": "id",
-											"orig": "contract_id",
+											"orig": "contractId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -4670,21 +4552,21 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "artifact_id",
-											"orig": "artifact_id",
+											"orig": "artifactId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
 										},
 										map[string]any{
 											"name": "group_id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
 										},
 										map[string]any{
 											"name": "version_id",
-											"orig": "version_expression",
+											"orig": "versionExpression",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -4746,14 +4628,14 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "artifact_id",
-											"orig": "artifact_id",
+											"orig": "artifactId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
 										},
 										map[string]any{
 											"name": "group_id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -4806,14 +4688,14 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "group_id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
 										},
 										map[string]any{
 											"name": "id",
-											"orig": "contract_id",
+											"orig": "contractId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -4879,14 +4761,14 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "artifact_id",
-											"orig": "artifact_id",
+											"orig": "artifactId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
 										},
 										map[string]any{
 											"name": "group_id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -4947,14 +4829,14 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "artifact_id",
-											"orig": "artifact_id",
+											"orig": "artifactId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
 										},
 										map[string]any{
 											"name": "group_id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -5155,21 +5037,21 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "artifact_id",
-											"orig": "artifact_id",
+											"orig": "artifactId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
 										},
 										map[string]any{
 											"name": "group_id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
 										},
 										map[string]any{
 											"name": "version_id",
-											"orig": "version_expression",
+											"orig": "versionExpression",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -5230,14 +5112,14 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "artifact_id",
-											"orig": "artifact_id",
+											"orig": "artifactId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
 										},
 										map[string]any{
 											"name": "group_id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -5340,21 +5222,21 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "artifact_id",
-											"orig": "artifact_id",
+											"orig": "artifactId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
 										},
 										map[string]any{
 											"name": "group_id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
 										},
 										map[string]any{
 											"name": "version_id",
-											"orig": "version_expression",
+											"orig": "versionExpression",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -5415,14 +5297,14 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "artifact_id",
-											"orig": "artifact_id",
+											"orig": "artifactId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
 										},
 										map[string]any{
 											"name": "group_id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -5567,7 +5449,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "group_id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -5583,13 +5465,13 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "dry_run",
-											"orig": "dry_run",
+											"orig": "dryRun",
 											"type": "`$BOOLEAN`",
 											"kind": "query",
 										},
 										map[string]any{
 											"name": "if_exist",
-											"orig": "if_exist",
+											"orig": "ifExists",
 											"type": "`$STRING`",
 											"kind": "query",
 										},
@@ -5696,14 +5578,14 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "artifact_id",
-											"orig": "artifact_id",
+											"orig": "artifactId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
 										},
 										map[string]any{
 											"name": "group_id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -5782,13 +5664,13 @@ func MakeConfig() map[string]any {
 									"query": []any{
 										map[string]any{
 											"name": "for_browser",
-											"orig": "for_browser",
+											"orig": "forBrowser",
 											"type": "`$BOOLEAN`",
 											"kind": "query",
 										},
 										map[string]any{
 											"name": "group_id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "query",
 										},
@@ -5809,28 +5691,7 @@ func MakeConfig() map[string]any {
 				},
 			},
 			"git_op": map[string]any{
-				"fields": []any{
-					map[string]any{
-						"name": "ref",
-						"title": "Ref",
-						"type": "`$STRING`",
-						"req": true,
-						"short": "Git ref to validate (branch name, tag, or PR ref like `refs/pull/42/head`).",
-					},
-					map[string]any{
-						"name": "repoId",
-						"title": "Repo Id",
-						"type": "`$STRING`",
-						"req": true,
-						"short": "Repository ID to validate against.",
-					},
-					map[string]any{
-						"name": "type",
-						"title": "Type",
-						"type": "`$STRING`",
-						"short": "Validation type.",
-					},
-				},
+				"fields": []any{},
 				"name": "git_op",
 				"op": map[string]any{
 					"create": map[string]any{
@@ -5856,34 +5717,6 @@ func MakeConfig() map[string]any {
 									"admin",
 									"gitops",
 									"sync",
-								},
-								"rename": map[string]any{},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body`",
-								},
-								"args": map[string]any{},
-								"select": map[string]any{},
-							},
-							map[string]any{
-								"kind": "http",
-								"method": "POST",
-								"orig": "/admin/gitops/validate",
-								"segments": []any{
-									map[string]any{
-										"lit": "admin",
-									},
-									map[string]any{
-										"lit": "gitops",
-									},
-									map[string]any{
-										"lit": "validate",
-									},
-								},
-								"parts": []any{
-									"admin",
-									"gitops",
-									"validate",
 								},
 								"rename": map[string]any{},
 								"transform": map[string]any{
@@ -5936,7 +5769,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "task_id",
-											"orig": "task_id",
+											"orig": "taskId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -6059,12 +5892,24 @@ func MakeConfig() map[string]any {
 						"name": "ref",
 						"title": "Ref",
 						"type": "`$STRING`",
+						"op": map[string]any{
+							"create": map[string]any{
+								"req": true,
+								"type": "`$STRING`",
+							},
+						},
 						"short": "Git ref being validated.",
 					},
 					map[string]any{
 						"name": "repoId",
 						"title": "Repo Id",
 						"type": "`$STRING`",
+						"op": map[string]any{
+							"create": map[string]any{
+								"req": true,
+								"type": "`$STRING`",
+							},
+						},
 						"short": "Repository ID being validated.",
 					},
 					map[string]any{
@@ -6103,6 +5948,40 @@ func MakeConfig() map[string]any {
 				},
 				"name": "git_ops_validate_task",
 				"op": map[string]any{
+					"create": map[string]any{
+						"input": "data",
+						"name": "create",
+						"points": []any{
+							map[string]any{
+								"kind": "http",
+								"method": "POST",
+								"orig": "/admin/gitops/validate",
+								"segments": []any{
+									map[string]any{
+										"lit": "admin",
+									},
+									map[string]any{
+										"lit": "gitops",
+									},
+									map[string]any{
+										"lit": "validate",
+									},
+								},
+								"parts": []any{
+									"admin",
+									"gitops",
+									"validate",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body`",
+								},
+								"args": map[string]any{},
+								"select": map[string]any{},
+							},
+						},
+					},
 					"list": map[string]any{
 						"input": "data",
 						"name": "list",
@@ -6178,7 +6057,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "task_id",
-											"orig": "task_id",
+											"orig": "taskId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -6253,6 +6132,36 @@ func MakeConfig() map[string]any {
 							},
 						},
 					},
+					"list": map[string]any{
+						"input": "data",
+						"name": "list",
+						"points": []any{
+							map[string]any{
+								"kind": "http",
+								"method": "GET",
+								"orig": "/admin/rules",
+								"segments": []any{
+									map[string]any{
+										"lit": "admin",
+									},
+									map[string]any{
+										"lit": "rules",
+									},
+								},
+								"parts": []any{
+									"admin",
+									"rules",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body`",
+								},
+								"args": map[string]any{},
+								"select": map[string]any{},
+							},
+						},
+					},
 					"remove": map[string]any{
 						"input": "data",
 						"name": "remove",
@@ -6290,7 +6199,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "id",
-											"orig": "rule_type",
+											"orig": "ruleType",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -6338,20 +6247,10 @@ func MakeConfig() map[string]any {
 			"group": map[string]any{
 				"fields": []any{
 					map[string]any{
-						"name": "artifactsType",
-						"title": "Artifacts Type",
-						"type": "`$STRING`",
-					},
-					map[string]any{
 						"name": "createdOn",
 						"title": "Created On",
 						"type": "`$STRING`",
-						"op": map[string]any{
-							"list": map[string]any{
-								"req": true,
-								"type": "`$STRING`",
-							},
-						},
+						"req": true,
 						"format": "date-time",
 					},
 					map[string]any{
@@ -6363,16 +6262,7 @@ func MakeConfig() map[string]any {
 						"name": "groupId",
 						"title": "Group Id",
 						"type": "`$STRING`",
-						"op": map[string]any{
-							"create": map[string]any{
-								"req": true,
-								"type": "`$STRING`",
-							},
-							"list": map[string]any{
-								"req": true,
-								"type": "`$STRING`",
-							},
-						},
+						"req": true,
 					},
 					map[string]any{
 						"name": "id",
@@ -6388,40 +6278,25 @@ func MakeConfig() map[string]any {
 						"name": "modifiedBy",
 						"title": "Modified By",
 						"type": "`$STRING`",
-						"op": map[string]any{
-							"list": map[string]any{
-								"req": true,
-								"type": "`$STRING`",
-							},
-						},
+						"req": true,
 					},
 					map[string]any{
 						"name": "modifiedOn",
 						"title": "Modified On",
 						"type": "`$STRING`",
-						"op": map[string]any{
-							"list": map[string]any{
-								"req": true,
-								"type": "`$STRING`",
-							},
-						},
+						"req": true,
 						"format": "date-time",
 					},
 					map[string]any{
 						"name": "owner",
 						"title": "Owner",
 						"type": "`$STRING`",
+						"req": true,
 						"op": map[string]any{
-							"list": map[string]any{
-								"req": true,
+							"update": map[string]any{
 								"type": "`$STRING`",
 							},
 						},
-					},
-					map[string]any{
-						"name": "properties",
-						"title": "Properties",
-						"type": "`$OBJECT`",
 					},
 				},
 				"id": map[string]any{
@@ -6449,7 +6324,7 @@ func MakeConfig() map[string]any {
 								"rename": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body.labels`",
+									"res": "`body`",
 								},
 								"args": map[string]any{},
 								"select": map[string]any{},
@@ -6543,13 +6418,13 @@ func MakeConfig() map[string]any {
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body.labels`",
+									"res": "`body`",
 								},
 								"args": map[string]any{
 									"params": []any{
 										map[string]any{
 											"name": "id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -6598,7 +6473,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -6647,7 +6522,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -6730,7 +6605,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -6788,7 +6663,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "group_id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -6796,7 +6671,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "id",
-											"orig": "rule_type",
+											"orig": "ruleType",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -6843,7 +6718,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -6914,151 +6789,26 @@ func MakeConfig() map[string]any {
 					"ancestors": []any{},
 				},
 			},
-			"mcp_tool": map[string]any{
-				"fields": []any{
-					map[string]any{
-						"name": "artifactId",
-						"title": "Artifact Id",
-						"type": "`$STRING`",
-					},
-					map[string]any{
-						"name": "createdOn",
-						"title": "Created On",
-						"type": "`$INTEGER`",
-						"format": "int64",
-					},
-					map[string]any{
-						"name": "description",
-						"title": "Description",
-						"type": "`$STRING`",
-					},
-					map[string]any{
-						"name": "groupId",
-						"title": "Group Id",
-						"type": "`$STRING`",
-					},
-					map[string]any{
-						"name": "name",
-						"title": "Name",
-						"type": "`$STRING`",
-					},
-					map[string]any{
-						"name": "owner",
-						"title": "Owner",
-						"type": "`$STRING`",
-					},
-					map[string]any{
-						"name": "parameters",
-						"title": "Parameters",
-						"type": "`$ARRAY`",
-					},
-					map[string]any{
-						"name": "title",
-						"title": "Title",
-						"type": "`$STRING`",
-					},
-				},
-				"name": "mcp_tool",
-				"op": map[string]any{
-					"list": map[string]any{
-						"input": "data",
-						"name": "list",
-						"points": []any{
-							map[string]any{
-								"kind": "http",
-								"method": "GET",
-								"orig": "/well-known/mcp-tools",
-								"segments": []any{
-									map[string]any{
-										"lit": "well-known",
-									},
-									map[string]any{
-										"lit": "mcp-tools",
-									},
-								},
-								"parts": []any{
-									"well-known",
-									"mcp-tools",
-								},
-								"rename": map[string]any{},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body.tools`",
-								},
-								"args": map[string]any{
-									"query": []any{
-										map[string]any{
-											"name": "limit",
-											"orig": "limit",
-											"type": "`$INTEGER`",
-											"kind": "query",
-											"example": 20,
-										},
-										map[string]any{
-											"name": "name",
-											"orig": "name",
-											"type": "`$STRING`",
-											"kind": "query",
-										},
-										map[string]any{
-											"name": "offset",
-											"orig": "offset",
-											"type": "`$INTEGER`",
-											"kind": "query",
-											"example": 0,
-										},
-										map[string]any{
-											"name": "parameter",
-											"orig": "parameter",
-											"type": "`$ARRAY`",
-											"kind": "query",
-										},
-									},
-								},
-								"select": map[string]any{
-									"exist": []any{
-										"limit",
-										"name",
-										"offset",
-										"parameter",
-									},
-								},
-							},
-						},
-					},
-				},
-				"relations": map[string]any{
-					"ancestors": []any{},
-				},
-			},
 			"metadata": map[string]any{
 				"fields": []any{
 					map[string]any{
 						"name": "artifactId",
 						"title": "Artifact Id",
 						"type": "`$STRING`",
-						"op": map[string]any{
-							"load": map[string]any{
-								"req": true,
-								"type": "`$STRING`",
-							},
-						},
+						"req": true,
 					},
 					map[string]any{
 						"name": "artifactType",
 						"title": "Artifact Type",
 						"type": "`$STRING`",
-						"op": map[string]any{
-							"load": map[string]any{
-								"req": true,
-								"type": "`$STRING`",
-							},
-						},
+						"req": true,
 					},
 					map[string]any{
 						"name": "contentId",
 						"title": "Content Id",
 						"type": "`$INTEGER`",
+						"req": true,
+						"format": "int64",
 					},
 					map[string]any{
 						"name": "contractMetadata",
@@ -7070,12 +6820,7 @@ func MakeConfig() map[string]any {
 						"name": "createdOn",
 						"title": "Created On",
 						"type": "`$STRING`",
-						"op": map[string]any{
-							"load": map[string]any{
-								"req": true,
-								"type": "`$STRING`",
-							},
-						},
+						"req": true,
 						"format": "date-time",
 					},
 					map[string]any{
@@ -7087,6 +6832,8 @@ func MakeConfig() map[string]any {
 						"name": "globalId",
 						"title": "Global Id",
 						"type": "`$INTEGER`",
+						"req": true,
+						"format": "int64",
 					},
 					map[string]any{
 						"name": "groupId",
@@ -7108,13 +6855,23 @@ func MakeConfig() map[string]any {
 						"name": "modifiedBy",
 						"title": "Modified By",
 						"type": "`$STRING`",
-						"req": true,
+						"op": map[string]any{
+							"load": map[string]any{
+								"req": true,
+								"type": "`$STRING`",
+							},
+						},
 					},
 					map[string]any{
 						"name": "modifiedOn",
 						"title": "Modified On",
 						"type": "`$STRING`",
-						"req": true,
+						"op": map[string]any{
+							"load": map[string]any{
+								"req": true,
+								"type": "`$STRING`",
+							},
+						},
 						"format": "date-time",
 					},
 					map[string]any{
@@ -7126,17 +6883,24 @@ func MakeConfig() map[string]any {
 						"name": "owner",
 						"title": "Owner",
 						"type": "`$STRING`",
+						"req": true,
 						"op": map[string]any{
-							"load": map[string]any{
-								"req": true,
+							"update": map[string]any{
 								"type": "`$STRING`",
 							},
 						},
 					},
 					map[string]any{
+						"name": "state",
+						"title": "State",
+						"type": "`$STRING`",
+					},
+					map[string]any{
 						"name": "version",
 						"title": "Version",
-						"type": "`$INTEGER`",
+						"type": "`$STRING`",
+						"req": true,
+						"short": "A single version of an artifact.",
 					},
 				},
 				"name": "metadata",
@@ -7196,7 +6960,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "artifact_id",
-											"orig": "artifact_id",
+											"orig": "artifactId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -7204,7 +6968,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "group_id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -7212,7 +6976,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "version_expression",
-											"orig": "version_expression",
+											"orig": "versionExpression",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -7275,13 +7039,13 @@ func MakeConfig() map[string]any {
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body.labels`",
+									"res": "`body`",
 								},
 								"args": map[string]any{
 									"params": []any{
 										map[string]any{
 											"name": "artifact_id",
-											"orig": "artifact_id",
+											"orig": "artifactId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -7289,7 +7053,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "group_id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -7297,7 +7061,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "version_expression",
-											"orig": "version_expression",
+											"orig": "versionExpression",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -7350,7 +7114,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "artifact_id",
-											"orig": "artifact_id",
+											"orig": "artifactId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -7358,7 +7122,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "group_id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -7430,7 +7194,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "artifact_id",
-											"orig": "artifact_id",
+											"orig": "artifactId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -7438,7 +7202,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "group_id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -7446,7 +7210,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "version_expression",
-											"orig": "version_expression",
+											"orig": "versionExpression",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -7455,7 +7219,7 @@ func MakeConfig() map[string]any {
 									"query": []any{
 										map[string]any{
 											"name": "dry_run",
-											"orig": "dry_run",
+											"orig": "dryRun",
 											"type": "`$BOOLEAN`",
 											"kind": "query",
 										},
@@ -7518,7 +7282,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "artifact_id",
-											"orig": "artifact_id",
+											"orig": "artifactId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -7526,7 +7290,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "group_id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -7534,7 +7298,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "version_expression",
-											"orig": "version_expression",
+											"orig": "versionExpression",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -7600,7 +7364,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "artifact_id",
-											"orig": "artifact_id",
+											"orig": "artifactId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -7608,7 +7372,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "group_id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -7616,7 +7380,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "version_expression",
-											"orig": "version_expression",
+											"orig": "versionExpression",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -7670,7 +7434,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "artifact_id",
-											"orig": "artifact_id",
+											"orig": "artifactId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -7678,7 +7442,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "group_id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -7713,31 +7477,22 @@ func MakeConfig() map[string]any {
 			"odcs_contract_result": map[string]any{
 				"fields": []any{
 					map[string]any{
-						"name": "labelsApplied",
-						"title": "Labels Applied",
-						"type": "`$INTEGER`",
-						"short": "Number of contract.* labels set on the schema artifact.",
-						"format": "int32",
+						"name": "contractId",
+						"title": "Contract Id",
+						"type": "`$STRING`",
+						"short": "The contract artifact ID.",
 					},
 					map[string]any{
-						"name": "rulesApplied",
-						"title": "Rules Applied",
-						"type": "`$INTEGER`",
-						"short": "Number of CEL quality rules projected onto the schema artifact.",
-						"format": "int32",
+						"name": "projection",
+						"title": "Projection",
+						"type": "`$OBJECT`",
+						"short": "Summary of the projection performed when an ODCS contract is applied.",
 					},
 					map[string]any{
-						"name": "tagsApplied",
-						"title": "Tags Applied",
-						"type": "`$INTEGER`",
-						"short": "Number of field-tag.* labels set on the schema artifact version.",
-						"format": "int32",
-					},
-					map[string]any{
-						"name": "warnings",
-						"title": "Warnings",
-						"type": "`$ARRAY`",
-						"short": "Any warnings encountered during projection.",
+						"name": "version",
+						"title": "Version",
+						"type": "`$STRING`",
+						"short": "The ODCS contract version.",
 					},
 				},
 				"name": "odcs_contract_result",
@@ -7773,13 +7528,13 @@ func MakeConfig() map[string]any {
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body.projection`",
+									"res": "`body`",
 								},
 								"args": map[string]any{
 									"params": []any{
 										map[string]any{
 											"name": "group_id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -7830,20 +7585,20 @@ func MakeConfig() map[string]any {
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body.projection`",
+									"res": "`body`",
 								},
 								"args": map[string]any{
 									"params": []any{
 										map[string]any{
 											"name": "contract_id",
-											"orig": "contract_id",
+											"orig": "contractId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
 										},
 										map[string]any{
 											"name": "group_id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -7926,7 +7681,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "group_id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -8058,7 +7813,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "artifact_id",
-											"orig": "artifact_id",
+											"orig": "artifactId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -8066,7 +7821,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "group_id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -8074,7 +7829,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "version_id",
-											"orig": "version_expression",
+											"orig": "versionExpression",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -8152,6 +7907,38 @@ func MakeConfig() map[string]any {
 				},
 				"name": "role_mapping",
 				"op": map[string]any{
+					"create": map[string]any{
+						"input": "data",
+						"name": "create",
+						"points": []any{
+							map[string]any{
+								"kind": "http",
+								"method": "POST",
+								"orig": "/admin/roleMappings",
+								"segments": []any{
+									map[string]any{
+										"lit": "admin",
+									},
+									map[string]any{
+										"lit": "roleMappings",
+									},
+								},
+								"parts": []any{
+									"admin",
+									"roleMappings",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body`",
+								},
+								"args": map[string]any{},
+								"select": map[string]any{
+									"$action": "role_mapping",
+								},
+							},
+						},
+					},
 					"list": map[string]any{
 						"input": "data",
 						"name": "list",
@@ -8194,6 +7981,7 @@ func MakeConfig() map[string]any {
 									},
 								},
 								"select": map[string]any{
+									"$action": "role_mapping",
 									"exist": []any{
 										"limit",
 										"offset",
@@ -8239,7 +8027,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "id",
-											"orig": "principal_id",
+											"orig": "principalId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -8330,7 +8118,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "artifact_id",
-											"orig": "artifact_id",
+											"orig": "artifactId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -8338,7 +8126,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "group_id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -8386,7 +8174,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "group_id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -8399,30 +8187,6 @@ func MakeConfig() map[string]any {
 										"group_id",
 									},
 								},
-							},
-							map[string]any{
-								"kind": "http",
-								"method": "GET",
-								"orig": "/admin/rules",
-								"segments": []any{
-									map[string]any{
-										"lit": "admin",
-									},
-									map[string]any{
-										"lit": "rules",
-									},
-								},
-								"parts": []any{
-									"admin",
-									"rules",
-								},
-								"rename": map[string]any{},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body`",
-								},
-								"args": map[string]any{},
-								"select": map[string]any{},
 							},
 						},
 					},
@@ -8477,7 +8241,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "artifact_id",
-											"orig": "artifact_id",
+											"orig": "artifactId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -8485,7 +8249,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "group_id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -8493,7 +8257,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "id",
-											"orig": "rule_type",
+											"orig": "ruleType",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -8546,7 +8310,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "group_id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -8554,7 +8318,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "id",
-											"orig": "rule_type",
+											"orig": "ruleType",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -8601,7 +8365,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "id",
-											"orig": "rule_type",
+											"orig": "ruleType",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -8668,7 +8432,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "artifact_id",
-											"orig": "artifact_id",
+											"orig": "artifactId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -8676,7 +8440,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "group_id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -8684,7 +8448,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "id",
-											"orig": "rule_type",
+											"orig": "ruleType",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -8737,7 +8501,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "group_id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -8745,7 +8509,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "id",
-											"orig": "rule_type",
+											"orig": "ruleType",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -8792,7 +8556,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "id",
-											"orig": "rule_type",
+											"orig": "ruleType",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -8927,7 +8691,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "artifact_id",
-											"orig": "artifact_id",
+											"orig": "artifactId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -8935,7 +8699,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "group_id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -9060,13 +8824,13 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "group_id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "query",
 										},
 										map[string]any{
 											"name": "label",
-											"orig": "label",
+											"orig": "labels",
 											"type": "`$ARRAY`",
 											"kind": "query",
 										},
@@ -9468,7 +9232,12 @@ func MakeConfig() map[string]any {
 						"name": "state",
 						"title": "State",
 						"type": "`$STRING`",
-						"req": true,
+						"op": map[string]any{
+							"list": map[string]any{
+								"req": true,
+								"type": "`$STRING`",
+							},
+						},
 					},
 					map[string]any{
 						"name": "value",
@@ -9480,12 +9249,13 @@ func MakeConfig() map[string]any {
 						"name": "version",
 						"title": "Version",
 						"type": "`$STRING`",
+						"req": true,
 						"op": map[string]any{
-							"list": map[string]any{
-								"req": true,
+							"create": map[string]any{
 								"type": "`$STRING`",
 							},
 						},
+						"short": "A single version of an artifact.",
 					},
 					map[string]any{
 						"name": "versions",
@@ -9530,14 +9300,14 @@ func MakeConfig() map[string]any {
 									"query": []any{
 										map[string]any{
 											"name": "artifact_id",
-											"orig": "artifact_id",
+											"orig": "artifactId",
 											"type": "`$STRING`",
 											"kind": "query",
 											"example": "\"example-artifact\"",
 										},
 										map[string]any{
 											"name": "artifact_type",
-											"orig": "artifact_type",
+											"orig": "artifactType",
 											"type": "`$STRING`",
 											"kind": "query",
 											"example": "AVRO",
@@ -9550,7 +9320,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "group_id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "query",
 											"example": "\"my-group\"",
@@ -9583,7 +9353,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "skip_count",
-											"orig": "skip_count",
+											"orig": "skipCount",
 											"type": "`$BOOLEAN`",
 											"kind": "query",
 											"example": false,
@@ -9646,16 +9416,14 @@ func MakeConfig() map[string]any {
 									},
 								},
 								"transform": map[string]any{
-									"req": map[string]any{
-										"version": "`reqdata`",
-									},
-									"res": "`body.labels`",
+									"req": "`reqdata`",
+									"res": "`body`",
 								},
 								"args": map[string]any{
 									"params": []any{
 										map[string]any{
 											"name": "artifact_id",
-											"orig": "artifact_id",
+											"orig": "artifactId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -9663,7 +9431,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "group_id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -9673,7 +9441,7 @@ func MakeConfig() map[string]any {
 									"query": []any{
 										map[string]any{
 											"name": "dry_run",
-											"orig": "dry_run",
+											"orig": "dryRun",
 											"type": "`$BOOLEAN`",
 											"kind": "query",
 										},
@@ -9718,14 +9486,14 @@ func MakeConfig() map[string]any {
 									"query": []any{
 										map[string]any{
 											"name": "artifact_id",
-											"orig": "artifact_id",
+											"orig": "artifactId",
 											"type": "`$STRING`",
 											"kind": "query",
 											"example": "\"example-artifact\"",
 										},
 										map[string]any{
 											"name": "artifact_type",
-											"orig": "artifact_type",
+											"orig": "artifactType",
 											"type": "`$STRING`",
 											"kind": "query",
 											"example": "AVRO",
@@ -9738,7 +9506,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "content_id",
-											"orig": "content_id",
+											"orig": "contentId",
 											"type": "`$INTEGER`",
 											"kind": "query",
 										},
@@ -9750,20 +9518,20 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "global_id",
-											"orig": "global_id",
+											"orig": "globalId",
 											"type": "`$INTEGER`",
 											"kind": "query",
 										},
 										map[string]any{
 											"name": "group_id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "query",
 											"example": "\"my-group\"",
 										},
 										map[string]any{
 											"name": "label",
-											"orig": "label",
+											"orig": "labels",
 											"type": "`$ARRAY`",
 											"kind": "query",
 										},
@@ -9801,7 +9569,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "skip_count",
-											"orig": "skip_count",
+											"orig": "skipCount",
 											"type": "`$BOOLEAN`",
 											"kind": "query",
 											"example": false,
@@ -9891,7 +9659,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "artifact_id",
-											"orig": "artifact_id",
+											"orig": "artifactId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -9899,7 +9667,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "group_id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -9933,7 +9701,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "skip_count",
-											"orig": "skip_count",
+											"orig": "skipCount",
 											"type": "`$BOOLEAN`",
 											"kind": "query",
 											"example": false,
@@ -10003,7 +9771,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "artifact_id",
-											"orig": "artifact_id",
+											"orig": "artifactId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -10011,7 +9779,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "branch_id",
-											"orig": "branch_id",
+											"orig": "branchId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -10019,7 +9787,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "group_id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -10108,7 +9876,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "artifact_id",
-											"orig": "artifact_id",
+											"orig": "artifactId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -10116,7 +9884,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "group_id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -10124,7 +9892,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "version_expression",
-											"orig": "version_expression",
+											"orig": "versionExpression",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -10139,7 +9907,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "reference",
-											"orig": "reference",
+											"orig": "references",
 											"type": "`$STRING`",
 											"kind": "query",
 										},
@@ -10207,7 +9975,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "artifact_id",
-											"orig": "artifact_id",
+											"orig": "artifactId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -10215,7 +9983,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "group_id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -10223,7 +9991,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "version_expression",
-											"orig": "version_expression",
+											"orig": "versionExpression",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -10301,7 +10069,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "artifact_id",
-											"orig": "artifact_id",
+											"orig": "artifactId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -10309,14 +10077,14 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "comment_id",
-											"orig": "comment_id",
+											"orig": "commentId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
 										},
 										map[string]any{
 											"name": "group_id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -10324,7 +10092,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "version_id",
-											"orig": "version_expression",
+											"orig": "versionExpression",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -10387,7 +10155,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "artifact_id",
-											"orig": "artifact_id",
+											"orig": "artifactId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -10395,7 +10163,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "group_id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -10403,7 +10171,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "id",
-											"orig": "version_expression",
+											"orig": "versionExpression",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -10480,7 +10248,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "artifact_id",
-											"orig": "artifact_id",
+											"orig": "artifactId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -10488,14 +10256,14 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "comment_id",
-											"orig": "comment_id",
+											"orig": "commentId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
 										},
 										map[string]any{
 											"name": "group_id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -10503,7 +10271,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "version_id",
-											"orig": "version_expression",
+											"orig": "versionExpression",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -10548,13 +10316,79 @@ func MakeConfig() map[string]any {
 			"well_known": map[string]any{
 				"fields": []any{
 					map[string]any{
+						"name": "artifactId",
+						"title": "Artifact Id",
+						"type": "`$STRING`",
+					},
+					map[string]any{
+						"name": "capabilities",
+						"title": "Capabilities",
+						"type": "`$OBJECT`",
+						"short": "Capabilities of an A2A agent.",
+					},
+					map[string]any{
+						"name": "createdOn",
+						"title": "Created On",
+						"type": "`$INTEGER`",
+						"format": "int64",
+					},
+					map[string]any{
+						"name": "description",
+						"title": "Description",
+						"type": "`$STRING`",
+					},
+					map[string]any{
+						"name": "groupId",
+						"title": "Group Id",
+						"type": "`$STRING`",
+					},
+					map[string]any{
 						"name": "id",
 						"title": "Id",
+						"type": "`$STRING`",
+					},
+					map[string]any{
+						"name": "name",
+						"title": "Name",
+						"type": "`$STRING`",
+					},
+					map[string]any{
+						"name": "owner",
+						"title": "Owner",
+						"type": "`$STRING`",
+					},
+					map[string]any{
+						"name": "parameters",
+						"title": "Parameters",
+						"type": "`$ARRAY`",
+					},
+					map[string]any{
+						"name": "skills",
+						"title": "Skills",
+						"type": "`$ARRAY`",
+					},
+					map[string]any{
+						"name": "supportedInterfaces",
+						"title": "Supported Interfaces",
+						"type": "`$ARRAY`",
+					},
+					map[string]any{
+						"name": "title",
+						"title": "Title",
+						"type": "`$STRING`",
+					},
+					map[string]any{
+						"name": "version",
+						"title": "Version",
 						"type": "`$STRING`",
 					},
 				},
 				"id": map[string]any{
 					"field": "id",
+					"from": map[string]any{
+						"artifact_id": "artifactId",
+						"group_id": "groupId",
+					},
 					"name": "id",
 					"parts": []any{
 						"group_id",
@@ -10564,6 +10398,153 @@ func MakeConfig() map[string]any {
 				},
 				"name": "well_known",
 				"op": map[string]any{
+					"list": map[string]any{
+						"input": "data",
+						"name": "list",
+						"points": []any{
+							map[string]any{
+								"kind": "http",
+								"method": "GET",
+								"orig": "/well-known/agents",
+								"segments": []any{
+									map[string]any{
+										"lit": "well-known",
+									},
+									map[string]any{
+										"lit": "agents",
+									},
+								},
+								"parts": []any{
+									"well-known",
+									"agents",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body.agents`",
+								},
+								"args": map[string]any{
+									"query": []any{
+										map[string]any{
+											"name": "capability",
+											"orig": "capability",
+											"type": "`$ARRAY`",
+											"kind": "query",
+										},
+										map[string]any{
+											"name": "input_mode",
+											"orig": "inputMode",
+											"type": "`$ARRAY`",
+											"kind": "query",
+										},
+										map[string]any{
+											"name": "limit",
+											"orig": "limit",
+											"type": "`$INTEGER`",
+											"kind": "query",
+											"example": 20,
+										},
+										map[string]any{
+											"name": "name",
+											"orig": "name",
+											"type": "`$STRING`",
+											"kind": "query",
+										},
+										map[string]any{
+											"name": "offset",
+											"orig": "offset",
+											"type": "`$INTEGER`",
+											"kind": "query",
+											"example": 0,
+										},
+										map[string]any{
+											"name": "output_mode",
+											"orig": "outputMode",
+											"type": "`$ARRAY`",
+											"kind": "query",
+										},
+										map[string]any{
+											"name": "skill",
+											"orig": "skill",
+											"type": "`$ARRAY`",
+											"kind": "query",
+										},
+									},
+								},
+								"select": map[string]any{
+									"exist": []any{
+										"capability",
+										"input_mode",
+										"limit",
+										"name",
+										"offset",
+										"output_mode",
+										"skill",
+									},
+								},
+							},
+							map[string]any{
+								"kind": "http",
+								"method": "GET",
+								"orig": "/well-known/mcp-tools",
+								"segments": []any{
+									map[string]any{
+										"lit": "well-known",
+									},
+									map[string]any{
+										"lit": "mcp-tools",
+									},
+								},
+								"parts": []any{
+									"well-known",
+									"mcp-tools",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body.tools`",
+								},
+								"args": map[string]any{
+									"query": []any{
+										map[string]any{
+											"name": "limit",
+											"orig": "limit",
+											"type": "`$INTEGER`",
+											"kind": "query",
+											"example": 20,
+										},
+										map[string]any{
+											"name": "name",
+											"orig": "name",
+											"type": "`$STRING`",
+											"kind": "query",
+										},
+										map[string]any{
+											"name": "offset",
+											"orig": "offset",
+											"type": "`$INTEGER`",
+											"kind": "query",
+											"example": 0,
+										},
+										map[string]any{
+											"name": "parameter",
+											"orig": "parameter",
+											"type": "`$ARRAY`",
+											"kind": "query",
+										},
+									},
+								},
+								"select": map[string]any{
+									"exist": []any{
+										"limit",
+										"name",
+										"offset",
+										"parameter",
+									},
+								},
+							},
+						},
+					},
 					"load": map[string]any{
 						"input": "data",
 						"name": "load",
@@ -10606,14 +10587,14 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "artifact_id",
-											"orig": "artifact_id",
+											"orig": "artifactId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
 										},
 										map[string]any{
 											"name": "group_id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -10674,14 +10655,14 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "artifact_id",
-											"orig": "artifact_id",
+											"orig": "artifactId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
 										},
 										map[string]any{
 											"name": "group_id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -10741,7 +10722,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "schema_type",
-											"orig": "schema_type",
+											"orig": "schemaType",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -10769,9 +10750,6 @@ func MakeConfig() map[string]any {
 					"ancestors": []any{
 						[]any{
 							"$.main.kit.entity.agent",
-						},
-						[]any{
-							"$.main.kit.entity.mcp_tool",
 						},
 					},
 				},
@@ -10843,7 +10821,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "artifact_id",
-											"orig": "artifact_id",
+											"orig": "artifactId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -10851,7 +10829,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "group_id",
-											"orig": "group_id",
+											"orig": "groupId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -10859,7 +10837,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "version_expression",
-											"orig": "version_expression",
+											"orig": "versionExpression",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,

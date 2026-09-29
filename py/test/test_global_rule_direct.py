@@ -1,4 +1,4 @@
-# McpTool direct test
+# GlobalRule direct test
 
 import json
 import pytest
@@ -9,14 +9,14 @@ from apicurioregistry_sdk.core import helpers
 from test import runner
 
 
-class TestMcpToolDirect:
+class TestGlobalRuleDirect:
 
-    def test_should_direct_list_mcp_tool(self):
-        setup = _mcp_tool_direct_setup([
+    def test_should_direct_list_global_rule(self):
+        setup = _global_rule_direct_setup([
             {"id": "direct01"},
             {"id": "direct02"},
         ])
-        _skip, _reason = runner.is_control_skipped("direct", "direct-list-mcp_tool", "live" if setup["live"] else "unit")
+        _skip, _reason = runner.is_control_skipped("direct", "direct-list-global_rule", "live" if setup["live"] else "unit")
         if _skip:
             # pytest already imported at module scope
             pytest.skip(_reason or "skipped via sdk-test-control.json")
@@ -25,7 +25,7 @@ class TestMcpToolDirect:
 
 
         result = client.direct({
-            "path": "well-known/mcp-tools",
+            "path": "admin/rules",
             "method": "GET",
             "params": {},
         })
@@ -52,13 +52,13 @@ class TestMcpToolDirect:
 
 
 
-def _mcp_tool_direct_setup(mockres):
+def _global_rule_direct_setup(mockres):
     runner.load_env_local()
 
     calls = []
 
     env = runner.env_override({
-        "APICURIO_REGISTRY_TEST_MCP_TOOL_ENTID": {},
+        "APICURIO_REGISTRY_TEST_GLOBAL_RULE_ENTID": {},
         "APICURIO_REGISTRY_TEST_LIVE": "FALSE",
         "APICURIO_REGISTRY_SERVER_REGISTRY": "MY-REGISTRY-URL",
     })

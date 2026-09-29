@@ -20,7 +20,7 @@ import (
 const prompt = "apicurio-registry"
 
 // entitiesHelp is the space-separated entity list shown by /help.
-const entitiesHelp = "admin agent agent_card ai_catalog ard_explore ard_search artifact artifact_reference artifact_rule artifact_type branch comment configuration_property consumer_version_heatmap content contract contract_rule contract_rule_set create_artifact deprecation_readiness download_ref git_op git_ops_status git_ops_validate_task global_rule group group_rule kafka_sql mcp_tool metadata odcs_contract_result odcs_contract_summary reference_graph role_mapping rule searched_branch searched_group system_info usage_summary user_info user_interface_config version well_known wrapped_version_state"
+const entitiesHelp = "admin agent agent_card ai_catalog ard_explore ard_search artifact artifact_reference artifact_rule artifact_type branch comment configuration_property consumer_version_heatmap content contract contract_rule contract_rule_set create_artifact deprecation_readiness download_ref git_op git_ops_status git_ops_validate_task global_rule group group_rule kafka_sql metadata odcs_contract_result odcs_contract_summary reference_graph role_mapping rule searched_branch searched_group system_info usage_summary user_info user_interface_config version well_known wrapped_version_state"
 
 func main() {
 	os.Exit(run(os.Args[1:], os.Stdin, os.Stdout, os.Stderr))

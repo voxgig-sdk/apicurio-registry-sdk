@@ -1,22 +1,22 @@
 <?php
 declare(strict_types=1);
 
-// McpTool direct test
+// GlobalRule direct test
 
 require_once __DIR__ . '/../apicurioregistry_sdk.php';
 require_once __DIR__ . '/Runner.php';
 
 use PHPUnit\Framework\TestCase;
 
-class McpToolDirectTest extends TestCase
+class GlobalRuleDirectTest extends TestCase
 {
-    public function test_direct_list_mcp_tool(): void
+    public function test_direct_list_global_rule(): void
     {
-        $setup = mcp_tool_direct_setup([
+        $setup = global_rule_direct_setup([
             ["id" => "direct01"],
             ["id" => "direct02"],
         ]);
-        [$_shouldSkip, $_reason] = Runner::is_control_skipped("direct", "direct-list-mcp_tool", $setup["live"] ? "live" : "unit");
+        [$_shouldSkip, $_reason] = Runner::is_control_skipped("direct", "direct-list-global_rule", $setup["live"] ? "live" : "unit");
         if ($_shouldSkip) {
             $this->markTestSkipped($_reason ?? "skipped via sdk-test-control.json");
             return;
@@ -25,7 +25,7 @@ class McpToolDirectTest extends TestCase
 
 
         $result = $client->direct([
-            "path" => "well-known/mcp-tools",
+            "path" => "admin/rules",
             "method" => "GET",
             "params" => [],
         ]);
@@ -59,14 +59,14 @@ class McpToolDirectTest extends TestCase
 }
 
 
-function mcp_tool_direct_setup($mockres)
+function global_rule_direct_setup($mockres)
 {
     Runner::load_env_local();
 
     $calls = new \ArrayObject();
 
     $env = Runner::env_override([
-        "APICURIO_REGISTRY_TEST_MCP_TOOL_ENTID" => [],
+        "APICURIO_REGISTRY_TEST_GLOBAL_RULE_ENTID" => [],
         "APICURIO_REGISTRY_TEST_LIVE" => "FALSE",
         "APICURIO_REGISTRY_SERVER_REGISTRY" => 'MY-REGISTRY-URL',
     ]);

@@ -44,14 +44,14 @@ describe('GlobalRuleEntity', async () => {
   test('basic', async (t) => {
 
     const live = 'TRUE' === process.env.APICURIO_REGISTRY_TEST_LIVE
-    for (const op of ['create', 'remove']) {
+    for (const op of ['create', 'list', 'remove']) {
       if (!live && maybeSkipControl(t, 'entityOp', 'global_rule.' + op, live)) return
     }
 
     
     const setup = basicSetup()
     if (setup.live) {
-      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"config":{"a":true,"h":"Config","n":"config","r":true,"t":"`$STRING`","key$":"config","index$":0},"id":{"a":true,"h":"Id","n":"id","r":false,"t":"`$STRING`","key$":"id","index$":1},"ruleType":{"a":true,"h":"Rule Type","n":"ruleType","r":false,"t":"`$STRING`","key$":"ruleType","index$":2}},"id":{"field":"id","name":"id"},"name":"global_rule","op":{"create":{"input":"data","name":"create","points":[{"a":true,"co":{"id":"POST /admin/rules","source":"openapi3","version":2},"g":{},"k":"http","m":"POST","o":"/admin/rules","q":{},"r":{},"s":[{"lit":"admin"},{"lit":"rules"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"create"},"remove":{"input":"data","name":"remove","points":[{"a":true,"co":{"id":"DELETE /admin/rules/{ruleType}","source":"openapi3","version":2},"g":{"params":[{"a":true,"ex":"VALIDITY","k":"param","n":"id","or":"rule_type","r":true,"t":"`$STRING`","index$":0}]},"k":"http","m":"DELETE","o":"/admin/rules/{ruleType}","q":{"exist":["id"]},"r":{"param":{"ruleType":"id"}},"s":[{"lit":"admin"},{"lit":"rules"},{"var":"id"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0},{"a":true,"co":{"id":"DELETE /admin/rules","source":"openapi3","version":2},"g":{},"k":"http","m":"DELETE","o":"/admin/rules","q":{},"r":{},"s":[{"lit":"admin"},{"lit":"rules"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":1}],"key$":"remove"}},"relations":{"ancestors":[]},"key$":"global_rule","name__orig":"global_rule","Name":"GlobalRule","name_":"global_rule","name-":"global-rule","NAME":"GLOBAL_RULE","index$":24}, {"active":true,"entity":"global_rule","key$":"BasicGlobalRuleFlow","kind":"basic","name":"BasicGlobalRuleFlow","param":{},"step":[{"a":true,"d":{},"i":{"ref":"global_rule_ref01"},"m":{},"o":"create","s":[],"v":[],"index$":0},{"a":true,"d":{},"i":{"ref":"global_rule_ref01","suffix":"_rm0"},"m":{},"o":"remove","s":[],"v":[],"index$":1}]}, 'GlobalRule', {"POST /admin/rules":{"protocol":"http","requestBody":{"content":{"application/json":{"schema":{"title":"Root Type for Rule","description":"","required":["config"],"type":"object","properties":{"config":{"type":"string","key$":"config"},"ruleType":{"description":"","enum":["VALIDITY","COMPATIBILITY","INTEGRITY"],"type":"string","example":"VALIDITY","x-codegen-package":"io.apicurio.registry.types","x-ref":"#/components/schemas/RuleType","key$":"ruleType"}},"example":{"ruleType":"VALIDITY","config":"FULL"},"x-ref":"#/components/schemas/CreateRule","index$":1}}},"required":true},"parameters":[]},"DELETE /admin/rules/{ruleType}":{"protocol":"http","parameters":[{"name":"ruleType","description":"The unique name/type of a rule.","schema":{"description":"","enum":["VALIDITY","COMPATIBILITY","INTEGRITY"],"type":"string","example":"VALIDITY","x-codegen-package":"io.apicurio.registry.types","x-ref":"#/components/schemas/RuleType"},"in":"path","required":true,"index$":0}]},"DELETE /admin/rules":{"protocol":"http","parameters":[]}})
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"config":{"a":true,"h":"Config","n":"config","r":true,"t":"`$STRING`","key$":"config","index$":0},"id":{"a":true,"h":"Id","n":"id","r":false,"t":"`$STRING`","key$":"id","index$":1},"ruleType":{"a":true,"h":"Rule Type","n":"ruleType","r":false,"t":"`$STRING`","key$":"ruleType","index$":2}},"id":{"field":"id","name":"id"},"name":"global_rule","op":{"create":{"input":"data","name":"create","points":[{"a":true,"co":{"id":"POST /admin/rules","source":"openapi3","version":2},"g":{},"k":"http","m":"POST","o":"/admin/rules","q":{},"r":{},"s":[{"lit":"admin"},{"lit":"rules"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"create"},"list":{"input":"data","name":"list","points":[{"a":true,"co":{"id":"GET /admin/rules","source":"openapi3","version":2},"g":{},"k":"http","m":"GET","o":"/admin/rules","q":{},"r":{},"s":[{"lit":"admin"},{"lit":"rules"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"list"},"remove":{"input":"data","name":"remove","points":[{"a":true,"co":{"id":"DELETE /admin/rules/{ruleType}","source":"openapi3","version":2},"g":{"params":[{"a":true,"ex":"VALIDITY","k":"param","n":"id","or":"ruleType","r":true,"t":"`$STRING`","index$":0}]},"k":"http","m":"DELETE","o":"/admin/rules/{ruleType}","q":{"exist":["id"]},"r":{"param":{"ruleType":"id"}},"s":[{"lit":"admin"},{"lit":"rules"},{"var":"id"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0},{"a":true,"co":{"id":"DELETE /admin/rules","source":"openapi3","version":2},"g":{},"k":"http","m":"DELETE","o":"/admin/rules","q":{},"r":{},"s":[{"lit":"admin"},{"lit":"rules"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":1}],"key$":"remove"}},"relations":{"ancestors":[]},"key$":"global_rule","name__orig":"global_rule","Name":"GlobalRule","name_":"global_rule","name-":"global-rule","NAME":"GLOBAL_RULE","index$":24}, {"active":true,"entity":"global_rule","key$":"BasicGlobalRuleFlow","kind":"basic","name":"BasicGlobalRuleFlow","param":{},"step":[{"a":true,"d":{},"i":{"ref":"global_rule_ref01"},"m":{},"o":"create","s":[],"v":[],"index$":0},{"a":true,"d":{},"i":{},"m":{},"o":"list","s":[],"v":[{"apply":"ItemExists","def":{"ref":"global_rule_ref01"}}],"index$":1},{"a":true,"d":{},"i":{"ref":"global_rule_ref01","suffix":"_rm0"},"m":{},"o":"remove","s":[],"v":[],"index$":2},{"a":true,"d":{},"i":{"suffix":"_rt0"},"m":{},"o":"list","s":[],"v":[{"apply":"ItemNotExists","def":{"ref":"global_rule_ref01"}}],"index$":3}]}, 'GlobalRule', {"POST /admin/rules":{"protocol":"http","requestBody":{"content":{"application/json":{"schema":{"title":"Root Type for Rule","description":"","required":["config"],"type":"object","properties":{"config":{"type":"string","key$":"config"},"ruleType":{"description":"","enum":["VALIDITY","COMPATIBILITY","INTEGRITY"],"type":"string","example":"VALIDITY","x-codegen-package":"io.apicurio.registry.types","x-ref":"#/components/schemas/RuleType","key$":"ruleType"}},"example":{"ruleType":"VALIDITY","config":"FULL"},"x-ref":"#/components/schemas/CreateRule","index$":1}}},"required":true},"parameters":[]},"GET /admin/rules":{"protocol":"http","parameters":[]},"DELETE /admin/rules/{ruleType}":{"protocol":"http","parameters":[{"name":"ruleType","description":"The unique name/type of a rule.","schema":{"description":"","enum":["VALIDITY","COMPATIBILITY","INTEGRITY"],"type":"string","example":"VALIDITY","x-codegen-package":"io.apicurio.registry.types","x-ref":"#/components/schemas/RuleType"},"in":"path","required":true,"index$":0}]},"DELETE /admin/rules":{"protocol":"http","parameters":[]}})
     }
     const client = setup.client
     const struct = setup.struct
@@ -68,10 +68,26 @@ describe('GlobalRuleEntity', async () => {
     assert(null != global_rule_ref01_data.id)
 
 
+    // LIST
+    const global_rule_ref01_match: any = {}
+
+    const global_rule_ref01_list = (await global_rule_ref01_ent.list(global_rule_ref01_match)).map((e: any) => e.data())
+
+    assert(!isempty(select(global_rule_ref01_list, { id: global_rule_ref01_data.id })))
+
+
     // REMOVE
     const global_rule_ref01_match_rm0: any = { id: global_rule_ref01_data.id }
     await global_rule_ref01_ent.remove(global_rule_ref01_match_rm0)
   
+
+    // LIST
+    const global_rule_ref01_match_rt0: any = {}
+
+    const global_rule_ref01_list_rt0 = (await global_rule_ref01_ent.list(global_rule_ref01_match_rt0)).map((e: any) => e.data())
+
+    assert(isempty(select(global_rule_ref01_list_rt0, { id: global_rule_ref01_data.id })))
+
 
   })
 })

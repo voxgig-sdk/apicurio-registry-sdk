@@ -52,7 +52,7 @@ class RoleMappingEntityTest < Minitest::Test
     setup = role_mapping_basic_setup(nil)
     # Per-op sdk-test-control.json skip.
     _live = setup[:live] || false
-    ["list", "load"].each do |_op|
+    ["create", "list", "load"].each do |_op|
       _should_skip, _reason = Runner.is_control_skipped("entityOp", "role_mapping." + _op, _live ? "live" : "unit")
       if _should_skip
         skip(_reason || "skipped via sdk-test-control.json")
@@ -67,20 +67,26 @@ class RoleMappingEntityTest < Minitest::Test
     end
     client = setup[:client]
 
-    # Bootstrap entity data from existing test data.
-    role_mapping_ref01_data_raw = Vs.items(Helpers.to_map(
-      Vs.getpath(setup[:data], "existing.role_mapping")))
-    role_mapping_ref01_data = nil
-    if role_mapping_ref01_data_raw.length > 0
-      role_mapping_ref01_data = Helpers.to_map(role_mapping_ref01_data_raw[0][1])
-    end
+    # CREATE
+    role_mapping_ref01_ent = client.RoleMapping(nil)
+    role_mapping_ref01_data = Helpers.to_map(Vs.getprop(
+      Vs.getpath(setup[:data], "new.role_mapping"), "role_mapping_ref01"))
+
+    role_mapping_ref01_data_result = role_mapping_ref01_ent.create(role_mapping_ref01_data, nil)
+    role_mapping_ref01_data = Helpers.to_map(role_mapping_ref01_data_result.respond_to?(:data_get) ? role_mapping_ref01_data_result.data_get : role_mapping_ref01_data_result)
+    assert !role_mapping_ref01_data.nil?
+    assert !role_mapping_ref01_data["id"].nil?
 
     # LIST
-    role_mapping_ref01_ent = client.RoleMapping(nil)
     role_mapping_ref01_match = {}
 
     role_mapping_ref01_list_result = role_mapping_ref01_ent.list(role_mapping_ref01_match, nil)
     assert role_mapping_ref01_list_result.is_a?(Array)
+
+    found_item = Vs.select(
+      Runner.entity_list_to_data(role_mapping_ref01_list_result),
+      { "id" => role_mapping_ref01_data["id"] })
+    assert !Vs.isempty(found_item)
 
     # LOAD
     role_mapping_ref01_match_dt0 = {

@@ -37,7 +37,7 @@ main: kit: entity: odcs_contract_summary: {
               {
                 k: "param"
                 n: "group_id"
-                or: "group_id"
+                or: "groupId"
                 r: true
                 t: "`$STRING`"
               }

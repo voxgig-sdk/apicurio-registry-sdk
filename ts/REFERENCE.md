@@ -384,18 +384,6 @@ Create a new `KafkaSql` entity instance.
 
 **Returns:** `KafkaSqlEntity` instance.
 
-#### `McpTool(data?: object)`
-
-Create a new `McpTool` entity instance.
-
-**Parameters:**
-
-| Name | Type | Description |
-| --- | --- | --- |
-| `data` | `object` | Initial entity data. |
-
-**Returns:** `McpToolEntity` instance.
-
 #### `Metadata(data?: object)`
 
 Create a new `Metadata` entity instance.
@@ -644,7 +632,6 @@ remaining keys are sent as that action's payload.
 | Action | Route | Call |
 | --- | --- | --- |
 | `import` | `/admin/import` | `client.Admin().create({ $action: 'import', ... })` |
-| `role_mapping` | `/admin/roleMappings` | `client.Admin().create({ $action: 'role_mapping', ... })` |
 
 An action returns that action's OWN response, which is not necessarily a
 Admin record — check the API definition for its shape.
@@ -726,17 +713,13 @@ const agent = client.Agent()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `artifactId` | `string` | No |  |
 | `capabilities` | `Record<string, any>` | No | Capabilities of an A2A agent. |
-| `createdOn` | `number` | No |  |
 | `defaultInputModes` | `any[]` | No |  |
 | `defaultOutputModes` | `any[]` | No |  |
 | `description` | `string` | No |  |
 | `documentationUrl` | `string` | No |  |
-| `groupId` | `string` | No |  |
 | `iconUrl` | `string` | No |  |
 | `name` | `string` | No |  |
-| `owner` | `string` | No |  |
 | `protocolVersion` | `string` | No |  |
 | `provider` | `Record<string, any>` | No | Provider of an A2A agent. |
 | `securityRequirements` | `any[]` | No |  |
@@ -917,8 +900,17 @@ const ard_explore = client.ArdExplore()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
+| `facets` | `Record<string, any>` | No | Facets keyed by the requested facet field name. |
 | `query` | `Record<string, any>` | No | ARD search query. |
-| `resultType` | `Record<string, any>` | Yes | Requested result type for the ARD POST /explore endpoint. |
+| `resultType` | `string` | No | Requested result type for the ARD POST /explore endpoint. |
+
+### Field Usage by Operation
+
+| Field | create |
+| --- | --- |
+| `facets` | - |
+| `query` | - |
+| `resultType` | Yes |
 
 ### Operations
 
@@ -928,7 +920,6 @@ Create a new entity with the given data.
 
 ```ts
 const result = await client.ArdExplore().create({
-  resultType: {},
 })
 ```
 
@@ -2098,14 +2089,6 @@ Return a copy of the entity options.
 const git_op = client.GitOp()
 ```
 
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `ref` | `string` | Yes | Git ref to validate (branch name, tag, or PR ref like `refs/pull/42/head`). |
-| `repoId` | `string` | Yes | Repository ID to validate against. |
-| `type` | `string` | No | Validation type. |
-
 ### Operations
 
 #### `create(data: object, ctrl?: object)`
@@ -2114,8 +2097,6 @@ Create a new entity with the given data.
 
 ```ts
 const result = await client.GitOp().create({
-  ref: 'example_ref',
-  repoId: 'example_repoId',
 })
 ```
 
@@ -2230,7 +2211,35 @@ const git_ops_validate_task = client.GitOpsValidateTask()
 | `type` | `string` | No | Validation type (`pull` or `push`). |
 | `versionCount` | `number` | No | Number of artifact versions loaded during validation. |
 
+### Field Usage by Operation
+
+| Field | load | list | create |
+| --- | --- | --- | --- |
+| `artifactCount` | - | - | - |
+| `completedAt` | - | - | - |
+| `createdAt` | - | - | - |
+| `errors` | - | - | - |
+| `groupCount` | - | - | - |
+| `ref` | - | - | Yes |
+| `repoId` | - | - | Yes |
+| `result` | - | - | - |
+| `state` | - | - | - |
+| `taskId` | - | - | - |
+| `type` | - | - | - |
+| `versionCount` | - | - | - |
+
 ### Operations
+
+#### `create(data: object, ctrl?: object)`
+
+Create a new entity with the given data.
+
+```ts
+const result = await client.GitOpsValidateTask().create({
+  state: 'example_state',
+  taskId: 'example_taskId',
+})
+```
 
 #### `list(match: object, ctrl?: object)`
 
@@ -2302,6 +2311,14 @@ const result = await client.GlobalRule().create({
 })
 ```
 
+#### `list(match: object, ctrl?: object)`
+
+List entities matching the given criteria. Returns an array.
+
+```ts
+const results = await client.GlobalRule().list()
+```
+
 #### `remove(match: object, ctrl?: object)`
 
 Remove the entity matching the given criteria.
@@ -2348,31 +2365,27 @@ const group = client.Group()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `artifactsType` | `string` | No |  |
-| `createdOn` | `string` | No |  |
+| `createdOn` | `string` | Yes |  |
 | `description` | `string` | No |  |
-| `groupId` | `string` | No |  |
+| `groupId` | `string` | Yes |  |
 | `id` | `string` | No |  |
 | `labels` | `Record<string, any>` | No |  |
-| `modifiedBy` | `string` | No |  |
-| `modifiedOn` | `string` | No |  |
-| `owner` | `string` | No |  |
-| `properties` | `Record<string, any>` | No |  |
+| `modifiedBy` | `string` | Yes |  |
+| `modifiedOn` | `string` | Yes |  |
+| `owner` | `string` | Yes |  |
 
 ### Field Usage by Operation
 
 | Field | load | list | create | update | remove |
 | --- | --- | --- | --- | --- | --- |
-| `artifactsType` | - | - | - | - | - |
-| `createdOn` | - | Yes | - | - | - |
+| `createdOn` | - | - | - | - | - |
 | `description` | - | - | - | - | - |
-| `groupId` | - | Yes | Yes | - | - |
+| `groupId` | - | - | - | - | - |
 | `id` | - | - | - | - | - |
 | `labels` | - | - | - | - | - |
-| `modifiedBy` | - | Yes | - | - | - |
-| `modifiedOn` | - | Yes | - | - | - |
-| `owner` | - | Yes | - | - | - |
-| `properties` | - | - | - | - | - |
+| `modifiedBy` | - | - | - | - | - |
+| `modifiedOn` | - | - | - | - | - |
+| `owner` | - | - | - | Yes | - |
 
 ### Operations
 
@@ -2382,6 +2395,11 @@ Create a new entity with the given data.
 
 ```ts
 const result = await client.Group().create({
+  createdOn: 'example_createdOn',
+  groupId: 'example_groupId',
+  modifiedBy: 'example_modifiedBy',
+  modifiedOn: 'example_modifiedOn',
+  owner: 'example_owner',
 })
 ```
 
@@ -2563,63 +2581,6 @@ Return a copy of the entity options.
 
 ---
 
-## McpToolEntity
-
-```ts
-const mcp_tool = client.McpTool()
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `artifactId` | `string` | No |  |
-| `createdOn` | `number` | No |  |
-| `description` | `string` | No |  |
-| `groupId` | `string` | No |  |
-| `name` | `string` | No |  |
-| `owner` | `string` | No |  |
-| `parameters` | `any[]` | No |  |
-| `title` | `string` | No |  |
-
-### Operations
-
-#### `list(match: object, ctrl?: object)`
-
-List entities matching the given criteria. Returns an array.
-
-```ts
-const results = await client.McpTool().list()
-```
-
-### Common Methods
-
-#### `data(data?: object)`
-
-Get or set the entity data. When called with data, sets the entity's
-internal data and returns the current data. When called without
-arguments, returns a copy of the current data.
-
-#### `match(match?: object)`
-
-Get or set the entity match criteria. Works the same as `data()`.
-
-#### `make()`
-
-Create a new `McpToolEntity` instance with the same client and
-options.
-
-#### `client()`
-
-Return the parent `ApicurioRegistrySDK` instance.
-
-#### `entopts()`
-
-Return a copy of the entity options.
-
-
----
-
 ## MetadataEntity
 
 ```ts
@@ -2630,38 +2591,40 @@ const metadata = client.Metadata()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `artifactId` | `string` | No |  |
-| `artifactType` | `string` | No |  |
-| `contentId` | `number` | No |  |
+| `artifactId` | `string` | Yes |  |
+| `artifactType` | `string` | Yes |  |
+| `contentId` | `number` | Yes |  |
 | `contractMetadata` | `Record<string, any>` | No | Contract metadata projected from the artifact labels. |
-| `createdOn` | `string` | No |  |
+| `createdOn` | `string` | Yes |  |
 | `description` | `string` | No |  |
-| `globalId` | `number` | No |  |
+| `globalId` | `number` | Yes |  |
 | `groupId` | `string` | No |  |
 | `labels` | `Record<string, any>` | No |  |
-| `modifiedBy` | `string` | Yes |  |
-| `modifiedOn` | `string` | Yes |  |
+| `modifiedBy` | `string` | No |  |
+| `modifiedOn` | `string` | No |  |
 | `name` | `string` | No |  |
-| `owner` | `string` | No |  |
-| `version` | `number` | No |  |
+| `owner` | `string` | Yes |  |
+| `state` | `string` | No |  |
+| `version` | `string` | Yes | A single version of an artifact. |
 
 ### Field Usage by Operation
 
 | Field | load | create | update |
 | --- | --- | --- | --- |
-| `artifactId` | Yes | - | - |
-| `artifactType` | Yes | - | - |
+| `artifactId` | - | - | - |
+| `artifactType` | - | - | - |
 | `contentId` | - | - | - |
 | `contractMetadata` | - | - | - |
-| `createdOn` | Yes | - | - |
+| `createdOn` | - | - | - |
 | `description` | - | - | - |
 | `globalId` | - | - | - |
 | `groupId` | Yes | - | - |
 | `labels` | - | - | - |
-| `modifiedBy` | - | - | - |
-| `modifiedOn` | - | - | - |
+| `modifiedBy` | Yes | - | - |
+| `modifiedOn` | Yes | - | - |
 | `name` | - | - | - |
-| `owner` | Yes | - | - |
+| `owner` | - | - | Yes |
+| `state` | - | - | - |
 | `version` | - | - | - |
 
 ### Actions
@@ -2697,8 +2660,13 @@ const result = await client.Metadata().create({
   artifact_id: 'example_artifact_id',
   group_id: 'example_group_id',
   version_expression: 'example_version_expression',
-  modifiedBy: 'example_modifiedBy',
-  modifiedOn: 'example_modifiedOn',
+  artifactId: 'example_artifactId',
+  artifactType: 'example_artifactType',
+  contentId: 1,
+  createdOn: 'example_createdOn',
+  globalId: 1,
+  owner: 'example_owner',
+  version: 'example_version',
 })
 ```
 
@@ -2760,10 +2728,9 @@ const odcs_contract_result = client.OdcsContractResult()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `labelsApplied` | `number` | No | Number of contract.* labels set on the schema artifact. |
-| `rulesApplied` | `number` | No | Number of CEL quality rules projected onto the schema artifact. |
-| `tagsApplied` | `number` | No | Number of field-tag.* labels set on the schema artifact version. |
-| `warnings` | `any[]` | No | Any warnings encountered during projection. |
+| `contractId` | `string` | No | The contract artifact ID. |
+| `projection` | `Record<string, any>` | No | Summary of the projection performed when an ODCS contract is applied. |
+| `version` | `string` | No | The ODCS contract version. |
 
 ### Operations
 
@@ -2936,7 +2903,39 @@ const role_mapping = client.RoleMapping()
 | `principalName` | `string` | No | A friendly name for the principal. |
 | `role` | `string` | Yes |  |
 
+### Actions
+
+This entity exposes custom API actions in addition to the standard
+operations. Select one with `$action` in the call's argument; the
+remaining keys are sent as that action's payload.
+
+| Action | Route | Call |
+| --- | --- | --- |
+| `role_mapping` | `/admin/roleMappings` | `client.RoleMapping().create({ $action: 'role_mapping', ... })` |
+| `role_mapping` | `/admin/roleMappings` | `client.RoleMapping().list({ $action: 'role_mapping', ... })` |
+
+An action returns that action's OWN response, which is not necessarily a
+RoleMapping record — check the API definition for its shape.
+
+```ts
+const result = await client.RoleMapping().create({
+  $action: 'role_mapping',
+  /* ...the action's own arguments */
+})
+```
+
 ### Operations
+
+#### `create(data: object, ctrl?: object)`
+
+Create a new entity with the given data.
+
+```ts
+const result = await client.RoleMapping().create({
+  principalId: 'example_principalId',
+  role: 'example_role',
+})
+```
 
 #### `list(match: object, ctrl?: object)`
 
@@ -3003,7 +3002,7 @@ const rule = client.Rule()
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.Rule().list()
+const results = await client.Rule().list({ group_id: "example" })
 ```
 
 #### `load(match: object, ctrl?: object)`
@@ -3405,9 +3404,9 @@ const version = client.Version()
 | `modifiedOn` | `string` | No |  |
 | `name` | `string` | No |  |
 | `owner` | `string` | Yes |  |
-| `state` | `string` | Yes |  |
+| `state` | `string` | No |  |
 | `value` | `string` | Yes |  |
-| `version` | `string` | No |  |
+| `version` | `string` | Yes | A single version of an artifact. |
 | `versions` | `any[]` | Yes | The collection of artifact versions returned in the result set. |
 
 ### Field Usage by Operation
@@ -3431,9 +3430,9 @@ const version = client.Version()
 | `modifiedOn` | - | - | - | - | - |
 | `name` | - | - | - | - | - |
 | `owner` | - | - | - | - | - |
-| `state` | - | - | - | - | - |
+| `state` | - | Yes | - | - | - |
 | `value` | - | - | - | - | - |
-| `version` | - | Yes | - | - | - |
+| `version` | - | - | Yes | - | - |
 | `versions` | - | - | - | - | - |
 
 ### Actions
@@ -3474,6 +3473,7 @@ const result = await client.Version().create({
   globalId: 1,
   owner: 'example_owner',
   value: 'example_value',
+  version: 'example_version',
   versions: [],
 })
 ```
@@ -3554,9 +3554,29 @@ const well_known = client.WellKnown()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
+| `artifactId` | `string` | No |  |
+| `capabilities` | `Record<string, any>` | No | Capabilities of an A2A agent. |
+| `createdOn` | `number` | No |  |
+| `description` | `string` | No |  |
+| `groupId` | `string` | No |  |
 | `id` | `string` | No |  |
+| `name` | `string` | No |  |
+| `owner` | `string` | No |  |
+| `parameters` | `any[]` | No |  |
+| `skills` | `any[]` | No |  |
+| `supportedInterfaces` | `any[]` | No |  |
+| `title` | `string` | No |  |
+| `version` | `string` | No |  |
 
 ### Operations
+
+#### `list(match: object, ctrl?: object)`
+
+List entities matching the given criteria. Returns an array.
+
+```ts
+const results = await client.WellKnown().list()
+```
 
 #### `load(match: object, ctrl?: object)`
 

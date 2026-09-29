@@ -475,12 +475,6 @@ class ApicurioRegistrySDK:
         return KafkaSqlEntity(self, data)
 
 
-    def McpTool(self, data=None) -> "McpToolEntity":
-        """Entity factory: client.McpTool().list() / client.McpTool().load({"id": ...})."""
-        from apicurioregistry_sdk.entity.mcp_tool_entity import McpToolEntity
-        return McpToolEntity(self, data)
-
-
     def Metadata(self, data=None) -> "MetadataEntity":
         """Entity factory: client.Metadata().list() / client.Metadata().load({"id": ...})."""
         from apicurioregistry_sdk.entity.metadata_entity import MetadataEntity
@@ -626,7 +620,6 @@ if TYPE_CHECKING:
     from apicurioregistry_sdk.entity.group_entity import GroupEntity
     from apicurioregistry_sdk.entity.group_rule_entity import GroupRuleEntity
     from apicurioregistry_sdk.entity.kafka_sql_entity import KafkaSqlEntity
-    from apicurioregistry_sdk.entity.mcp_tool_entity import McpToolEntity
     from apicurioregistry_sdk.entity.metadata_entity import MetadataEntity
     from apicurioregistry_sdk.entity.odcs_contract_result_entity import OdcsContractResultEntity
     from apicurioregistry_sdk.entity.odcs_contract_summary_entity import OdcsContractSummaryEntity

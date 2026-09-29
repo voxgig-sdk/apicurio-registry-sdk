@@ -77,7 +77,9 @@ class RuleEntityTest < Minitest::Test
 
     # LIST
     rule_ref01_ent = client.Rule(nil)
-    rule_ref01_match = {}
+    rule_ref01_match = {
+      "group_id" => setup[:idmap]["group01"],
+    }
 
     rule_ref01_list_result = rule_ref01_ent.list(rule_ref01_match, nil)
     assert rule_ref01_list_result.is_a?(Array)

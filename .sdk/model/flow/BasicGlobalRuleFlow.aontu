@@ -15,12 +15,40 @@ main: kit: flow: BasicGlobalRuleFlow:
     }
 
     {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "global_rule_ref01"
+          }
+        }
+      ]
+    }
+
+    {
       i: {
         ref: "global_rule_ref01",
         suffix: "_rm0"
       }
 
       o: "remove"
+    }
+
+    {
+      i: {
+        suffix: "_rt0"
+      }
+
+      o: "list",
+      v: [
+        {
+          apply: "ItemNotExists",
+          def: {
+            ref: "global_rule_ref01"
+          }
+        }
+      ]
     }
   ],
   "key$": "BasicGlobalRuleFlow"

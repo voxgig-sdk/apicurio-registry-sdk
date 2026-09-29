@@ -18,17 +18,13 @@ export interface AdminRemoveMatch {
     principal_id: string;
 }
 export interface Agent {
-    artifactId?: string;
     capabilities?: Record<string, any>;
-    createdOn?: number;
     defaultInputModes?: any[];
     defaultOutputModes?: any[];
     description?: string;
     documentationUrl?: string;
-    groupId?: string;
     iconUrl?: string;
     name?: string;
-    owner?: string;
     protocolVersion?: string;
     provider?: Record<string, any>;
     securityRequirements?: any[];
@@ -39,13 +35,21 @@ export interface Agent {
     version?: string;
 }
 export interface AgentListMatch {
-    capability?: any[];
-    input_mode?: any[];
-    limit?: number;
+    capabilities?: Record<string, any>;
+    defaultInputModes?: any[];
+    defaultOutputModes?: any[];
+    description?: string;
+    documentationUrl?: string;
+    iconUrl?: string;
     name?: string;
-    offset?: number;
-    output_mode?: any[];
-    skill?: any[];
+    protocolVersion?: string;
+    provider?: Record<string, any>;
+    securityRequirements?: any[];
+    securitySchemes?: Record<string, any>;
+    signatures?: any[];
+    skills?: any[];
+    supportedInterfaces?: any[];
+    version?: string;
 }
 export interface AgentCard {
     capabilities?: Record<string, any>;
@@ -106,12 +110,14 @@ export interface AiCatalogListMatch {
     version?: string;
 }
 export interface ArdExplore {
+    facets?: Record<string, any>;
     query?: Record<string, any>;
-    resultType: Record<string, any>;
+    resultType?: string;
 }
 export interface ArdExploreCreateData {
+    facets?: Record<string, any>;
     query?: Record<string, any>;
-    resultType: Record<string, any>;
+    resultType?: string;
 }
 export interface ArdSearch {
     federation?: string;
@@ -487,14 +493,8 @@ export interface DownloadRefLoadMatch {
     group_id?: string;
 }
 export interface GitOp {
-    ref: string;
-    repoId: string;
-    type?: string;
 }
 export interface GitOpCreateData {
-    ref: string;
-    repoId: string;
-    type?: string;
 }
 export interface GitOpRemoveMatch {
     task_id: string;
@@ -540,8 +540,27 @@ export interface GitOpsValidateTaskListMatch {
     type?: string;
     versionCount?: number;
 }
+export interface GitOpsValidateTaskCreateData {
+    artifactCount?: number;
+    completedAt?: string;
+    createdAt?: string;
+    errors?: any[];
+    groupCount?: number;
+    ref?: string;
+    repoId?: string;
+    result?: string;
+    state: string;
+    taskId: string;
+    type?: string;
+    versionCount?: number;
+}
 export interface GlobalRule {
     config: string;
+    id?: string;
+    ruleType?: string;
+}
+export interface GlobalRuleListMatch {
+    config?: string;
     id?: string;
     ruleType?: string;
 }
@@ -554,16 +573,14 @@ export interface GlobalRuleRemoveMatch {
     id: string;
 }
 export interface Group {
-    artifactsType?: string;
-    createdOn?: string;
+    createdOn: string;
     description?: string;
-    groupId?: string;
+    groupId: string;
     id?: string;
     labels?: Record<string, any>;
-    modifiedBy?: string;
-    modifiedOn?: string;
-    owner?: string;
-    properties?: Record<string, any>;
+    modifiedBy: string;
+    modifiedOn: string;
+    owner: string;
 }
 export interface GroupLoadMatch {
     id: string;
@@ -575,20 +592,17 @@ export interface GroupListMatch {
     orderby?: string;
 }
 export interface GroupCreateData {
-    artifactsType?: string;
-    createdOn?: string;
+    createdOn: string;
     description?: string;
-    groupId?: string;
+    groupId: string;
     id?: string;
     labels?: Record<string, any>;
-    modifiedBy?: string;
-    modifiedOn?: string;
-    owner?: string;
-    properties?: Record<string, any>;
+    modifiedBy: string;
+    modifiedOn: string;
+    owner: string;
 }
 export interface GroupUpdateData {
     id: string;
-    artifactsType?: string;
     createdOn?: string;
     description?: string;
     groupId?: string;
@@ -596,7 +610,6 @@ export interface GroupUpdateData {
     modifiedBy?: string;
     modifiedOn?: string;
     owner?: string;
-    properties?: Record<string, any>;
 }
 export interface GroupRemoveMatch {
     id: string;
@@ -621,37 +634,22 @@ export interface KafkaSql {
 export interface KafkaSqlCreateData {
     snapshotId: string;
 }
-export interface McpTool {
-    artifactId?: string;
-    createdOn?: number;
-    description?: string;
-    groupId?: string;
-    name?: string;
-    owner?: string;
-    parameters?: any[];
-    title?: string;
-}
-export interface McpToolListMatch {
-    limit?: number;
-    name?: string;
-    offset?: number;
-    parameter?: any[];
-}
 export interface Metadata {
-    artifactId?: string;
-    artifactType?: string;
-    contentId?: number;
+    artifactId: string;
+    artifactType: string;
+    contentId: number;
     contractMetadata?: Record<string, any>;
-    createdOn?: string;
+    createdOn: string;
     description?: string;
-    globalId?: number;
+    globalId: number;
     groupId?: string;
     labels?: Record<string, any>;
-    modifiedBy: string;
-    modifiedOn: string;
+    modifiedBy?: string;
+    modifiedOn?: string;
     name?: string;
-    owner?: string;
-    version?: number;
+    owner: string;
+    state?: string;
+    version: string;
 }
 export interface MetadataLoadMatch {
     artifact_id: string;
@@ -662,20 +660,21 @@ export interface MetadataCreateData {
     artifact_id: string;
     group_id: string;
     version_expression: string;
-    artifactId?: string;
-    artifactType?: string;
-    contentId?: number;
+    artifactId: string;
+    artifactType: string;
+    contentId: number;
     contractMetadata?: Record<string, any>;
-    createdOn?: string;
+    createdOn: string;
     description?: string;
-    globalId?: number;
+    globalId: number;
     groupId?: string;
     labels?: Record<string, any>;
-    modifiedBy: string;
-    modifiedOn: string;
+    modifiedBy?: string;
+    modifiedOn?: string;
     name?: string;
-    owner?: string;
-    version?: number;
+    owner: string;
+    state?: string;
+    version: string;
     $action?: string;
     [action: string]: any;
 }
@@ -696,30 +695,28 @@ export interface MetadataUpdateData {
     modifiedOn?: string;
     name?: string;
     owner?: string;
-    version?: number;
+    state?: string;
+    version?: string;
     $action?: string;
     [action: string]: any;
 }
 export interface OdcsContractResult {
-    labelsApplied?: number;
-    rulesApplied?: number;
-    tagsApplied?: number;
-    warnings?: any[];
+    contractId?: string;
+    projection?: Record<string, any>;
+    version?: string;
 }
 export interface OdcsContractResultCreateData {
     group_id: string;
-    labelsApplied?: number;
-    rulesApplied?: number;
-    tagsApplied?: number;
-    warnings?: any[];
+    contractId?: string;
+    projection?: Record<string, any>;
+    version?: string;
 }
 export interface OdcsContractResultUpdateData {
     contract_id: string;
     group_id: string;
-    labelsApplied?: number;
-    rulesApplied?: number;
-    tagsApplied?: number;
-    warnings?: any[];
+    contractId?: string;
+    projection?: Record<string, any>;
+    version?: string;
 }
 export interface OdcsContractSummary {
     contractId?: string;
@@ -755,6 +752,16 @@ export interface RoleMappingLoadMatch {
 export interface RoleMappingListMatch {
     limit?: number;
     offset?: number;
+    $action?: string;
+    [action: string]: any;
+}
+export interface RoleMappingCreateData {
+    id?: string;
+    principalId: string;
+    principalName?: string;
+    role: string;
+    $action?: string;
+    [action: string]: any;
 }
 export interface Rule {
     config: string;
@@ -767,9 +774,8 @@ export interface RuleLoadMatch {
     id: string;
 }
 export interface RuleListMatch {
-    config?: string;
-    id?: string;
-    ruleType?: string;
+    artifact_id?: string;
+    group_id: string;
 }
 export interface RuleUpdateData {
     artifact_id?: string;
@@ -877,9 +883,9 @@ export interface Version {
     modifiedOn?: string;
     name?: string;
     owner: string;
-    state: string;
+    state?: string;
     value: string;
-    version?: string;
+    version: string;
     versions: any[];
 }
 export interface VersionLoadMatch {
@@ -939,7 +945,7 @@ export interface VersionCreateData {
     name?: string;
     owner: string;
     value: string;
-    version?: string;
+    version: string;
     versions: any[];
 }
 export interface VersionUpdateData {
@@ -977,12 +983,33 @@ export interface VersionRemoveMatch {
     id?: string;
 }
 export interface WellKnown {
+    artifactId?: string;
+    capabilities?: Record<string, any>;
+    createdOn?: number;
+    description?: string;
+    groupId?: string;
     id?: string;
+    name?: string;
+    owner?: string;
+    parameters?: any[];
+    skills?: any[];
+    supportedInterfaces?: any[];
+    title?: string;
+    version?: string;
 }
 export interface WellKnownLoadMatch {
     artifact_id: string;
     group_id: string;
     version?: string;
+}
+export interface WellKnownListMatch {
+    capability?: any[];
+    input_mode?: any[];
+    limit?: number;
+    name?: string;
+    offset?: number;
+    output_mode?: any[];
+    skill?: any[];
 }
 export interface WrappedVersionState {
     state: string;

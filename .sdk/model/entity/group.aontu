@@ -5,23 +5,11 @@ main: kit: entity: group: {
   alias: field: {}
 
   fields: {
-    artifactsType: {
-      h: "Artifacts Type"
-      n: "artifactsType"
-      r: false
-      t: "`$STRING`"
-    }
     createdOn: {
       fo: "date-time"
       h: "Created On"
       n: "createdOn"
-      op: {
-        list: {
-          req: true
-          type: "`$STRING`"
-        }
-      }
-      r: false
+      r: true
       t: "`$STRING`"
     }
     description: {
@@ -33,17 +21,7 @@ main: kit: entity: group: {
     groupId: {
       h: "Group Id"
       n: "groupId"
-      op: {
-        create: {
-          req: true
-          type: "`$STRING`"
-        }
-        list: {
-          req: true
-          type: "`$STRING`"
-        }
-      }
-      r: false
+      r: true
       t: "`$STRING`"
     }
     id: {
@@ -61,45 +39,27 @@ main: kit: entity: group: {
     modifiedBy: {
       h: "Modified By"
       n: "modifiedBy"
-      op: {
-        list: {
-          req: true
-          type: "`$STRING`"
-        }
-      }
-      r: false
+      r: true
       t: "`$STRING`"
     }
     modifiedOn: {
       fo: "date-time"
       h: "Modified On"
       n: "modifiedOn"
-      op: {
-        list: {
-          req: true
-          type: "`$STRING`"
-        }
-      }
-      r: false
+      r: true
       t: "`$STRING`"
     }
     owner: {
       h: "Owner"
       n: "owner"
       op: {
-        list: {
-          req: true
+        update: {
+          req: false
           type: "`$STRING`"
         }
       }
-      r: false
+      r: true
       t: "`$STRING`"
-    }
-    properties: {
-      h: "Properties"
-      n: "properties"
-      r: false
-      t: "`$OBJECT`"
     }
   }
 
@@ -128,7 +88,7 @@ main: kit: entity: group: {
           ]
           t: {
             req: "`reqdata`"
-            res: "`body.labels`"
+            res: "`body`"
           }
         }
       ]
@@ -211,7 +171,7 @@ main: kit: entity: group: {
                 ex: "\"my-group\""
                 k: "param"
                 n: "id"
-                or: "group_id"
+                or: "groupId"
                 r: true
                 t: "`$STRING`"
               }
@@ -239,7 +199,7 @@ main: kit: entity: group: {
           ]
           t: {
             req: "`reqdata`"
-            res: "`body.labels`"
+            res: "`body`"
           }
         }
       ]
@@ -259,7 +219,7 @@ main: kit: entity: group: {
                 ex: "\"my-group\""
                 k: "param"
                 n: "id"
-                or: "group_id"
+                or: "groupId"
                 r: true
                 t: "`$STRING`"
               }
@@ -307,7 +267,7 @@ main: kit: entity: group: {
                 ex: "\"my-group\""
                 k: "param"
                 n: "id"
-                or: "group_id"
+                or: "groupId"
                 r: true
                 t: "`$STRING`"
               }

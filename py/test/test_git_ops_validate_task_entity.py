@@ -61,7 +61,7 @@ class TestGitOpsValidateTaskEntity:
         # multiple ops; skipping any one skips the whole flow (steps depend
         # on each other).
         _live = setup.get("live", False)
-        for _op in ["list", "load"]:
+        for _op in ["create", "list", "load"]:
             _skip, _reason = runner.is_control_skipped("entityOp", "git_ops_validate_task." + _op, "live" if _live else "unit")
             if _skip:
                 pytest.skip(_reason or "skipped via sdk-test-control.json")
@@ -73,15 +73,15 @@ class TestGitOpsValidateTaskEntity:
                         "set APICURIO_REGISTRY_TEST_GIT_OPS_VALIDATE_TASK_ENTID JSON to run live")
         client = setup["client"]
 
-        # Bootstrap entity data from existing test data.
-        git_ops_validate_task_ref01_data_raw = vs.items(helpers.to_map(
-            vs.getpath(setup["data"], "existing.git_ops_validate_task")))
-        git_ops_validate_task_ref01_data = None
-        if len(git_ops_validate_task_ref01_data_raw) > 0:
-            git_ops_validate_task_ref01_data = helpers.to_map(git_ops_validate_task_ref01_data_raw[0][1])
+        # CREATE
+        git_ops_validate_task_ref01_ent = client.GitOpsValidateTask(None)
+        git_ops_validate_task_ref01_data = helpers.to_map(vs.getprop(
+            vs.getpath(setup["data"], "new.git_ops_validate_task"), "git_ops_validate_task_ref01"))
+
+        git_ops_validate_task_ref01_data = helpers.to_map(runner.entity_data(git_ops_validate_task_ref01_ent.create(git_ops_validate_task_ref01_data, None)))
+        assert git_ops_validate_task_ref01_data is not None
 
         # LIST
-        git_ops_validate_task_ref01_ent = client.GitOpsValidateTask(None)
         git_ops_validate_task_ref01_match = {}
 
         git_ops_validate_task_ref01_list_result = git_ops_validate_task_ref01_ent.list(git_ops_validate_task_ref01_match, None)

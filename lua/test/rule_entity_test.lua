@@ -85,7 +85,9 @@ describe("RuleEntity", function()
 
     -- LIST
     local rule_ref01_ent = client:Rule(nil)
-    local rule_ref01_match = {}
+    local rule_ref01_match = {
+      ["group_id"] = setup.idmap["group01"],
+    }
 
     local rule_ref01_list_result, err = rule_ref01_ent:list(rule_ref01_match, nil)
     assert.is_nil(err)

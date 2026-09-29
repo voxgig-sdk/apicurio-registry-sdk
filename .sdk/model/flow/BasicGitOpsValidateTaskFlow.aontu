@@ -7,6 +7,14 @@ main: kit: flow: BasicGitOpsValidateTaskFlow:
   name: "BasicGitOpsValidateTaskFlow",
   step: [
     {
+      i: {
+        ref: "git_ops_validate_task_ref01"
+      }
+
+      o: "create"
+    }
+
+    {
       o: "list",
       v: [
         {

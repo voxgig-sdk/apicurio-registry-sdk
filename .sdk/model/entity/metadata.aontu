@@ -8,31 +8,20 @@ main: kit: entity: metadata: {
     artifactId: {
       h: "Artifact Id"
       n: "artifactId"
-      op: {
-        load: {
-          req: true
-          type: "`$STRING`"
-        }
-      }
-      r: false
+      r: true
       t: "`$STRING`"
     }
     artifactType: {
       h: "Artifact Type"
       n: "artifactType"
-      op: {
-        load: {
-          req: true
-          type: "`$STRING`"
-        }
-      }
-      r: false
+      r: true
       t: "`$STRING`"
     }
     contentId: {
+      fo: "int64"
       h: "Content Id"
       n: "contentId"
-      r: false
+      r: true
       t: "`$INTEGER`"
     }
     contractMetadata: {
@@ -46,13 +35,7 @@ main: kit: entity: metadata: {
       fo: "date-time"
       h: "Created On"
       n: "createdOn"
-      op: {
-        load: {
-          req: true
-          type: "`$STRING`"
-        }
-      }
-      r: false
+      r: true
       t: "`$STRING`"
     }
     description: {
@@ -62,9 +45,10 @@ main: kit: entity: metadata: {
       t: "`$STRING`"
     }
     globalId: {
+      fo: "int64"
       h: "Global Id"
       n: "globalId"
-      r: false
+      r: true
       t: "`$INTEGER`"
     }
     groupId: {
@@ -88,14 +72,26 @@ main: kit: entity: metadata: {
     modifiedBy: {
       h: "Modified By"
       n: "modifiedBy"
-      r: true
+      op: {
+        load: {
+          req: true
+          type: "`$STRING`"
+        }
+      }
+      r: false
       t: "`$STRING`"
     }
     modifiedOn: {
       fo: "date-time"
       h: "Modified On"
       n: "modifiedOn"
-      r: true
+      op: {
+        load: {
+          req: true
+          type: "`$STRING`"
+        }
+      }
+      r: false
       t: "`$STRING`"
     }
     name: {
@@ -108,19 +104,26 @@ main: kit: entity: metadata: {
       h: "Owner"
       n: "owner"
       op: {
-        load: {
-          req: true
+        update: {
+          req: false
           type: "`$STRING`"
         }
       }
+      r: true
+      t: "`$STRING`"
+    }
+    state: {
+      h: "State"
+      n: "state"
       r: false
       t: "`$STRING`"
     }
     version: {
       h: "Version"
       n: "version"
-      r: false
-      t: "`$INTEGER`"
+      r: true
+      sh: "A single version of an artifact."
+      t: "`$STRING`"
     }
   }
 
@@ -141,7 +144,7 @@ main: kit: entity: metadata: {
                 ex: "\"example-artifact\""
                 k: "param"
                 n: "artifact_id"
-                or: "artifact_id"
+                or: "artifactId"
                 r: true
                 t: "`$STRING`"
               }
@@ -149,14 +152,14 @@ main: kit: entity: metadata: {
                 ex: "\"my-group\""
                 k: "param"
                 n: "group_id"
-                or: "group_id"
+                or: "groupId"
                 r: true
                 t: "`$STRING`"
               }
               {
                 k: "param"
                 n: "version_expression"
-                or: "version_expression"
+                or: "versionExpression"
                 r: true
                 t: "`$STRING`"
               }
@@ -224,7 +227,7 @@ main: kit: entity: metadata: {
                 ex: "\"example-artifact\""
                 k: "param"
                 n: "artifact_id"
-                or: "artifact_id"
+                or: "artifactId"
                 r: true
                 t: "`$STRING`"
               }
@@ -232,14 +235,14 @@ main: kit: entity: metadata: {
                 ex: "\"my-group\""
                 k: "param"
                 n: "group_id"
-                or: "group_id"
+                or: "groupId"
                 r: true
                 t: "`$STRING`"
               }
               {
                 k: "param"
                 n: "version_expression"
-                or: "version_expression"
+                or: "versionExpression"
                 r: true
                 t: "`$STRING`"
               }
@@ -283,7 +286,7 @@ main: kit: entity: metadata: {
           ]
           t: {
             req: "`reqdata`"
-            res: "`body.labels`"
+            res: "`body`"
           }
         }
         {
@@ -298,7 +301,7 @@ main: kit: entity: metadata: {
                 ex: "\"example-artifact\""
                 k: "param"
                 n: "artifact_id"
-                or: "artifact_id"
+                or: "artifactId"
                 r: true
                 t: "`$STRING`"
               }
@@ -306,7 +309,7 @@ main: kit: entity: metadata: {
                 ex: "\"my-group\""
                 k: "param"
                 n: "group_id"
-                or: "group_id"
+                or: "groupId"
                 r: true
                 t: "`$STRING`"
               }
@@ -362,7 +365,7 @@ main: kit: entity: metadata: {
                 ex: "\"example-artifact\""
                 k: "param"
                 n: "artifact_id"
-                or: "artifact_id"
+                or: "artifactId"
                 r: true
                 t: "`$STRING`"
               }
@@ -370,14 +373,14 @@ main: kit: entity: metadata: {
                 ex: "\"my-group\""
                 k: "param"
                 n: "group_id"
-                or: "group_id"
+                or: "groupId"
                 r: true
                 t: "`$STRING`"
               }
               {
                 k: "param"
                 n: "version_expression"
-                or: "version_expression"
+                or: "versionExpression"
                 r: true
                 t: "`$STRING`"
               }
@@ -386,7 +389,7 @@ main: kit: entity: metadata: {
               {
                 k: "query"
                 n: "dry_run"
-                or: "dry_run"
+                or: "dryRun"
                 r: false
                 t: "`$BOOLEAN`"
               }
@@ -450,7 +453,7 @@ main: kit: entity: metadata: {
                 ex: "\"example-artifact\""
                 k: "param"
                 n: "artifact_id"
-                or: "artifact_id"
+                or: "artifactId"
                 r: true
                 t: "`$STRING`"
               }
@@ -458,14 +461,14 @@ main: kit: entity: metadata: {
                 ex: "\"my-group\""
                 k: "param"
                 n: "group_id"
-                or: "group_id"
+                or: "groupId"
                 r: true
                 t: "`$STRING`"
               }
               {
                 k: "param"
                 n: "version_expression"
-                or: "version_expression"
+                or: "versionExpression"
                 r: true
                 t: "`$STRING`"
               }
@@ -524,7 +527,7 @@ main: kit: entity: metadata: {
                 ex: "\"example-artifact\""
                 k: "param"
                 n: "artifact_id"
-                or: "artifact_id"
+                or: "artifactId"
                 r: true
                 t: "`$STRING`"
               }
@@ -532,14 +535,14 @@ main: kit: entity: metadata: {
                 ex: "\"my-group\""
                 k: "param"
                 n: "group_id"
-                or: "group_id"
+                or: "groupId"
                 r: true
                 t: "`$STRING`"
               }
               {
                 k: "param"
                 n: "version_expression"
-                or: "version_expression"
+                or: "versionExpression"
                 r: true
                 t: "`$STRING`"
               }
@@ -602,7 +605,7 @@ main: kit: entity: metadata: {
                 ex: "\"example-artifact\""
                 k: "param"
                 n: "artifact_id"
-                or: "artifact_id"
+                or: "artifactId"
                 r: true
                 t: "`$STRING`"
               }
@@ -610,7 +613,7 @@ main: kit: entity: metadata: {
                 ex: "\"my-group\""
                 k: "param"
                 n: "group_id"
-                or: "group_id"
+                or: "groupId"
                 r: true
                 t: "`$STRING`"
               }

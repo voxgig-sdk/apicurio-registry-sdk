@@ -21,7 +21,7 @@ main: kit: entity: content: {
                 ex: "AVRO"
                 k: "query"
                 n: "artifact_type"
-                or: "artifact_type"
+                or: "artifactType"
                 r: true
                 t: "`$STRING`"
               }

@@ -264,7 +264,6 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | `Group` | `(data map[string]any) ApicurioRegistryEntity` | Create a Group entity instance. |
 | `GroupRule` | `(data map[string]any) ApicurioRegistryEntity` | Create a GroupRule entity instance. |
 | `KafkaSql` | `(data map[string]any) ApicurioRegistryEntity` | Create a KafkaSql entity instance. |
-| `McpTool` | `(data map[string]any) ApicurioRegistryEntity` | Create a McpTool entity instance. |
 | `Metadata` | `(data map[string]any) ApicurioRegistryEntity` | Create a Metadata entity instance. |
 | `OdcsContractResult` | `(data map[string]any) ApicurioRegistryEntity` | Create an OdcsContractResult entity instance. |
 | `OdcsContractSummary` | `(data map[string]any) ApicurioRegistryEntity` | Create an OdcsContractSummary entity instance. |
@@ -335,17 +334,13 @@ API path: `/admin/import`
 
 | Field | Description |
 | --- | --- |
-| `"artifactId"` |  |
 | `"capabilities"` | Capabilities of an A2A agent. |
-| `"createdOn"` |  |
 | `"defaultInputModes"` |  |
 | `"defaultOutputModes"` |  |
 | `"description"` |  |
 | `"documentationUrl"` |  |
-| `"groupId"` |  |
 | `"iconUrl"` |  |
 | `"name"` |  |
-| `"owner"` |  |
 | `"protocolVersion"` |  |
 | `"provider"` | Provider of an A2A agent. |
 | `"securityRequirements"` |  |
@@ -357,7 +352,7 @@ API path: `/admin/import`
 
 Operations: List.
 
-API path: `/well-known/agents`
+API path: `/well-known/agent.json`
 
 #### AgentCard
 
@@ -406,6 +401,7 @@ API path: `/well-known/ard/agents`
 
 | Field | Description |
 | --- | --- |
+| `"facets"` | Facets keyed by the requested facet field name. |
 | `"query"` | ARD search query. |
 | `"resultType"` | Requested result type for the ARD POST /explore endpoint. |
 
@@ -648,9 +644,6 @@ API path: `/admin/export`
 
 | Field | Description |
 | --- | --- |
-| `"ref"` | Git ref to validate (branch name, tag, or PR ref like `refs/pull/42/head`). |
-| `"repoId"` | Repository ID to validate against. |
-| `"type"` | Validation type. |
 
 Operations: Create, Remove.
 
@@ -685,7 +678,7 @@ API path: `/admin/gitops/status`
 | `"type"` | Validation type (`pull` or `push`). |
 | `"versionCount"` | Number of artifact versions loaded during validation. |
 
-Operations: List, Load.
+Operations: Create, List, Load.
 
 API path: `/admin/gitops/validate`
 
@@ -697,7 +690,7 @@ API path: `/admin/gitops/validate`
 | `"id"` |  |
 | `"ruleType"` |  |
 
-Operations: Create, Remove.
+Operations: Create, List, Remove.
 
 API path: `/admin/rules`
 
@@ -705,7 +698,6 @@ API path: `/admin/rules`
 
 | Field | Description |
 | --- | --- |
-| `"artifactsType"` |  |
 | `"createdOn"` |  |
 | `"description"` |  |
 | `"groupId"` |  |
@@ -714,7 +706,6 @@ API path: `/admin/rules`
 | `"modifiedBy"` |  |
 | `"modifiedOn"` |  |
 | `"owner"` |  |
-| `"properties"` |  |
 
 Operations: Create, List, Load, Remove, Update.
 
@@ -742,23 +733,6 @@ Operations: Create.
 
 API path: `/admin/snapshots`
 
-#### McpTool
-
-| Field | Description |
-| --- | --- |
-| `"artifactId"` |  |
-| `"createdOn"` |  |
-| `"description"` |  |
-| `"groupId"` |  |
-| `"name"` |  |
-| `"owner"` |  |
-| `"parameters"` |  |
-| `"title"` |  |
-
-Operations: List.
-
-API path: `/well-known/mcp-tools`
-
 #### Metadata
 
 | Field | Description |
@@ -776,7 +750,8 @@ API path: `/well-known/mcp-tools`
 | `"modifiedOn"` |  |
 | `"name"` |  |
 | `"owner"` |  |
-| `"version"` |  |
+| `"state"` |  |
+| `"version"` | A single version of an artifact. |
 
 Operations: Create, Load, Update.
 
@@ -786,10 +761,9 @@ API path: `/groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}
 
 | Field | Description |
 | --- | --- |
-| `"labelsApplied"` | Number of contract.* labels set on the schema artifact. |
-| `"rulesApplied"` | Number of CEL quality rules projected onto the schema artifact. |
-| `"tagsApplied"` | Number of field-tag.* labels set on the schema artifact version. |
-| `"warnings"` | Any warnings encountered during projection. |
+| `"contractId"` | The contract artifact ID. |
+| `"projection"` | Summary of the projection performed when an ODCS contract is applied. |
+| `"version"` | The ODCS contract version. |
 
 Operations: Create, Update.
 
@@ -828,7 +802,7 @@ API path: `/groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}
 | `"principalName"` | A friendly name for the principal. |
 | `"role"` |  |
 
-Operations: List, Load.
+Operations: Create, List, Load.
 
 API path: `/admin/roleMappings`
 
@@ -952,7 +926,7 @@ API path: `/system/uiConfig`
 | `"owner"` |  |
 | `"state"` |  |
 | `"value"` |  |
-| `"version"` |  |
+| `"version"` | A single version of an artifact. |
 | `"versions"` | The collection of artifact versions returned in the result set. |
 
 Operations: Create, List, Load, Remove, Update.
@@ -963,11 +937,23 @@ API path: `/search/versions`
 
 | Field | Description |
 | --- | --- |
+| `"artifactId"` |  |
+| `"capabilities"` | Capabilities of an A2A agent. |
+| `"createdOn"` |  |
+| `"description"` |  |
+| `"groupId"` |  |
 | `"id"` |  |
+| `"name"` |  |
+| `"owner"` |  |
+| `"parameters"` |  |
+| `"skills"` |  |
+| `"supportedInterfaces"` |  |
+| `"title"` |  |
+| `"version"` |  |
 
-Operations: Load.
+Operations: List, Load.
 
-API path: `/well-known/agents/{groupId}/{artifactId}`
+API path: `/well-known/agents`
 
 #### WrappedVersionState
 
@@ -1031,17 +1017,13 @@ Create an instance: `agent := client.Agent(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `artifactId` | `string` |  |
 | `capabilities` | `map[string]any` | Capabilities of an A2A agent. |
-| `createdOn` | `int` |  |
 | `defaultInputModes` | `[]any` |  |
 | `defaultOutputModes` | `[]any` |  |
 | `description` | `string` |  |
 | `documentationUrl` | `string` |  |
-| `groupId` | `string` |  |
 | `iconUrl` | `string` |  |
 | `name` | `string` |  |
-| `owner` | `string` |  |
 | `protocolVersion` | `string` |  |
 | `provider` | `map[string]any` | Provider of an A2A agent. |
 | `securityRequirements` | `[]any` |  |
@@ -1153,14 +1135,14 @@ Create an instance: `ardExplore := client.ArdExplore(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
+| `facets` | `map[string]any` | Facets keyed by the requested facet field name. |
 | `query` | `map[string]any` | ARD search query. |
-| `resultType` | `map[string]any` | Requested result type for the ARD POST /explore endpoint. |
+| `resultType` | `string` | Requested result type for the ARD POST /explore endpoint. |
 
 #### Example: Create
 
 ```go
 result, err := client.ArdExplore(nil).Create(map[string]any{
-    "resultType": map[string]any{},
 }, nil)
 if err != nil {
     panic(err)
@@ -1834,20 +1816,10 @@ Create an instance: `gitOp := client.GitOp(nil)`
 | `Create(data, ctrl)` | Create a new entity with the given data. |
 | `Remove(match, ctrl)` | Remove the matching entity. |
 
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `ref` | `string` | Git ref to validate (branch name, tag, or PR ref like `refs/pull/42/head`). |
-| `repoId` | `string` | Repository ID to validate against. |
-| `type` | `string` | Validation type. |
-
 #### Example: Create
 
 ```go
 result, err := client.GitOp(nil).Create(map[string]any{
-    "ref": "example_ref",
-    "repoId": "example_repoId",
 }, nil)
 if err != nil {
     panic(err)
@@ -1895,6 +1867,7 @@ Create an instance: `gitOpsValidateTask := client.GitOpsValidateTask(nil)`
 | --- | --- |
 | `List(match, ctrl)` | List entities matching the criteria. |
 | `Load(match, ctrl)` | Load a single entity by match criteria. |
+| `Create(data, ctrl)` | Create a new entity with the given data. |
 
 #### Fields
 
@@ -1933,6 +1906,19 @@ if err != nil {
 fmt.Println(gitOpsValidateTasks) // the array of records
 ```
 
+#### Example: Create
+
+```go
+result, err := client.GitOpsValidateTask(nil).Create(map[string]any{
+    "state": "example_state",
+    "taskId": "example_taskId",
+}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
+```
+
 
 ### GlobalRule
 
@@ -1942,6 +1928,7 @@ Create an instance: `globalRule := client.GlobalRule(nil)`
 
 | Method | Description |
 | --- | --- |
+| `List(match, ctrl)` | List entities matching the criteria. |
 | `Create(data, ctrl)` | Create a new entity with the given data. |
 | `Remove(match, ctrl)` | Remove the matching entity. |
 
@@ -1952,6 +1939,16 @@ Create an instance: `globalRule := client.GlobalRule(nil)`
 | `config` | `string` |  |
 | `id` | `string` |  |
 | `ruleType` | `string` |  |
+
+#### Example: List
+
+```go
+globalRules, err := client.GlobalRule(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(globalRules) // the array of records
+```
 
 #### Example: Create
 
@@ -1984,7 +1981,6 @@ Create an instance: `group := client.Group(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `artifactsType` | `string` |  |
 | `createdOn` | `string` |  |
 | `description` | `string` |  |
 | `groupId` | `string` |  |
@@ -1993,7 +1989,6 @@ Create an instance: `group := client.Group(nil)`
 | `modifiedBy` | `string` |  |
 | `modifiedOn` | `string` |  |
 | `owner` | `string` |  |
-| `properties` | `map[string]any` |  |
 
 #### Example: Load
 
@@ -2019,6 +2014,11 @@ fmt.Println(groups) // the array of records
 
 ```go
 result, err := client.Group(nil).Create(map[string]any{
+    "createdOn": "example_createdOn",
+    "groupId": "example_groupId",
+    "modifiedBy": "example_modifiedBy",
+    "modifiedOn": "example_modifiedOn",
+    "owner": "example_owner",
 }, nil)
 if err != nil {
     panic(err)
@@ -2089,40 +2089,6 @@ fmt.Println(result)
 ```
 
 
-### McpTool
-
-Create an instance: `mcpTool := client.McpTool(nil)`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `List(match, ctrl)` | List entities matching the criteria. |
-
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `artifactId` | `string` |  |
-| `createdOn` | `int` |  |
-| `description` | `string` |  |
-| `groupId` | `string` |  |
-| `name` | `string` |  |
-| `owner` | `string` |  |
-| `parameters` | `[]any` |  |
-| `title` | `string` |  |
-
-#### Example: List
-
-```go
-mcpTools, err := client.McpTool(nil).List(nil, nil)
-if err != nil {
-    panic(err)
-}
-fmt.Println(mcpTools) // the array of records
-```
-
-
 ### Metadata
 
 Create an instance: `metadata := client.Metadata(nil)`
@@ -2152,7 +2118,8 @@ Create an instance: `metadata := client.Metadata(nil)`
 | `modifiedOn` | `string` |  |
 | `name` | `string` |  |
 | `owner` | `string` |  |
-| `version` | `int` |  |
+| `state` | `string` |  |
+| `version` | `string` | A single version of an artifact. |
 
 #### Example: Load
 
@@ -2171,8 +2138,13 @@ result, err := client.Metadata(nil).Create(map[string]any{
     "artifact_id": "example_artifact_id",
     "group_id": "example_group_id",
     "version_expression": "example_version_expression",
-    "modifiedBy": "example_modifiedBy",
-    "modifiedOn": "example_modifiedOn",
+    "artifactId": "example_artifactId",
+    "artifactType": "example_artifactType",
+    "contentId": 1,
+    "createdOn": "example_createdOn",
+    "globalId": 1,
+    "owner": "example_owner",
+    "version": "example_version",
 }, nil)
 if err != nil {
     panic(err)
@@ -2196,10 +2168,9 @@ Create an instance: `odcsContractResult := client.OdcsContractResult(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `labelsApplied` | `int` | Number of contract.* labels set on the schema artifact. |
-| `rulesApplied` | `int` | Number of CEL quality rules projected onto the schema artifact. |
-| `tagsApplied` | `int` | Number of field-tag.* labels set on the schema artifact version. |
-| `warnings` | `[]any` | Any warnings encountered during projection. |
+| `contractId` | `string` | The contract artifact ID. |
+| `projection` | `map[string]any` | Summary of the projection performed when an ODCS contract is applied. |
+| `version` | `string` | The ODCS contract version. |
 
 #### Example: Create
 
@@ -2282,6 +2253,7 @@ Create an instance: `roleMapping := client.RoleMapping(nil)`
 | --- | --- |
 | `List(match, ctrl)` | List entities matching the criteria. |
 | `Load(match, ctrl)` | Load a single entity by match criteria. |
+| `Create(data, ctrl)` | Create a new entity with the given data. |
 
 #### Fields
 
@@ -2310,6 +2282,19 @@ if err != nil {
     panic(err)
 }
 fmt.Println(roleMappings) // the array of records
+```
+
+#### Example: Create
+
+```go
+result, err := client.RoleMapping(nil).Create(map[string]any{
+    "principalId": "example_principalId",
+    "role": "example_role",
+}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 
@@ -2578,7 +2563,7 @@ Create an instance: `version := client.Version(nil)`
 | `owner` | `string` |  |
 | `state` | `string` |  |
 | `value` | `string` |  |
-| `version` | `string` |  |
+| `version` | `string` | A single version of an artifact. |
 | `versions` | `[]any` | The collection of artifact versions returned in the result set. |
 
 #### Example: Load
@@ -2614,6 +2599,7 @@ result, err := client.Version(nil).Create(map[string]any{
     "globalId": 1,
     "owner": "example_owner",
     "value": "example_value",
+    "version": "example_version",
     "versions": []any{},
 }, nil)
 if err != nil {
@@ -2631,13 +2617,26 @@ Create an instance: `wellKnown := client.WellKnown(nil)`
 
 | Method | Description |
 | --- | --- |
+| `List(match, ctrl)` | List entities matching the criteria. |
 | `Load(match, ctrl)` | Load a single entity by match criteria. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
+| `artifactId` | `string` |  |
+| `capabilities` | `map[string]any` | Capabilities of an A2A agent. |
+| `createdOn` | `int` |  |
+| `description` | `string` |  |
+| `groupId` | `string` |  |
 | `id` | `string` |  |
+| `name` | `string` |  |
+| `owner` | `string` |  |
+| `parameters` | `[]any` |  |
+| `skills` | `[]any` |  |
+| `supportedInterfaces` | `[]any` |  |
+| `title` | `string` |  |
+| `version` | `string` |  |
 
 #### Example: Load
 
@@ -2647,6 +2646,16 @@ if err != nil {
     panic(err)
 }
 fmt.Println(wellKnown) // the loaded record
+```
+
+#### Example: List
+
+```go
+wellKnowns, err := client.WellKnown(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(wellKnowns) // the array of records
 ```
 
 

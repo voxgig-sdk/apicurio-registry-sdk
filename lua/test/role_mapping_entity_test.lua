@@ -60,7 +60,7 @@ describe("RoleMappingEntity", function()
     local setup = role_mapping_basic_setup(nil)
     -- Per-op sdk-test-control.json skip.
     local _live = setup.live or false
-    for _, _op in ipairs({"list", "load"}) do
+    for _, _op in ipairs({"create", "list", "load"}) do
       local _should_skip, _reason = runner.is_control_skipped("entityOp", "role_mapping." .. _op, _live and "live" or "unit")
       if _should_skip then
         pending(_reason or "skipped via sdk-test-control.json")
@@ -75,21 +75,28 @@ describe("RoleMappingEntity", function()
     end
     local client = setup.client
 
-    -- Bootstrap entity data from existing test data.
-    local role_mapping_ref01_data_raw = vs.items(helpers.to_map(
-      vs.getpath(setup.data, "existing.role_mapping")))
-    local role_mapping_ref01_data = nil
-    if #role_mapping_ref01_data_raw > 0 then
-      role_mapping_ref01_data = helpers.to_map(role_mapping_ref01_data_raw[1][2])
-    end
+    -- CREATE
+    local role_mapping_ref01_ent = client:RoleMapping(nil)
+    local role_mapping_ref01_data = helpers.to_map(vs.getprop(
+      vs.getpath(setup.data, "new.role_mapping"), "role_mapping_ref01"))
+
+    local role_mapping_ref01_data_result, err = role_mapping_ref01_ent:create(role_mapping_ref01_data, nil)
+    assert.is_nil(err)
+    role_mapping_ref01_data = helpers.to_map(type(role_mapping_ref01_data_result) == 'table' and role_mapping_ref01_data_result.data_get and role_mapping_ref01_data_result:data_get() or role_mapping_ref01_data_result)
+    assert.is_not_nil(role_mapping_ref01_data)
+    assert.is_not_nil(role_mapping_ref01_data["id"])
 
     -- LIST
-    local role_mapping_ref01_ent = client:RoleMapping(nil)
     local role_mapping_ref01_match = {}
 
     local role_mapping_ref01_list_result, err = role_mapping_ref01_ent:list(role_mapping_ref01_match, nil)
     assert.is_nil(err)
     assert.is_table(role_mapping_ref01_list_result)
+
+    local found_item = vs.select(
+      runner.entity_list_to_data(role_mapping_ref01_list_result),
+      { id = role_mapping_ref01_data["id"] })
+    assert.is_false(vs.isempty(found_item))
 
     -- LOAD
     local role_mapping_ref01_match_dt0 = {

@@ -28,7 +28,6 @@
 @"./BasicGroupFlow.aontu"
 @"./BasicGroupRuleFlow.aontu"
 @"./BasicKafkaSqlFlow.aontu"
-@"./BasicMcpToolFlow.aontu"
 @"./BasicMetadataFlow.aontu"
 @"./BasicOdcsContractResultFlow.aontu"
 @"./BasicOdcsContractSummaryFlow.aontu"

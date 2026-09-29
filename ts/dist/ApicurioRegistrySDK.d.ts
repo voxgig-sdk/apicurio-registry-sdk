@@ -26,7 +26,6 @@ import { GlobalRuleEntity } from './entity/GlobalRuleEntity';
 import { GroupEntity } from './entity/GroupEntity';
 import { GroupRuleEntity } from './entity/GroupRuleEntity';
 import { KafkaSqlEntity } from './entity/KafkaSqlEntity';
-import { McpToolEntity } from './entity/McpToolEntity';
 import { MetadataEntity } from './entity/MetadataEntity';
 import { OdcsContractResultEntity } from './entity/OdcsContractResultEntity';
 import { OdcsContractSummaryEntity } from './entity/OdcsContractSummaryEntity';
@@ -115,7 +114,6 @@ declare class ApicurioRegistrySDK {
     Group(entopts?: Record<string, any>): GroupEntity;
     GroupRule(entopts?: Record<string, any>): GroupRuleEntity;
     KafkaSql(entopts?: Record<string, any>): KafkaSqlEntity;
-    McpTool(entopts?: Record<string, any>): McpToolEntity;
     Metadata(entopts?: Record<string, any>): MetadataEntity;
     OdcsContractResult(entopts?: Record<string, any>): OdcsContractResultEntity;
     OdcsContractSummary(entopts?: Record<string, any>): OdcsContractSummaryEntity;

@@ -485,13 +485,6 @@ class ApicurioRegistrySDK
   end
 
 
-  # Canonical facade: client.McpTool.list / client.McpTool.load({ "id" => ... })
-  def McpTool(data = nil)
-    require_relative 'entity/mcp_tool_entity'
-    McpToolEntity.new(self, data)
-  end
-
-
   # Canonical facade: client.Metadata.list / client.Metadata.load({ "id" => ... })
   def Metadata(data = nil)
     require_relative 'entity/metadata_entity'

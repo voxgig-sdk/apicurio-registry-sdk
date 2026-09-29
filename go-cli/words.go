@@ -133,8 +133,6 @@ func entityFor(client *sdk.ApicurioRegistrySDK, name string) (sdk.ApicurioRegist
 		return client.GroupRule(nil), nil
 	case "kafka_sql":
 		return client.KafkaSql(nil), nil
-	case "mcp_tool":
-		return client.McpTool(nil), nil
 	case "metadata":
 		return client.Metadata(nil), nil
 	case "odcs_contract_result":

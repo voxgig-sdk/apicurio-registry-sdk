@@ -47,7 +47,7 @@ main: kit: entity: rule: {
                 ex: "\"example-artifact\""
                 k: "param"
                 n: "artifact_id"
-                or: "artifact_id"
+                or: "artifactId"
                 r: true
                 t: "`$STRING`"
               }
@@ -55,7 +55,7 @@ main: kit: entity: rule: {
                 ex: "\"my-group\""
                 k: "param"
                 n: "group_id"
-                or: "group_id"
+                or: "groupId"
                 r: true
                 t: "`$STRING`"
               }
@@ -109,7 +109,7 @@ main: kit: entity: rule: {
                 ex: "\"my-group\""
                 k: "param"
                 n: "group_id"
-                or: "group_id"
+                or: "groupId"
                 r: true
                 t: "`$STRING`"
               }
@@ -143,27 +143,6 @@ main: kit: entity: rule: {
             res: "`body`"
           }
         }
-        {
-          co: {
-            id: "GET /admin/rules"
-            source: "openapi3"
-            version: 2
-          }
-          m: "GET"
-          o: "/admin/rules"
-          s: [
-            {
-              lit: "admin"
-            }
-            {
-              lit: "rules"
-            }
-          ]
-          t: {
-            req: "`reqdata`"
-            res: "`body`"
-          }
-        }
       ]
     }
     load: {
@@ -181,7 +160,7 @@ main: kit: entity: rule: {
                 ex: "\"example-artifact\""
                 k: "param"
                 n: "artifact_id"
-                or: "artifact_id"
+                or: "artifactId"
                 r: true
                 t: "`$STRING`"
               }
@@ -189,14 +168,14 @@ main: kit: entity: rule: {
                 ex: "\"my-group\""
                 k: "param"
                 n: "group_id"
-                or: "group_id"
+                or: "groupId"
                 r: true
                 t: "`$STRING`"
               }
               {
                 k: "param"
                 n: "id"
-                or: "rule_type"
+                or: "ruleType"
                 r: true
                 t: "`$STRING`"
               }
@@ -255,14 +234,14 @@ main: kit: entity: rule: {
                 ex: "\"my-group\""
                 k: "param"
                 n: "group_id"
-                or: "group_id"
+                or: "groupId"
                 r: true
                 t: "`$STRING`"
               }
               {
                 k: "param"
                 n: "id"
-                or: "rule_type"
+                or: "ruleType"
                 r: true
                 t: "`$STRING`"
               }
@@ -313,7 +292,7 @@ main: kit: entity: rule: {
                 ex: "VALIDITY"
                 k: "param"
                 n: "id"
-                or: "rule_type"
+                or: "ruleType"
                 r: true
                 t: "`$STRING`"
               }
@@ -364,7 +343,7 @@ main: kit: entity: rule: {
                 ex: "\"example-artifact\""
                 k: "param"
                 n: "artifact_id"
-                or: "artifact_id"
+                or: "artifactId"
                 r: true
                 t: "`$STRING`"
               }
@@ -372,14 +351,14 @@ main: kit: entity: rule: {
                 ex: "\"my-group\""
                 k: "param"
                 n: "group_id"
-                or: "group_id"
+                or: "groupId"
                 r: true
                 t: "`$STRING`"
               }
               {
                 k: "param"
                 n: "id"
-                or: "rule_type"
+                or: "ruleType"
                 r: true
                 t: "`$STRING`"
               }
@@ -438,14 +417,14 @@ main: kit: entity: rule: {
                 ex: "\"my-group\""
                 k: "param"
                 n: "group_id"
-                or: "group_id"
+                or: "groupId"
                 r: true
                 t: "`$STRING`"
               }
               {
                 k: "param"
                 n: "id"
-                or: "rule_type"
+                or: "ruleType"
                 r: true
                 t: "`$STRING`"
               }
@@ -496,7 +475,7 @@ main: kit: entity: rule: {
                 ex: "VALIDITY"
                 k: "param"
                 n: "id"
-                or: "rule_type"
+                or: "ruleType"
                 r: true
                 t: "`$STRING`"
               }

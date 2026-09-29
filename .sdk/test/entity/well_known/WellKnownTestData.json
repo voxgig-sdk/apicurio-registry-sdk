@@ -2,34 +2,90 @@
   "existing": {
     "well_known": {
       "WELL_KNOWN00": {
+        "artifactId": "s82",
+        "capabilities": {},
+        "createdOn": 132,
+        "description": "s85",
+        "groupId": "s86",
         "id": "WELL_KNOWN00",
+        "name": "s88",
+        "owner": "s89",
+        "parameters": [],
+        "skills": [],
+        "supportedInterfaces": [],
+        "title": "s8d",
+        "version": "s8e",
         "artifact_id": "ARTIFACT01",
         "group_id": "GROUP01",
-        "schema_type": "SCHEMA_TYPE01",
-        "version": "VERSION01"
+        "schema_type": "SCHEMA_TYPE01"
       },
       "WELL_KNOWN01": {
+        "artifactId": "s104",
+        "capabilities": {},
+        "createdOn": 262,
+        "description": "s107",
+        "groupId": "s108",
         "id": "WELL_KNOWN01",
+        "name": "s10a",
+        "owner": "s10b",
+        "parameters": [],
+        "skills": [],
+        "supportedInterfaces": [],
+        "title": "s10f",
+        "version": "s110",
         "artifact_id": "ARTIFACT01",
         "group_id": "GROUP01",
-        "schema_type": "SCHEMA_TYPE01",
-        "version": "VERSION01"
+        "schema_type": "SCHEMA_TYPE01"
       },
       "WELL_KNOWN02": {
+        "artifactId": "s186",
+        "capabilities": {},
+        "createdOn": 392,
+        "description": "s189",
+        "groupId": "s18a",
         "id": "WELL_KNOWN02",
+        "name": "s18c",
+        "owner": "s18d",
+        "parameters": [],
+        "skills": [],
+        "supportedInterfaces": [],
+        "title": "s191",
+        "version": "s192",
         "artifact_id": "ARTIFACT01",
         "group_id": "GROUP01",
-        "schema_type": "SCHEMA_TYPE01",
-        "version": "VERSION01"
+        "schema_type": "SCHEMA_TYPE01"
       }
     }
   },
   "new": {
     "well_known": {
-      "well_known_ref01": {}
+      "well_known_ref01": {
+        "artifactId": "s208",
+        "capabilities": {},
+        "createdOn": 522,
+        "description": "s20b",
+        "groupId": "s20c",
+        "name": "s20e",
+        "owner": "s20f",
+        "parameters": [],
+        "skills": [],
+        "supportedInterfaces": [],
+        "title": "s213",
+        "version": "s214"
+      }
     }
   },
   "requests": {
+    "GET /well-known/agents": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /well-known/mcp-tools": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
     "GET /well-known/agents/{groupId}/{artifactId}": {
       "provenance": "operation-contract",
       "version": 2,

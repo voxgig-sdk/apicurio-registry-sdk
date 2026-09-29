@@ -62,7 +62,7 @@ class GitOpsValidateTaskEntityTest extends TestCase
         $setup = git_ops_validate_task_basic_setup(null);
         // Per-op sdk-test-control.json skip.
         $_live = !empty($setup["live"]);
-        foreach (["list", "load"] as $_op) {
+        foreach (["create", "list", "load"] as $_op) {
             [$_shouldSkip, $_reason] = Runner::is_control_skipped("entityOp", "git_ops_validate_task." . $_op, $_live ? "live" : "unit");
             if ($_shouldSkip) {
                 $this->markTestSkipped($_reason ?? "skipped via sdk-test-control.json");
@@ -77,16 +77,16 @@ class GitOpsValidateTaskEntityTest extends TestCase
         }
         $client = $setup["client"];
 
-        // Bootstrap entity data from existing test data.
-        $git_ops_validate_task_ref01_data_raw = Vs::items(Helpers::to_map(
-            Vs::getpath($setup["data"], "existing.git_ops_validate_task")));
-        $git_ops_validate_task_ref01_data = null;
-        if (count($git_ops_validate_task_ref01_data_raw) > 0) {
-            $git_ops_validate_task_ref01_data = Helpers::to_map($git_ops_validate_task_ref01_data_raw[0][1]);
-        }
+        // CREATE
+        $git_ops_validate_task_ref01_ent = $client->GitOpsValidateTask(null);
+        $git_ops_validate_task_ref01_data = Helpers::to_map(Vs::getprop(
+            Vs::getpath($setup["data"], "new.git_ops_validate_task"), "git_ops_validate_task_ref01"));
+
+        $git_ops_validate_task_ref01_data_result = $git_ops_validate_task_ref01_ent->create($git_ops_validate_task_ref01_data, null);
+        $git_ops_validate_task_ref01_data = Helpers::to_map(is_object($git_ops_validate_task_ref01_data_result) && method_exists($git_ops_validate_task_ref01_data_result, 'data_get') ? $git_ops_validate_task_ref01_data_result->data_get() : $git_ops_validate_task_ref01_data_result);
+        $this->assertNotNull($git_ops_validate_task_ref01_data);
 
         // LIST
-        $git_ops_validate_task_ref01_ent = $client->GitOpsValidateTask(null);
         $git_ops_validate_task_ref01_match = [];
 
         $git_ops_validate_task_ref01_list_result = $git_ops_validate_task_ref01_ent->list($git_ops_validate_task_ref01_match, null);

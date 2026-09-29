@@ -47,7 +47,7 @@ main: kit: entity: group_rule: {
                 ex: "\"my-group\""
                 k: "param"
                 n: "id"
-                or: "group_id"
+                or: "groupId"
                 r: true
                 t: "`$STRING`"
               }
@@ -98,14 +98,14 @@ main: kit: entity: group_rule: {
                 ex: "\"my-group\""
                 k: "param"
                 n: "group_id"
-                or: "group_id"
+                or: "groupId"
                 r: true
                 t: "`$STRING`"
               }
               {
                 k: "param"
                 n: "id"
-                or: "rule_type"
+                or: "ruleType"
                 r: true
                 t: "`$STRING`"
               }
@@ -156,7 +156,7 @@ main: kit: entity: group_rule: {
                 ex: "\"my-group\""
                 k: "param"
                 n: "id"
-                or: "group_id"
+                or: "groupId"
                 r: true
                 t: "`$STRING`"
               }

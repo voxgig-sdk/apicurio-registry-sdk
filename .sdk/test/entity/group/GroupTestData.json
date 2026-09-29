@@ -2,55 +2,47 @@
   "existing": {
     "group": {
       "GROUP00": {
-        "artifactsType": "s64",
-        "createdOn": "s65",
-        "description": "s66",
-        "groupId": "s67",
+        "createdOn": "s50",
+        "description": "s51",
+        "groupId": "s52",
         "id": "GROUP00",
         "labels": {},
-        "modifiedBy": "s6a",
-        "modifiedOn": "s6b",
-        "owner": "s6c",
-        "properties": {}
+        "modifiedBy": "s55",
+        "modifiedOn": "s56",
+        "owner": "s57"
       },
       "GROUP01": {
-        "artifactsType": "sc8",
-        "createdOn": "sc9",
-        "description": "sca",
-        "groupId": "scb",
+        "createdOn": "sa0",
+        "description": "sa1",
+        "groupId": "sa2",
         "id": "GROUP01",
         "labels": {},
-        "modifiedBy": "sce",
-        "modifiedOn": "scf",
-        "owner": "sd0",
-        "properties": {}
+        "modifiedBy": "sa5",
+        "modifiedOn": "sa6",
+        "owner": "sa7"
       },
       "GROUP02": {
-        "artifactsType": "s12c",
-        "createdOn": "s12d",
-        "description": "s12e",
-        "groupId": "s12f",
+        "createdOn": "sf0",
+        "description": "sf1",
+        "groupId": "sf2",
         "id": "GROUP02",
         "labels": {},
-        "modifiedBy": "s132",
-        "modifiedOn": "s133",
-        "owner": "s134",
-        "properties": {}
+        "modifiedBy": "sf5",
+        "modifiedOn": "sf6",
+        "owner": "sf7"
       }
     }
   },
   "new": {
     "group": {
       "group_ref01": {
-        "artifactsType": "s190",
-        "createdOn": "s191",
-        "description": "s192",
-        "groupId": "s193",
+        "createdOn": "s140",
+        "description": "s141",
+        "groupId": "s142",
         "labels": {},
-        "modifiedBy": "s196",
-        "modifiedOn": "s197",
-        "owner": "s198",
-        "properties": {}
+        "modifiedBy": "s145",
+        "modifiedOn": "s146",
+        "owner": "s147"
       }
     }
   },

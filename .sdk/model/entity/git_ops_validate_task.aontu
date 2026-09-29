@@ -47,6 +47,12 @@ main: kit: entity: git_ops_validate_task: {
     ref: {
       h: "Ref"
       n: "ref"
+      op: {
+        create: {
+          req: true
+          type: "`$STRING`"
+        }
+      }
       r: false
       sh: "Git ref being validated."
       t: "`$STRING`"
@@ -54,6 +60,12 @@ main: kit: entity: git_ops_validate_task: {
     repoId: {
       h: "Repo Id"
       n: "repoId"
+      op: {
+        create: {
+          req: true
+          type: "`$STRING`"
+        }
+      }
       r: false
       sh: "Repository ID being validated."
       t: "`$STRING`"
@@ -98,6 +110,35 @@ main: kit: entity: git_ops_validate_task: {
 
   name: "git_ops_validate_task"
   op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /admin/gitops/validate"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/admin/gitops/validate"
+          s: [
+            {
+              lit: "admin"
+            }
+            {
+              lit: "gitops"
+            }
+            {
+              lit: "validate"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
     list: {
       name: "list"
       points: [
@@ -141,7 +182,7 @@ main: kit: entity: git_ops_validate_task: {
               {
                 k: "param"
                 n: "task_id"
-                or: "task_id"
+                or: "taskId"
                 r: true
                 t: "`$STRING`"
               }

@@ -745,20 +745,6 @@ function ApicurioRegistrySDK:KafkaSql(data)
 end
 
 
--- Idiomatic facade: client:McpTool():list() / client:McpTool():load({ id = ... })
--- Entity access is capitalised (PascalCase) for parity with the other SDKs.
-function ApicurioRegistrySDK:McpTool(data)
-  local EntityMod = require("entity.mcp_tool_entity")
-  if data == nil then
-    if self._mcp_tool == nil then
-      self._mcp_tool = EntityMod.new(self, nil)
-    end
-    return self._mcp_tool
-  end
-  return EntityMod.new(self, data)
-end
-
-
 -- Idiomatic facade: client:Metadata():list() / client:Metadata():load({ id = ... })
 -- Entity access is capitalised (PascalCase) for parity with the other SDKs.
 function ApicurioRegistrySDK:Metadata(data)

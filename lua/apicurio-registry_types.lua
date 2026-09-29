@@ -24,17 +24,13 @@
 ---@field principal_id string
 
 ---@class Agent
----@field artifactId? string
 ---@field capabilities? table
----@field createdOn? number
 ---@field defaultInputModes? table
 ---@field defaultOutputModes? table
 ---@field description? string
 ---@field documentationUrl? string
----@field groupId? string
 ---@field iconUrl? string
 ---@field name? string
----@field owner? string
 ---@field protocolVersion? string
 ---@field provider? table
 ---@field securityRequirements? table
@@ -45,13 +41,21 @@
 ---@field version? string
 
 ---@class AgentListMatch
----@field capability? table
----@field input_mode? table
----@field limit? number
+---@field capabilities? table
+---@field defaultInputModes? table
+---@field defaultOutputModes? table
+---@field description? string
+---@field documentationUrl? string
+---@field iconUrl? string
 ---@field name? string
----@field offset? number
----@field output_mode? table
----@field skill? table
+---@field protocolVersion? string
+---@field provider? table
+---@field securityRequirements? table
+---@field securitySchemes? table
+---@field signatures? table
+---@field skills? table
+---@field supportedInterfaces? table
+---@field version? string
 
 ---@class AgentCard
 ---@field capabilities? table
@@ -112,12 +116,14 @@
 ---@field version? string
 
 ---@class ArdExplore
+---@field facets? table
 ---@field query? table
----@field resultType table
+---@field resultType? string
 
 ---@class ArdExploreCreateData
+---@field facets? table
 ---@field query? table
----@field resultType table
+---@field resultType? string
 
 ---@class ArdSearch
 ---@field federation? string
@@ -477,14 +483,8 @@
 ---@field group_id? string
 
 ---@class GitOp
----@field ref string
----@field repoId string
----@field type? string
 
 ---@class GitOpCreateData
----@field ref string
----@field repoId string
----@field type? string
 
 ---@class GitOpRemoveMatch
 ---@field task_id string
@@ -530,8 +530,27 @@
 ---@field type? string
 ---@field versionCount? number
 
+---@class GitOpsValidateTaskCreateData
+---@field artifactCount? number
+---@field completedAt? string
+---@field createdAt? string
+---@field errors? table
+---@field groupCount? number
+---@field ref? string
+---@field repoId? string
+---@field result? string
+---@field state string
+---@field taskId string
+---@field type? string
+---@field versionCount? number
+
 ---@class GlobalRule
 ---@field config string
+---@field id? string
+---@field ruleType? string
+
+---@class GlobalRuleListMatch
+---@field config? string
 ---@field id? string
 ---@field ruleType? string
 
@@ -544,16 +563,14 @@
 ---@field id string
 
 ---@class Group
----@field artifactsType? string
----@field createdOn? string
+---@field createdOn string
 ---@field description? string
----@field groupId? string
+---@field groupId string
 ---@field id? string
 ---@field labels? table
----@field modifiedBy? string
----@field modifiedOn? string
----@field owner? string
----@field properties? table
+---@field modifiedBy string
+---@field modifiedOn string
+---@field owner string
 
 ---@class GroupLoadMatch
 ---@field id string
@@ -565,20 +582,17 @@
 ---@field orderby? string
 
 ---@class GroupCreateData
----@field artifactsType? string
----@field createdOn? string
+---@field createdOn string
 ---@field description? string
----@field groupId? string
+---@field groupId string
 ---@field id? string
 ---@field labels? table
----@field modifiedBy? string
----@field modifiedOn? string
----@field owner? string
----@field properties? table
+---@field modifiedBy string
+---@field modifiedOn string
+---@field owner string
 
 ---@class GroupUpdateData
 ---@field id string
----@field artifactsType? string
 ---@field createdOn? string
 ---@field description? string
 ---@field groupId? string
@@ -586,7 +600,6 @@
 ---@field modifiedBy? string
 ---@field modifiedOn? string
 ---@field owner? string
----@field properties? table
 
 ---@class GroupRemoveMatch
 ---@field id string
@@ -611,37 +624,22 @@
 ---@class KafkaSqlCreateData
 ---@field snapshotId string
 
----@class McpTool
----@field artifactId? string
----@field createdOn? number
----@field description? string
----@field groupId? string
----@field name? string
----@field owner? string
----@field parameters? table
----@field title? string
-
----@class McpToolListMatch
----@field limit? number
----@field name? string
----@field offset? number
----@field parameter? table
-
 ---@class Metadata
----@field artifactId? string
----@field artifactType? string
----@field contentId? number
+---@field artifactId string
+---@field artifactType string
+---@field contentId number
 ---@field contractMetadata? table
----@field createdOn? string
+---@field createdOn string
 ---@field description? string
----@field globalId? number
+---@field globalId number
 ---@field groupId? string
 ---@field labels? table
----@field modifiedBy string
----@field modifiedOn string
+---@field modifiedBy? string
+---@field modifiedOn? string
 ---@field name? string
----@field owner? string
----@field version? number
+---@field owner string
+---@field state? string
+---@field version string
 
 ---@class MetadataLoadMatch
 ---@field artifact_id string
@@ -652,20 +650,21 @@
 ---@field artifact_id string
 ---@field group_id string
 ---@field version_expression string
----@field artifactId? string
----@field artifactType? string
----@field contentId? number
+---@field artifactId string
+---@field artifactType string
+---@field contentId number
 ---@field contractMetadata? table
----@field createdOn? string
+---@field createdOn string
 ---@field description? string
----@field globalId? number
+---@field globalId number
 ---@field groupId? string
 ---@field labels? table
----@field modifiedBy string
----@field modifiedOn string
+---@field modifiedBy? string
+---@field modifiedOn? string
 ---@field name? string
----@field owner? string
----@field version? number
+---@field owner string
+---@field state? string
+---@field version string
 
 ---@class MetadataUpdateData
 ---@field artifact_id string
@@ -684,28 +683,26 @@
 ---@field modifiedOn? string
 ---@field name? string
 ---@field owner? string
----@field version? number
+---@field state? string
+---@field version? string
 
 ---@class OdcsContractResult
----@field labelsApplied? number
----@field rulesApplied? number
----@field tagsApplied? number
----@field warnings? table
+---@field contractId? string
+---@field projection? table
+---@field version? string
 
 ---@class OdcsContractResultCreateData
 ---@field group_id string
----@field labelsApplied? number
----@field rulesApplied? number
----@field tagsApplied? number
----@field warnings? table
+---@field contractId? string
+---@field projection? table
+---@field version? string
 
 ---@class OdcsContractResultUpdateData
 ---@field contract_id string
 ---@field group_id string
----@field labelsApplied? number
----@field rulesApplied? number
----@field tagsApplied? number
----@field warnings? table
+---@field contractId? string
+---@field projection? table
+---@field version? string
 
 ---@class OdcsContractSummary
 ---@field contractId? string
@@ -742,6 +739,12 @@
 ---@field limit? number
 ---@field offset? number
 
+---@class RoleMappingCreateData
+---@field id? string
+---@field principalId string
+---@field principalName? string
+---@field role string
+
 ---@class Rule
 ---@field config string
 ---@field id? string
@@ -753,9 +756,8 @@
 ---@field id string
 
 ---@class RuleListMatch
----@field config? string
----@field id? string
----@field ruleType? string
+---@field artifact_id? string
+---@field group_id string
 
 ---@class RuleUpdateData
 ---@field artifact_id? string
@@ -863,9 +865,9 @@
 ---@field modifiedOn? string
 ---@field name? string
 ---@field owner string
----@field state string
+---@field state? string
 ---@field value string
----@field version? string
+---@field version string
 ---@field versions table
 
 ---@class VersionLoadMatch
@@ -923,7 +925,7 @@
 ---@field name? string
 ---@field owner string
 ---@field value string
----@field version? string
+---@field version string
 ---@field versions table
 
 ---@class VersionUpdateData
@@ -961,12 +963,33 @@
 ---@field id? string
 
 ---@class WellKnown
+---@field artifactId? string
+---@field capabilities? table
+---@field createdOn? number
+---@field description? string
+---@field groupId? string
 ---@field id? string
+---@field name? string
+---@field owner? string
+---@field parameters? table
+---@field skills? table
+---@field supportedInterfaces? table
+---@field title? string
+---@field version? string
 
 ---@class WellKnownLoadMatch
 ---@field artifact_id string
 ---@field group_id string
 ---@field version? string
+
+---@class WellKnownListMatch
+---@field capability? table
+---@field input_mode? table
+---@field limit? number
+---@field name? string
+---@field offset? number
+---@field output_mode? table
+---@field skill? table
 
 ---@class WrappedVersionState
 ---@field state string

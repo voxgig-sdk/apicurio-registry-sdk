@@ -46,7 +46,7 @@ describe('AgentDirect', async () => {
     const query: any = {}
 
     const result: any = await client.direct({
-      path: 'well-known/agents',
+      path: 'well-known/agent.json',
       method: 'GET',
       params,
       query,

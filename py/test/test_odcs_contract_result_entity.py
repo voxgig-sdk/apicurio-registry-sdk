@@ -53,8 +53,13 @@ class TestOdcsContractResultEntity:
             "group_id": setup["idmap"]["group_id"],
         }
 
+        odcs_contract_result_ref01_markdef_up0_name = "contractId"
+        odcs_contract_result_ref01_markdef_up0_value = "Mark01-odcs_contract_result_ref01_" + str(setup["now"])
+        odcs_contract_result_ref01_data_up0_up[odcs_contract_result_ref01_markdef_up0_name] = odcs_contract_result_ref01_markdef_up0_value
+
         odcs_contract_result_ref01_resdata_up0 = helpers.to_map(runner.entity_data(odcs_contract_result_ref01_ent.update(odcs_contract_result_ref01_data_up0_up, None)))
         assert odcs_contract_result_ref01_resdata_up0 is not None
+        assert odcs_contract_result_ref01_resdata_up0[odcs_contract_result_ref01_markdef_up0_name] == odcs_contract_result_ref01_markdef_up0_value
 
 
 

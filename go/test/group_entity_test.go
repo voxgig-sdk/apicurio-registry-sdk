@@ -137,7 +137,7 @@ func TestGroupEntity(t *testing.T) {
 			"id": groupRef01Data["id"],
 		}
 
-		groupRef01MarkdefUp0Name := "artifactsType"
+		groupRef01MarkdefUp0Name := "createdOn"
 		groupRef01MarkdefUp0Value := fmt.Sprintf("Mark01-group_ref01_%d", setup.now)
 		groupRef01DataUp0Up[groupRef01MarkdefUp0Name] = groupRef01MarkdefUp0Value
 

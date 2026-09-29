@@ -2,101 +2,80 @@
   "existing": {
     "agent": {
       "AGENT00": {
-        "artifactId": "sbe",
         "capabilities": {},
-        "createdOn": 192,
         "defaultInputModes": [],
         "defaultOutputModes": [],
-        "description": "sc3",
-        "documentationUrl": "sc4",
-        "groupId": "sc5",
-        "iconUrl": "sc6",
-        "name": "sc7",
-        "owner": "sc8",
-        "protocolVersion": "sc9",
+        "description": "s99",
+        "documentationUrl": "s9a",
+        "iconUrl": "s9b",
+        "name": "s9c",
+        "protocolVersion": "s9d",
         "provider": {},
         "securityRequirements": [],
         "securitySchemes": {},
         "signatures": [],
         "skills": [],
         "supportedInterfaces": [],
-        "version": "sd0"
+        "version": "sa4"
       },
       "AGENT01": {
-        "artifactId": "s17c",
         "capabilities": {},
-        "createdOn": 382,
         "defaultInputModes": [],
         "defaultOutputModes": [],
-        "description": "s181",
-        "documentationUrl": "s182",
-        "groupId": "s183",
-        "iconUrl": "s184",
-        "name": "s185",
-        "owner": "s186",
-        "protocolVersion": "s187",
+        "description": "s12f",
+        "documentationUrl": "s130",
+        "iconUrl": "s131",
+        "name": "s132",
+        "protocolVersion": "s133",
         "provider": {},
         "securityRequirements": [],
         "securitySchemes": {},
         "signatures": [],
         "skills": [],
         "supportedInterfaces": [],
-        "version": "s18e"
+        "version": "s13a"
       },
       "AGENT02": {
-        "artifactId": "s23a",
         "capabilities": {},
-        "createdOn": 572,
         "defaultInputModes": [],
         "defaultOutputModes": [],
-        "description": "s23f",
-        "documentationUrl": "s240",
-        "groupId": "s241",
-        "iconUrl": "s242",
-        "name": "s243",
-        "owner": "s244",
-        "protocolVersion": "s245",
+        "description": "s1c5",
+        "documentationUrl": "s1c6",
+        "iconUrl": "s1c7",
+        "name": "s1c8",
+        "protocolVersion": "s1c9",
         "provider": {},
         "securityRequirements": [],
         "securitySchemes": {},
         "signatures": [],
         "skills": [],
         "supportedInterfaces": [],
-        "version": "s24c"
+        "version": "s1d0"
       }
     }
   },
   "new": {
     "agent": {
       "agent_ref01": {
-        "artifactId": "s2f8",
         "capabilities": {},
-        "createdOn": 762,
         "defaultInputModes": [],
         "defaultOutputModes": [],
-        "description": "s2fd",
-        "documentationUrl": "s2fe",
-        "groupId": "s2ff",
-        "iconUrl": "s300",
-        "name": "s301",
-        "owner": "s302",
-        "protocolVersion": "s303",
+        "description": "s25b",
+        "documentationUrl": "s25c",
+        "iconUrl": "s25d",
+        "name": "s25e",
+        "protocolVersion": "s25f",
         "provider": {},
         "securityRequirements": [],
         "securitySchemes": {},
         "signatures": [],
         "skills": [],
         "supportedInterfaces": [],
-        "version": "s30a"
+        "version": "s266"
       }
     }
   },
   "requests": {
-    "GET /well-known/agents": {
-      "provenance": "operation-contract",
-      "version": 2,
-      "source": "openapi3"
-    },
     "GET /well-known/agent.json": {
       "provenance": "operation-contract",
       "version": 2,

@@ -53,9 +53,14 @@ class OdcsContractResultEntityTest extends TestCase
             "group_id" => $setup["idmap"]["group_id"],
         ];
 
+        $odcs_contract_result_ref01_markdef_up0_name = "contractId";
+        $odcs_contract_result_ref01_markdef_up0_value = "Mark01-odcs_contract_result_ref01_" . $setup["now"];
+        $odcs_contract_result_ref01_data_up0_up[$odcs_contract_result_ref01_markdef_up0_name] = $odcs_contract_result_ref01_markdef_up0_value;
+
         $odcs_contract_result_ref01_resdata_up0_result = $odcs_contract_result_ref01_ent->update($odcs_contract_result_ref01_data_up0_up, null);
         $odcs_contract_result_ref01_resdata_up0 = Helpers::to_map(is_object($odcs_contract_result_ref01_resdata_up0_result) && method_exists($odcs_contract_result_ref01_resdata_up0_result, 'data_get') ? $odcs_contract_result_ref01_resdata_up0_result->data_get() : $odcs_contract_result_ref01_resdata_up0_result);
         $this->assertNotNull($odcs_contract_result_ref01_resdata_up0);
+        $this->assertEquals($odcs_contract_result_ref01_resdata_up0[$odcs_contract_result_ref01_markdef_up0_name], $odcs_contract_result_ref01_markdef_up0_value);
 
     }
 }

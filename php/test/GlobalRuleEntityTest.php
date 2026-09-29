@@ -18,12 +18,51 @@ class GlobalRuleEntityTest extends TestCase
         $this->assertNotNull($ent);
     }
 
+    // Feature #4: the entity stream(action, ...) method runs the op pipeline
+    // and yields result items. With the streaming feature active it yields the
+    // feature's incremental output; otherwise it falls back to the materialised
+    // list so stream always yields.
+    public function test_stream(): void
+    {
+        $seed = [
+            "entity" => [
+                "global_rule" => [
+                    "s1" => ["id" => "s1"],
+                    "s2" => ["id" => "s2"],
+                    "s3" => ["id" => "s3"],
+                ],
+            ],
+        ];
+
+        // Fallback: streaming inactive -> yields the materialised list items.
+        $base = ApicurioRegistrySDK::test($seed, null);
+        $seen = iterator_to_array($base->GlobalRule(null)->stream("list", null, null), false);
+        $this->assertCount(3, $seen);
+
+        // Inbound: streaming active -> yields each item from the feature.
+        $cfg = ApicurioRegistryConfig::shared_config();
+        if (isset($cfg["feature"]) && is_array($cfg["feature"]) && isset($cfg["feature"]["streaming"])) {
+            $sdk = ApicurioRegistrySDK::test($seed, ["feature" => ["streaming" => ["active" => true]]]);
+            $got = [];
+            foreach ($sdk->GlobalRule(null)->stream("list", null, null) as $item) {
+                if (is_array($item) && array_is_list($item)) {
+                    foreach ($item as $sub) {
+                        $got[] = $sub;
+                    }
+                } else {
+                    $got[] = $item;
+                }
+            }
+            $this->assertCount(3, $got);
+        }
+    }
+
     public function test_basic_flow(): void
     {
         $setup = global_rule_basic_setup(null);
         // Per-op sdk-test-control.json skip.
         $_live = !empty($setup["live"]);
-        foreach (["create", "remove"] as $_op) {
+        foreach (["create", "list", "remove"] as $_op) {
             [$_shouldSkip, $_reason] = Runner::is_control_skipped("entityOp", "global_rule." . $_op, $_live ? "live" : "unit");
             if ($_shouldSkip) {
                 $this->markTestSkipped($_reason ?? "skipped via sdk-test-control.json");
@@ -48,11 +87,33 @@ class GlobalRuleEntityTest extends TestCase
         $this->assertNotNull($global_rule_ref01_data);
         $this->assertNotNull($global_rule_ref01_data["id"]);
 
+        // LIST
+        $global_rule_ref01_match = [];
+
+        $global_rule_ref01_list_result = $global_rule_ref01_ent->list($global_rule_ref01_match, null);
+        $this->assertIsArray($global_rule_ref01_list_result);
+
+        $found_item = sdk_select(
+            Runner::entity_list_to_data($global_rule_ref01_list_result),
+            ["id" => $global_rule_ref01_data["id"]]);
+        $this->assertNotEmpty($found_item);
+
         // REMOVE
         $global_rule_ref01_match_rm0 = [
             "id" => $global_rule_ref01_data["id"],
         ];
         $global_rule_ref01_ent->remove($global_rule_ref01_match_rm0, null);
+
+        // LIST
+        $global_rule_ref01_match_rt0 = [];
+
+        $global_rule_ref01_list_rt0_result = $global_rule_ref01_ent->list($global_rule_ref01_match_rt0, null);
+        $this->assertIsArray($global_rule_ref01_list_rt0_result);
+
+        $not_found_item = sdk_select(
+            Runner::entity_list_to_data($global_rule_ref01_list_rt0_result),
+            ["id" => $global_rule_ref01_data["id"]]);
+        $this->assertEmpty($not_found_item);
 
     }
 }

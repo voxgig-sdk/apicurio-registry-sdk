@@ -28,7 +28,6 @@ import { GlobalRuleEntity } from './entity/GlobalRuleEntity'
 import { GroupEntity } from './entity/GroupEntity'
 import { GroupRuleEntity } from './entity/GroupRuleEntity'
 import { KafkaSqlEntity } from './entity/KafkaSqlEntity'
-import { McpToolEntity } from './entity/McpToolEntity'
 import { MetadataEntity } from './entity/MetadataEntity'
 import { OdcsContractResultEntity } from './entity/OdcsContractResultEntity'
 import { OdcsContractSummaryEntity } from './entity/OdcsContractSummaryEntity'
@@ -574,15 +573,6 @@ class ApicurioRegistrySDK {
   KafkaSql(entopts?: Record<string, any>) {
     const self = this
     return new KafkaSqlEntity(self, entopts)
-  }
-
-
-  // Entity access: `client.McpTool().list()` / `client.McpTool().load({ id })`.
-  // The argument is the entity OPTIONS object (passed to the entity
-  // constructor as entopts), not initial entity data.
-  McpTool(entopts?: Record<string, any>) {
-    const self = this
-    return new McpToolEntity(self, entopts)
   }
 
 

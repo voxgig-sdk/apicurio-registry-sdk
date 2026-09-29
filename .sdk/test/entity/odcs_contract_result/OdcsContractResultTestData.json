@@ -2,28 +2,25 @@
   "existing": {
     "odcs_contract_result": {
       "ODCS_CONTRACT_RESULT00": {
-        "labelsApplied": 40,
-        "rulesApplied": 41,
-        "tagsApplied": 42,
-        "warnings": [],
+        "contractId": "s1e",
+        "projection": {},
+        "version": "s20",
         "group_id": "GROUP01",
         "contract_id": "CONTRACT01",
         "id": "ODCS_CONTRACT_RESULT00"
       },
       "ODCS_CONTRACT_RESULT01": {
-        "labelsApplied": 80,
-        "rulesApplied": 81,
-        "tagsApplied": 82,
-        "warnings": [],
+        "contractId": "s3c",
+        "projection": {},
+        "version": "s3e",
         "group_id": "GROUP01",
         "contract_id": "CONTRACT01",
         "id": "ODCS_CONTRACT_RESULT01"
       },
       "ODCS_CONTRACT_RESULT02": {
-        "labelsApplied": 120,
-        "rulesApplied": 121,
-        "tagsApplied": 122,
-        "warnings": [],
+        "contractId": "s5a",
+        "projection": {},
+        "version": "s5c",
         "group_id": "GROUP01",
         "contract_id": "CONTRACT01",
         "id": "ODCS_CONTRACT_RESULT02"
@@ -33,10 +30,9 @@
   "new": {
     "odcs_contract_result": {
       "odcs_contract_result_ref01": {
-        "labelsApplied": 160,
-        "rulesApplied": 161,
-        "tagsApplied": 162,
-        "warnings": []
+        "contractId": "s78",
+        "projection": {},
+        "version": "s7a"
       }
     }
   },

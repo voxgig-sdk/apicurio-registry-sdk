@@ -110,7 +110,9 @@ func TestRuleEntity(t *testing.T) {
 
 		// LIST
 		ruleRef01Ent := client.Rule(nil)
-		ruleRef01Match := map[string]any{}
+		ruleRef01Match := map[string]any{
+			"group_id": setup.idmap["group01"],
+		}
 
 		ruleRef01ListResult, err := ruleRef01Ent.List(ruleRef01Match, nil)
 		if err != nil {

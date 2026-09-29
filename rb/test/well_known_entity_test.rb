@@ -12,11 +12,47 @@ class WellKnownEntityTest < Minitest::Test
     assert !ent.nil?
   end
 
+  # Feature #4: the entity stream(action, ...) method runs the op pipeline and
+  # returns an Enumerator over result items. With the streaming feature active
+  # it yields the feature's incremental output; otherwise it falls back to the
+  # materialised list so stream always yields.
+  def test_stream
+    seed = {
+      "entity" => {
+        "well_known" => {
+          "s1" => { "id" => "s1" },
+          "s2" => { "id" => "s2" },
+          "s3" => { "id" => "s3" },
+        },
+      },
+    }
+
+    # Fallback: streaming inactive -> yields the materialised list items.
+    base = ApicurioRegistrySDK.test(seed, nil)
+    seen = base.WellKnown(nil).stream("list", nil, nil).to_a
+    assert_equal 3, seen.length
+
+    # Inbound: streaming active -> yields each item from the feature.
+    cfg = ApicurioRegistryConfig.shared_config
+    if cfg["feature"].is_a?(Hash) && cfg["feature"].key?("streaming")
+      sdk = ApicurioRegistrySDK.test(seed, { "feature" => { "streaming" => { "active" => true } } })
+      got = []
+      sdk.WellKnown(nil).stream("list", nil, nil).each do |item|
+        if item.is_a?(Array)
+          got.concat(item)
+        else
+          got << item
+        end
+      end
+      assert_equal 3, got.length
+    end
+  end
+
   def test_basic_flow
     setup = well_known_basic_setup(nil)
     # Per-op sdk-test-control.json skip.
     _live = setup[:live] || false
-    ["load"].each do |_op|
+    ["list", "load"].each do |_op|
       _should_skip, _reason = Runner.is_control_skipped("entityOp", "well_known." + _op, _live ? "live" : "unit")
       if _should_skip
         skip(_reason || "skipped via sdk-test-control.json")
@@ -39,8 +75,14 @@ class WellKnownEntityTest < Minitest::Test
       well_known_ref01_data = Helpers.to_map(well_known_ref01_data_raw[0][1])
     end
 
-    # LOAD
+    # LIST
     well_known_ref01_ent = client.WellKnown(nil)
+    well_known_ref01_match = {}
+
+    well_known_ref01_list_result = well_known_ref01_ent.list(well_known_ref01_match, nil)
+    assert well_known_ref01_list_result.is_a?(Array)
+
+    # LOAD
     well_known_ref01_match_dt0 = {
       "id" => well_known_ref01_data["id"],
     }
@@ -66,7 +108,7 @@ def well_known_basic_setup(extra)
 
   # Generate idmap via transform.
   idmap = Vs.transform(
-    ["well_known01", "well_known02", "well_known03", "agent01", "agent02", "agent03", "mcp_tool01", "mcp_tool02", "mcp_tool03", "schema_type01"],
+    ["well_known01", "well_known02", "well_known03", "agent01", "agent02", "agent03", "schema_type01"],
     {
       "`$PACK`" => ["", {
         "`$KEY`" => "`$COPY`",

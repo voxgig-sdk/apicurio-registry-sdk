@@ -58,6 +58,32 @@ main: kit: entity: global_rule: {
         }
       ]
     }
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /admin/rules"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/admin/rules"
+          s: [
+            {
+              lit: "admin"
+            }
+            {
+              lit: "rules"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
     remove: {
       name: "remove"
       points: [
@@ -73,7 +99,7 @@ main: kit: entity: global_rule: {
                 ex: "VALIDITY"
                 k: "param"
                 n: "id"
-                or: "rule_type"
+                or: "ruleType"
                 r: true
                 t: "`$STRING`"
               }

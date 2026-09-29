@@ -6,7 +6,7 @@ Apicurio Registry is a datastore for standard event schemas and API designs. Api
 
 This guide introduces the API, the client libraries, and the companion tools in this repository. Start with the API capabilities, choose a client for your application, and use the linked reference when you need exact request and response details.
 
-The selected API surface contains 44 entities and 132 HTTP routes. There are 6 SDK targets and 2 companion tools.
+The selected API surface contains 43 entities and 132 HTTP routes. There are 6 SDK targets and 2 companion tools.
 
 An entity groups related API operations. An operation can have several routes with different inputs or authentication requirements. The SDK exposes the entity and its operations using the conventions of the selected language.
 
@@ -14,13 +14,13 @@ An entity groups related API operations. An operation can have several routes wi
 
 ### Admin
 
-Results: Indicates that the import was successful.; Returned when the role mapping was successfully created.; Response returned when the delete was successful.; The configuration property was deleted.; The global contract ruleset was deleted.; Response when the update is successful.; The configuration property was updated.
+Results: Indicates that the import was successful.; Response returned when the delete was successful.; The configuration property was deleted.; The global contract ruleset was deleted.; Response when the update is successful.; The configuration property was updated.
 
 SDK operations: `create`, `remove`, `update`.
 
 ### Agent
 
-Results: Agent search results.; The Agent Card.
+Results: The Agent Card.
 
 SDK operations: `list`.
 
@@ -60,6 +60,7 @@ SDK operations: `create`.
 
 Key fields to recognise:
 
+- `facets`: Facets keyed by the requested facet field name.
 - `query`: ARD search query.
 - `resultType`: Requested result type for the ARD POST /explore endpoint.
 
@@ -210,15 +211,9 @@ SDK operations: `load`.
 
 ### GitOp
 
-Results: Synchronization has been requested. The sync will happen asynchronously on the next scheduler cycle.; Validation task created. Poll the task status to get the result.; Validation task deleted.
+Results: Synchronization has been requested. The sync will happen asynchronously on the next scheduler cycle.; Validation task deleted.
 
 SDK operations: `create`, `remove`.
-
-Key fields to recognise:
-
-- `ref`: Git ref being validated.
-- `repoId`: Repository ID being validated.
-- `type`: A URI reference [RFC3986] that identifies the problem type.
 
 ### GitOpsStatus
 
@@ -234,9 +229,9 @@ Key fields to recognise:
 
 ### GitOpsValidateTask
 
-Results: List of active validation tasks.; The validation task details and results.
+Results: Validation task created. Poll the task status to get the result.; List of active validation tasks.; The validation task details and results.
 
-SDK operations: `list`, `load`.
+SDK operations: `create`, `list`, `load`.
 
 Key fields to recognise:
 
@@ -248,9 +243,9 @@ Key fields to recognise:
 
 ### GlobalRule
 
-Results: The global rule was added.; The global rule was successfully deleted.; All global rules have been removed successfully.
+Results: The global rule was added.; The list of names of the globally configured rules.; The global rule was successfully deleted.; All global rules have been removed successfully.
 
-SDK operations: `create`, `remove`.
+SDK operations: `create`, `list`, `remove`.
 
 ### Group
 
@@ -269,17 +264,6 @@ SDK operations: `create`, `remove`.
 Results: The snapshot has been successfully triggered.
 
 SDK operations: `create`.
-
-### McpTool
-
-Results: MCP tool search results.
-
-SDK operations: `list`.
-
-Key fields to recognise:
-
-- `name`: The name of the error (typically a server exception class name).
-- `title`: A short, human-readable summary of the problem type.
 
 ### Metadata
 
@@ -303,10 +287,9 @@ SDK operations: `create`, `update`.
 
 Key fields to recognise:
 
-- `labelsApplied`: Number of contract.* labels set on the schema artifact.
-- `rulesApplied`: Number of CEL quality rules projected onto the schema artifact.
-- `tagsApplied`: Number of field-tag.* labels set on the schema artifact version.
-- `warnings`: Any warnings encountered during projection.
+- `contractId`: The contract artifact ID.
+- `projection`: Summary of the projection performed when an ODCS contract is applied.
+- `version`: The ODCS contract version.
 
 ### OdcsContractSummary
 
@@ -334,9 +317,9 @@ Key fields to recognise:
 
 ### RoleMapping
 
-Results: A successful response will return the list of role mappings.; When successful, returns the details of a role mapping.
+Results: Returned when the role mapping was successfully created.; A successful response will return the list of role mappings.; When successful, returns the details of a role mapping.
 
-SDK operations: `list`, `load`.
+SDK operations: `create`, `list`, `load`.
 
 Key fields to recognise:
 
@@ -344,7 +327,7 @@ Key fields to recognise:
 
 ### Rule
 
-Results: Returns the names of the rules configured for the artifact.; Returns the names of the rules configured for the group.; The list of names of the globally configured rules.; Information about a rule.; The global rule&#39;s configuration.; Rule configuration was updated.; The global rule&#39;s configuration was successfully updated.
+Results: Returns the names of the rules configured for the artifact.; Returns the names of the rules configured for the group.; Information about a rule.; The global rule&#39;s configuration.; Rule configuration was updated.; The global rule&#39;s configuration was successfully updated.
 
 SDK operations: `list`, `load`, `update`.
 
@@ -403,9 +386,15 @@ Key fields to recognise:
 
 ### WellKnown
 
-Results: Agent Card JSON.; MCP tool JSON.; The JSON Schema.
+Results: Agent search results.; MCP tool search results.; Agent Card JSON.; MCP tool JSON.; The JSON Schema.
 
-SDK operations: `load`.
+SDK operations: `list`, `load`.
+
+Key fields to recognise:
+
+- `capabilities`: Capabilities of an A2A agent.
+- `name`: The name of the error (typically a server exception class name).
+- `title`: A short, human-readable summary of the problem type.
 
 ### WrappedVersionState
 
@@ -424,13 +413,11 @@ Use this map to locate a capability. Consult the entity reference before supplyi
 | Entity | SDK operation | HTTP route | Authentication |
 | --- | --- | --- | --- |
 | Admin | `create` | `POST /admin/import` | See reference |
-| Admin | `create` | `POST /admin/roleMappings` | See reference |
 | Admin | `remove` | `DELETE /admin/roleMappings/{principalId}` | See reference |
 | Admin | `remove` | `DELETE /admin/config/properties/{propertyName}` | See reference |
 | Admin | `remove` | `DELETE /admin/contracts/ruleset` | See reference |
 | Admin | `update` | `PUT /admin/roleMappings/{principalId}` | See reference |
 | Admin | `update` | `PUT /admin/config/properties/{propertyName}` | See reference |
-| Agent | `list` | `GET /well-known/agents` | See reference |
 | Agent | `list` | `GET /well-known/agent.json` | See reference |
 | AgentCard | `list` | `GET /well-known/agent-card.json` | See reference |
 | AiCatalog | `list` | `GET /well-known/ard/agents` | See reference |
@@ -495,12 +482,13 @@ Use this map to locate a capability. Consult the entity reference before supplyi
 | DeprecationReadiness | `list` | `GET /admin/usage/artifacts/{groupId}/{artifactId}/versions/{version}/deprecation-readiness` | See reference |
 | DownloadRef | `load` | `GET /admin/export` | See reference |
 | GitOp | `create` | `POST /admin/gitops/sync` | See reference |
-| GitOp | `create` | `POST /admin/gitops/validate` | See reference |
 | GitOp | `remove` | `DELETE /admin/gitops/validate/{taskId}` | See reference |
 | GitOpsStatus | `list` | `GET /admin/gitops/status` | See reference |
+| GitOpsValidateTask | `create` | `POST /admin/gitops/validate` | See reference |
 | GitOpsValidateTask | `list` | `GET /admin/gitops/validate` | See reference |
 | GitOpsValidateTask | `load` | `GET /admin/gitops/validate/{taskId}` | See reference |
 | GlobalRule | `create` | `POST /admin/rules` | See reference |
+| GlobalRule | `list` | `GET /admin/rules` | See reference |
 | GlobalRule | `remove` | `DELETE /admin/rules/{ruleType}` | See reference |
 | GlobalRule | `remove` | `DELETE /admin/rules` | See reference |
 | Group | `create` | `POST /groups` | See reference |
@@ -512,7 +500,6 @@ Use this map to locate a capability. Consult the entity reference before supplyi
 | GroupRule | `remove` | `DELETE /groups/{groupId}/rules/{ruleType}` | See reference |
 | GroupRule | `remove` | `DELETE /groups/{groupId}/rules` | See reference |
 | KafkaSql | `create` | `POST /admin/snapshots` | See reference |
-| McpTool | `list` | `GET /well-known/mcp-tools` | See reference |
 | Metadata | `create` | `POST /groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}/render` | See reference |
 | Metadata | `load` | `GET /groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}` | See reference |
 | Metadata | `load` | `GET /groups/{groupId}/artifacts/{artifactId}` | See reference |
@@ -524,11 +511,11 @@ Use this map to locate a capability. Consult the entity reference before supplyi
 | OdcsContractResult | `update` | `PUT /groups/{groupId}/contracts/{contractId}` | See reference |
 | OdcsContractSummary | `list` | `GET /groups/{groupId}/contracts` | See reference |
 | ReferenceGraph | `list` | `GET /groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}/references/graph` | See reference |
+| RoleMapping | `create` | `POST /admin/roleMappings` | See reference |
 | RoleMapping | `list` | `GET /admin/roleMappings` | See reference |
 | RoleMapping | `load` | `GET /admin/roleMappings/{principalId}` | See reference |
 | Rule | `list` | `GET /groups/{groupId}/artifacts/{artifactId}/rules` | See reference |
 | Rule | `list` | `GET /groups/{groupId}/rules` | See reference |
-| Rule | `list` | `GET /admin/rules` | See reference |
 | Rule | `load` | `GET /groups/{groupId}/artifacts/{artifactId}/rules/{ruleType}` | See reference |
 | Rule | `load` | `GET /groups/{groupId}/rules/{ruleType}` | See reference |
 | Rule | `load` | `GET /admin/rules/{ruleType}` | See reference |
@@ -551,6 +538,8 @@ Use this map to locate a capability. Consult the entity reference before supplyi
 | Version | `remove` | `DELETE /groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}/comments/{commentId}` | See reference |
 | Version | `remove` | `DELETE /groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}` | See reference |
 | Version | `update` | `PUT /groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}/comments/{commentId}` | See reference |
+| WellKnown | `list` | `GET /well-known/agents` | See reference |
+| WellKnown | `list` | `GET /well-known/mcp-tools` | See reference |
 | WellKnown | `load` | `GET /well-known/agents/{groupId}/{artifactId}` | See reference |
 | WellKnown | `load` | `GET /well-known/mcp-tools/{groupId}/{artifactId}` | See reference |
 | WellKnown | `load` | `GET /well-known/schemas/{schemaType}/{version}` | See reference |
@@ -602,7 +591,7 @@ Use the MCP server to expose supported API operations to an MCP client.
 
 Repository directory: `go-mcp/`. Not published. Build from the go-mcp directory.
 
-- `apicurio-registry_list`: List records for an entity. Supported entities: `agent`, `agent_card`, `ai_catalog`, `artifact`, `artifact_reference`, `artifact_type`, `comment`, `configuration_property`, `consumer_version_heatmap`, `contract`, `contract_rule`, `contract_rule_set`, `deprecation_readiness`, `git_ops_status`, `git_ops_validate_task`, `group`, `mcp_tool`, `odcs_contract_summary`, `reference_graph`, `role_mapping`, `rule`, `searched_branch`, `searched_group`, `version`.
+- `apicurio-registry_list`: List records for an entity. Supported entities: `agent`, `agent_card`, `ai_catalog`, `artifact`, `artifact_reference`, `artifact_type`, `comment`, `configuration_property`, `consumer_version_heatmap`, `contract`, `contract_rule`, `contract_rule_set`, `deprecation_readiness`, `git_ops_status`, `git_ops_validate_task`, `global_rule`, `group`, `odcs_contract_summary`, `reference_graph`, `role_mapping`, `rule`, `searched_branch`, `searched_group`, `version`, `well_known`.
 - `apicurio-registry_load`: Load one record for an entity. Supported entities: `artifact`, `branch`, `configuration_property`, `contract`, `download_ref`, `git_ops_validate_task`, `group`, `metadata`, `role_mapping`, `rule`, `system_info`, `usage_summary`, `user_info`, `user_interface_config`, `version`, `well_known`, `wrapped_version_state`.
 
 ## Operational features

@@ -4,7 +4,7 @@
 #   guide.aontu
 
 guide: {
-  metrics: count: entity: 44
+  metrics: count: entity: 43
   metrics: count: path: 82
   metrics: count: method: 132
 
@@ -21,10 +21,6 @@ guide: {
       action: "import": {}
       op: create: method: *POST
     }
-    path: "/admin/roleMappings": {
-      action: "role_mapping": {}
-      op: create: method: *POST
-    }
     path: "/admin/roleMappings/{principalId}": {
       rename: param: "principalId": *"principal_id"
       op: remove: method: *DELETE
@@ -35,10 +31,6 @@ guide: {
   entity: agent: {
     path: "/well-known/agent.json": {
       op: list: method: *GET
-    }
-    path: "/well-known/agents": {
-      op: list: method: *GET
-      op: list: transform: res: *("`body.agents`")|top
     }
   }
 
@@ -63,7 +55,6 @@ guide: {
   entity: ard_explore: {
     path: "/well-known/ard/explore": {
       op: create: method: *POST
-      op: create: transform: res: *("`body.facets`")|top
     }
   }
 
@@ -349,9 +340,6 @@ guide: {
     path: "/admin/gitops/sync": {
       op: create: method: *POST
     }
-    path: "/admin/gitops/validate": {
-      op: create: method: *POST
-    }
     path: "/admin/gitops/validate/{taskId}": {
       rename: param: "taskId": *"task_id"
       op: remove: method: *DELETE
@@ -366,6 +354,7 @@ guide: {
 
   entity: git_ops_validate_task: {
     path: "/admin/gitops/validate": {
+      op: create: method: *POST
       op: list: method: *GET
     }
     path: "/admin/gitops/validate/{taskId}": {
@@ -377,6 +366,7 @@ guide: {
   entity: global_rule: {
     path: "/admin/rules": {
       op: create: method: *POST
+      op: list: method: *GET
       op: remove: method: *DELETE
     }
     path: "/admin/rules/{ruleType}": {
@@ -388,14 +378,12 @@ guide: {
   entity: group: {
     path: "/groups": {
       op: create: method: *POST
-      op: create: transform: res: *("`body.labels`")|top
       op: list: method: *GET
       op: list: transform: res: *("`body.groups`")|top
     }
     path: "/groups/{groupId}": {
       rename: param: "groupId": *"id"
       op: load: method: *GET
-      op: load: transform: res: *("`body.labels`")|top
       op: remove: method: *DELETE
       op: update: method: *PUT
     }
@@ -420,13 +408,6 @@ guide: {
     }
   }
 
-  entity: mcp_tool: {
-    path: "/well-known/mcp-tools": {
-      op: list: method: *GET
-      op: list: transform: res: *("`body.tools`")|top
-    }
-  }
-
   entity: metadata: {
     path: "/groups/{groupId}/artifacts/{artifactId}": {
       rename: param: "artifactId": *"artifact_id"
@@ -439,7 +420,6 @@ guide: {
       rename: param: "groupId": *"group_id"
       rename: param: "versionExpression": *"version_expression"
       op: load: method: *GET
-      op: load: transform: res: *("`body.labels`")|top
       op: update: method: *PUT
     }
     path: "/groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}/content": {
@@ -469,13 +449,11 @@ guide: {
     path: "/groups/{groupId}/contracts": {
       rename: param: "groupId": *"group_id"
       op: create: method: *POST
-      op: create: transform: res: *("`body.projection`")|top
     }
     path: "/groups/{groupId}/contracts/{contractId}": {
       rename: param: "contractId": *"contract_id"
       rename: param: "groupId": *"group_id"
       op: update: method: *PUT
-      op: update: transform: res: *("`body.projection`")|top
     }
   }
 
@@ -497,6 +475,8 @@ guide: {
 
   entity: role_mapping: {
     path: "/admin/roleMappings": {
+      action: "role_mapping": {}
+      op: create: method: *POST
       op: list: method: *GET
       op: list: transform: res: *("`body.roleMappings`")|top
     }
@@ -507,9 +487,6 @@ guide: {
   }
 
   entity: rule: {
-    path: "/admin/rules": {
-      op: list: method: *GET
-    }
     path: "/admin/rules/{ruleType}": {
       rename: param: "ruleType": *"id"
       op: load: method: *GET
@@ -591,8 +568,6 @@ guide: {
       rename: param: "artifactId": *"artifact_id"
       rename: param: "groupId": *"group_id"
       op: create: method: *POST
-      op: create: transform: res: *("`body.labels`")|top
-      op: create: transform: req: "version": *("`reqdata`")|top
       op: list: method: *GET
       op: list: transform: res: *("`body.versions`")|top
     }
@@ -632,10 +607,18 @@ guide: {
   }
 
   entity: well_known: {
+    path: "/well-known/agents": {
+      op: list: method: *GET
+      op: list: transform: res: *("`body.agents`")|top
+    }
     path: "/well-known/agents/{groupId}/{artifactId}": {
       rename: param: "artifactId": *"artifact_id"
       rename: param: "groupId": *"group_id"
       op: load: method: *GET
+    }
+    path: "/well-known/mcp-tools": {
+      op: list: method: *GET
+      op: list: transform: res: *("`body.tools`")|top
     }
     path: "/well-known/mcp-tools/{groupId}/{artifactId}": {
       rename: param: "artifactId": *"artifact_id"

@@ -35,14 +35,14 @@ main: kit: entity: download_ref: {
               {
                 k: "query"
                 n: "for_browser"
-                or: "for_browser"
+                or: "forBrowser"
                 r: false
                 t: "`$BOOLEAN`"
               }
               {
                 k: "query"
                 n: "group_id"
-                or: "group_id"
+                or: "groupId"
                 r: false
                 t: "`$STRING`"
               }

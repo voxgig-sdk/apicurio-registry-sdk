@@ -41,13 +41,21 @@ type Agent struct {
 
 // AgentListMatch is the typed request payload for Agent.ListTyped.
 type AgentListMatch struct {
-	Capability *[]any `json:"capability,omitempty"`
-	InputMode *[]any `json:"input_mode,omitempty"`
-	Limit *int `json:"limit,omitempty"`
+	Capabilities *map[string]any `json:"capabilities,omitempty"`
+	DefaultInputModes *[]any `json:"defaultInputModes,omitempty"`
+	DefaultOutputModes *[]any `json:"defaultOutputModes,omitempty"`
+	Description *string `json:"description,omitempty"`
+	DocumentationUrl *string `json:"documentationUrl,omitempty"`
+	IconUrl *string `json:"iconUrl,omitempty"`
 	Name *string `json:"name,omitempty"`
-	Offset *int `json:"offset,omitempty"`
-	OutputMode *[]any `json:"output_mode,omitempty"`
-	Skill *[]any `json:"skill,omitempty"`
+	ProtocolVersion *string `json:"protocolVersion,omitempty"`
+	Provider *map[string]any `json:"provider,omitempty"`
+	SecurityRequirements *[]any `json:"securityRequirements,omitempty"`
+	SecuritySchemes *map[string]any `json:"securitySchemes,omitempty"`
+	Signatures *[]any `json:"signatures,omitempty"`
+	Skills *[]any `json:"skills,omitempty"`
+	SupportedInterfaces *[]any `json:"supportedInterfaces,omitempty"`
+	Version *string `json:"version,omitempty"`
 }
 
 // AgentCard is the typed data model for the agent_card entity.
@@ -97,8 +105,9 @@ type ArdExplore struct {
 
 // ArdExploreCreateData is the typed request payload for ArdExplore.CreateTyped.
 type ArdExploreCreateData struct {
+	Facets *map[string]any `json:"facets,omitempty"`
 	Query *map[string]any `json:"query,omitempty"`
-	ResultType map[string]any `json:"resultType"`
+	ResultType *string `json:"resultType,omitempty"`
 }
 
 // ArdSearch is the typed data model for the ard_search entity.
@@ -471,9 +480,6 @@ type GitOp struct {
 
 // GitOpCreateData is the typed request payload for GitOp.CreateTyped.
 type GitOpCreateData struct {
-	Ref string `json:"ref"`
-	RepoId string `json:"repoId"`
-	Type *string `json:"type,omitempty"`
 }
 
 // GitOpRemoveMatch is the typed request payload for GitOp.RemoveTyped.
@@ -517,8 +523,31 @@ type GitOpsValidateTaskListMatch struct {
 	VersionCount *int `json:"versionCount,omitempty"`
 }
 
+// GitOpsValidateTaskCreateData is the typed request payload for GitOpsValidateTask.CreateTyped.
+type GitOpsValidateTaskCreateData struct {
+	ArtifactCount *int `json:"artifactCount,omitempty"`
+	CompletedAt *string `json:"completedAt,omitempty"`
+	CreatedAt *string `json:"createdAt,omitempty"`
+	Errors *[]any `json:"errors,omitempty"`
+	GroupCount *int `json:"groupCount,omitempty"`
+	Ref *string `json:"ref,omitempty"`
+	RepoId *string `json:"repoId,omitempty"`
+	Result *string `json:"result,omitempty"`
+	State string `json:"state"`
+	TaskId string `json:"taskId"`
+	Type *string `json:"type,omitempty"`
+	VersionCount *int `json:"versionCount,omitempty"`
+}
+
 // GlobalRule is the typed data model for the global_rule entity.
 type GlobalRule struct {
+}
+
+// GlobalRuleListMatch is the typed request payload for GlobalRule.ListTyped.
+type GlobalRuleListMatch struct {
+	Config *string `json:"config,omitempty"`
+	Id *string `json:"id,omitempty"`
+	RuleType *string `json:"ruleType,omitempty"`
 }
 
 // GlobalRuleCreateData is the typed request payload for GlobalRule.CreateTyped.
@@ -552,22 +581,19 @@ type GroupListMatch struct {
 
 // GroupCreateData is the typed request payload for Group.CreateTyped.
 type GroupCreateData struct {
-	ArtifactsType *string `json:"artifactsType,omitempty"`
-	CreatedOn *string `json:"createdOn,omitempty"`
+	CreatedOn string `json:"createdOn"`
 	Description *string `json:"description,omitempty"`
-	GroupId *string `json:"groupId,omitempty"`
+	GroupId string `json:"groupId"`
 	Id *string `json:"id,omitempty"`
 	Labels *map[string]any `json:"labels,omitempty"`
-	ModifiedBy *string `json:"modifiedBy,omitempty"`
-	ModifiedOn *string `json:"modifiedOn,omitempty"`
-	Owner *string `json:"owner,omitempty"`
-	Properties *map[string]any `json:"properties,omitempty"`
+	ModifiedBy string `json:"modifiedBy"`
+	ModifiedOn string `json:"modifiedOn"`
+	Owner string `json:"owner"`
 }
 
 // GroupUpdateData is the typed request payload for Group.UpdateTyped.
 type GroupUpdateData struct {
 	Id string `json:"id"`
-	ArtifactsType *string `json:"artifactsType,omitempty"`
 	CreatedOn *string `json:"createdOn,omitempty"`
 	Description *string `json:"description,omitempty"`
 	GroupId *string `json:"groupId,omitempty"`
@@ -575,7 +601,6 @@ type GroupUpdateData struct {
 	ModifiedBy *string `json:"modifiedBy,omitempty"`
 	ModifiedOn *string `json:"modifiedOn,omitempty"`
 	Owner *string `json:"owner,omitempty"`
-	Properties *map[string]any `json:"properties,omitempty"`
 }
 
 // GroupRemoveMatch is the typed request payload for Group.RemoveTyped.
@@ -609,18 +634,6 @@ type KafkaSqlCreateData struct {
 	SnapshotId string `json:"snapshotId"`
 }
 
-// McpTool is the typed data model for the mcp_tool entity.
-type McpTool struct {
-}
-
-// McpToolListMatch is the typed request payload for McpTool.ListTyped.
-type McpToolListMatch struct {
-	Limit *int `json:"limit,omitempty"`
-	Name *string `json:"name,omitempty"`
-	Offset *int `json:"offset,omitempty"`
-	Parameter *[]any `json:"parameter,omitempty"`
-}
-
 // Metadata is the typed data model for the metadata entity.
 type Metadata struct {
 }
@@ -637,20 +650,21 @@ type MetadataCreateData struct {
 	ArtifactId string `json:"artifact_id"`
 	GroupId string `json:"group_id"`
 	VersionExpression string `json:"version_expression"`
-	ArtifactId2 *string `json:"artifactId,omitempty"`
-	ArtifactType *string `json:"artifactType,omitempty"`
-	ContentId *int `json:"contentId,omitempty"`
+	ArtifactId2 string `json:"artifactId"`
+	ArtifactType string `json:"artifactType"`
+	ContentId int `json:"contentId"`
 	ContractMetadata *map[string]any `json:"contractMetadata,omitempty"`
-	CreatedOn *string `json:"createdOn,omitempty"`
+	CreatedOn string `json:"createdOn"`
 	Description *string `json:"description,omitempty"`
-	GlobalId *int `json:"globalId,omitempty"`
+	GlobalId int `json:"globalId"`
 	GroupId2 *string `json:"groupId,omitempty"`
 	Labels *map[string]any `json:"labels,omitempty"`
-	ModifiedBy string `json:"modifiedBy"`
-	ModifiedOn string `json:"modifiedOn"`
+	ModifiedBy *string `json:"modifiedBy,omitempty"`
+	ModifiedOn *string `json:"modifiedOn,omitempty"`
 	Name *string `json:"name,omitempty"`
-	Owner *string `json:"owner,omitempty"`
-	Version *int `json:"version,omitempty"`
+	Owner string `json:"owner"`
+	State *string `json:"state,omitempty"`
+	Version string `json:"version"`
 }
 
 // MetadataUpdateData is the typed request payload for Metadata.UpdateTyped.
@@ -671,7 +685,8 @@ type MetadataUpdateData struct {
 	ModifiedOn *string `json:"modifiedOn,omitempty"`
 	Name *string `json:"name,omitempty"`
 	Owner *string `json:"owner,omitempty"`
-	Version *int `json:"version,omitempty"`
+	State *string `json:"state,omitempty"`
+	Version *string `json:"version,omitempty"`
 }
 
 // OdcsContractResult is the typed data model for the odcs_contract_result entity.
@@ -681,20 +696,18 @@ type OdcsContractResult struct {
 // OdcsContractResultCreateData is the typed request payload for OdcsContractResult.CreateTyped.
 type OdcsContractResultCreateData struct {
 	GroupId string `json:"group_id"`
-	LabelsApplied *int `json:"labelsApplied,omitempty"`
-	RulesApplied *int `json:"rulesApplied,omitempty"`
-	TagsApplied *int `json:"tagsApplied,omitempty"`
-	Warnings *[]any `json:"warnings,omitempty"`
+	ContractId *string `json:"contractId,omitempty"`
+	Projection *map[string]any `json:"projection,omitempty"`
+	Version *string `json:"version,omitempty"`
 }
 
 // OdcsContractResultUpdateData is the typed request payload for OdcsContractResult.UpdateTyped.
 type OdcsContractResultUpdateData struct {
 	ContractId string `json:"contract_id"`
 	GroupId string `json:"group_id"`
-	LabelsApplied *int `json:"labelsApplied,omitempty"`
-	RulesApplied *int `json:"rulesApplied,omitempty"`
-	TagsApplied *int `json:"tagsApplied,omitempty"`
-	Warnings *[]any `json:"warnings,omitempty"`
+	ContractId2 *string `json:"contractId,omitempty"`
+	Projection *map[string]any `json:"projection,omitempty"`
+	Version *string `json:"version,omitempty"`
 }
 
 // OdcsContractSummary is the typed data model for the odcs_contract_summary entity.
@@ -736,6 +749,14 @@ type RoleMappingListMatch struct {
 	Offset *int `json:"offset,omitempty"`
 }
 
+// RoleMappingCreateData is the typed request payload for RoleMapping.CreateTyped.
+type RoleMappingCreateData struct {
+	Id *string `json:"id,omitempty"`
+	PrincipalId string `json:"principalId"`
+	PrincipalName *string `json:"principalName,omitempty"`
+	Role string `json:"role"`
+}
+
 // Rule is the typed data model for the rule entity.
 type Rule struct {
 }
@@ -749,9 +770,8 @@ type RuleLoadMatch struct {
 
 // RuleListMatch is the typed request payload for Rule.ListTyped.
 type RuleListMatch struct {
-	Config *string `json:"config,omitempty"`
-	Id *string `json:"id,omitempty"`
-	RuleType *string `json:"ruleType,omitempty"`
+	ArtifactId *string `json:"artifact_id,omitempty"`
+	GroupId string `json:"group_id"`
 }
 
 // RuleUpdateData is the typed request payload for Rule.UpdateTyped.
@@ -901,7 +921,7 @@ type VersionCreateData struct {
 	Name *string `json:"name,omitempty"`
 	Owner string `json:"owner"`
 	Value string `json:"value"`
-	Version *string `json:"version,omitempty"`
+	Version string `json:"version"`
 	Versions []any `json:"versions"`
 }
 
@@ -952,6 +972,17 @@ type WellKnownLoadMatch struct {
 	ArtifactId string `json:"artifact_id"`
 	GroupId string `json:"group_id"`
 	Version *string `json:"version,omitempty"`
+}
+
+// WellKnownListMatch is the typed request payload for WellKnown.ListTyped.
+type WellKnownListMatch struct {
+	Capability *[]any `json:"capability,omitempty"`
+	InputMode *[]any `json:"input_mode,omitempty"`
+	Limit *int `json:"limit,omitempty"`
+	Name *string `json:"name,omitempty"`
+	Offset *int `json:"offset,omitempty"`
+	OutputMode *[]any `json:"output_mode,omitempty"`
+	Skill *[]any `json:"skill,omitempty"`
 }
 
 // WrappedVersionState is the typed data model for the wrapped_version_state entity.

@@ -1,4 +1,4 @@
--- McpTool direct test
+-- GlobalRule direct test
 
 local json = require("dkjson")
 local vs = require("utility.struct.struct")
@@ -6,13 +6,13 @@ local sdk = require("apicurio-registry_sdk")
 local helpers = require("core.helpers")
 local runner = require("test.runner")
 
-describe("McpToolDirect", function()
-  it("should direct-list-mcp_tool", function()
-    local setup = mcp_tool_direct_setup({
+describe("GlobalRuleDirect", function()
+  it("should direct-list-global_rule", function()
+    local setup = global_rule_direct_setup({
       { id = "direct01" },
       { id = "direct02" },
     })
-    local _should_skip, _reason = runner.is_control_skipped("direct", "direct-list-mcp_tool", setup.live and "live" or "unit")
+    local _should_skip, _reason = runner.is_control_skipped("direct", "direct-list-global_rule", setup.live and "live" or "unit")
     if _should_skip then
       pending(_reason or "skipped via sdk-test-control.json")
       return
@@ -21,7 +21,7 @@ describe("McpToolDirect", function()
 
 
     local result, err = client:direct({
-      path = "well-known/mcp-tools",
+      path = "admin/rules",
       method = "GET",
       params = {},
     })
@@ -55,13 +55,13 @@ describe("McpToolDirect", function()
 end)
 
 
-function mcp_tool_direct_setup(mockres)
+function global_rule_direct_setup(mockres)
   runner.load_env_local()
 
   local calls = {}
 
   local env = runner.env_override({
-    ["APICURIO_REGISTRY_TEST_MCP_TOOL_ENTID"] = {},
+    ["APICURIO_REGISTRY_TEST_GLOBAL_RULE_ENTID"] = {},
     ["APICURIO_REGISTRY_TEST_LIVE"] = "FALSE",
     ["APICURIO_REGISTRY_SERVER_REGISTRY"] = "MY-REGISTRY-URL",
   })

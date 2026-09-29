@@ -115,7 +115,13 @@ main: kit: entity: version: {
     state: {
       h: "State"
       n: "state"
-      r: true
+      op: {
+        list: {
+          req: true
+          type: "`$STRING`"
+        }
+      }
+      r: false
       t: "`$STRING`"
     }
     value: {
@@ -128,12 +134,13 @@ main: kit: entity: version: {
       h: "Version"
       n: "version"
       op: {
-        list: {
-          req: true
+        create: {
+          req: false
           type: "`$STRING`"
         }
       }
-      r: false
+      r: true
+      sh: "A single version of an artifact."
       t: "`$STRING`"
     }
     versions: {
@@ -167,7 +174,7 @@ main: kit: entity: version: {
                 ex: "\"example-artifact\""
                 k: "query"
                 n: "artifact_id"
-                or: "artifact_id"
+                or: "artifactId"
                 r: false
                 t: "`$STRING`"
               }
@@ -175,7 +182,7 @@ main: kit: entity: version: {
                 ex: "AVRO"
                 k: "query"
                 n: "artifact_type"
-                or: "artifact_type"
+                or: "artifactType"
                 r: false
                 t: "`$STRING`"
               }
@@ -190,7 +197,7 @@ main: kit: entity: version: {
                 ex: "\"my-group\""
                 k: "query"
                 n: "group_id"
-                or: "group_id"
+                or: "groupId"
                 r: false
                 t: "`$STRING`"
               }
@@ -228,7 +235,7 @@ main: kit: entity: version: {
                 ex: false
                 k: "query"
                 n: "skip_count"
-                or: "skip_count"
+                or: "skipCount"
                 r: false
                 t: "`$BOOLEAN`"
               }
@@ -282,7 +289,7 @@ main: kit: entity: version: {
                 ex: "\"example-artifact\""
                 k: "param"
                 n: "artifact_id"
-                or: "artifact_id"
+                or: "artifactId"
                 r: true
                 t: "`$STRING`"
               }
@@ -290,7 +297,7 @@ main: kit: entity: version: {
                 ex: "\"my-group\""
                 k: "param"
                 n: "group_id"
-                or: "group_id"
+                or: "groupId"
                 r: true
                 t: "`$STRING`"
               }
@@ -299,7 +306,7 @@ main: kit: entity: version: {
               {
                 k: "query"
                 n: "dry_run"
-                or: "dry_run"
+                or: "dryRun"
                 r: false
                 t: "`$BOOLEAN`"
               }
@@ -338,10 +345,8 @@ main: kit: entity: version: {
             }
           ]
           t: {
-            req: {
-              version: "`reqdata`"
-            }
-            res: "`body.labels`"
+            req: "`reqdata`"
+            res: "`body`"
           }
         }
       ]
@@ -361,7 +366,7 @@ main: kit: entity: version: {
                 ex: "\"example-artifact\""
                 k: "query"
                 n: "artifact_id"
-                or: "artifact_id"
+                or: "artifactId"
                 r: false
                 t: "`$STRING`"
               }
@@ -369,7 +374,7 @@ main: kit: entity: version: {
                 ex: "AVRO"
                 k: "query"
                 n: "artifact_type"
-                or: "artifact_type"
+                or: "artifactType"
                 r: false
                 t: "`$STRING`"
               }
@@ -383,7 +388,7 @@ main: kit: entity: version: {
               {
                 k: "query"
                 n: "content_id"
-                or: "content_id"
+                or: "contentId"
                 r: false
                 t: "`$INTEGER`"
               }
@@ -397,7 +402,7 @@ main: kit: entity: version: {
               {
                 k: "query"
                 n: "global_id"
-                or: "global_id"
+                or: "globalId"
                 r: false
                 t: "`$INTEGER`"
               }
@@ -405,14 +410,14 @@ main: kit: entity: version: {
                 ex: "\"my-group\""
                 k: "query"
                 n: "group_id"
-                or: "group_id"
+                or: "groupId"
                 r: false
                 t: "`$STRING`"
               }
               {
                 k: "query"
                 n: "label"
-                or: "label"
+                or: "labels"
                 r: false
                 t: "`$ARRAY`"
               }
@@ -457,7 +462,7 @@ main: kit: entity: version: {
                 ex: false
                 k: "query"
                 n: "skip_count"
-                or: "skip_count"
+                or: "skipCount"
                 r: false
                 t: "`$BOOLEAN`"
               }
@@ -533,7 +538,7 @@ main: kit: entity: version: {
                 ex: "\"example-artifact\""
                 k: "param"
                 n: "artifact_id"
-                or: "artifact_id"
+                or: "artifactId"
                 r: true
                 t: "`$STRING`"
               }
@@ -541,7 +546,7 @@ main: kit: entity: version: {
                 ex: "\"my-group\""
                 k: "param"
                 n: "group_id"
-                or: "group_id"
+                or: "groupId"
                 r: true
                 t: "`$STRING`"
               }
@@ -579,7 +584,7 @@ main: kit: entity: version: {
                 ex: false
                 k: "query"
                 n: "skip_count"
-                or: "skip_count"
+                or: "skipCount"
                 r: false
                 t: "`$BOOLEAN`"
               }
@@ -638,7 +643,7 @@ main: kit: entity: version: {
                 ex: "\"example-artifact\""
                 k: "param"
                 n: "artifact_id"
-                or: "artifact_id"
+                or: "artifactId"
                 r: true
                 t: "`$STRING`"
               }
@@ -646,7 +651,7 @@ main: kit: entity: version: {
                 ex: "\"latest\""
                 k: "param"
                 n: "branch_id"
-                or: "branch_id"
+                or: "branchId"
                 r: true
                 t: "`$STRING`"
               }
@@ -654,7 +659,7 @@ main: kit: entity: version: {
                 ex: "\"my-group\""
                 k: "param"
                 n: "group_id"
-                or: "group_id"
+                or: "groupId"
                 r: true
                 t: "`$STRING`"
               }
@@ -739,7 +744,7 @@ main: kit: entity: version: {
                 ex: "\"example-artifact\""
                 k: "param"
                 n: "artifact_id"
-                or: "artifact_id"
+                or: "artifactId"
                 r: true
                 t: "`$STRING`"
               }
@@ -747,14 +752,14 @@ main: kit: entity: version: {
                 ex: "\"my-group\""
                 k: "param"
                 n: "group_id"
-                or: "group_id"
+                or: "groupId"
                 r: true
                 t: "`$STRING`"
               }
               {
                 k: "param"
                 n: "version_expression"
-                or: "version_expression"
+                or: "versionExpression"
                 r: true
                 t: "`$STRING`"
               }
@@ -770,7 +775,7 @@ main: kit: entity: version: {
               {
                 k: "query"
                 n: "reference"
-                or: "reference"
+                or: "references"
                 r: false
                 t: "`$STRING`"
               }
@@ -835,7 +840,7 @@ main: kit: entity: version: {
                 ex: "\"example-artifact\""
                 k: "param"
                 n: "artifact_id"
-                or: "artifact_id"
+                or: "artifactId"
                 r: true
                 t: "`$STRING`"
               }
@@ -843,14 +848,14 @@ main: kit: entity: version: {
                 ex: "\"my-group\""
                 k: "param"
                 n: "group_id"
-                or: "group_id"
+                or: "groupId"
                 r: true
                 t: "`$STRING`"
               }
               {
                 k: "param"
                 n: "version_expression"
-                or: "version_expression"
+                or: "versionExpression"
                 r: true
                 t: "`$STRING`"
               }
@@ -918,14 +923,14 @@ main: kit: entity: version: {
                 ex: "\"example-artifact\""
                 k: "param"
                 n: "artifact_id"
-                or: "artifact_id"
+                or: "artifactId"
                 r: true
                 t: "`$STRING`"
               }
               {
                 k: "param"
                 n: "comment_id"
-                or: "comment_id"
+                or: "commentId"
                 r: true
                 t: "`$STRING`"
               }
@@ -933,14 +938,14 @@ main: kit: entity: version: {
                 ex: "\"my-group\""
                 k: "param"
                 n: "group_id"
-                or: "group_id"
+                or: "groupId"
                 r: true
                 t: "`$STRING`"
               }
               {
                 k: "param"
                 n: "version_id"
-                or: "version_expression"
+                or: "versionExpression"
                 r: true
                 t: "`$STRING`"
               }
@@ -1007,7 +1012,7 @@ main: kit: entity: version: {
                 ex: "\"example-artifact\""
                 k: "param"
                 n: "artifact_id"
-                or: "artifact_id"
+                or: "artifactId"
                 r: true
                 t: "`$STRING`"
               }
@@ -1015,14 +1020,14 @@ main: kit: entity: version: {
                 ex: "\"my-group\""
                 k: "param"
                 n: "group_id"
-                or: "group_id"
+                or: "groupId"
                 r: true
                 t: "`$STRING`"
               }
               {
                 k: "param"
                 n: "id"
-                or: "version_expression"
+                or: "versionExpression"
                 r: true
                 t: "`$STRING`"
               }
@@ -1086,14 +1091,14 @@ main: kit: entity: version: {
                 ex: "\"example-artifact\""
                 k: "param"
                 n: "artifact_id"
-                or: "artifact_id"
+                or: "artifactId"
                 r: true
                 t: "`$STRING`"
               }
               {
                 k: "param"
                 n: "comment_id"
-                or: "comment_id"
+                or: "commentId"
                 r: true
                 t: "`$STRING`"
               }
@@ -1101,14 +1106,14 @@ main: kit: entity: version: {
                 ex: "\"my-group\""
                 k: "param"
                 n: "group_id"
-                or: "group_id"
+                or: "groupId"
                 r: true
                 t: "`$STRING`"
               }
               {
                 k: "param"
                 n: "version_id"
-                or: "version_expression"
+                or: "versionExpression"
                 r: true
                 t: "`$STRING`"
               }

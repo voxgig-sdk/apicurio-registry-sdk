@@ -153,10 +153,6 @@ Create a new `GroupRuleEntity` instance. Pass `null` for no initial data.
 
 Create a new `KafkaSqlEntity` instance. Pass `null` for no initial data.
 
-#### `McpTool($data = null)`
-
-Create a new `McpToolEntity` instance. Pass `null` for no initial data.
-
 #### `Metadata($data = null)`
 
 Create a new `MetadataEntity` instance. Pass `null` for no initial data.
@@ -339,17 +335,13 @@ $agent = $client->Agent();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `artifactId` | `string` | No |  |
 | `capabilities` | `array` | No | Capabilities of an A2A agent. |
-| `createdOn` | `int` | No |  |
 | `defaultInputModes` | `array` | No |  |
 | `defaultOutputModes` | `array` | No |  |
 | `description` | `string` | No |  |
 | `documentationUrl` | `string` | No |  |
-| `groupId` | `string` | No |  |
 | `iconUrl` | `string` | No |  |
 | `name` | `string` | No |  |
-| `owner` | `string` | No |  |
 | `protocolVersion` | `string` | No |  |
 | `provider` | `array` | No | Provider of an A2A agent. |
 | `securityRequirements` | `array` | No |  |
@@ -536,8 +528,17 @@ $ard_explore = $client->ArdExplore();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
+| `facets` | `array` | No | Facets keyed by the requested facet field name. |
 | `query` | `array` | No | ARD search query. |
-| `resultType` | `array` | Yes | Requested result type for the ARD POST /explore endpoint. |
+| `resultType` | `string` | No | Requested result type for the ARD POST /explore endpoint. |
+
+### Field Usage by Operation
+
+| Field | create |
+| --- | --- |
+| `facets` | - |
+| `query` | - |
+| `resultType` | Yes |
 
 ### Operations
 
@@ -547,7 +548,6 @@ Create a new entity with the given data. Throws on error.
 
 ```php
 $result = $client->ArdExplore()->create([
-  "resultType" => null, // array
 ]);
 ```
 
@@ -1678,14 +1678,6 @@ Return the entity name.
 $git_op = $client->GitOp();
 ```
 
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `ref` | `string` | Yes | Git ref to validate (branch name, tag, or PR ref like `refs/pull/42/head`). |
-| `repoId` | `string` | Yes | Repository ID to validate against. |
-| `type` | `string` | No | Validation type. |
-
 ### Operations
 
 #### `create(array $reqdata, ?array $ctrl = null): mixed`
@@ -1694,8 +1686,6 @@ Create a new entity with the given data. Throws on error.
 
 ```php
 $result = $client->GitOp()->create([
-  "ref" => null, // string
-  "repoId" => null, // string
 ]);
 ```
 
@@ -1814,7 +1804,35 @@ $git_ops_validate_task = $client->GitOpsValidateTask();
 | `type` | `string` | No | Validation type (`pull` or `push`). |
 | `versionCount` | `int` | No | Number of artifact versions loaded during validation. |
 
+### Field Usage by Operation
+
+| Field | load | list | create |
+| --- | --- | --- | --- |
+| `artifactCount` | - | - | - |
+| `completedAt` | - | - | - |
+| `createdAt` | - | - | - |
+| `errors` | - | - | - |
+| `groupCount` | - | - | - |
+| `ref` | - | - | Yes |
+| `repoId` | - | - | Yes |
+| `result` | - | - | - |
+| `state` | - | - | - |
+| `taskId` | - | - | - |
+| `type` | - | - | - |
+| `versionCount` | - | - | - |
+
 ### Operations
+
+#### `create(array $reqdata, ?array $ctrl = null): mixed`
+
+Create a new entity with the given data. Throws on error.
+
+```php
+$result = $client->GitOpsValidateTask()->create([
+  "state" => null, // string
+  "taskId" => null, // string
+]);
+```
 
 #### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
@@ -1888,6 +1906,14 @@ $result = $client->GlobalRule()->create([
 ]);
 ```
 
+#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
+
+List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
+
+```php
+$results = $client->GlobalRule()->list();
+```
+
 #### `remove(array $reqmatch, ?array $ctrl = null): mixed`
 
 Remove the entity matching the given criteria. Throws on error.
@@ -1936,31 +1962,27 @@ $group = $client->Group();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `artifactsType` | `string` | No |  |
-| `createdOn` | `string` | No |  |
+| `createdOn` | `string` | Yes |  |
 | `description` | `string` | No |  |
-| `groupId` | `string` | No |  |
+| `groupId` | `string` | Yes |  |
 | `id` | `string` | No |  |
 | `labels` | `array` | No |  |
-| `modifiedBy` | `string` | No |  |
-| `modifiedOn` | `string` | No |  |
-| `owner` | `string` | No |  |
-| `properties` | `array` | No |  |
+| `modifiedBy` | `string` | Yes |  |
+| `modifiedOn` | `string` | Yes |  |
+| `owner` | `string` | Yes |  |
 
 ### Field Usage by Operation
 
 | Field | load | list | create | update | remove |
 | --- | --- | --- | --- | --- | --- |
-| `artifactsType` | - | - | - | - | - |
-| `createdOn` | - | Yes | - | - | - |
+| `createdOn` | - | - | - | - | - |
 | `description` | - | - | - | - | - |
-| `groupId` | - | Yes | Yes | - | - |
+| `groupId` | - | - | - | - | - |
 | `id` | - | - | - | - | - |
 | `labels` | - | - | - | - | - |
-| `modifiedBy` | - | Yes | - | - | - |
-| `modifiedOn` | - | Yes | - | - | - |
-| `owner` | - | Yes | - | - | - |
-| `properties` | - | - | - | - | - |
+| `modifiedBy` | - | - | - | - | - |
+| `modifiedOn` | - | - | - | - | - |
+| `owner` | - | - | - | Yes | - |
 
 ### Operations
 
@@ -1970,6 +1992,11 @@ Create a new entity with the given data. Throws on error.
 
 ```php
 $result = $client->Group()->create([
+  "createdOn" => null, // string
+  "groupId" => null, // string
+  "modifiedBy" => null, // string
+  "modifiedOn" => null, // string
+  "owner" => null, // string
 ]);
 ```
 
@@ -2157,65 +2184,6 @@ Return the entity name.
 
 ---
 
-## McpToolEntity
-
-```php
-$mcp_tool = $client->McpTool();
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `artifactId` | `string` | No |  |
-| `createdOn` | `int` | No |  |
-| `description` | `string` | No |  |
-| `groupId` | `string` | No |  |
-| `name` | `string` | No |  |
-| `owner` | `string` | No |  |
-| `parameters` | `array` | No |  |
-| `title` | `string` | No |  |
-
-### Operations
-
-#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
-
-List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
-
-```php
-$results = $client->McpTool()->list();
-```
-
-### Common Methods
-
-#### `data_get(): array`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set($data): void`
-
-Set the entity data.
-
-#### `match_get(): array`
-
-Get the entity match criteria.
-
-#### `match_set($match): void`
-
-Set the entity match criteria.
-
-#### `make(): McpToolEntity`
-
-Create a new `McpToolEntity` instance with the same client and
-options.
-
-#### `get_name(): string`
-
-Return the entity name.
-
-
----
-
 ## MetadataEntity
 
 ```php
@@ -2226,38 +2194,40 @@ $metadata = $client->Metadata();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `artifactId` | `string` | No |  |
-| `artifactType` | `string` | No |  |
-| `contentId` | `int` | No |  |
+| `artifactId` | `string` | Yes |  |
+| `artifactType` | `string` | Yes |  |
+| `contentId` | `int` | Yes |  |
 | `contractMetadata` | `array` | No | Contract metadata projected from the artifact labels. |
-| `createdOn` | `string` | No |  |
+| `createdOn` | `string` | Yes |  |
 | `description` | `string` | No |  |
-| `globalId` | `int` | No |  |
+| `globalId` | `int` | Yes |  |
 | `groupId` | `string` | No |  |
 | `labels` | `array` | No |  |
-| `modifiedBy` | `string` | Yes |  |
-| `modifiedOn` | `string` | Yes |  |
+| `modifiedBy` | `string` | No |  |
+| `modifiedOn` | `string` | No |  |
 | `name` | `string` | No |  |
-| `owner` | `string` | No |  |
-| `version` | `int` | No |  |
+| `owner` | `string` | Yes |  |
+| `state` | `string` | No |  |
+| `version` | `string` | Yes | A single version of an artifact. |
 
 ### Field Usage by Operation
 
 | Field | load | create | update |
 | --- | --- | --- | --- |
-| `artifactId` | Yes | - | - |
-| `artifactType` | Yes | - | - |
+| `artifactId` | - | - | - |
+| `artifactType` | - | - | - |
 | `contentId` | - | - | - |
 | `contractMetadata` | - | - | - |
-| `createdOn` | Yes | - | - |
+| `createdOn` | - | - | - |
 | `description` | - | - | - |
 | `globalId` | - | - | - |
 | `groupId` | Yes | - | - |
 | `labels` | - | - | - |
-| `modifiedBy` | - | - | - |
-| `modifiedOn` | - | - | - |
+| `modifiedBy` | Yes | - | - |
+| `modifiedOn` | Yes | - | - |
 | `name` | - | - | - |
-| `owner` | Yes | - | - |
+| `owner` | - | - | Yes |
+| `state` | - | - | - |
 | `version` | - | - | - |
 
 ### Operations
@@ -2271,8 +2241,13 @@ $result = $client->Metadata()->create([
   "artifact_id" => null, // string
   "group_id" => null, // string
   "version_expression" => null, // string
-  "modifiedBy" => null, // string
-  "modifiedOn" => null, // string
+  "artifactId" => null, // string
+  "artifactType" => null, // string
+  "contentId" => null, // int
+  "createdOn" => null, // string
+  "globalId" => null, // int
+  "owner" => null, // string
+  "version" => null, // string
 ]);
 ```
 
@@ -2336,10 +2311,9 @@ $odcs_contract_result = $client->OdcsContractResult();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `labelsApplied` | `int` | No | Number of contract.* labels set on the schema artifact. |
-| `rulesApplied` | `int` | No | Number of CEL quality rules projected onto the schema artifact. |
-| `tagsApplied` | `int` | No | Number of field-tag.* labels set on the schema artifact version. |
-| `warnings` | `array` | No | Any warnings encountered during projection. |
+| `contractId` | `string` | No | The contract artifact ID. |
+| `projection` | `array` | No | Summary of the projection performed when an ODCS contract is applied. |
+| `version` | `string` | No | The ODCS contract version. |
 
 ### Operations
 
@@ -2519,6 +2493,17 @@ $role_mapping = $client->RoleMapping();
 | `role` | `string` | Yes |  |
 
 ### Operations
+
+#### `create(array $reqdata, ?array $ctrl = null): mixed`
+
+Create a new entity with the given data. Throws on error.
+
+```php
+$result = $client->RoleMapping()->create([
+  "principalId" => null, // string
+  "role" => null, // string
+]);
+```
 
 #### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
@@ -3003,9 +2988,9 @@ $version = $client->Version();
 | `modifiedOn` | `string` | No |  |
 | `name` | `string` | No |  |
 | `owner` | `string` | Yes |  |
-| `state` | `string` | Yes |  |
+| `state` | `string` | No |  |
 | `value` | `string` | Yes |  |
-| `version` | `string` | No |  |
+| `version` | `string` | Yes | A single version of an artifact. |
 | `versions` | `array` | Yes | The collection of artifact versions returned in the result set. |
 
 ### Field Usage by Operation
@@ -3029,9 +3014,9 @@ $version = $client->Version();
 | `modifiedOn` | - | - | - | - | - |
 | `name` | - | - | - | - | - |
 | `owner` | - | - | - | - | - |
-| `state` | - | - | - | - | - |
+| `state` | - | Yes | - | - | - |
 | `value` | - | - | - | - | - |
-| `version` | - | Yes | - | - | - |
+| `version` | - | - | Yes | - | - |
 | `versions` | - | - | - | - | - |
 
 ### Operations
@@ -3051,6 +3036,7 @@ $result = $client->Version()->create([
   "globalId" => null, // int
   "owner" => null, // string
   "value" => null, // string
+  "version" => null, // string
   "versions" => null, // array
 ]);
 ```
@@ -3133,9 +3119,29 @@ $well_known = $client->WellKnown();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
+| `artifactId` | `string` | No |  |
+| `capabilities` | `array` | No | Capabilities of an A2A agent. |
+| `createdOn` | `int` | No |  |
+| `description` | `string` | No |  |
+| `groupId` | `string` | No |  |
 | `id` | `string` | No |  |
+| `name` | `string` | No |  |
+| `owner` | `string` | No |  |
+| `parameters` | `array` | No |  |
+| `skills` | `array` | No |  |
+| `supportedInterfaces` | `array` | No |  |
+| `title` | `string` | No |  |
+| `version` | `string` | No |  |
 
 ### Operations
+
+#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
+
+List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
+
+```php
+$results = $client->WellKnown()->list();
+```
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
 

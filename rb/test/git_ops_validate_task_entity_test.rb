@@ -52,7 +52,7 @@ class GitOpsValidateTaskEntityTest < Minitest::Test
     setup = git_ops_validate_task_basic_setup(nil)
     # Per-op sdk-test-control.json skip.
     _live = setup[:live] || false
-    ["list", "load"].each do |_op|
+    ["create", "list", "load"].each do |_op|
       _should_skip, _reason = Runner.is_control_skipped("entityOp", "git_ops_validate_task." + _op, _live ? "live" : "unit")
       if _should_skip
         skip(_reason || "skipped via sdk-test-control.json")
@@ -67,16 +67,16 @@ class GitOpsValidateTaskEntityTest < Minitest::Test
     end
     client = setup[:client]
 
-    # Bootstrap entity data from existing test data.
-    git_ops_validate_task_ref01_data_raw = Vs.items(Helpers.to_map(
-      Vs.getpath(setup[:data], "existing.git_ops_validate_task")))
-    git_ops_validate_task_ref01_data = nil
-    if git_ops_validate_task_ref01_data_raw.length > 0
-      git_ops_validate_task_ref01_data = Helpers.to_map(git_ops_validate_task_ref01_data_raw[0][1])
-    end
+    # CREATE
+    git_ops_validate_task_ref01_ent = client.GitOpsValidateTask(nil)
+    git_ops_validate_task_ref01_data = Helpers.to_map(Vs.getprop(
+      Vs.getpath(setup[:data], "new.git_ops_validate_task"), "git_ops_validate_task_ref01"))
+
+    git_ops_validate_task_ref01_data_result = git_ops_validate_task_ref01_ent.create(git_ops_validate_task_ref01_data, nil)
+    git_ops_validate_task_ref01_data = Helpers.to_map(git_ops_validate_task_ref01_data_result.respond_to?(:data_get) ? git_ops_validate_task_ref01_data_result.data_get : git_ops_validate_task_ref01_data_result)
+    assert !git_ops_validate_task_ref01_data.nil?
 
     # LIST
-    git_ops_validate_task_ref01_ent = client.GitOpsValidateTask(nil)
     git_ops_validate_task_ref01_match = {}
 
     git_ops_validate_task_ref01_list_result = git_ops_validate_task_ref01_ent.list(git_ops_validate_task_ref01_match, nil)

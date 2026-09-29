@@ -72,7 +72,7 @@ main: kit: entity: create_artifact: {
                 ex: "\"my-group\""
                 k: "param"
                 n: "group_id"
-                or: "group_id"
+                or: "groupId"
                 r: true
                 t: "`$STRING`"
               }
@@ -88,14 +88,14 @@ main: kit: entity: create_artifact: {
               {
                 k: "query"
                 n: "dry_run"
-                or: "dry_run"
+                or: "dryRun"
                 r: false
                 t: "`$BOOLEAN`"
               }
               {
                 k: "query"
                 n: "if_exist"
-                or: "if_exist"
+                or: "ifExists"
                 r: false
                 t: "`$STRING`"
               }

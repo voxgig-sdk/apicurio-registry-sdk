@@ -1,17 +1,17 @@
-# McpTool direct test
+# GlobalRule direct test
 
 require "minitest/autorun"
 require "json"
 require_relative "../ApicurioRegistry_sdk"
 require_relative "runner"
 
-class McpToolDirectTest < Minitest::Test
-  def test_direct_list_mcp_tool
-    setup = mcp_tool_direct_setup([
+class GlobalRuleDirectTest < Minitest::Test
+  def test_direct_list_global_rule
+    setup = global_rule_direct_setup([
       { "id" => "direct01" },
       { "id" => "direct02" },
     ])
-    _should_skip, _reason = Runner.is_control_skipped("direct", "direct-list-mcp_tool", setup[:live] ? "live" : "unit")
+    _should_skip, _reason = Runner.is_control_skipped("direct", "direct-list-global_rule", setup[:live] ? "live" : "unit")
     if _should_skip
       skip(_reason || "skipped via sdk-test-control.json")
       return
@@ -20,7 +20,7 @@ class McpToolDirectTest < Minitest::Test
 
 
     result = client.direct({
-      "path" => "well-known/mcp-tools",
+      "path" => "admin/rules",
       "method" => "GET",
       "params" => {},
     })
@@ -54,13 +54,13 @@ class McpToolDirectTest < Minitest::Test
 end
 
 
-def mcp_tool_direct_setup(mockres)
+def global_rule_direct_setup(mockres)
   Runner.load_env_local
 
   calls = []
 
   env = Runner.env_override({
-    "APICURIO_REGISTRY_TEST_MCP_TOOL_ENTID" => {},
+    "APICURIO_REGISTRY_TEST_GLOBAL_RULE_ENTID" => {},
     "APICURIO_REGISTRY_TEST_LIVE" => "FALSE",
     "APICURIO_REGISTRY_SERVER_REGISTRY" => "MY-REGISTRY-URL",
   })

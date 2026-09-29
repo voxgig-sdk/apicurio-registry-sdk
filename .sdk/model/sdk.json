@@ -163,7 +163,7 @@
                         "a": true,
                         "k": "header",
                         "n": "x_registry_preserve_content_id",
-                        "or": "x_registry_preserve_content_id",
+                        "or": "X-Registry-Preserve-ContentId",
                         "r": false,
                         "t": "`$BOOLEAN`"
                       },
@@ -171,7 +171,7 @@
                         "a": true,
                         "k": "header",
                         "n": "x_registry_preserve_global_id",
-                        "or": "x_registry_preserve_global_id",
+                        "or": "X-Registry-Preserve-GlobalId",
                         "r": false,
                         "t": "`$BOOLEAN`"
                       }
@@ -181,7 +181,7 @@
                         "a": true,
                         "k": "query",
                         "n": "require_empty_registry",
-                        "or": "require_empty_registry",
+                        "or": "requireEmptyRegistry",
                         "r": false,
                         "t": "`$BOOLEAN`"
                       }
@@ -211,34 +211,6 @@
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
-                },
-                {
-                  "a": true,
-                  "co": {
-                    "id": "POST /admin/roleMappings",
-                    "source": "openapi3",
-                    "version": 2
-                  },
-                  "g": {},
-                  "k": "http",
-                  "m": "POST",
-                  "o": "/admin/roleMappings",
-                  "q": {
-                    "$action": "role_mapping"
-                  },
-                  "r": {},
-                  "s": [
-                    {
-                      "lit": "admin"
-                    },
-                    {
-                      "lit": "roleMappings"
-                    }
-                  ],
-                  "t": {
-                    "req": "`reqdata`",
-                    "res": "`body`"
-                  }
                 }
               ]
             },
@@ -259,7 +231,7 @@
                         "a": true,
                         "k": "param",
                         "n": "principal_id",
-                        "or": "principal_id",
+                        "or": "principalId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -307,7 +279,7 @@
                         "a": true,
                         "k": "param",
                         "n": "property_name",
-                        "or": "property_name",
+                        "or": "propertyName",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -393,7 +365,7 @@
                         "a": true,
                         "k": "param",
                         "n": "principal_id",
-                        "or": "principal_id",
+                        "or": "principalId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -441,7 +413,7 @@
                         "a": true,
                         "k": "param",
                         "n": "property_name",
-                        "or": "property_name",
+                        "or": "propertyName",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -496,13 +468,6 @@
             "field": {}
           },
           "fields": {
-            "artifactId": {
-              "a": true,
-              "h": "Artifact Id",
-              "n": "artifactId",
-              "r": false,
-              "t": "`$STRING`"
-            },
             "capabilities": {
               "a": true,
               "h": "Capabilities",
@@ -510,14 +475,6 @@
               "r": false,
               "sh": "Capabilities of an A2A agent.",
               "t": "`$OBJECT`"
-            },
-            "createdOn": {
-              "a": true,
-              "fo": "int64",
-              "h": "Created On",
-              "n": "createdOn",
-              "r": false,
-              "t": "`$INTEGER`"
             },
             "defaultInputModes": {
               "a": true,
@@ -547,13 +504,6 @@
               "r": false,
               "t": "`$STRING`"
             },
-            "groupId": {
-              "a": true,
-              "h": "Group Id",
-              "n": "groupId",
-              "r": false,
-              "t": "`$STRING`"
-            },
             "iconUrl": {
               "a": true,
               "h": "Icon Url",
@@ -565,13 +515,6 @@
               "a": true,
               "h": "Name",
               "n": "name",
-              "r": false,
-              "t": "`$STRING`"
-            },
-            "owner": {
-              "a": true,
-              "h": "Owner",
-              "n": "owner",
               "r": false,
               "t": "`$STRING`"
             },
@@ -639,103 +582,6 @@
               "input": "data",
               "name": "list",
               "points": [
-                {
-                  "a": true,
-                  "co": {
-                    "id": "GET /well-known/agents",
-                    "source": "openapi3",
-                    "version": 2
-                  },
-                  "g": {
-                    "query": [
-                      {
-                        "a": true,
-                        "k": "query",
-                        "n": "capability",
-                        "or": "capability",
-                        "r": false,
-                        "t": "`$ARRAY`"
-                      },
-                      {
-                        "a": true,
-                        "k": "query",
-                        "n": "input_mode",
-                        "or": "input_mode",
-                        "r": false,
-                        "t": "`$ARRAY`"
-                      },
-                      {
-                        "a": true,
-                        "ex": 20,
-                        "k": "query",
-                        "n": "limit",
-                        "or": "limit",
-                        "r": false,
-                        "t": "`$INTEGER`"
-                      },
-                      {
-                        "a": true,
-                        "k": "query",
-                        "n": "name",
-                        "or": "name",
-                        "r": false,
-                        "t": "`$STRING`"
-                      },
-                      {
-                        "a": true,
-                        "ex": 0,
-                        "k": "query",
-                        "n": "offset",
-                        "or": "offset",
-                        "r": false,
-                        "t": "`$INTEGER`"
-                      },
-                      {
-                        "a": true,
-                        "k": "query",
-                        "n": "output_mode",
-                        "or": "output_mode",
-                        "r": false,
-                        "t": "`$ARRAY`"
-                      },
-                      {
-                        "a": true,
-                        "k": "query",
-                        "n": "skill",
-                        "or": "skill",
-                        "r": false,
-                        "t": "`$ARRAY`"
-                      }
-                    ]
-                  },
-                  "k": "http",
-                  "m": "GET",
-                  "o": "/well-known/agents",
-                  "q": {
-                    "exist": [
-                      "capability",
-                      "input_mode",
-                      "limit",
-                      "name",
-                      "offset",
-                      "output_mode",
-                      "skill"
-                    ]
-                  },
-                  "r": {},
-                  "s": [
-                    {
-                      "lit": "well-known"
-                    },
-                    {
-                      "lit": "agents"
-                    }
-                  ],
-                  "t": {
-                    "req": "`reqdata`",
-                    "res": "`body.agents`"
-                  }
-                },
                 {
                   "a": true,
                   "co": {
@@ -1026,7 +872,7 @@
                         "a": true,
                         "k": "query",
                         "n": "order_by",
-                        "or": "order_by",
+                        "or": "orderBy",
                         "r": false,
                         "t": "`$STRING`"
                       },
@@ -1035,7 +881,7 @@
                         "ex": 20,
                         "k": "query",
                         "n": "page_size",
-                        "or": "page_size",
+                        "or": "pageSize",
                         "r": false,
                         "t": "`$INTEGER`"
                       },
@@ -1043,7 +889,7 @@
                         "a": true,
                         "k": "query",
                         "n": "page_token",
-                        "or": "page_token",
+                        "or": "pageToken",
                         "r": false,
                         "t": "`$STRING`"
                       }
@@ -1142,6 +988,14 @@
             "field": {}
           },
           "fields": {
+            "facets": {
+              "a": true,
+              "h": "Facets",
+              "n": "facets",
+              "r": false,
+              "sh": "Facets keyed by the requested facet field name.",
+              "t": "`$OBJECT`"
+            },
             "query": {
               "a": true,
               "h": "Query",
@@ -1154,9 +1008,15 @@
               "a": true,
               "h": "Result Type",
               "n": "resultType",
-              "r": true,
+              "op": {
+                "create": {
+                  "req": true,
+                  "type": "`$OBJECT`"
+                }
+              },
+              "r": false,
               "sh": "Requested result type for the ARD POST /explore endpoint.",
-              "t": "`$OBJECT`"
+              "t": "`$STRING`"
             }
           },
           "name": "ard_explore",
@@ -1191,7 +1051,7 @@
                   ],
                   "t": {
                     "req": "`reqdata`",
-                    "res": "`body.facets`"
+                    "res": "`body`"
                   }
                 }
               ]
@@ -1419,7 +1279,7 @@
                         "ex": "AVRO",
                         "k": "query",
                         "n": "artifact_type",
-                        "or": "artifact_type",
+                        "or": "artifactType",
                         "r": false,
                         "t": "`$STRING`"
                       },
@@ -1435,7 +1295,7 @@
                         "a": true,
                         "k": "query",
                         "n": "group_id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": false,
                         "t": "`$STRING`"
                       },
@@ -1478,7 +1338,7 @@
                         "ex": false,
                         "k": "query",
                         "n": "skip_count",
-                        "or": "skip_count",
+                        "or": "skipCount",
                         "r": false,
                         "t": "`$BOOLEAN`"
                       }
@@ -1532,7 +1392,7 @@
                         "a": true,
                         "k": "query",
                         "n": "artifact_id",
-                        "or": "artifact_id",
+                        "or": "artifactId",
                         "r": false,
                         "t": "`$STRING`"
                       },
@@ -1541,7 +1401,7 @@
                         "ex": "AVRO",
                         "k": "query",
                         "n": "artifact_type",
-                        "or": "artifact_type",
+                        "or": "artifactType",
                         "r": false,
                         "t": "`$STRING`"
                       },
@@ -1549,7 +1409,7 @@
                         "a": true,
                         "k": "query",
                         "n": "content_id",
-                        "or": "content_id",
+                        "or": "contentId",
                         "r": false,
                         "t": "`$INTEGER`"
                       },
@@ -1565,7 +1425,7 @@
                         "a": true,
                         "k": "query",
                         "n": "global_id",
-                        "or": "global_id",
+                        "or": "globalId",
                         "r": false,
                         "t": "`$INTEGER`"
                       },
@@ -1573,7 +1433,7 @@
                         "a": true,
                         "k": "query",
                         "n": "group_id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": false,
                         "t": "`$STRING`"
                       },
@@ -1581,7 +1441,7 @@
                         "a": true,
                         "k": "query",
                         "n": "label",
-                        "or": "label",
+                        "or": "labels",
                         "r": false,
                         "t": "`$ARRAY`"
                       },
@@ -1632,7 +1492,7 @@
                         "ex": false,
                         "k": "query",
                         "n": "skip_count",
-                        "or": "skip_count",
+                        "or": "skipCount",
                         "r": false,
                         "t": "`$BOOLEAN`"
                       }
@@ -1686,7 +1546,7 @@
                         "ex": "\"my-group\"",
                         "k": "param",
                         "n": "group_id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -1729,7 +1589,7 @@
                         "ex": false,
                         "k": "query",
                         "n": "skip_count",
-                        "or": "skip_count",
+                        "or": "skipCount",
                         "r": false,
                         "t": "`$BOOLEAN`"
                       }
@@ -1788,7 +1648,7 @@
                         "a": true,
                         "k": "param",
                         "n": "global_id",
-                        "or": "global_id",
+                        "or": "globalId",
                         "r": true,
                         "t": "`$INTEGER`"
                       }
@@ -1798,7 +1658,7 @@
                         "a": true,
                         "k": "query",
                         "n": "reference",
-                        "or": "reference",
+                        "or": "references",
                         "r": false,
                         "t": "`$STRING`"
                       },
@@ -1806,7 +1666,7 @@
                         "a": true,
                         "k": "query",
                         "n": "return_artifact_type",
-                        "or": "return_artifact_type",
+                        "or": "returnArtifactType",
                         "r": false,
                         "t": "`$BOOLEAN`"
                       }
@@ -1856,7 +1716,7 @@
                         "a": true,
                         "k": "param",
                         "n": "artifact_id",
-                        "or": "artifact_id",
+                        "or": "artifactId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -1864,7 +1724,7 @@
                         "a": true,
                         "k": "param",
                         "n": "group_id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -1920,7 +1780,7 @@
                         "a": true,
                         "k": "param",
                         "n": "content_hash",
-                        "or": "content_hash",
+                        "or": "contentHash",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -1968,7 +1828,7 @@
                         "a": true,
                         "k": "param",
                         "n": "content_id",
-                        "or": "content_id",
+                        "or": "contentId",
                         "r": true,
                         "t": "`$INTEGER`"
                       }
@@ -2023,7 +1883,7 @@
                         "ex": "\"my-group\"",
                         "k": "param",
                         "n": "group_id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -2032,7 +1892,7 @@
                         "ex": "\"example-artifact\"",
                         "k": "param",
                         "n": "id",
-                        "or": "artifact_id",
+                        "or": "artifactId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -2086,7 +1946,7 @@
                         "ex": "\"my-group\"",
                         "k": "param",
                         "n": "group_id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -2218,7 +2078,7 @@
                         "a": true,
                         "k": "query",
                         "n": "artifact_type",
-                        "or": "artifact_type",
+                        "or": "artifactType",
                         "r": false,
                         "t": "`$STRING`"
                       }
@@ -2266,7 +2126,7 @@
                         "ex": "\"example-artifact\"",
                         "k": "param",
                         "n": "artifact_id",
-                        "or": "artifact_id",
+                        "or": "artifactId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -2275,7 +2135,7 @@
                         "ex": "\"my-group\"",
                         "k": "param",
                         "n": "group_id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -2283,7 +2143,7 @@
                         "a": true,
                         "k": "param",
                         "n": "version_expression",
-                        "or": "version_expression",
+                        "or": "versionExpression",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -2294,7 +2154,7 @@
                         "ex": "\"INBOUND\"",
                         "k": "query",
                         "n": "ref_type",
-                        "or": "ref_type",
+                        "or": "refType",
                         "r": false,
                         "t": "`$STRING`"
                       }
@@ -2359,7 +2219,7 @@
                         "a": true,
                         "k": "param",
                         "n": "global_id_id",
-                        "or": "global_id",
+                        "or": "globalId",
                         "r": true,
                         "t": "`$INTEGER`"
                       }
@@ -2370,7 +2230,7 @@
                         "ex": "\"INBOUND\"",
                         "k": "query",
                         "n": "ref_type",
-                        "or": "ref_type",
+                        "or": "refType",
                         "r": false,
                         "t": "`$STRING`"
                       }
@@ -2422,7 +2282,7 @@
                         "a": true,
                         "k": "param",
                         "n": "content_hash_id",
-                        "or": "content_hash",
+                        "or": "contentHash",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -2473,7 +2333,7 @@
                         "a": true,
                         "k": "param",
                         "n": "content_id_id",
-                        "or": "content_id",
+                        "or": "contentId",
                         "r": true,
                         "t": "`$INTEGER`"
                       }
@@ -2576,7 +2436,7 @@
                         "ex": "\"my-group\"",
                         "k": "param",
                         "n": "group_id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -2585,7 +2445,7 @@
                         "ex": "\"example-artifact\"",
                         "k": "param",
                         "n": "id",
-                        "or": "artifact_id",
+                        "or": "artifactId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -2648,7 +2508,7 @@
                         "ex": "\"example-artifact\"",
                         "k": "param",
                         "n": "artifact_id",
-                        "or": "artifact_id",
+                        "or": "artifactId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -2657,7 +2517,7 @@
                         "ex": "\"my-group\"",
                         "k": "param",
                         "n": "group_id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -2665,7 +2525,7 @@
                         "a": true,
                         "k": "param",
                         "n": "id",
-                        "or": "rule_type",
+                        "or": "ruleType",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -2727,7 +2587,7 @@
                         "ex": "\"my-group\"",
                         "k": "param",
                         "n": "group_id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -2736,7 +2596,7 @@
                         "ex": "\"example-artifact\"",
                         "k": "param",
                         "n": "id",
-                        "or": "artifact_id",
+                        "or": "artifactId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -2960,7 +2820,7 @@
                         "ex": "\"example-artifact\"",
                         "k": "param",
                         "n": "artifact_id",
-                        "or": "artifact_id",
+                        "or": "artifactId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -2969,7 +2829,7 @@
                         "ex": "\"my-group\"",
                         "k": "param",
                         "n": "group_id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -2978,7 +2838,7 @@
                         "ex": "\"latest\"",
                         "k": "param",
                         "n": "id",
-                        "or": "branch_id",
+                        "or": "branchId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -3044,7 +2904,7 @@
                         "ex": "\"example-artifact\"",
                         "k": "param",
                         "n": "artifact_id",
-                        "or": "artifact_id",
+                        "or": "artifactId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -3053,7 +2913,7 @@
                         "ex": "\"my-group\"",
                         "k": "param",
                         "n": "group_id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -3116,7 +2976,7 @@
                         "ex": "\"example-artifact\"",
                         "k": "param",
                         "n": "artifact_id",
-                        "or": "artifact_id",
+                        "or": "artifactId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -3125,7 +2985,7 @@
                         "ex": "\"my-group\"",
                         "k": "param",
                         "n": "group_id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -3134,7 +2994,7 @@
                         "ex": "\"latest\"",
                         "k": "param",
                         "n": "id",
-                        "or": "branch_id",
+                        "or": "branchId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -3202,7 +3062,7 @@
                         "ex": "\"example-artifact\"",
                         "k": "param",
                         "n": "artifact_id",
-                        "or": "artifact_id",
+                        "or": "artifactId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -3211,7 +3071,7 @@
                         "ex": "\"my-group\"",
                         "k": "param",
                         "n": "group_id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -3220,7 +3080,7 @@
                         "ex": "\"latest\"",
                         "k": "param",
                         "n": "id",
-                        "or": "branch_id",
+                        "or": "branchId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -3288,7 +3148,7 @@
                         "ex": "\"example-artifact\"",
                         "k": "param",
                         "n": "artifact_id",
-                        "or": "artifact_id",
+                        "or": "artifactId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -3297,7 +3157,7 @@
                         "ex": "\"my-group\"",
                         "k": "param",
                         "n": "group_id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -3306,7 +3166,7 @@
                         "ex": "\"latest\"",
                         "k": "param",
                         "n": "id",
-                        "or": "branch_id",
+                        "or": "branchId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -3368,7 +3228,7 @@
                         "ex": "\"example-artifact\"",
                         "k": "param",
                         "n": "artifact_id",
-                        "or": "artifact_id",
+                        "or": "artifactId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -3377,7 +3237,7 @@
                         "ex": "\"my-group\"",
                         "k": "param",
                         "n": "group_id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -3386,7 +3246,7 @@
                         "ex": "\"latest\"",
                         "k": "param",
                         "n": "id",
-                        "or": "branch_id",
+                        "or": "branchId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -3506,7 +3366,7 @@
                         "ex": "\"example-artifact\"",
                         "k": "param",
                         "n": "artifact_id",
-                        "or": "artifact_id",
+                        "or": "artifactId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -3515,7 +3375,7 @@
                         "ex": "\"my-group\"",
                         "k": "param",
                         "n": "group_id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -3523,7 +3383,7 @@
                         "a": true,
                         "k": "param",
                         "n": "version_expression",
-                        "or": "version_expression",
+                        "or": "versionExpression",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -3594,7 +3454,7 @@
                         "ex": "\"example-artifact\"",
                         "k": "param",
                         "n": "artifact_id",
-                        "or": "artifact_id",
+                        "or": "artifactId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -3603,7 +3463,7 @@
                         "ex": "\"my-group\"",
                         "k": "param",
                         "n": "group_id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -3611,7 +3471,7 @@
                         "a": true,
                         "k": "param",
                         "n": "version_expression",
-                        "or": "version_expression",
+                        "or": "versionExpression",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -3782,7 +3642,7 @@
                         "a": true,
                         "k": "param",
                         "n": "id",
-                        "or": "property_name",
+                        "or": "propertyName",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -3882,7 +3742,7 @@
                         "a": true,
                         "k": "param",
                         "n": "artifact_id",
-                        "or": "artifact_id",
+                        "or": "artifactId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -3890,7 +3750,7 @@
                         "a": true,
                         "k": "param",
                         "n": "group_id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -3973,7 +3833,7 @@
                         "ex": "AVRO",
                         "k": "query",
                         "n": "artifact_type",
-                        "or": "artifact_type",
+                        "or": "artifactType",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -4118,7 +3978,7 @@
                         "a": true,
                         "k": "param",
                         "n": "artifact_id",
-                        "or": "artifact_id",
+                        "or": "artifactId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -4126,7 +3986,7 @@
                         "a": true,
                         "k": "param",
                         "n": "group_id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -4134,7 +3994,7 @@
                         "a": true,
                         "k": "param",
                         "n": "version_id",
-                        "or": "version_expression",
+                        "or": "versionExpression",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -4202,7 +4062,7 @@
                         "a": true,
                         "k": "param",
                         "n": "artifact_id",
-                        "or": "artifact_id",
+                        "or": "artifactId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -4210,7 +4070,7 @@
                         "a": true,
                         "k": "param",
                         "n": "group_id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -4270,7 +4130,7 @@
                         "a": true,
                         "k": "param",
                         "n": "artifact_id",
-                        "or": "artifact_id",
+                        "or": "artifactId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -4278,7 +4138,7 @@
                         "a": true,
                         "k": "param",
                         "n": "group_id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -4338,7 +4198,7 @@
                         "a": true,
                         "k": "param",
                         "n": "artifact_id",
-                        "or": "artifact_id",
+                        "or": "artifactId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -4346,7 +4206,7 @@
                         "a": true,
                         "k": "param",
                         "n": "group_id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -4412,7 +4272,7 @@
                         "a": true,
                         "k": "query",
                         "n": "compatibility_group",
-                        "or": "compatibility_group",
+                        "or": "compatibilityGroup",
                         "r": false,
                         "t": "`$STRING`"
                       },
@@ -4454,7 +4314,7 @@
                         "a": true,
                         "k": "query",
                         "n": "owner_team",
-                        "or": "owner_team",
+                        "or": "ownerTeam",
                         "r": false,
                         "t": "`$STRING`"
                       },
@@ -4509,7 +4369,7 @@
                         "a": true,
                         "k": "param",
                         "n": "artifact_id",
-                        "or": "artifact_id",
+                        "or": "artifactId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -4517,7 +4377,7 @@
                         "a": true,
                         "k": "param",
                         "n": "group_id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -4605,7 +4465,7 @@
                         "a": true,
                         "k": "param",
                         "n": "artifact_id",
-                        "or": "artifact_id",
+                        "or": "artifactId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -4613,7 +4473,7 @@
                         "a": true,
                         "k": "param",
                         "n": "group_id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -4623,7 +4483,7 @@
                         "a": true,
                         "k": "query",
                         "n": "contract_id",
-                        "or": "contract_id",
+                        "or": "contractId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -4684,7 +4544,7 @@
                         "a": true,
                         "k": "param",
                         "n": "artifact_id",
-                        "or": "artifact_id",
+                        "or": "artifactId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -4692,7 +4552,7 @@
                         "a": true,
                         "k": "param",
                         "n": "group_id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -4702,7 +4562,7 @@
                         "a": true,
                         "k": "query",
                         "n": "contract_id",
-                        "or": "contract_id",
+                        "or": "contractId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -4763,7 +4623,7 @@
                         "a": true,
                         "k": "param",
                         "n": "artifact_id",
-                        "or": "artifact_id",
+                        "or": "artifactId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -4771,7 +4631,7 @@
                         "a": true,
                         "k": "param",
                         "n": "group_id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -4831,7 +4691,7 @@
                         "a": true,
                         "k": "param",
                         "n": "artifact_id",
-                        "or": "artifact_id",
+                        "or": "artifactId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -4839,7 +4699,7 @@
                         "a": true,
                         "k": "param",
                         "n": "group_id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -4899,7 +4759,7 @@
                         "a": true,
                         "k": "param",
                         "n": "group_id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -4907,7 +4767,7 @@
                         "a": true,
                         "k": "param",
                         "n": "id",
-                        "or": "contract_id",
+                        "or": "contractId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -4966,7 +4826,7 @@
                         "a": true,
                         "k": "param",
                         "n": "artifact_id",
-                        "or": "artifact_id",
+                        "or": "artifactId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -4974,7 +4834,7 @@
                         "a": true,
                         "k": "param",
                         "n": "group_id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -4982,7 +4842,7 @@
                         "a": true,
                         "k": "param",
                         "n": "version_id",
-                        "or": "version_expression",
+                        "or": "versionExpression",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -5050,7 +4910,7 @@
                         "a": true,
                         "k": "param",
                         "n": "artifact_id",
-                        "or": "artifact_id",
+                        "or": "artifactId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -5058,7 +4918,7 @@
                         "a": true,
                         "k": "param",
                         "n": "group_id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -5118,7 +4978,7 @@
                         "a": true,
                         "k": "param",
                         "n": "group_id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -5126,7 +4986,7 @@
                         "a": true,
                         "k": "param",
                         "n": "id",
-                        "or": "contract_id",
+                        "or": "contractId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -5185,7 +5045,7 @@
                         "a": true,
                         "k": "param",
                         "n": "artifact_id",
-                        "or": "artifact_id",
+                        "or": "artifactId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -5193,7 +5053,7 @@
                         "a": true,
                         "k": "param",
                         "n": "group_id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -5253,7 +5113,7 @@
                         "a": true,
                         "k": "param",
                         "n": "artifact_id",
-                        "or": "artifact_id",
+                        "or": "artifactId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -5261,7 +5121,7 @@
                         "a": true,
                         "k": "param",
                         "n": "group_id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -5475,7 +5335,7 @@
                         "a": true,
                         "k": "param",
                         "n": "artifact_id",
-                        "or": "artifact_id",
+                        "or": "artifactId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -5483,7 +5343,7 @@
                         "a": true,
                         "k": "param",
                         "n": "group_id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -5491,7 +5351,7 @@
                         "a": true,
                         "k": "param",
                         "n": "version_id",
-                        "or": "version_expression",
+                        "or": "versionExpression",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -5558,7 +5418,7 @@
                         "a": true,
                         "k": "param",
                         "n": "artifact_id",
-                        "or": "artifact_id",
+                        "or": "artifactId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -5566,7 +5426,7 @@
                         "a": true,
                         "k": "param",
                         "n": "group_id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -5660,7 +5520,7 @@
                         "a": true,
                         "k": "param",
                         "n": "artifact_id",
-                        "or": "artifact_id",
+                        "or": "artifactId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -5668,7 +5528,7 @@
                         "a": true,
                         "k": "param",
                         "n": "group_id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -5676,7 +5536,7 @@
                         "a": true,
                         "k": "param",
                         "n": "version_id",
-                        "or": "version_expression",
+                        "or": "versionExpression",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -5743,7 +5603,7 @@
                         "a": true,
                         "k": "param",
                         "n": "artifact_id",
-                        "or": "artifact_id",
+                        "or": "artifactId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -5751,7 +5611,7 @@
                         "a": true,
                         "k": "param",
                         "n": "group_id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -5926,7 +5786,7 @@
                         "ex": "\"my-group\"",
                         "k": "param",
                         "n": "group_id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -5944,7 +5804,7 @@
                         "a": true,
                         "k": "query",
                         "n": "dry_run",
-                        "or": "dry_run",
+                        "or": "dryRun",
                         "r": false,
                         "t": "`$BOOLEAN`"
                       },
@@ -5952,7 +5812,7 @@
                         "a": true,
                         "k": "query",
                         "n": "if_exist",
-                        "or": "if_exist",
+                        "or": "ifExists",
                         "r": false,
                         "t": "`$STRING`"
                       }
@@ -6050,7 +5910,7 @@
                         "a": true,
                         "k": "param",
                         "n": "artifact_id",
-                        "or": "artifact_id",
+                        "or": "artifactId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -6058,7 +5918,7 @@
                         "a": true,
                         "k": "param",
                         "n": "group_id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -6172,7 +6032,7 @@
                         "a": true,
                         "k": "query",
                         "n": "for_browser",
-                        "or": "for_browser",
+                        "or": "forBrowser",
                         "r": false,
                         "t": "`$BOOLEAN`"
                       },
@@ -6180,7 +6040,7 @@
                         "a": true,
                         "k": "query",
                         "n": "group_id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": false,
                         "t": "`$STRING`"
                       }
@@ -6221,32 +6081,7 @@
           "alias": {
             "field": {}
           },
-          "fields": {
-            "ref": {
-              "a": true,
-              "h": "Ref",
-              "n": "ref",
-              "r": true,
-              "sh": "Git ref to validate (branch name, tag, or PR ref like `refs/pull/42/head`).",
-              "t": "`$STRING`"
-            },
-            "repoId": {
-              "a": true,
-              "h": "Repo Id",
-              "n": "repoId",
-              "r": true,
-              "sh": "Repository ID to validate against.",
-              "t": "`$STRING`"
-            },
-            "type": {
-              "a": true,
-              "h": "Type",
-              "n": "type",
-              "r": false,
-              "sh": "Validation type.",
-              "t": "`$STRING`"
-            }
-          },
+          "fields": {},
           "name": "git_op",
           "op": {
             "create": {
@@ -6281,35 +6116,6 @@
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
-                },
-                {
-                  "a": true,
-                  "co": {
-                    "id": "POST /admin/gitops/validate",
-                    "source": "openapi3",
-                    "version": 2
-                  },
-                  "g": {},
-                  "k": "http",
-                  "m": "POST",
-                  "o": "/admin/gitops/validate",
-                  "q": {},
-                  "r": {},
-                  "s": [
-                    {
-                      "lit": "admin"
-                    },
-                    {
-                      "lit": "gitops"
-                    },
-                    {
-                      "lit": "validate"
-                    }
-                  ],
-                  "t": {
-                    "req": "`reqdata`",
-                    "res": "`body`"
-                  }
                 }
               ]
             },
@@ -6330,7 +6136,7 @@
                         "a": true,
                         "k": "param",
                         "n": "task_id",
-                        "or": "task_id",
+                        "or": "taskId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -6502,6 +6308,12 @@
               "a": true,
               "h": "Ref",
               "n": "ref",
+              "op": {
+                "create": {
+                  "req": true,
+                  "type": "`$STRING`"
+                }
+              },
               "r": false,
               "sh": "Git ref being validated.",
               "t": "`$STRING`"
@@ -6510,6 +6322,12 @@
               "a": true,
               "h": "Repo Id",
               "n": "repoId",
+              "op": {
+                "create": {
+                  "req": true,
+                  "type": "`$STRING`"
+                }
+              },
               "r": false,
               "sh": "Repository ID being validated.",
               "t": "`$STRING`"
@@ -6558,6 +6376,41 @@
           },
           "name": "git_ops_validate_task",
           "op": {
+            "create": {
+              "input": "data",
+              "name": "create",
+              "points": [
+                {
+                  "a": true,
+                  "co": {
+                    "id": "POST /admin/gitops/validate",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {},
+                  "k": "http",
+                  "m": "POST",
+                  "o": "/admin/gitops/validate",
+                  "q": {},
+                  "r": {},
+                  "s": [
+                    {
+                      "lit": "admin"
+                    },
+                    {
+                      "lit": "gitops"
+                    },
+                    {
+                      "lit": "validate"
+                    }
+                  ],
+                  "t": {
+                    "req": "`reqdata`",
+                    "res": "`body`"
+                  }
+                }
+              ]
+            },
             "list": {
               "input": "data",
               "name": "list",
@@ -6610,7 +6463,7 @@
                         "a": true,
                         "k": "param",
                         "n": "task_id",
-                        "or": "task_id",
+                        "or": "taskId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -6721,6 +6574,38 @@
                 }
               ]
             },
+            "list": {
+              "input": "data",
+              "name": "list",
+              "points": [
+                {
+                  "a": true,
+                  "co": {
+                    "id": "GET /admin/rules",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {},
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/admin/rules",
+                  "q": {},
+                  "r": {},
+                  "s": [
+                    {
+                      "lit": "admin"
+                    },
+                    {
+                      "lit": "rules"
+                    }
+                  ],
+                  "t": {
+                    "req": "`reqdata`",
+                    "res": "`body`"
+                  }
+                }
+              ]
+            },
             "remove": {
               "input": "data",
               "name": "remove",
@@ -6739,7 +6624,7 @@
                         "ex": "VALIDITY",
                         "k": "param",
                         "n": "id",
-                        "or": "rule_type",
+                        "or": "ruleType",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -6813,25 +6698,12 @@
             "field": {}
           },
           "fields": {
-            "artifactsType": {
-              "a": true,
-              "h": "Artifacts Type",
-              "n": "artifactsType",
-              "r": false,
-              "t": "`$STRING`"
-            },
             "createdOn": {
               "a": true,
               "fo": "date-time",
               "h": "Created On",
               "n": "createdOn",
-              "op": {
-                "list": {
-                  "req": true,
-                  "type": "`$STRING`"
-                }
-              },
-              "r": false,
+              "r": true,
               "t": "`$STRING`"
             },
             "description": {
@@ -6845,17 +6717,7 @@
               "a": true,
               "h": "Group Id",
               "n": "groupId",
-              "op": {
-                "create": {
-                  "req": true,
-                  "type": "`$STRING`"
-                },
-                "list": {
-                  "req": true,
-                  "type": "`$STRING`"
-                }
-              },
-              "r": false,
+              "r": true,
               "t": "`$STRING`"
             },
             "id": {
@@ -6876,13 +6738,7 @@
               "a": true,
               "h": "Modified By",
               "n": "modifiedBy",
-              "op": {
-                "list": {
-                  "req": true,
-                  "type": "`$STRING`"
-                }
-              },
-              "r": false,
+              "r": true,
               "t": "`$STRING`"
             },
             "modifiedOn": {
@@ -6890,13 +6746,7 @@
               "fo": "date-time",
               "h": "Modified On",
               "n": "modifiedOn",
-              "op": {
-                "list": {
-                  "req": true,
-                  "type": "`$STRING`"
-                }
-              },
-              "r": false,
+              "r": true,
               "t": "`$STRING`"
             },
             "owner": {
@@ -6904,20 +6754,13 @@
               "h": "Owner",
               "n": "owner",
               "op": {
-                "list": {
-                  "req": true,
+                "update": {
+                  "req": false,
                   "type": "`$STRING`"
                 }
               },
-              "r": false,
+              "r": true,
               "t": "`$STRING`"
-            },
-            "properties": {
-              "a": true,
-              "h": "Properties",
-              "n": "properties",
-              "r": false,
-              "t": "`$OBJECT`"
             }
           },
           "id": {
@@ -6950,7 +6793,7 @@
                   ],
                   "t": {
                     "req": "`reqdata`",
-                    "res": "`body.labels`"
+                    "res": "`body`"
                   }
                 }
               ]
@@ -7044,7 +6887,7 @@
                         "ex": "\"my-group\"",
                         "k": "param",
                         "n": "id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -7073,7 +6916,7 @@
                   ],
                   "t": {
                     "req": "`reqdata`",
-                    "res": "`body.labels`"
+                    "res": "`body`"
                   }
                 }
               ]
@@ -7096,7 +6939,7 @@
                         "ex": "\"my-group\"",
                         "k": "param",
                         "n": "id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -7148,7 +6991,7 @@
                         "ex": "\"my-group\"",
                         "k": "param",
                         "n": "id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -7239,7 +7082,7 @@
                         "ex": "\"my-group\"",
                         "k": "param",
                         "n": "id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -7294,7 +7137,7 @@
                         "ex": "\"my-group\"",
                         "k": "param",
                         "n": "group_id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -7302,7 +7145,7 @@
                         "a": true,
                         "k": "param",
                         "n": "id",
-                        "or": "rule_type",
+                        "or": "ruleType",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -7356,7 +7199,7 @@
                         "ex": "\"my-group\"",
                         "k": "param",
                         "n": "id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -7455,153 +7298,6 @@
             "ancestors": []
           }
         },
-        "mcp_tool": {
-          "active": true,
-          "alias": {
-            "field": {}
-          },
-          "fields": {
-            "artifactId": {
-              "a": true,
-              "h": "Artifact Id",
-              "n": "artifactId",
-              "r": false,
-              "t": "`$STRING`"
-            },
-            "createdOn": {
-              "a": true,
-              "fo": "int64",
-              "h": "Created On",
-              "n": "createdOn",
-              "r": false,
-              "t": "`$INTEGER`"
-            },
-            "description": {
-              "a": true,
-              "h": "Description",
-              "n": "description",
-              "r": false,
-              "t": "`$STRING`"
-            },
-            "groupId": {
-              "a": true,
-              "h": "Group Id",
-              "n": "groupId",
-              "r": false,
-              "t": "`$STRING`"
-            },
-            "name": {
-              "a": true,
-              "h": "Name",
-              "n": "name",
-              "r": false,
-              "t": "`$STRING`"
-            },
-            "owner": {
-              "a": true,
-              "h": "Owner",
-              "n": "owner",
-              "r": false,
-              "t": "`$STRING`"
-            },
-            "parameters": {
-              "a": true,
-              "h": "Parameters",
-              "n": "parameters",
-              "r": false,
-              "t": "`$ARRAY`"
-            },
-            "title": {
-              "a": true,
-              "h": "Title",
-              "n": "title",
-              "r": false,
-              "t": "`$STRING`"
-            }
-          },
-          "name": "mcp_tool",
-          "op": {
-            "list": {
-              "input": "data",
-              "name": "list",
-              "points": [
-                {
-                  "a": true,
-                  "co": {
-                    "id": "GET /well-known/mcp-tools",
-                    "source": "openapi3",
-                    "version": 2
-                  },
-                  "g": {
-                    "query": [
-                      {
-                        "a": true,
-                        "ex": 20,
-                        "k": "query",
-                        "n": "limit",
-                        "or": "limit",
-                        "r": false,
-                        "t": "`$INTEGER`"
-                      },
-                      {
-                        "a": true,
-                        "k": "query",
-                        "n": "name",
-                        "or": "name",
-                        "r": false,
-                        "t": "`$STRING`"
-                      },
-                      {
-                        "a": true,
-                        "ex": 0,
-                        "k": "query",
-                        "n": "offset",
-                        "or": "offset",
-                        "r": false,
-                        "t": "`$INTEGER`"
-                      },
-                      {
-                        "a": true,
-                        "k": "query",
-                        "n": "parameter",
-                        "or": "parameter",
-                        "r": false,
-                        "t": "`$ARRAY`"
-                      }
-                    ]
-                  },
-                  "k": "http",
-                  "m": "GET",
-                  "o": "/well-known/mcp-tools",
-                  "q": {
-                    "exist": [
-                      "limit",
-                      "name",
-                      "offset",
-                      "parameter"
-                    ]
-                  },
-                  "r": {},
-                  "s": [
-                    {
-                      "lit": "well-known"
-                    },
-                    {
-                      "lit": "mcp-tools"
-                    }
-                  ],
-                  "t": {
-                    "req": "`reqdata`",
-                    "res": "`body.tools`"
-                  }
-                }
-              ]
-            }
-          },
-          "relations": {
-            "ancestors": []
-          }
-        },
         "metadata": {
           "active": true,
           "alias": {
@@ -7612,33 +7308,22 @@
               "a": true,
               "h": "Artifact Id",
               "n": "artifactId",
-              "op": {
-                "load": {
-                  "req": true,
-                  "type": "`$STRING`"
-                }
-              },
-              "r": false,
+              "r": true,
               "t": "`$STRING`"
             },
             "artifactType": {
               "a": true,
               "h": "Artifact Type",
               "n": "artifactType",
-              "op": {
-                "load": {
-                  "req": true,
-                  "type": "`$STRING`"
-                }
-              },
-              "r": false,
+              "r": true,
               "t": "`$STRING`"
             },
             "contentId": {
               "a": true,
+              "fo": "int64",
               "h": "Content Id",
               "n": "contentId",
-              "r": false,
+              "r": true,
               "t": "`$INTEGER`"
             },
             "contractMetadata": {
@@ -7654,13 +7339,7 @@
               "fo": "date-time",
               "h": "Created On",
               "n": "createdOn",
-              "op": {
-                "load": {
-                  "req": true,
-                  "type": "`$STRING`"
-                }
-              },
-              "r": false,
+              "r": true,
               "t": "`$STRING`"
             },
             "description": {
@@ -7672,9 +7351,10 @@
             },
             "globalId": {
               "a": true,
+              "fo": "int64",
               "h": "Global Id",
               "n": "globalId",
-              "r": false,
+              "r": true,
               "t": "`$INTEGER`"
             },
             "groupId": {
@@ -7701,7 +7381,13 @@
               "a": true,
               "h": "Modified By",
               "n": "modifiedBy",
-              "r": true,
+              "op": {
+                "load": {
+                  "req": true,
+                  "type": "`$STRING`"
+                }
+              },
+              "r": false,
               "t": "`$STRING`"
             },
             "modifiedOn": {
@@ -7709,7 +7395,13 @@
               "fo": "date-time",
               "h": "Modified On",
               "n": "modifiedOn",
-              "r": true,
+              "op": {
+                "load": {
+                  "req": true,
+                  "type": "`$STRING`"
+                }
+              },
+              "r": false,
               "t": "`$STRING`"
             },
             "name": {
@@ -7724,11 +7416,18 @@
               "h": "Owner",
               "n": "owner",
               "op": {
-                "load": {
-                  "req": true,
+                "update": {
+                  "req": false,
                   "type": "`$STRING`"
                 }
               },
+              "r": true,
+              "t": "`$STRING`"
+            },
+            "state": {
+              "a": true,
+              "h": "State",
+              "n": "state",
               "r": false,
               "t": "`$STRING`"
             },
@@ -7736,8 +7435,9 @@
               "a": true,
               "h": "Version",
               "n": "version",
-              "r": false,
-              "t": "`$INTEGER`"
+              "r": true,
+              "sh": "A single version of an artifact.",
+              "t": "`$STRING`"
             }
           },
           "name": "metadata",
@@ -7760,7 +7460,7 @@
                         "ex": "\"example-artifact\"",
                         "k": "param",
                         "n": "artifact_id",
-                        "or": "artifact_id",
+                        "or": "artifactId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -7769,7 +7469,7 @@
                         "ex": "\"my-group\"",
                         "k": "param",
                         "n": "group_id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -7777,7 +7477,7 @@
                         "a": true,
                         "k": "param",
                         "n": "version_expression",
-                        "or": "version_expression",
+                        "or": "versionExpression",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -7849,7 +7549,7 @@
                         "ex": "\"example-artifact\"",
                         "k": "param",
                         "n": "artifact_id",
-                        "or": "artifact_id",
+                        "or": "artifactId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -7858,7 +7558,7 @@
                         "ex": "\"my-group\"",
                         "k": "param",
                         "n": "group_id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -7866,7 +7566,7 @@
                         "a": true,
                         "k": "param",
                         "n": "version_expression",
-                        "or": "version_expression",
+                        "or": "versionExpression",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -7911,7 +7611,7 @@
                   ],
                   "t": {
                     "req": "`reqdata`",
-                    "res": "`body.labels`"
+                    "res": "`body`"
                   }
                 },
                 {
@@ -7928,7 +7628,7 @@
                         "ex": "\"example-artifact\"",
                         "k": "param",
                         "n": "artifact_id",
-                        "or": "artifact_id",
+                        "or": "artifactId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -7937,7 +7637,7 @@
                         "ex": "\"my-group\"",
                         "k": "param",
                         "n": "group_id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -7997,7 +7697,7 @@
                         "ex": "\"example-artifact\"",
                         "k": "param",
                         "n": "artifact_id",
-                        "or": "artifact_id",
+                        "or": "artifactId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -8006,7 +7706,7 @@
                         "ex": "\"my-group\"",
                         "k": "param",
                         "n": "group_id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -8014,7 +7714,7 @@
                         "a": true,
                         "k": "param",
                         "n": "version_expression",
-                        "or": "version_expression",
+                        "or": "versionExpression",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -8024,7 +7724,7 @@
                         "a": true,
                         "k": "query",
                         "n": "dry_run",
-                        "or": "dry_run",
+                        "or": "dryRun",
                         "r": false,
                         "t": "`$BOOLEAN`"
                       }
@@ -8091,7 +7791,7 @@
                         "ex": "\"example-artifact\"",
                         "k": "param",
                         "n": "artifact_id",
-                        "or": "artifact_id",
+                        "or": "artifactId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -8100,7 +7800,7 @@
                         "ex": "\"my-group\"",
                         "k": "param",
                         "n": "group_id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -8108,7 +7808,7 @@
                         "a": true,
                         "k": "param",
                         "n": "version_expression",
-                        "or": "version_expression",
+                        "or": "versionExpression",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -8170,7 +7870,7 @@
                         "ex": "\"example-artifact\"",
                         "k": "param",
                         "n": "artifact_id",
-                        "or": "artifact_id",
+                        "or": "artifactId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -8179,7 +7879,7 @@
                         "ex": "\"my-group\"",
                         "k": "param",
                         "n": "group_id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -8187,7 +7887,7 @@
                         "a": true,
                         "k": "param",
                         "n": "version_expression",
-                        "or": "version_expression",
+                        "or": "versionExpression",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -8253,7 +7953,7 @@
                         "ex": "\"example-artifact\"",
                         "k": "param",
                         "n": "artifact_id",
-                        "or": "artifact_id",
+                        "or": "artifactId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -8262,7 +7962,7 @@
                         "ex": "\"my-group\"",
                         "k": "param",
                         "n": "group_id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -8325,40 +8025,29 @@
             "field": {}
           },
           "fields": {
-            "labelsApplied": {
+            "contractId": {
               "a": true,
-              "fo": "int32",
-              "h": "Labels Applied",
-              "n": "labelsApplied",
+              "h": "Contract Id",
+              "n": "contractId",
               "r": false,
-              "sh": "Number of contract.* labels set on the schema artifact.",
-              "t": "`$INTEGER`"
+              "sh": "The contract artifact ID.",
+              "t": "`$STRING`"
             },
-            "rulesApplied": {
+            "projection": {
               "a": true,
-              "fo": "int32",
-              "h": "Rules Applied",
-              "n": "rulesApplied",
+              "h": "Projection",
+              "n": "projection",
               "r": false,
-              "sh": "Number of CEL quality rules projected onto the schema artifact.",
-              "t": "`$INTEGER`"
+              "sh": "Summary of the projection performed when an ODCS contract is applied.",
+              "t": "`$OBJECT`"
             },
-            "tagsApplied": {
+            "version": {
               "a": true,
-              "fo": "int32",
-              "h": "Tags Applied",
-              "n": "tagsApplied",
+              "h": "Version",
+              "n": "version",
               "r": false,
-              "sh": "Number of field-tag.* labels set on the schema artifact version.",
-              "t": "`$INTEGER`"
-            },
-            "warnings": {
-              "a": true,
-              "h": "Warnings",
-              "n": "warnings",
-              "r": false,
-              "sh": "Any warnings encountered during projection.",
-              "t": "`$ARRAY`"
+              "sh": "The ODCS contract version.",
+              "t": "`$STRING`"
             }
           },
           "name": "odcs_contract_result",
@@ -8380,7 +8069,7 @@
                         "a": true,
                         "k": "param",
                         "n": "group_id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -8412,7 +8101,7 @@
                   ],
                   "t": {
                     "req": "`reqdata`",
-                    "res": "`body.projection`"
+                    "res": "`body`"
                   }
                 }
               ]
@@ -8434,7 +8123,7 @@
                         "a": true,
                         "k": "param",
                         "n": "contract_id",
-                        "or": "contract_id",
+                        "or": "contractId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -8442,7 +8131,7 @@
                         "a": true,
                         "k": "param",
                         "n": "group_id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -8479,7 +8168,7 @@
                   ],
                   "t": {
                     "req": "`reqdata`",
-                    "res": "`body.projection`"
+                    "res": "`body`"
                   }
                 }
               ]
@@ -8539,7 +8228,7 @@
                         "a": true,
                         "k": "param",
                         "n": "group_id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -8664,7 +8353,7 @@
                         "ex": "\"example-artifact\"",
                         "k": "param",
                         "n": "artifact_id",
-                        "or": "artifact_id",
+                        "or": "artifactId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -8673,7 +8362,7 @@
                         "ex": "\"my-group\"",
                         "k": "param",
                         "n": "group_id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -8681,7 +8370,7 @@
                         "a": true,
                         "k": "param",
                         "n": "version_id",
-                        "or": "version_expression",
+                        "or": "versionExpression",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -8812,6 +8501,40 @@
           },
           "name": "role_mapping",
           "op": {
+            "create": {
+              "input": "data",
+              "name": "create",
+              "points": [
+                {
+                  "a": true,
+                  "co": {
+                    "id": "POST /admin/roleMappings",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {},
+                  "k": "http",
+                  "m": "POST",
+                  "o": "/admin/roleMappings",
+                  "q": {
+                    "$action": "role_mapping"
+                  },
+                  "r": {},
+                  "s": [
+                    {
+                      "lit": "admin"
+                    },
+                    {
+                      "lit": "roleMappings"
+                    }
+                  ],
+                  "t": {
+                    "req": "`reqdata`",
+                    "res": "`body`"
+                  }
+                }
+              ]
+            },
             "list": {
               "input": "data",
               "name": "list",
@@ -8847,6 +8570,7 @@
                   "m": "GET",
                   "o": "/admin/roleMappings",
                   "q": {
+                    "$action": "role_mapping",
                     "exist": [
                       "limit",
                       "offset"
@@ -8885,7 +8609,7 @@
                         "a": true,
                         "k": "param",
                         "n": "id",
-                        "or": "principal_id",
+                        "or": "principalId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -8979,7 +8703,7 @@
                         "ex": "\"example-artifact\"",
                         "k": "param",
                         "n": "artifact_id",
-                        "or": "artifact_id",
+                        "or": "artifactId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -8988,7 +8712,7 @@
                         "ex": "\"my-group\"",
                         "k": "param",
                         "n": "group_id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -9045,7 +8769,7 @@
                         "ex": "\"my-group\"",
                         "k": "param",
                         "n": "group_id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -9079,32 +8803,6 @@
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
-                },
-                {
-                  "a": true,
-                  "co": {
-                    "id": "GET /admin/rules",
-                    "source": "openapi3",
-                    "version": 2
-                  },
-                  "g": {},
-                  "k": "http",
-                  "m": "GET",
-                  "o": "/admin/rules",
-                  "q": {},
-                  "r": {},
-                  "s": [
-                    {
-                      "lit": "admin"
-                    },
-                    {
-                      "lit": "rules"
-                    }
-                  ],
-                  "t": {
-                    "req": "`reqdata`",
-                    "res": "`body`"
-                  }
                 }
               ]
             },
@@ -9126,7 +8824,7 @@
                         "ex": "\"example-artifact\"",
                         "k": "param",
                         "n": "artifact_id",
-                        "or": "artifact_id",
+                        "or": "artifactId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -9135,7 +8833,7 @@
                         "ex": "\"my-group\"",
                         "k": "param",
                         "n": "group_id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -9143,7 +8841,7 @@
                         "a": true,
                         "k": "param",
                         "n": "id",
-                        "or": "rule_type",
+                        "or": "ruleType",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -9205,7 +8903,7 @@
                         "ex": "\"my-group\"",
                         "k": "param",
                         "n": "group_id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -9213,7 +8911,7 @@
                         "a": true,
                         "k": "param",
                         "n": "id",
-                        "or": "rule_type",
+                        "or": "ruleType",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -9267,7 +8965,7 @@
                         "ex": "VALIDITY",
                         "k": "param",
                         "n": "id",
-                        "or": "rule_type",
+                        "or": "ruleType",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -9322,7 +9020,7 @@
                         "ex": "\"example-artifact\"",
                         "k": "param",
                         "n": "artifact_id",
-                        "or": "artifact_id",
+                        "or": "artifactId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -9331,7 +9029,7 @@
                         "ex": "\"my-group\"",
                         "k": "param",
                         "n": "group_id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -9339,7 +9037,7 @@
                         "a": true,
                         "k": "param",
                         "n": "id",
-                        "or": "rule_type",
+                        "or": "ruleType",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -9401,7 +9099,7 @@
                         "ex": "\"my-group\"",
                         "k": "param",
                         "n": "group_id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -9409,7 +9107,7 @@
                         "a": true,
                         "k": "param",
                         "n": "id",
-                        "or": "rule_type",
+                        "or": "ruleType",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -9463,7 +9161,7 @@
                         "ex": "VALIDITY",
                         "k": "param",
                         "n": "id",
-                        "or": "rule_type",
+                        "or": "ruleType",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -9605,7 +9303,7 @@
                         "ex": "\"example-artifact\"",
                         "k": "param",
                         "n": "artifact_id",
-                        "or": "artifact_id",
+                        "or": "artifactId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -9614,7 +9312,7 @@
                         "ex": "\"my-group\"",
                         "k": "param",
                         "n": "group_id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -9774,7 +9472,7 @@
                         "a": true,
                         "k": "query",
                         "n": "group_id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": false,
                         "t": "`$STRING`"
                       },
@@ -9782,7 +9480,7 @@
                         "a": true,
                         "k": "query",
                         "n": "label",
-                        "or": "label",
+                        "or": "labels",
                         "r": false,
                         "t": "`$ARRAY`"
                       },
@@ -10287,7 +9985,13 @@
               "a": true,
               "h": "State",
               "n": "state",
-              "r": true,
+              "op": {
+                "list": {
+                  "req": true,
+                  "type": "`$STRING`"
+                }
+              },
+              "r": false,
               "t": "`$STRING`"
             },
             "value": {
@@ -10302,12 +10006,13 @@
               "h": "Version",
               "n": "version",
               "op": {
-                "list": {
-                  "req": true,
+                "create": {
+                  "req": false,
                   "type": "`$STRING`"
                 }
               },
-              "r": false,
+              "r": true,
+              "sh": "A single version of an artifact.",
               "t": "`$STRING`"
             },
             "versions": {
@@ -10343,7 +10048,7 @@
                         "ex": "\"example-artifact\"",
                         "k": "query",
                         "n": "artifact_id",
-                        "or": "artifact_id",
+                        "or": "artifactId",
                         "r": false,
                         "t": "`$STRING`"
                       },
@@ -10352,7 +10057,7 @@
                         "ex": "AVRO",
                         "k": "query",
                         "n": "artifact_type",
-                        "or": "artifact_type",
+                        "or": "artifactType",
                         "r": false,
                         "t": "`$STRING`"
                       },
@@ -10369,7 +10074,7 @@
                         "ex": "\"my-group\"",
                         "k": "query",
                         "n": "group_id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": false,
                         "t": "`$STRING`"
                       },
@@ -10412,7 +10117,7 @@
                         "ex": false,
                         "k": "query",
                         "n": "skip_count",
-                        "or": "skip_count",
+                        "or": "skipCount",
                         "r": false,
                         "t": "`$BOOLEAN`"
                       },
@@ -10471,7 +10176,7 @@
                         "ex": "\"example-artifact\"",
                         "k": "param",
                         "n": "artifact_id",
-                        "or": "artifact_id",
+                        "or": "artifactId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -10480,7 +10185,7 @@
                         "ex": "\"my-group\"",
                         "k": "param",
                         "n": "group_id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -10490,7 +10195,7 @@
                         "a": true,
                         "k": "query",
                         "n": "dry_run",
-                        "or": "dry_run",
+                        "or": "dryRun",
                         "r": false,
                         "t": "`$BOOLEAN`"
                       }
@@ -10530,10 +10235,8 @@
                     }
                   ],
                   "t": {
-                    "req": {
-                      "version": "`reqdata`"
-                    },
-                    "res": "`body.labels`"
+                    "req": "`reqdata`",
+                    "res": "`body`"
                   }
                 }
               ]
@@ -10556,7 +10259,7 @@
                         "ex": "\"example-artifact\"",
                         "k": "query",
                         "n": "artifact_id",
-                        "or": "artifact_id",
+                        "or": "artifactId",
                         "r": false,
                         "t": "`$STRING`"
                       },
@@ -10565,7 +10268,7 @@
                         "ex": "AVRO",
                         "k": "query",
                         "n": "artifact_type",
-                        "or": "artifact_type",
+                        "or": "artifactType",
                         "r": false,
                         "t": "`$STRING`"
                       },
@@ -10581,7 +10284,7 @@
                         "a": true,
                         "k": "query",
                         "n": "content_id",
-                        "or": "content_id",
+                        "or": "contentId",
                         "r": false,
                         "t": "`$INTEGER`"
                       },
@@ -10597,7 +10300,7 @@
                         "a": true,
                         "k": "query",
                         "n": "global_id",
-                        "or": "global_id",
+                        "or": "globalId",
                         "r": false,
                         "t": "`$INTEGER`"
                       },
@@ -10606,7 +10309,7 @@
                         "ex": "\"my-group\"",
                         "k": "query",
                         "n": "group_id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": false,
                         "t": "`$STRING`"
                       },
@@ -10614,7 +10317,7 @@
                         "a": true,
                         "k": "query",
                         "n": "label",
-                        "or": "label",
+                        "or": "labels",
                         "r": false,
                         "t": "`$ARRAY`"
                       },
@@ -10665,7 +10368,7 @@
                         "ex": false,
                         "k": "query",
                         "n": "skip_count",
-                        "or": "skip_count",
+                        "or": "skipCount",
                         "r": false,
                         "t": "`$BOOLEAN`"
                       },
@@ -10748,7 +10451,7 @@
                         "ex": "\"example-artifact\"",
                         "k": "param",
                         "n": "artifact_id",
-                        "or": "artifact_id",
+                        "or": "artifactId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -10757,7 +10460,7 @@
                         "ex": "\"my-group\"",
                         "k": "param",
                         "n": "group_id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -10800,7 +10503,7 @@
                         "ex": false,
                         "k": "query",
                         "n": "skip_count",
-                        "or": "skip_count",
+                        "or": "skipCount",
                         "r": false,
                         "t": "`$BOOLEAN`"
                       }
@@ -10862,7 +10565,7 @@
                         "ex": "\"example-artifact\"",
                         "k": "param",
                         "n": "artifact_id",
-                        "or": "artifact_id",
+                        "or": "artifactId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -10871,7 +10574,7 @@
                         "ex": "\"latest\"",
                         "k": "param",
                         "n": "branch_id",
-                        "or": "branch_id",
+                        "or": "branchId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -10880,7 +10583,7 @@
                         "ex": "\"my-group\"",
                         "k": "param",
                         "n": "group_id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -10971,7 +10674,7 @@
                         "ex": "\"example-artifact\"",
                         "k": "param",
                         "n": "artifact_id",
-                        "or": "artifact_id",
+                        "or": "artifactId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -10980,7 +10683,7 @@
                         "ex": "\"my-group\"",
                         "k": "param",
                         "n": "group_id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -10988,7 +10691,7 @@
                         "a": true,
                         "k": "param",
                         "n": "version_expression",
-                        "or": "version_expression",
+                        "or": "versionExpression",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -11006,7 +10709,7 @@
                         "a": true,
                         "k": "query",
                         "n": "reference",
-                        "or": "reference",
+                        "or": "references",
                         "r": false,
                         "t": "`$STRING`"
                       }
@@ -11074,7 +10777,7 @@
                         "ex": "\"example-artifact\"",
                         "k": "param",
                         "n": "artifact_id",
-                        "or": "artifact_id",
+                        "or": "artifactId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -11083,7 +10786,7 @@
                         "ex": "\"my-group\"",
                         "k": "param",
                         "n": "group_id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -11091,7 +10794,7 @@
                         "a": true,
                         "k": "param",
                         "n": "version_expression",
-                        "or": "version_expression",
+                        "or": "versionExpression",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -11163,7 +10866,7 @@
                         "ex": "\"example-artifact\"",
                         "k": "param",
                         "n": "artifact_id",
-                        "or": "artifact_id",
+                        "or": "artifactId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -11171,7 +10874,7 @@
                         "a": true,
                         "k": "param",
                         "n": "comment_id",
-                        "or": "comment_id",
+                        "or": "commentId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -11180,7 +10883,7 @@
                         "ex": "\"my-group\"",
                         "k": "param",
                         "n": "group_id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -11188,7 +10891,7 @@
                         "a": true,
                         "k": "param",
                         "n": "version_id",
-                        "or": "version_expression",
+                        "or": "versionExpression",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -11258,7 +10961,7 @@
                         "ex": "\"example-artifact\"",
                         "k": "param",
                         "n": "artifact_id",
-                        "or": "artifact_id",
+                        "or": "artifactId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -11267,7 +10970,7 @@
                         "ex": "\"my-group\"",
                         "k": "param",
                         "n": "group_id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -11275,7 +10978,7 @@
                         "a": true,
                         "k": "param",
                         "n": "id",
-                        "or": "version_expression",
+                        "or": "versionExpression",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -11343,7 +11046,7 @@
                         "ex": "\"example-artifact\"",
                         "k": "param",
                         "n": "artifact_id",
-                        "or": "artifact_id",
+                        "or": "artifactId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -11351,7 +11054,7 @@
                         "a": true,
                         "k": "param",
                         "n": "comment_id",
-                        "or": "comment_id",
+                        "or": "commentId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -11360,7 +11063,7 @@
                         "ex": "\"my-group\"",
                         "k": "param",
                         "n": "group_id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -11368,7 +11071,7 @@
                         "a": true,
                         "k": "param",
                         "n": "version_id",
-                        "or": "version_expression",
+                        "or": "versionExpression",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -11456,16 +11159,106 @@
             "field": {}
           },
           "fields": {
+            "artifactId": {
+              "a": true,
+              "h": "Artifact Id",
+              "n": "artifactId",
+              "r": false,
+              "t": "`$STRING`"
+            },
+            "capabilities": {
+              "a": true,
+              "h": "Capabilities",
+              "n": "capabilities",
+              "r": false,
+              "sh": "Capabilities of an A2A agent.",
+              "t": "`$OBJECT`"
+            },
+            "createdOn": {
+              "a": true,
+              "fo": "int64",
+              "h": "Created On",
+              "n": "createdOn",
+              "r": false,
+              "t": "`$INTEGER`"
+            },
+            "description": {
+              "a": true,
+              "h": "Description",
+              "n": "description",
+              "r": false,
+              "t": "`$STRING`"
+            },
+            "groupId": {
+              "a": true,
+              "h": "Group Id",
+              "n": "groupId",
+              "r": false,
+              "t": "`$STRING`"
+            },
             "id": {
               "a": true,
               "h": "Id",
               "n": "id",
               "r": false,
               "t": "`$STRING`"
+            },
+            "name": {
+              "a": true,
+              "h": "Name",
+              "n": "name",
+              "r": false,
+              "t": "`$STRING`"
+            },
+            "owner": {
+              "a": true,
+              "h": "Owner",
+              "n": "owner",
+              "r": false,
+              "t": "`$STRING`"
+            },
+            "parameters": {
+              "a": true,
+              "h": "Parameters",
+              "n": "parameters",
+              "r": false,
+              "t": "`$ARRAY`"
+            },
+            "skills": {
+              "a": true,
+              "h": "Skills",
+              "n": "skills",
+              "r": false,
+              "t": "`$ARRAY`"
+            },
+            "supportedInterfaces": {
+              "a": true,
+              "h": "Supported Interfaces",
+              "n": "supportedInterfaces",
+              "r": false,
+              "t": "`$ARRAY`"
+            },
+            "title": {
+              "a": true,
+              "h": "Title",
+              "n": "title",
+              "r": false,
+              "t": "`$STRING`"
+            },
+            "version": {
+              "a": true,
+              "h": "Version",
+              "n": "version",
+              "r": false,
+              "t": "`$STRING`"
             }
           },
           "id": {
             "field": "id",
+            "from": {
+              "artifact_id": "artifactId",
+              "group_id": "groupId"
+            },
             "name": "id",
             "parts": [
               "group_id",
@@ -11475,6 +11268,179 @@
           },
           "name": "well_known",
           "op": {
+            "list": {
+              "input": "data",
+              "name": "list",
+              "points": [
+                {
+                  "a": true,
+                  "co": {
+                    "id": "GET /well-known/agents",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
+                    "query": [
+                      {
+                        "a": true,
+                        "k": "query",
+                        "n": "capability",
+                        "or": "capability",
+                        "r": false,
+                        "t": "`$ARRAY`"
+                      },
+                      {
+                        "a": true,
+                        "k": "query",
+                        "n": "input_mode",
+                        "or": "inputMode",
+                        "r": false,
+                        "t": "`$ARRAY`"
+                      },
+                      {
+                        "a": true,
+                        "ex": 20,
+                        "k": "query",
+                        "n": "limit",
+                        "or": "limit",
+                        "r": false,
+                        "t": "`$INTEGER`"
+                      },
+                      {
+                        "a": true,
+                        "k": "query",
+                        "n": "name",
+                        "or": "name",
+                        "r": false,
+                        "t": "`$STRING`"
+                      },
+                      {
+                        "a": true,
+                        "ex": 0,
+                        "k": "query",
+                        "n": "offset",
+                        "or": "offset",
+                        "r": false,
+                        "t": "`$INTEGER`"
+                      },
+                      {
+                        "a": true,
+                        "k": "query",
+                        "n": "output_mode",
+                        "or": "outputMode",
+                        "r": false,
+                        "t": "`$ARRAY`"
+                      },
+                      {
+                        "a": true,
+                        "k": "query",
+                        "n": "skill",
+                        "or": "skill",
+                        "r": false,
+                        "t": "`$ARRAY`"
+                      }
+                    ]
+                  },
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/well-known/agents",
+                  "q": {
+                    "exist": [
+                      "capability",
+                      "input_mode",
+                      "limit",
+                      "name",
+                      "offset",
+                      "output_mode",
+                      "skill"
+                    ]
+                  },
+                  "r": {},
+                  "s": [
+                    {
+                      "lit": "well-known"
+                    },
+                    {
+                      "lit": "agents"
+                    }
+                  ],
+                  "t": {
+                    "req": "`reqdata`",
+                    "res": "`body.agents`"
+                  }
+                },
+                {
+                  "a": true,
+                  "co": {
+                    "id": "GET /well-known/mcp-tools",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
+                    "query": [
+                      {
+                        "a": true,
+                        "ex": 20,
+                        "k": "query",
+                        "n": "limit",
+                        "or": "limit",
+                        "r": false,
+                        "t": "`$INTEGER`"
+                      },
+                      {
+                        "a": true,
+                        "k": "query",
+                        "n": "name",
+                        "or": "name",
+                        "r": false,
+                        "t": "`$STRING`"
+                      },
+                      {
+                        "a": true,
+                        "ex": 0,
+                        "k": "query",
+                        "n": "offset",
+                        "or": "offset",
+                        "r": false,
+                        "t": "`$INTEGER`"
+                      },
+                      {
+                        "a": true,
+                        "k": "query",
+                        "n": "parameter",
+                        "or": "parameter",
+                        "r": false,
+                        "t": "`$ARRAY`"
+                      }
+                    ]
+                  },
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/well-known/mcp-tools",
+                  "q": {
+                    "exist": [
+                      "limit",
+                      "name",
+                      "offset",
+                      "parameter"
+                    ]
+                  },
+                  "r": {},
+                  "s": [
+                    {
+                      "lit": "well-known"
+                    },
+                    {
+                      "lit": "mcp-tools"
+                    }
+                  ],
+                  "t": {
+                    "req": "`reqdata`",
+                    "res": "`body.tools`"
+                  }
+                }
+              ]
+            },
             "load": {
               "input": "data",
               "name": "load",
@@ -11492,7 +11458,7 @@
                         "a": true,
                         "k": "param",
                         "n": "artifact_id",
-                        "or": "artifact_id",
+                        "or": "artifactId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -11500,7 +11466,7 @@
                         "a": true,
                         "k": "param",
                         "n": "group_id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -11564,7 +11530,7 @@
                         "a": true,
                         "k": "param",
                         "n": "artifact_id",
-                        "or": "artifact_id",
+                        "or": "artifactId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -11572,7 +11538,7 @@
                         "a": true,
                         "k": "param",
                         "n": "group_id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -11636,7 +11602,7 @@
                         "a": true,
                         "k": "param",
                         "n": "schema_type",
-                        "or": "schema_type",
+                        "or": "schemaType",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -11690,9 +11656,6 @@
             "ancestors": [
               [
                 "$.main.kit.entity.agent"
-              ],
-              [
-                "$.main.kit.entity.mcp_tool"
               ]
             ]
           }
@@ -11732,7 +11695,7 @@
                         "ex": "\"example-artifact\"",
                         "k": "param",
                         "n": "artifact_id",
-                        "or": "artifact_id",
+                        "or": "artifactId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -11741,7 +11704,7 @@
                         "ex": "\"my-group\"",
                         "k": "param",
                         "n": "group_id",
-                        "or": "group_id",
+                        "or": "groupId",
                         "r": true,
                         "t": "`$STRING`"
                       },
@@ -11749,7 +11712,7 @@
                         "a": true,
                         "k": "param",
                         "n": "version_expression",
-                        "or": "version_expression",
+                        "or": "versionExpression",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -13620,6 +13583,17 @@
             {
               "a": true,
               "d": {},
+              "i": {
+                "ref": "git_ops_validate_task_ref01"
+              },
+              "m": {},
+              "o": "create",
+              "s": [],
+              "v": []
+            },
+            {
+              "a": true,
+              "d": {},
               "i": {},
               "m": {},
               "o": "list",
@@ -13679,6 +13653,22 @@
             {
               "a": true,
               "d": {},
+              "i": {},
+              "m": {},
+              "o": "list",
+              "s": [],
+              "v": [
+                {
+                  "apply": "ItemExists",
+                  "def": {
+                    "ref": "global_rule_ref01"
+                  }
+                }
+              ]
+            },
+            {
+              "a": true,
+              "d": {},
               "i": {
                 "ref": "global_rule_ref01",
                 "suffix": "_rm0"
@@ -13687,6 +13677,24 @@
               "o": "remove",
               "s": [],
               "v": []
+            },
+            {
+              "a": true,
+              "d": {},
+              "i": {
+                "suffix": "_rt0"
+              },
+              "m": {},
+              "o": "list",
+              "s": [],
+              "v": [
+                {
+                  "apply": "ItemNotExists",
+                  "def": {
+                    "ref": "global_rule_ref01"
+                  }
+                }
+              ]
             }
           ]
         },
@@ -13732,7 +13740,7 @@
                 "ref": "group_ref01",
                 "srcdatavar": "group_ref01_data",
                 "suffix": "_up0",
-                "textfield": "artifactsType"
+                "textfield": "createdOn"
               },
               "m": {},
               "o": "update",
@@ -13860,32 +13868,6 @@
             }
           ]
         },
-        "BasicMcpToolFlow": {
-          "active": true,
-          "entity": "mcp_tool",
-          "key$": "BasicMcpToolFlow",
-          "kind": "basic",
-          "name": "BasicMcpToolFlow",
-          "param": {},
-          "step": [
-            {
-              "a": true,
-              "d": {},
-              "i": {},
-              "m": {},
-              "o": "list",
-              "s": [],
-              "v": [
-                {
-                  "apply": "ItemExists",
-                  "def": {
-                    "ref": "mcp_tool_ref01"
-                  }
-                }
-              ]
-            }
-          ]
-        },
         "BasicMetadataFlow": {
           "active": true,
           "entity": "metadata",
@@ -13986,7 +13968,8 @@
               "i": {
                 "ref": "odcs_contract_result_ref01",
                 "srcdatavar": "odcs_contract_result_ref01_data",
-                "suffix": "_up0"
+                "suffix": "_up0",
+                "textfield": "contractId"
               },
               "m": {},
               "o": "update",
@@ -14071,6 +14054,17 @@
             {
               "a": true,
               "d": {},
+              "i": {
+                "ref": "role_mapping_ref01"
+              },
+              "m": {},
+              "o": "create",
+              "s": [],
+              "v": []
+            },
+            {
+              "a": true,
+              "d": {},
               "i": {},
               "m": {},
               "o": "list",
@@ -14120,7 +14114,9 @@
               "a": true,
               "d": {},
               "i": {},
-              "m": {},
+              "m": {
+                "group_id": "group01"
+              },
               "o": "list",
               "s": [],
               "v": [
@@ -14493,6 +14489,22 @@
           "name": "BasicWellKnownFlow",
           "param": {},
           "step": [
+            {
+              "a": true,
+              "d": {},
+              "i": {},
+              "m": {},
+              "o": "list",
+              "s": [],
+              "v": [
+                {
+                  "apply": "ItemExists",
+                  "def": {
+                    "ref": "well_known_ref01"
+                  }
+                }
+              ]
+            },
             {
               "a": true,
               "d": {},

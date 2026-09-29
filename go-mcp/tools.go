@@ -15,7 +15,7 @@ import (
 // reqdata map passed through to the SDK. For load, `query` should be
 // `{"id": <value>}`. For list, omit `query` or pass an empty map.
 type Args struct {
-	Entity string         `json:"entity" jsonschema:"admin | agent | agent_card | ai_catalog | ard_explore | ard_search | artifact | artifact_reference | artifact_rule | artifact_type | branch | comment | configuration_property | consumer_version_heatmap | content | contract | contract_rule | contract_rule_set | create_artifact | deprecation_readiness | download_ref | git_op | git_ops_status | git_ops_validate_task | global_rule | group | group_rule | kafka_sql | mcp_tool | metadata | odcs_contract_result | odcs_contract_summary | reference_graph | role_mapping | rule | searched_branch | searched_group | system_info | usage_summary | user_info | user_interface_config | version | well_known | wrapped_version_state"`
+	Entity string         `json:"entity" jsonschema:"admin | agent | agent_card | ai_catalog | ard_explore | ard_search | artifact | artifact_reference | artifact_rule | artifact_type | branch | comment | configuration_property | consumer_version_heatmap | content | contract | contract_rule | contract_rule_set | create_artifact | deprecation_readiness | download_ref | git_op | git_ops_status | git_ops_validate_task | global_rule | group | group_rule | kafka_sql | metadata | odcs_contract_result | odcs_contract_summary | reference_graph | role_mapping | rule | searched_branch | searched_group | system_info | usage_summary | user_info | user_interface_config | version | well_known | wrapped_version_state"`
 	Query  map[string]any `json:"query,omitempty" jsonschema:"optional match map e.g. {\"id\":1} for load, omit for list"`
 }
 
@@ -132,8 +132,6 @@ func entityFor(client *sdk.ApicurioRegistrySDK, name string) (sdk.ApicurioRegist
 		return client.GroupRule(nil), nil
 	case "kafka_sql":
 		return client.KafkaSql(nil), nil
-	case "mcp_tool":
-		return client.McpTool(nil), nil
 	case "metadata":
 		return client.Metadata(nil), nil
 	case "odcs_contract_result":

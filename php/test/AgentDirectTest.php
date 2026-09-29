@@ -25,7 +25,7 @@ class AgentDirectTest extends TestCase
 
 
         $result = $client->direct([
-            "path" => "well-known/agents",
+            "path" => "well-known/agent.json",
             "method" => "GET",
             "params" => [],
         ]);

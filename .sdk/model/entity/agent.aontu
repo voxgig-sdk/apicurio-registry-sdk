@@ -5,25 +5,12 @@ main: kit: entity: agent: {
   alias: field: {}
 
   fields: {
-    artifactId: {
-      h: "Artifact Id"
-      n: "artifactId"
-      r: false
-      t: "`$STRING`"
-    }
     capabilities: {
       h: "Capabilities"
       n: "capabilities"
       r: false
       sh: "Capabilities of an A2A agent."
       t: "`$OBJECT`"
-    }
-    createdOn: {
-      fo: "int64"
-      h: "Created On"
-      n: "createdOn"
-      r: false
-      t: "`$INTEGER`"
     }
     defaultInputModes: {
       h: "Default Input Modes"
@@ -49,12 +36,6 @@ main: kit: entity: agent: {
       r: false
       t: "`$STRING`"
     }
-    groupId: {
-      h: "Group Id"
-      n: "groupId"
-      r: false
-      t: "`$STRING`"
-    }
     iconUrl: {
       h: "Icon Url"
       n: "iconUrl"
@@ -64,12 +45,6 @@ main: kit: entity: agent: {
     name: {
       h: "Name"
       n: "name"
-      r: false
-      t: "`$STRING`"
-    }
-    owner: {
-      h: "Owner"
-      n: "owner"
       r: false
       t: "`$STRING`"
     }
@@ -129,93 +104,6 @@ main: kit: entity: agent: {
     list: {
       name: "list"
       points: [
-        {
-          co: {
-            id: "GET /well-known/agents"
-            source: "openapi3"
-            version: 2
-          }
-          g: {
-            query: [
-              {
-                k: "query"
-                n: "capability"
-                or: "capability"
-                r: false
-                t: "`$ARRAY`"
-              }
-              {
-                k: "query"
-                n: "input_mode"
-                or: "input_mode"
-                r: false
-                t: "`$ARRAY`"
-              }
-              {
-                ex: 20
-                k: "query"
-                n: "limit"
-                or: "limit"
-                r: false
-                t: "`$INTEGER`"
-              }
-              {
-                k: "query"
-                n: "name"
-                or: "name"
-                r: false
-                t: "`$STRING`"
-              }
-              {
-                ex: 0
-                k: "query"
-                n: "offset"
-                or: "offset"
-                r: false
-                t: "`$INTEGER`"
-              }
-              {
-                k: "query"
-                n: "output_mode"
-                or: "output_mode"
-                r: false
-                t: "`$ARRAY`"
-              }
-              {
-                k: "query"
-                n: "skill"
-                or: "skill"
-                r: false
-                t: "`$ARRAY`"
-              }
-            ]
-          }
-          m: "GET"
-          o: "/well-known/agents"
-          q: {
-            exist: [
-              "capability"
-              "input_mode"
-              "limit"
-              "name"
-              "offset"
-              "output_mode"
-              "skill"
-            ]
-          }
-          s: [
-            {
-              lit: "well-known"
-            }
-            {
-              lit: "agents"
-            }
-          ]
-          t: {
-            req: "`reqdata`"
-            res: "`body.agents`"
-          }
-        }
         {
           co: {
             id: "GET /well-known/agent.json"

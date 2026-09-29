@@ -90,7 +90,7 @@ main: kit: entity: ai_catalog: {
               {
                 k: "query"
                 n: "order_by"
-                or: "order_by"
+                or: "orderBy"
                 r: false
                 t: "`$STRING`"
               }
@@ -98,14 +98,14 @@ main: kit: entity: ai_catalog: {
                 ex: 20
                 k: "query"
                 n: "page_size"
-                or: "page_size"
+                or: "pageSize"
                 r: false
                 t: "`$INTEGER`"
               }
               {
                 k: "query"
                 n: "page_token"
-                or: "page_token"
+                or: "pageToken"
                 r: false
                 t: "`$STRING`"
               }

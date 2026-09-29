@@ -48,14 +48,14 @@ main: kit: entity: consumer_version_heatmap: {
               {
                 k: "param"
                 n: "artifact_id"
-                or: "artifact_id"
+                or: "artifactId"
                 r: true
                 t: "`$STRING`"
               }
               {
                 k: "param"
                 n: "group_id"
-                or: "group_id"
+                or: "groupId"
                 r: true
                 t: "`$STRING`"
               }

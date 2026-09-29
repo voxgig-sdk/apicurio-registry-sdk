@@ -229,7 +229,6 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | `Group` | `(data) -> GroupEntity` | Create a Group entity instance. |
 | `GroupRule` | `(data) -> GroupRuleEntity` | Create a GroupRule entity instance. |
 | `KafkaSql` | `(data) -> KafkaSqlEntity` | Create a KafkaSql entity instance. |
-| `McpTool` | `(data) -> McpToolEntity` | Create a McpTool entity instance. |
 | `Metadata` | `(data) -> MetadataEntity` | Create a Metadata entity instance. |
 | `OdcsContractResult` | `(data) -> OdcsContractResultEntity` | Create an OdcsContractResult entity instance. |
 | `OdcsContractSummary` | `(data) -> OdcsContractSummaryEntity` | Create an OdcsContractSummary entity instance. |
@@ -300,17 +299,13 @@ API path: `/admin/import`
 
 | Field | Description |
 | --- | --- |
-| `artifactId` |  |
 | `capabilities` | Capabilities of an A2A agent. |
-| `createdOn` |  |
 | `defaultInputModes` |  |
 | `defaultOutputModes` |  |
 | `description` |  |
 | `documentationUrl` |  |
-| `groupId` |  |
 | `iconUrl` |  |
 | `name` |  |
-| `owner` |  |
 | `protocolVersion` |  |
 | `provider` | Provider of an A2A agent. |
 | `securityRequirements` |  |
@@ -322,7 +317,7 @@ API path: `/admin/import`
 
 Operations: List.
 
-API path: `/well-known/agents`
+API path: `/well-known/agent.json`
 
 #### AgentCard
 
@@ -371,6 +366,7 @@ API path: `/well-known/ard/agents`
 
 | Field | Description |
 | --- | --- |
+| `facets` | Facets keyed by the requested facet field name. |
 | `query` | ARD search query. |
 | `resultType` | Requested result type for the ARD POST /explore endpoint. |
 
@@ -613,9 +609,6 @@ API path: `/admin/export`
 
 | Field | Description |
 | --- | --- |
-| `ref` | Git ref to validate (branch name, tag, or PR ref like `refs/pull/42/head`). |
-| `repoId` | Repository ID to validate against. |
-| `type` | Validation type. |
 
 Operations: Create, Remove.
 
@@ -650,7 +643,7 @@ API path: `/admin/gitops/status`
 | `type` | Validation type (`pull` or `push`). |
 | `versionCount` | Number of artifact versions loaded during validation. |
 
-Operations: List, Load.
+Operations: Create, List, Load.
 
 API path: `/admin/gitops/validate`
 
@@ -662,7 +655,7 @@ API path: `/admin/gitops/validate`
 | `id` |  |
 | `ruleType` |  |
 
-Operations: Create, Remove.
+Operations: Create, List, Remove.
 
 API path: `/admin/rules`
 
@@ -670,7 +663,6 @@ API path: `/admin/rules`
 
 | Field | Description |
 | --- | --- |
-| `artifactsType` |  |
 | `createdOn` |  |
 | `description` |  |
 | `groupId` |  |
@@ -679,7 +671,6 @@ API path: `/admin/rules`
 | `modifiedBy` |  |
 | `modifiedOn` |  |
 | `owner` |  |
-| `properties` |  |
 
 Operations: Create, List, Load, Remove, Update.
 
@@ -707,23 +698,6 @@ Operations: Create.
 
 API path: `/admin/snapshots`
 
-#### McpTool
-
-| Field | Description |
-| --- | --- |
-| `artifactId` |  |
-| `createdOn` |  |
-| `description` |  |
-| `groupId` |  |
-| `name` |  |
-| `owner` |  |
-| `parameters` |  |
-| `title` |  |
-
-Operations: List.
-
-API path: `/well-known/mcp-tools`
-
 #### Metadata
 
 | Field | Description |
@@ -741,7 +715,8 @@ API path: `/well-known/mcp-tools`
 | `modifiedOn` |  |
 | `name` |  |
 | `owner` |  |
-| `version` |  |
+| `state` |  |
+| `version` | A single version of an artifact. |
 
 Operations: Create, Load, Update.
 
@@ -751,10 +726,9 @@ API path: `/groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}
 
 | Field | Description |
 | --- | --- |
-| `labelsApplied` | Number of contract.* labels set on the schema artifact. |
-| `rulesApplied` | Number of CEL quality rules projected onto the schema artifact. |
-| `tagsApplied` | Number of field-tag.* labels set on the schema artifact version. |
-| `warnings` | Any warnings encountered during projection. |
+| `contractId` | The contract artifact ID. |
+| `projection` | Summary of the projection performed when an ODCS contract is applied. |
+| `version` | The ODCS contract version. |
 
 Operations: Create, Update.
 
@@ -793,7 +767,7 @@ API path: `/groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}
 | `principalName` | A friendly name for the principal. |
 | `role` |  |
 
-Operations: List, Load.
+Operations: Create, List, Load.
 
 API path: `/admin/roleMappings`
 
@@ -917,7 +891,7 @@ API path: `/system/uiConfig`
 | `owner` |  |
 | `state` |  |
 | `value` |  |
-| `version` |  |
+| `version` | A single version of an artifact. |
 | `versions` | The collection of artifact versions returned in the result set. |
 
 Operations: Create, List, Load, Remove, Update.
@@ -928,11 +902,23 @@ API path: `/search/versions`
 
 | Field | Description |
 | --- | --- |
+| `artifactId` |  |
+| `capabilities` | Capabilities of an A2A agent. |
+| `createdOn` |  |
+| `description` |  |
+| `groupId` |  |
 | `id` |  |
+| `name` |  |
+| `owner` |  |
+| `parameters` |  |
+| `skills` |  |
+| `supportedInterfaces` |  |
+| `title` |  |
+| `version` |  |
 
-Operations: Load.
+Operations: List, Load.
 
-API path: `/well-known/agents/{groupId}/{artifactId}`
+API path: `/well-known/agents`
 
 #### WrappedVersionState
 
@@ -992,17 +978,13 @@ Create an instance: `local agent = client:Agent(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `artifactId` | `string` |  |
 | `capabilities` | `table` | Capabilities of an A2A agent. |
-| `createdOn` | `number` |  |
 | `defaultInputModes` | `table` |  |
 | `defaultOutputModes` | `table` |  |
 | `description` | `string` |  |
 | `documentationUrl` | `string` |  |
-| `groupId` | `string` |  |
 | `iconUrl` | `string` |  |
 | `name` | `string` |  |
-| `owner` | `string` |  |
 | `protocolVersion` | `string` |  |
 | `provider` | `table` | Provider of an A2A agent. |
 | `securityRequirements` | `table` |  |
@@ -1102,14 +1084,14 @@ Create an instance: `local ard_explore = client:ArdExplore(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
+| `facets` | `table` | Facets keyed by the requested facet field name. |
 | `query` | `table` | ARD search query. |
-| `resultType` | `table` | Requested result type for the ARD POST /explore endpoint. |
+| `resultType` | `string` | Requested result type for the ARD POST /explore endpoint. |
 
 #### Example: Create
 
 ```lua
 local ard_explore, err = client:ArdExplore():create({
-  resultType = {}, -- table
 })
 ```
 
@@ -1683,20 +1665,10 @@ Create an instance: `local git_op = client:GitOp(nil)`
 | `create(data)` | Create a new entity with the given data. |
 | `remove(match)` | Remove the matching entity. |
 
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `ref` | `string` | Git ref to validate (branch name, tag, or PR ref like `refs/pull/42/head`). |
-| `repoId` | `string` | Repository ID to validate against. |
-| `type` | `string` | Validation type. |
-
 #### Example: Create
 
 ```lua
 local git_op, err = client:GitOp():create({
-  ref = "example_ref", -- string
-  repoId = "example_repoId", -- string
 })
 ```
 
@@ -1734,6 +1706,7 @@ Create an instance: `local git_ops_validate_task = client:GitOpsValidateTask(nil
 
 | Method | Description |
 | --- | --- |
+| `create(data)` | Create a new entity with the given data. |
 | `list(match)` | List entities matching the criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 
@@ -1766,6 +1739,15 @@ local git_ops_validate_task, err = client:GitOpsValidateTask():load({ task_id = 
 local git_ops_validate_tasks, err = client:GitOpsValidateTask():list()
 ```
 
+#### Example: Create
+
+```lua
+local git_ops_validate_task, err = client:GitOpsValidateTask():create({
+  state = "example_state", -- string
+  taskId = "example_taskId", -- string
+})
+```
+
 
 ### GlobalRule
 
@@ -1776,6 +1758,7 @@ Create an instance: `local global_rule = client:GlobalRule(nil)`
 | Method | Description |
 | --- | --- |
 | `create(data)` | Create a new entity with the given data. |
+| `list(match)` | List entities matching the criteria. |
 | `remove(match)` | Remove the matching entity. |
 
 #### Fields
@@ -1785,6 +1768,12 @@ Create an instance: `local global_rule = client:GlobalRule(nil)`
 | `config` | `string` |  |
 | `id` | `string` |  |
 | `ruleType` | `string` |  |
+
+#### Example: List
+
+```lua
+local global_rules, err = client:GlobalRule():list()
+```
 
 #### Example: Create
 
@@ -1813,7 +1802,6 @@ Create an instance: `local group = client:Group(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `artifactsType` | `string` |  |
 | `createdOn` | `string` |  |
 | `description` | `string` |  |
 | `groupId` | `string` |  |
@@ -1822,7 +1810,6 @@ Create an instance: `local group = client:Group(nil)`
 | `modifiedBy` | `string` |  |
 | `modifiedOn` | `string` |  |
 | `owner` | `string` |  |
-| `properties` | `table` |  |
 
 #### Example: Load
 
@@ -1840,6 +1827,11 @@ local groups, err = client:Group():list()
 
 ```lua
 local group, err = client:Group():create({
+  createdOn = "example_createdOn", -- string
+  groupId = "example_groupId", -- string
+  modifiedBy = "example_modifiedBy", -- string
+  modifiedOn = "example_modifiedOn", -- string
+  owner = "example_owner", -- string
 })
 ```
 
@@ -1898,36 +1890,6 @@ local kafka_sql, err = client:KafkaSql():create({
 ```
 
 
-### McpTool
-
-Create an instance: `local mcp_tool = client:McpTool(nil)`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `list(match)` | List entities matching the criteria. |
-
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `artifactId` | `string` |  |
-| `createdOn` | `number` |  |
-| `description` | `string` |  |
-| `groupId` | `string` |  |
-| `name` | `string` |  |
-| `owner` | `string` |  |
-| `parameters` | `table` |  |
-| `title` | `string` |  |
-
-#### Example: List
-
-```lua
-local mcp_tools, err = client:McpTool():list()
-```
-
-
 ### Metadata
 
 Create an instance: `local metadata = client:Metadata(nil)`
@@ -1957,7 +1919,8 @@ Create an instance: `local metadata = client:Metadata(nil)`
 | `modifiedOn` | `string` |  |
 | `name` | `string` |  |
 | `owner` | `string` |  |
-| `version` | `number` |  |
+| `state` | `string` |  |
+| `version` | `string` | A single version of an artifact. |
 
 #### Example: Load
 
@@ -1972,8 +1935,13 @@ local metadata, err = client:Metadata():create({
   artifact_id = "example_artifact_id", -- string
   group_id = "example_group_id", -- string
   version_expression = "example_version_expression", -- string
-  modifiedBy = "example_modifiedBy", -- string
-  modifiedOn = "example_modifiedOn", -- string
+  artifactId = "example_artifactId", -- string
+  artifactType = "example_artifactType", -- string
+  contentId = 1, -- number
+  createdOn = "example_createdOn", -- string
+  globalId = 1, -- number
+  owner = "example_owner", -- string
+  version = "example_version", -- string
 })
 ```
 
@@ -1993,10 +1961,9 @@ Create an instance: `local odcs_contract_result = client:OdcsContractResult(nil)
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `labelsApplied` | `number` | Number of contract.* labels set on the schema artifact. |
-| `rulesApplied` | `number` | Number of CEL quality rules projected onto the schema artifact. |
-| `tagsApplied` | `number` | Number of field-tag.* labels set on the schema artifact version. |
-| `warnings` | `table` | Any warnings encountered during projection. |
+| `contractId` | `string` | The contract artifact ID. |
+| `projection` | `table` | Summary of the projection performed when an ODCS contract is applied. |
+| `version` | `string` | The ODCS contract version. |
 
 #### Example: Create
 
@@ -2065,6 +2032,7 @@ Create an instance: `local role_mapping = client:RoleMapping(nil)`
 
 | Method | Description |
 | --- | --- |
+| `create(data)` | Create a new entity with the given data. |
 | `list(match)` | List entities matching the criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 
@@ -2087,6 +2055,15 @@ local role_mapping, err = client:RoleMapping():load({ id = "role_mapping_id" })
 
 ```lua
 local role_mappings, err = client:RoleMapping():list()
+```
+
+#### Example: Create
+
+```lua
+local role_mapping, err = client:RoleMapping():create({
+  principalId = "example_principalId", -- string
+  role = "example_role", -- string
+})
 ```
 
 
@@ -2323,7 +2300,7 @@ Create an instance: `local version = client:Version(nil)`
 | `owner` | `string` |  |
 | `state` | `string` |  |
 | `value` | `string` |  |
-| `version` | `string` |  |
+| `version` | `string` | A single version of an artifact. |
 | `versions` | `table` | The collection of artifact versions returned in the result set. |
 
 #### Example: Load
@@ -2351,6 +2328,7 @@ local version, err = client:Version():create({
   globalId = 1, -- number
   owner = "example_owner", -- string
   value = "example_value", -- string
+  version = "example_version", -- string
   versions = {}, -- table
 })
 ```
@@ -2364,18 +2342,37 @@ Create an instance: `local well_known = client:WellKnown(nil)`
 
 | Method | Description |
 | --- | --- |
+| `list(match)` | List entities matching the criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
+| `artifactId` | `string` |  |
+| `capabilities` | `table` | Capabilities of an A2A agent. |
+| `createdOn` | `number` |  |
+| `description` | `string` |  |
+| `groupId` | `string` |  |
 | `id` | `string` |  |
+| `name` | `string` |  |
+| `owner` | `string` |  |
+| `parameters` | `table` |  |
+| `skills` | `table` |  |
+| `supportedInterfaces` | `table` |  |
+| `title` | `string` |  |
+| `version` | `string` |  |
 
 #### Example: Load
 
 ```lua
 local well_known, err = client:WellKnown():load({ artifact_id = "artifact_id", group_id = "group_id" })
+```
+
+#### Example: List
+
+```lua
+local well_knowns, err = client:WellKnown():list()
 ```
 
 

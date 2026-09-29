@@ -75,7 +75,7 @@ main: kit: entity: artifact_reference: {
               {
                 k: "query"
                 n: "artifact_type"
-                or: "artifact_type"
+                or: "artifactType"
                 r: false
                 t: "`$STRING`"
               }
@@ -118,7 +118,7 @@ main: kit: entity: artifact_reference: {
                 ex: "\"example-artifact\""
                 k: "param"
                 n: "artifact_id"
-                or: "artifact_id"
+                or: "artifactId"
                 r: true
                 t: "`$STRING`"
               }
@@ -126,14 +126,14 @@ main: kit: entity: artifact_reference: {
                 ex: "\"my-group\""
                 k: "param"
                 n: "group_id"
-                or: "group_id"
+                or: "groupId"
                 r: true
                 t: "`$STRING`"
               }
               {
                 k: "param"
                 n: "version_expression"
-                or: "version_expression"
+                or: "versionExpression"
                 r: true
                 t: "`$STRING`"
               }
@@ -143,7 +143,7 @@ main: kit: entity: artifact_reference: {
                 ex: "\"INBOUND\""
                 k: "query"
                 n: "ref_type"
-                or: "ref_type"
+                or: "refType"
                 r: false
                 t: "`$STRING`"
               }
@@ -205,7 +205,7 @@ main: kit: entity: artifact_reference: {
               {
                 k: "param"
                 n: "global_id_id"
-                or: "global_id"
+                or: "globalId"
                 r: true
                 t: "`$INTEGER`"
               }
@@ -215,7 +215,7 @@ main: kit: entity: artifact_reference: {
                 ex: "\"INBOUND\""
                 k: "query"
                 n: "ref_type"
-                or: "ref_type"
+                or: "refType"
                 r: false
                 t: "`$STRING`"
               }
@@ -264,7 +264,7 @@ main: kit: entity: artifact_reference: {
               {
                 k: "param"
                 n: "content_hash_id"
-                or: "content_hash"
+                or: "contentHash"
                 r: true
                 t: "`$STRING`"
               }
@@ -312,7 +312,7 @@ main: kit: entity: artifact_reference: {
               {
                 k: "param"
                 n: "content_id_id"
-                or: "content_id"
+                or: "contentId"
                 r: true
                 t: "`$INTEGER`"
               }

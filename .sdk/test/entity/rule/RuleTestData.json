@@ -43,11 +43,6 @@
       "version": 2,
       "source": "openapi3"
     },
-    "GET /admin/rules": {
-      "provenance": "operation-contract",
-      "version": 2,
-      "source": "openapi3"
-    },
     "GET /groups/{groupId}/artifacts/{artifactId}/rules/{ruleType}": {
       "provenance": "operation-contract",
       "version": 2,

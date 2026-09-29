@@ -74,14 +74,14 @@ main: kit: entity: searched_group: {
               {
                 k: "query"
                 n: "group_id"
-                or: "group_id"
+                or: "groupId"
                 r: false
                 t: "`$STRING`"
               }
               {
                 k: "query"
                 n: "label"
-                or: "label"
+                or: "labels"
                 r: false
                 t: "`$ARRAY`"
               }

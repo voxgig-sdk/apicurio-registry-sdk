@@ -152,10 +152,6 @@ Create a new `GroupRule` entity instance. Pass `nil` for no initial data.
 
 Create a new `KafkaSql` entity instance. Pass `nil` for no initial data.
 
-#### `McpTool(data)`
-
-Create a new `McpTool` entity instance. Pass `nil` for no initial data.
-
 #### `Metadata(data)`
 
 Create a new `Metadata` entity instance. Pass `nil` for no initial data.
@@ -337,17 +333,13 @@ local agent = client:Agent(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `artifactId` | `string` | No |  |
 | `capabilities` | `table` | No | Capabilities of an A2A agent. |
-| `createdOn` | `number` | No |  |
 | `defaultInputModes` | `table` | No |  |
 | `defaultOutputModes` | `table` | No |  |
 | `description` | `string` | No |  |
 | `documentationUrl` | `string` | No |  |
-| `groupId` | `string` | No |  |
 | `iconUrl` | `string` | No |  |
 | `name` | `string` | No |  |
-| `owner` | `string` | No |  |
 | `protocolVersion` | `string` | No |  |
 | `provider` | `table` | No | Provider of an A2A agent. |
 | `securityRequirements` | `table` | No |  |
@@ -534,8 +526,17 @@ local ard_explore = client:ArdExplore(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
+| `facets` | `table` | No | Facets keyed by the requested facet field name. |
 | `query` | `table` | No | ARD search query. |
-| `resultType` | `table` | Yes | Requested result type for the ARD POST /explore endpoint. |
+| `resultType` | `string` | No | Requested result type for the ARD POST /explore endpoint. |
+
+### Field Usage by Operation
+
+| Field | create |
+| --- | --- |
+| `facets` | - |
+| `query` | - |
+| `resultType` | Yes |
 
 ### Operations
 
@@ -545,7 +546,6 @@ Create a new entity with the given data.
 
 ```lua
 local result, err = client:ArdExplore():create({
-  resultType = --[[ table ]],
 })
 ```
 
@@ -1676,14 +1676,6 @@ Return the entity name.
 local git_op = client:GitOp(nil)
 ```
 
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `ref` | `string` | Yes | Git ref to validate (branch name, tag, or PR ref like `refs/pull/42/head`). |
-| `repoId` | `string` | Yes | Repository ID to validate against. |
-| `type` | `string` | No | Validation type. |
-
 ### Operations
 
 #### `create(reqdata, ctrl) -> any, err`
@@ -1692,8 +1684,6 @@ Create a new entity with the given data.
 
 ```lua
 local result, err = client:GitOp():create({
-  ref = --[[ string ]],
-  repoId = --[[ string ]],
 })
 ```
 
@@ -1812,7 +1802,35 @@ local git_ops_validate_task = client:GitOpsValidateTask(nil)
 | `type` | `string` | No | Validation type (`pull` or `push`). |
 | `versionCount` | `number` | No | Number of artifact versions loaded during validation. |
 
+### Field Usage by Operation
+
+| Field | load | list | create |
+| --- | --- | --- | --- |
+| `artifactCount` | - | - | - |
+| `completedAt` | - | - | - |
+| `createdAt` | - | - | - |
+| `errors` | - | - | - |
+| `groupCount` | - | - | - |
+| `ref` | - | - | Yes |
+| `repoId` | - | - | Yes |
+| `result` | - | - | - |
+| `state` | - | - | - |
+| `taskId` | - | - | - |
+| `type` | - | - | - |
+| `versionCount` | - | - | - |
+
 ### Operations
+
+#### `create(reqdata, ctrl) -> any, err`
+
+Create a new entity with the given data.
+
+```lua
+local result, err = client:GitOpsValidateTask():create({
+  state = --[[ string ]],
+  taskId = --[[ string ]],
+})
+```
 
 #### `list(reqmatch, ctrl) -> any, err`
 
@@ -1886,6 +1904,14 @@ local result, err = client:GlobalRule():create({
 })
 ```
 
+#### `list(reqmatch, ctrl) -> any, err`
+
+List entities matching the given criteria. Returns an array.
+
+```lua
+local results, err = client:GlobalRule():list()
+```
+
 #### `remove(reqmatch, ctrl) -> any, err`
 
 Remove the entity matching the given criteria.
@@ -1934,31 +1960,27 @@ local group = client:Group(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `artifactsType` | `string` | No |  |
-| `createdOn` | `string` | No |  |
+| `createdOn` | `string` | Yes |  |
 | `description` | `string` | No |  |
-| `groupId` | `string` | No |  |
+| `groupId` | `string` | Yes |  |
 | `id` | `string` | No |  |
 | `labels` | `table` | No |  |
-| `modifiedBy` | `string` | No |  |
-| `modifiedOn` | `string` | No |  |
-| `owner` | `string` | No |  |
-| `properties` | `table` | No |  |
+| `modifiedBy` | `string` | Yes |  |
+| `modifiedOn` | `string` | Yes |  |
+| `owner` | `string` | Yes |  |
 
 ### Field Usage by Operation
 
 | Field | load | list | create | update | remove |
 | --- | --- | --- | --- | --- | --- |
-| `artifactsType` | - | - | - | - | - |
-| `createdOn` | - | Yes | - | - | - |
+| `createdOn` | - | - | - | - | - |
 | `description` | - | - | - | - | - |
-| `groupId` | - | Yes | Yes | - | - |
+| `groupId` | - | - | - | - | - |
 | `id` | - | - | - | - | - |
 | `labels` | - | - | - | - | - |
-| `modifiedBy` | - | Yes | - | - | - |
-| `modifiedOn` | - | Yes | - | - | - |
-| `owner` | - | Yes | - | - | - |
-| `properties` | - | - | - | - | - |
+| `modifiedBy` | - | - | - | - | - |
+| `modifiedOn` | - | - | - | - | - |
+| `owner` | - | - | - | Yes | - |
 
 ### Operations
 
@@ -1968,6 +1990,11 @@ Create a new entity with the given data.
 
 ```lua
 local result, err = client:Group():create({
+  createdOn = --[[ string ]],
+  groupId = --[[ string ]],
+  modifiedBy = --[[ string ]],
+  modifiedOn = --[[ string ]],
+  owner = --[[ string ]],
 })
 ```
 
@@ -2155,65 +2182,6 @@ Return the entity name.
 
 ---
 
-## McpToolEntity
-
-```lua
-local mcp_tool = client:McpTool(nil)
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `artifactId` | `string` | No |  |
-| `createdOn` | `number` | No |  |
-| `description` | `string` | No |  |
-| `groupId` | `string` | No |  |
-| `name` | `string` | No |  |
-| `owner` | `string` | No |  |
-| `parameters` | `table` | No |  |
-| `title` | `string` | No |  |
-
-### Operations
-
-#### `list(reqmatch, ctrl) -> any, err`
-
-List entities matching the given criteria. Returns an array.
-
-```lua
-local results, err = client:McpTool():list()
-```
-
-### Common Methods
-
-#### `data_get() -> table`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get() -> table`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make() -> Entity`
-
-Create a new `McpToolEntity` instance with the same client and
-options.
-
-#### `get_name() -> string`
-
-Return the entity name.
-
-
----
-
 ## MetadataEntity
 
 ```lua
@@ -2224,38 +2192,40 @@ local metadata = client:Metadata(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `artifactId` | `string` | No |  |
-| `artifactType` | `string` | No |  |
-| `contentId` | `number` | No |  |
+| `artifactId` | `string` | Yes |  |
+| `artifactType` | `string` | Yes |  |
+| `contentId` | `number` | Yes |  |
 | `contractMetadata` | `table` | No | Contract metadata projected from the artifact labels. |
-| `createdOn` | `string` | No |  |
+| `createdOn` | `string` | Yes |  |
 | `description` | `string` | No |  |
-| `globalId` | `number` | No |  |
+| `globalId` | `number` | Yes |  |
 | `groupId` | `string` | No |  |
 | `labels` | `table` | No |  |
-| `modifiedBy` | `string` | Yes |  |
-| `modifiedOn` | `string` | Yes |  |
+| `modifiedBy` | `string` | No |  |
+| `modifiedOn` | `string` | No |  |
 | `name` | `string` | No |  |
-| `owner` | `string` | No |  |
-| `version` | `number` | No |  |
+| `owner` | `string` | Yes |  |
+| `state` | `string` | No |  |
+| `version` | `string` | Yes | A single version of an artifact. |
 
 ### Field Usage by Operation
 
 | Field | load | create | update |
 | --- | --- | --- | --- |
-| `artifactId` | Yes | - | - |
-| `artifactType` | Yes | - | - |
+| `artifactId` | - | - | - |
+| `artifactType` | - | - | - |
 | `contentId` | - | - | - |
 | `contractMetadata` | - | - | - |
-| `createdOn` | Yes | - | - |
+| `createdOn` | - | - | - |
 | `description` | - | - | - |
 | `globalId` | - | - | - |
 | `groupId` | Yes | - | - |
 | `labels` | - | - | - |
-| `modifiedBy` | - | - | - |
-| `modifiedOn` | - | - | - |
+| `modifiedBy` | Yes | - | - |
+| `modifiedOn` | Yes | - | - |
 | `name` | - | - | - |
-| `owner` | Yes | - | - |
+| `owner` | - | - | Yes |
+| `state` | - | - | - |
 | `version` | - | - | - |
 
 ### Operations
@@ -2269,8 +2239,13 @@ local result, err = client:Metadata():create({
   artifact_id = --[[ string ]],
   group_id = --[[ string ]],
   version_expression = --[[ string ]],
-  modifiedBy = --[[ string ]],
-  modifiedOn = --[[ string ]],
+  artifactId = --[[ string ]],
+  artifactType = --[[ string ]],
+  contentId = --[[ number ]],
+  createdOn = --[[ string ]],
+  globalId = --[[ number ]],
+  owner = --[[ string ]],
+  version = --[[ string ]],
 })
 ```
 
@@ -2334,10 +2309,9 @@ local odcs_contract_result = client:OdcsContractResult(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `labelsApplied` | `number` | No | Number of contract.* labels set on the schema artifact. |
-| `rulesApplied` | `number` | No | Number of CEL quality rules projected onto the schema artifact. |
-| `tagsApplied` | `number` | No | Number of field-tag.* labels set on the schema artifact version. |
-| `warnings` | `table` | No | Any warnings encountered during projection. |
+| `contractId` | `string` | No | The contract artifact ID. |
+| `projection` | `table` | No | Summary of the projection performed when an ODCS contract is applied. |
+| `version` | `string` | No | The ODCS contract version. |
 
 ### Operations
 
@@ -2517,6 +2491,17 @@ local role_mapping = client:RoleMapping(nil)
 | `role` | `string` | Yes |  |
 
 ### Operations
+
+#### `create(reqdata, ctrl) -> any, err`
+
+Create a new entity with the given data.
+
+```lua
+local result, err = client:RoleMapping():create({
+  principalId = --[[ string ]],
+  role = --[[ string ]],
+})
+```
 
 #### `list(reqmatch, ctrl) -> any, err`
 
@@ -3001,9 +2986,9 @@ local version = client:Version(nil)
 | `modifiedOn` | `string` | No |  |
 | `name` | `string` | No |  |
 | `owner` | `string` | Yes |  |
-| `state` | `string` | Yes |  |
+| `state` | `string` | No |  |
 | `value` | `string` | Yes |  |
-| `version` | `string` | No |  |
+| `version` | `string` | Yes | A single version of an artifact. |
 | `versions` | `table` | Yes | The collection of artifact versions returned in the result set. |
 
 ### Field Usage by Operation
@@ -3027,9 +3012,9 @@ local version = client:Version(nil)
 | `modifiedOn` | - | - | - | - | - |
 | `name` | - | - | - | - | - |
 | `owner` | - | - | - | - | - |
-| `state` | - | - | - | - | - |
+| `state` | - | Yes | - | - | - |
 | `value` | - | - | - | - | - |
-| `version` | - | Yes | - | - | - |
+| `version` | - | - | Yes | - | - |
 | `versions` | - | - | - | - | - |
 
 ### Operations
@@ -3049,6 +3034,7 @@ local result, err = client:Version():create({
   globalId = --[[ number ]],
   owner = --[[ string ]],
   value = --[[ string ]],
+  version = --[[ string ]],
   versions = --[[ table ]],
 })
 ```
@@ -3131,9 +3117,29 @@ local well_known = client:WellKnown(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
+| `artifactId` | `string` | No |  |
+| `capabilities` | `table` | No | Capabilities of an A2A agent. |
+| `createdOn` | `number` | No |  |
+| `description` | `string` | No |  |
+| `groupId` | `string` | No |  |
 | `id` | `string` | No |  |
+| `name` | `string` | No |  |
+| `owner` | `string` | No |  |
+| `parameters` | `table` | No |  |
+| `skills` | `table` | No |  |
+| `supportedInterfaces` | `table` | No |  |
+| `title` | `string` | No |  |
+| `version` | `string` | No |  |
 
 ### Operations
+
+#### `list(reqmatch, ctrl) -> any, err`
+
+List entities matching the given criteria. Returns an array.
+
+```lua
+local results, err = client:WellKnown():list()
+```
 
 #### `load(reqmatch, ctrl) -> any, err`
 

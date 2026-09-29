@@ -10,9 +10,9 @@ import (
 	"github.com/voxgig-sdk/apicurio-registry-sdk/go/core"
 )
 
-func TestMcpToolDirect(t *testing.T) {
-	t.Run("direct-list-mcp_tool", func(t *testing.T) {
-		setup := mcp_toolDirectSetup([]any{
+func TestGlobalRuleDirect(t *testing.T) {
+	t.Run("direct-list-global_rule", func(t *testing.T) {
+		setup := global_ruleDirectSetup([]any{
 			map[string]any{"id": "direct01"},
 			map[string]any{"id": "direct02"},
 		})
@@ -20,7 +20,7 @@ func TestMcpToolDirect(t *testing.T) {
 		if setup.live {
 			_mode = "live"
 		}
-		if _shouldSkip, _reason := isControlSkipped("direct", "direct-list-mcp_tool", _mode); _shouldSkip {
+		if _shouldSkip, _reason := isControlSkipped("direct", "direct-list-global_rule", _mode); _shouldSkip {
 			if _reason == "" {
 				_reason = "skipped via sdk-test-control.json"
 			}
@@ -31,7 +31,7 @@ func TestMcpToolDirect(t *testing.T) {
 
 
 		result, err := client.Direct(map[string]any{
-			"path":   "well-known/mcp-tools",
+			"path":   "admin/rules",
 			"method": "GET",
 			"params": map[string]any{},
 		})
@@ -79,20 +79,20 @@ func TestMcpToolDirect(t *testing.T) {
 
 }
 
-type mcp_toolDirectSetupResult struct {
+type global_ruleDirectSetupResult struct {
 	client *sdk.ApicurioRegistrySDK
 	calls  *[]map[string]any
 	live   bool
 	idmap  map[string]any
 }
 
-func mcp_toolDirectSetup(mockres any) *mcp_toolDirectSetupResult {
+func global_ruleDirectSetup(mockres any) *global_ruleDirectSetupResult {
 	loadEnvLocal()
 
 	calls := &[]map[string]any{}
 
 	env := envOverride(map[string]any{
-		"APICURIO_REGISTRY_TEST_MCP_TOOL_ENTID": map[string]any{},
+		"APICURIO_REGISTRY_TEST_GLOBAL_RULE_ENTID": map[string]any{},
 		"APICURIO_REGISTRY_TEST_LIVE":    "FALSE",
 		"APICURIO_REGISTRY_SERVER_REGISTRY": "MY-REGISTRY-URL",
 	})
@@ -116,7 +116,7 @@ func mcp_toolDirectSetup(mockres any) *mcp_toolDirectSetupResult {
 		client := sdk.NewApicurioRegistrySDK(mergedOpts)
 
 		idmap := map[string]any{}
-		if entidRaw, ok := env["APICURIO_REGISTRY_TEST_MCP_TOOL_ENTID"]; ok {
+		if entidRaw, ok := env["APICURIO_REGISTRY_TEST_GLOBAL_RULE_ENTID"]; ok {
 			if entidStr, ok := entidRaw.(string); ok && strings.HasPrefix(entidStr, "{") {
 				json.Unmarshal([]byte(entidStr), &idmap)
 			} else if entidMap, ok := entidRaw.(map[string]any); ok {
@@ -124,7 +124,7 @@ func mcp_toolDirectSetup(mockres any) *mcp_toolDirectSetupResult {
 			}
 		}
 
-		return &mcp_toolDirectSetupResult{client: client, calls: calls, live: true, idmap: idmap}
+		return &global_ruleDirectSetupResult{client: client, calls: calls, live: true, idmap: idmap}
 	}
 
 	mockFetch := func(url string, init map[string]any) (map[string]any, error) {
@@ -149,7 +149,7 @@ func mcp_toolDirectSetup(mockres any) *mcp_toolDirectSetupResult {
 		},
 	})
 
-	return &mcp_toolDirectSetupResult{client: client, calls: calls, live: false, idmap: map[string]any{}}
+	return &global_ruleDirectSetupResult{client: client, calls: calls, live: false, idmap: map[string]any{}}
 }
 
 var _ = os.Getenv

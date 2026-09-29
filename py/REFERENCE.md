@@ -153,10 +153,6 @@ Create a new `GroupRuleEntity` instance. Pass `None` for no initial data.
 
 Create a new `KafkaSqlEntity` instance. Pass `None` for no initial data.
 
-#### `McpTool(data=None)`
-
-Create a new `McpToolEntity` instance. Pass `None` for no initial data.
-
 #### `Metadata(data=None)`
 
 Create a new `MetadataEntity` instance. Pass `None` for no initial data.
@@ -333,17 +329,13 @@ agent = client.Agent()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `artifactId` | `str` | No |  |
 | `capabilities` | `dict` | No | Capabilities of an A2A agent. |
-| `createdOn` | `int` | No |  |
 | `defaultInputModes` | `list` | No |  |
 | `defaultOutputModes` | `list` | No |  |
 | `description` | `str` | No |  |
 | `documentationUrl` | `str` | No |  |
-| `groupId` | `str` | No |  |
 | `iconUrl` | `str` | No |  |
 | `name` | `str` | No |  |
-| `owner` | `str` | No |  |
 | `protocolVersion` | `str` | No |  |
 | `provider` | `dict` | No | Provider of an A2A agent. |
 | `securityRequirements` | `list` | No |  |
@@ -533,8 +525,17 @@ ard_explore = client.ArdExplore()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
+| `facets` | `dict` | No | Facets keyed by the requested facet field name. |
 | `query` | `dict` | No | ARD search query. |
-| `resultType` | `dict` | Yes | Requested result type for the ARD POST /explore endpoint. |
+| `resultType` | `str` | No | Requested result type for the ARD POST /explore endpoint. |
+
+### Field Usage by Operation
+
+| Field | create |
+| --- | --- |
+| `facets` | - |
+| `query` | - |
+| `resultType` | Yes |
 
 ### Operations
 
@@ -544,7 +545,6 @@ Create a new entity with the given data. Returns the created entity data and rai
 
 ```python
 result = client.ArdExplore().create({
-    "resultType": {},  # dict
 })
 ```
 
@@ -1678,14 +1678,6 @@ Return the entity name.
 git_op = client.GitOp()
 ```
 
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `ref` | `str` | Yes | Git ref to validate (branch name, tag, or PR ref like `refs/pull/42/head`). |
-| `repoId` | `str` | Yes | Repository ID to validate against. |
-| `type` | `str` | No | Validation type. |
-
 ### Operations
 
 #### `create(reqdata, ctrl=None) -> dict`
@@ -1694,8 +1686,6 @@ Create a new entity with the given data. Returns the created entity data and rai
 
 ```python
 result = client.GitOp().create({
-    "ref": "example_ref",  # str
-    "repoId": "example_repoId",  # str
 })
 ```
 
@@ -1814,7 +1804,35 @@ git_ops_validate_task = client.GitOpsValidateTask()
 | `type` | `str` | No | Validation type (`pull` or `push`). |
 | `versionCount` | `int` | No | Number of artifact versions loaded during validation. |
 
+### Field Usage by Operation
+
+| Field | load | list | create |
+| --- | --- | --- | --- |
+| `artifactCount` | - | - | - |
+| `completedAt` | - | - | - |
+| `createdAt` | - | - | - |
+| `errors` | - | - | - |
+| `groupCount` | - | - | - |
+| `ref` | - | - | Yes |
+| `repoId` | - | - | Yes |
+| `result` | - | - | - |
+| `state` | - | - | - |
+| `taskId` | - | - | - |
+| `type` | - | - | - |
+| `versionCount` | - | - | - |
+
 ### Operations
+
+#### `create(reqdata, ctrl=None) -> dict`
+
+Create a new entity with the given data. Returns the created entity data and raises on error.
+
+```python
+result = client.GitOpsValidateTask().create({
+    "state": "example_state",  # str
+    "taskId": "example_taskId",  # str
+})
+```
 
 #### `list(reqmatch=None, ctrl=None) -> list`
 
@@ -1889,6 +1907,16 @@ result = client.GlobalRule().create({
 })
 ```
 
+#### `list(reqmatch=None, ctrl=None) -> list`
+
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
+
+```python
+results = client.GlobalRule().list()
+for global_rule in results:
+    print(global_rule)
+```
+
 #### `remove(reqmatch, ctrl=None) -> dict`
 
 Remove the entity matching the given criteria. Raises on error.
@@ -1936,31 +1964,27 @@ group = client.Group()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `artifactsType` | `str` | No |  |
-| `createdOn` | `str` | No |  |
+| `createdOn` | `str` | Yes |  |
 | `description` | `str` | No |  |
-| `groupId` | `str` | No |  |
+| `groupId` | `str` | Yes |  |
 | `id` | `str` | No |  |
 | `labels` | `dict` | No |  |
-| `modifiedBy` | `str` | No |  |
-| `modifiedOn` | `str` | No |  |
-| `owner` | `str` | No |  |
-| `properties` | `dict` | No |  |
+| `modifiedBy` | `str` | Yes |  |
+| `modifiedOn` | `str` | Yes |  |
+| `owner` | `str` | Yes |  |
 
 ### Field Usage by Operation
 
 | Field | load | list | create | update | remove |
 | --- | --- | --- | --- | --- | --- |
-| `artifactsType` | - | - | - | - | - |
-| `createdOn` | - | Yes | - | - | - |
+| `createdOn` | - | - | - | - | - |
 | `description` | - | - | - | - | - |
-| `groupId` | - | Yes | Yes | - | - |
+| `groupId` | - | - | - | - | - |
 | `id` | - | - | - | - | - |
 | `labels` | - | - | - | - | - |
-| `modifiedBy` | - | Yes | - | - | - |
-| `modifiedOn` | - | Yes | - | - | - |
-| `owner` | - | Yes | - | - | - |
-| `properties` | - | - | - | - | - |
+| `modifiedBy` | - | - | - | - | - |
+| `modifiedOn` | - | - | - | - | - |
+| `owner` | - | - | - | Yes | - |
 
 ### Operations
 
@@ -1970,6 +1994,11 @@ Create a new entity with the given data. Returns the created entity data and rai
 
 ```python
 result = client.Group().create({
+    "createdOn": "example_createdOn",  # str
+    "groupId": "example_groupId",  # str
+    "modifiedBy": "example_modifiedBy",  # str
+    "modifiedOn": "example_modifiedOn",  # str
+    "owner": "example_owner",  # str
 })
 ```
 
@@ -2156,66 +2185,6 @@ Return the entity name.
 
 ---
 
-## McpToolEntity
-
-```python
-mcp_tool = client.McpTool()
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `artifactId` | `str` | No |  |
-| `createdOn` | `int` | No |  |
-| `description` | `str` | No |  |
-| `groupId` | `str` | No |  |
-| `name` | `str` | No |  |
-| `owner` | `str` | No |  |
-| `parameters` | `list` | No |  |
-| `title` | `str` | No |  |
-
-### Operations
-
-#### `list(reqmatch=None, ctrl=None) -> list`
-
-List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
-
-```python
-results = client.McpTool().list()
-for mcp_tool in results:
-    print(mcp_tool)
-```
-
-### Common Methods
-
-#### `data_get() -> dict`
-
-Get the entity data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get() -> dict`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make() -> Entity`
-
-Create a new `McpToolEntity` instance with the same options.
-
-#### `get_name() -> str`
-
-Return the entity name.
-
-
----
-
 ## MetadataEntity
 
 ```python
@@ -2226,38 +2195,40 @@ metadata = client.Metadata()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `artifactId` | `str` | No |  |
-| `artifactType` | `str` | No |  |
-| `contentId` | `int` | No |  |
+| `artifactId` | `str` | Yes |  |
+| `artifactType` | `str` | Yes |  |
+| `contentId` | `int` | Yes |  |
 | `contractMetadata` | `dict` | No | Contract metadata projected from the artifact labels. |
-| `createdOn` | `str` | No |  |
+| `createdOn` | `str` | Yes |  |
 | `description` | `str` | No |  |
-| `globalId` | `int` | No |  |
+| `globalId` | `int` | Yes |  |
 | `groupId` | `str` | No |  |
 | `labels` | `dict` | No |  |
-| `modifiedBy` | `str` | Yes |  |
-| `modifiedOn` | `str` | Yes |  |
+| `modifiedBy` | `str` | No |  |
+| `modifiedOn` | `str` | No |  |
 | `name` | `str` | No |  |
-| `owner` | `str` | No |  |
-| `version` | `int` | No |  |
+| `owner` | `str` | Yes |  |
+| `state` | `str` | No |  |
+| `version` | `str` | Yes | A single version of an artifact. |
 
 ### Field Usage by Operation
 
 | Field | load | create | update |
 | --- | --- | --- | --- |
-| `artifactId` | Yes | - | - |
-| `artifactType` | Yes | - | - |
+| `artifactId` | - | - | - |
+| `artifactType` | - | - | - |
 | `contentId` | - | - | - |
 | `contractMetadata` | - | - | - |
-| `createdOn` | Yes | - | - |
+| `createdOn` | - | - | - |
 | `description` | - | - | - |
 | `globalId` | - | - | - |
 | `groupId` | Yes | - | - |
 | `labels` | - | - | - |
-| `modifiedBy` | - | - | - |
-| `modifiedOn` | - | - | - |
+| `modifiedBy` | Yes | - | - |
+| `modifiedOn` | Yes | - | - |
 | `name` | - | - | - |
-| `owner` | Yes | - | - |
+| `owner` | - | - | Yes |
+| `state` | - | - | - |
 | `version` | - | - | - |
 
 ### Operations
@@ -2271,8 +2242,13 @@ result = client.Metadata().create({
     "artifact_id": "example_artifact_id",  # str
     "group_id": "example_group_id",  # str
     "version_expression": "example_version_expression",  # str
-    "modifiedBy": "example_modifiedBy",  # str
-    "modifiedOn": "example_modifiedOn",  # str
+    "artifactId": "example_artifactId",  # str
+    "artifactType": "example_artifactType",  # str
+    "contentId": 1,  # int
+    "createdOn": "example_createdOn",  # str
+    "globalId": 1,  # int
+    "owner": "example_owner",  # str
+    "version": "example_version",  # str
 })
 ```
 
@@ -2335,10 +2311,9 @@ odcs_contract_result = client.OdcsContractResult()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `labelsApplied` | `int` | No | Number of contract.* labels set on the schema artifact. |
-| `rulesApplied` | `int` | No | Number of CEL quality rules projected onto the schema artifact. |
-| `tagsApplied` | `int` | No | Number of field-tag.* labels set on the schema artifact version. |
-| `warnings` | `list` | No | Any warnings encountered during projection. |
+| `contractId` | `str` | No | The contract artifact ID. |
+| `projection` | `dict` | No | Summary of the projection performed when an ODCS contract is applied. |
+| `version` | `str` | No | The ODCS contract version. |
 
 ### Operations
 
@@ -2520,6 +2495,17 @@ role_mapping = client.RoleMapping()
 
 ### Operations
 
+#### `create(reqdata, ctrl=None) -> dict`
+
+Create a new entity with the given data. Returns the created entity data and raises on error.
+
+```python
+result = client.RoleMapping().create({
+    "principalId": "example_principalId",  # str
+    "role": "example_role",  # str
+})
+```
+
 #### `list(reqmatch=None, ctrl=None) -> list`
 
 List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
@@ -2588,7 +2574,7 @@ rule = client.Rule()
 List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.Rule().list()
+results = client.Rule().list({"group_id": "example"})
 for rule in results:
     print(rule)
 ```
@@ -3003,9 +2989,9 @@ version = client.Version()
 | `modifiedOn` | `str` | No |  |
 | `name` | `str` | No |  |
 | `owner` | `str` | Yes |  |
-| `state` | `str` | Yes |  |
+| `state` | `str` | No |  |
 | `value` | `str` | Yes |  |
-| `version` | `str` | No |  |
+| `version` | `str` | Yes | A single version of an artifact. |
 | `versions` | `list` | Yes | The collection of artifact versions returned in the result set. |
 
 ### Field Usage by Operation
@@ -3029,9 +3015,9 @@ version = client.Version()
 | `modifiedOn` | - | - | - | - | - |
 | `name` | - | - | - | - | - |
 | `owner` | - | - | - | - | - |
-| `state` | - | - | - | - | - |
+| `state` | - | Yes | - | - | - |
 | `value` | - | - | - | - | - |
-| `version` | - | Yes | - | - | - |
+| `version` | - | - | Yes | - | - |
 | `versions` | - | - | - | - | - |
 
 ### Operations
@@ -3051,6 +3037,7 @@ result = client.Version().create({
     "globalId": 1,  # int
     "owner": "example_owner",  # str
     "value": "example_value",  # str
+    "version": "example_version",  # str
     "versions": [],  # list
 })
 ```
@@ -3134,9 +3121,31 @@ well_known = client.WellKnown()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
+| `artifactId` | `str` | No |  |
+| `capabilities` | `dict` | No | Capabilities of an A2A agent. |
+| `createdOn` | `int` | No |  |
+| `description` | `str` | No |  |
+| `groupId` | `str` | No |  |
 | `id` | `str` | No |  |
+| `name` | `str` | No |  |
+| `owner` | `str` | No |  |
+| `parameters` | `list` | No |  |
+| `skills` | `list` | No |  |
+| `supportedInterfaces` | `list` | No |  |
+| `title` | `str` | No |  |
+| `version` | `str` | No |  |
 
 ### Operations
+
+#### `list(reqmatch=None, ctrl=None) -> list`
+
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
+
+```python
+results = client.WellKnown().list()
+for well_known in results:
+    print(well_known)
+```
 
 #### `load(reqmatch, ctrl=None) -> dict`
 

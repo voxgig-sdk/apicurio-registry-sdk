@@ -71,7 +71,6 @@ class ReadmeExamplesTest < Minitest::Test
     "Group" => "group",
     "GroupRule" => "group_rule",
     "KafkaSql" => "kafka_sql",
-    "McpTool" => "mcp_tool",
     "Metadata" => "metadata",
     "OdcsContractResult" => "odcs_contract_result",
     "OdcsContractSummary" => "odcs_contract_summary",

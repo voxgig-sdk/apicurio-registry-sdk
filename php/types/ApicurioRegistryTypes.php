@@ -44,17 +44,13 @@ class AdminRemoveMatch
 /** Agent entity data model. */
 class Agent
 {
-    public ?string $artifactId = null;
     public ?array $capabilities = null;
-    public ?int $createdOn = null;
     public ?array $defaultInputModes = null;
     public ?array $defaultOutputModes = null;
     public ?string $description = null;
     public ?string $documentationUrl = null;
-    public ?string $groupId = null;
     public ?string $iconUrl = null;
     public ?string $name = null;
-    public ?string $owner = null;
     public ?string $protocolVersion = null;
     public ?array $provider = null;
     public ?array $securityRequirements = null;
@@ -68,13 +64,21 @@ class Agent
 /** Request payload for Agent#list. */
 class AgentListMatch
 {
-    public ?array $capability = null;
-    public ?array $input_mode = null;
-    public ?int $limit = null;
+    public ?array $capabilities = null;
+    public ?array $defaultInputModes = null;
+    public ?array $defaultOutputModes = null;
+    public ?string $description = null;
+    public ?string $documentationUrl = null;
+    public ?string $iconUrl = null;
     public ?string $name = null;
-    public ?int $offset = null;
-    public ?array $output_mode = null;
-    public ?array $skill = null;
+    public ?string $protocolVersion = null;
+    public ?array $provider = null;
+    public ?array $securityRequirements = null;
+    public ?array $securitySchemes = null;
+    public ?array $signatures = null;
+    public ?array $skills = null;
+    public ?array $supportedInterfaces = null;
+    public ?string $version = null;
 }
 
 /** AgentCard entity data model. */
@@ -150,15 +154,17 @@ class AiCatalogListMatch
 /** ArdExplore entity data model. */
 class ArdExplore
 {
+    public ?array $facets = null;
     public ?array $query = null;
-    public array $resultType;
+    public ?string $resultType = null;
 }
 
 /** Request payload for ArdExplore#create. */
 class ArdExploreCreateData
 {
+    public ?array $facets = null;
     public ?array $query = null;
-    public array $resultType;
+    public ?string $resultType = null;
 }
 
 /** ArdSearch entity data model. */
@@ -662,17 +668,11 @@ class DownloadRefLoadMatch
 /** GitOp entity data model. */
 class GitOp
 {
-    public string $ref;
-    public string $repoId;
-    public ?string $type = null;
 }
 
 /** Request payload for GitOp#create. */
 class GitOpCreateData
 {
-    public string $ref;
-    public string $repoId;
-    public ?string $type = null;
 }
 
 /** Request payload for GitOp#remove. */
@@ -737,10 +737,35 @@ class GitOpsValidateTaskListMatch
     public ?int $versionCount = null;
 }
 
+/** Request payload for GitOpsValidateTask#create. */
+class GitOpsValidateTaskCreateData
+{
+    public ?int $artifactCount = null;
+    public ?string $completedAt = null;
+    public ?string $createdAt = null;
+    public ?array $errors = null;
+    public ?int $groupCount = null;
+    public ?string $ref = null;
+    public ?string $repoId = null;
+    public ?string $result = null;
+    public string $state;
+    public string $taskId;
+    public ?string $type = null;
+    public ?int $versionCount = null;
+}
+
 /** GlobalRule entity data model. */
 class GlobalRule
 {
     public string $config;
+    public ?string $id = null;
+    public ?string $ruleType = null;
+}
+
+/** Request payload for GlobalRule#list. */
+class GlobalRuleListMatch
+{
+    public ?string $config = null;
     public ?string $id = null;
     public ?string $ruleType = null;
 }
@@ -762,16 +787,14 @@ class GlobalRuleRemoveMatch
 /** Group entity data model. */
 class Group
 {
-    public ?string $artifactsType = null;
-    public ?string $createdOn = null;
+    public string $createdOn;
     public ?string $description = null;
-    public ?string $groupId = null;
+    public string $groupId;
     public ?string $id = null;
     public ?array $labels = null;
-    public ?string $modifiedBy = null;
-    public ?string $modifiedOn = null;
-    public ?string $owner = null;
-    public ?array $properties = null;
+    public string $modifiedBy;
+    public string $modifiedOn;
+    public string $owner;
 }
 
 /** Request payload for Group#load. */
@@ -792,23 +815,20 @@ class GroupListMatch
 /** Request payload for Group#create. */
 class GroupCreateData
 {
-    public ?string $artifactsType = null;
-    public ?string $createdOn = null;
+    public string $createdOn;
     public ?string $description = null;
-    public ?string $groupId = null;
+    public string $groupId;
     public ?string $id = null;
     public ?array $labels = null;
-    public ?string $modifiedBy = null;
-    public ?string $modifiedOn = null;
-    public ?string $owner = null;
-    public ?array $properties = null;
+    public string $modifiedBy;
+    public string $modifiedOn;
+    public string $owner;
 }
 
 /** Request payload for Group#update. */
 class GroupUpdateData
 {
     public string $id;
-    public ?string $artifactsType = null;
     public ?string $createdOn = null;
     public ?string $description = null;
     public ?string $groupId = null;
@@ -816,7 +836,6 @@ class GroupUpdateData
     public ?string $modifiedBy = null;
     public ?string $modifiedOn = null;
     public ?string $owner = null;
-    public ?array $properties = null;
 }
 
 /** Request payload for Group#remove. */
@@ -860,45 +879,24 @@ class KafkaSqlCreateData
     public string $snapshotId;
 }
 
-/** McpTool entity data model. */
-class McpTool
-{
-    public ?string $artifactId = null;
-    public ?int $createdOn = null;
-    public ?string $description = null;
-    public ?string $groupId = null;
-    public ?string $name = null;
-    public ?string $owner = null;
-    public ?array $parameters = null;
-    public ?string $title = null;
-}
-
-/** Request payload for McpTool#list. */
-class McpToolListMatch
-{
-    public ?int $limit = null;
-    public ?string $name = null;
-    public ?int $offset = null;
-    public ?array $parameter = null;
-}
-
 /** Metadata entity data model. */
 class Metadata
 {
-    public ?string $artifactId = null;
-    public ?string $artifactType = null;
-    public ?int $contentId = null;
+    public string $artifactId;
+    public string $artifactType;
+    public int $contentId;
     public ?array $contractMetadata = null;
-    public ?string $createdOn = null;
+    public string $createdOn;
     public ?string $description = null;
-    public ?int $globalId = null;
+    public int $globalId;
     public ?string $groupId = null;
     public ?array $labels = null;
-    public string $modifiedBy;
-    public string $modifiedOn;
+    public ?string $modifiedBy = null;
+    public ?string $modifiedOn = null;
     public ?string $name = null;
-    public ?string $owner = null;
-    public ?int $version = null;
+    public string $owner;
+    public ?string $state = null;
+    public string $version;
 }
 
 /** Request payload for Metadata#load. */
@@ -915,20 +913,21 @@ class MetadataCreateData
     public string $artifact_id;
     public string $group_id;
     public string $version_expression;
-    public ?string $artifactId = null;
-    public ?string $artifactType = null;
-    public ?int $contentId = null;
+    public string $artifactId;
+    public string $artifactType;
+    public int $contentId;
     public ?array $contractMetadata = null;
-    public ?string $createdOn = null;
+    public string $createdOn;
     public ?string $description = null;
-    public ?int $globalId = null;
+    public int $globalId;
     public ?string $groupId = null;
     public ?array $labels = null;
-    public string $modifiedBy;
-    public string $modifiedOn;
+    public ?string $modifiedBy = null;
+    public ?string $modifiedOn = null;
     public ?string $name = null;
-    public ?string $owner = null;
-    public ?int $version = null;
+    public string $owner;
+    public ?string $state = null;
+    public string $version;
 }
 
 /** Request payload for Metadata#update. */
@@ -950,26 +949,25 @@ class MetadataUpdateData
     public ?string $modifiedOn = null;
     public ?string $name = null;
     public ?string $owner = null;
-    public ?int $version = null;
+    public ?string $state = null;
+    public ?string $version = null;
 }
 
 /** OdcsContractResult entity data model. */
 class OdcsContractResult
 {
-    public ?int $labelsApplied = null;
-    public ?int $rulesApplied = null;
-    public ?int $tagsApplied = null;
-    public ?array $warnings = null;
+    public ?string $contractId = null;
+    public ?array $projection = null;
+    public ?string $version = null;
 }
 
 /** Request payload for OdcsContractResult#create. */
 class OdcsContractResultCreateData
 {
     public string $group_id;
-    public ?int $labelsApplied = null;
-    public ?int $rulesApplied = null;
-    public ?int $tagsApplied = null;
-    public ?array $warnings = null;
+    public ?string $contractId = null;
+    public ?array $projection = null;
+    public ?string $version = null;
 }
 
 /** Request payload for OdcsContractResult#update. */
@@ -977,10 +975,9 @@ class OdcsContractResultUpdateData
 {
     public string $contract_id;
     public string $group_id;
-    public ?int $labelsApplied = null;
-    public ?int $rulesApplied = null;
-    public ?int $tagsApplied = null;
-    public ?array $warnings = null;
+    public ?string $contractId = null;
+    public ?array $projection = null;
+    public ?string $version = null;
 }
 
 /** OdcsContractSummary entity data model. */
@@ -1039,6 +1036,15 @@ class RoleMappingListMatch
     public ?int $offset = null;
 }
 
+/** Request payload for RoleMapping#create. */
+class RoleMappingCreateData
+{
+    public ?string $id = null;
+    public string $principalId;
+    public ?string $principalName = null;
+    public string $role;
+}
+
 /** Rule entity data model. */
 class Rule
 {
@@ -1058,9 +1064,8 @@ class RuleLoadMatch
 /** Request payload for Rule#list. */
 class RuleListMatch
 {
-    public ?string $config = null;
-    public ?string $id = null;
-    public ?string $ruleType = null;
+    public ?string $artifact_id = null;
+    public string $group_id;
 }
 
 /** Request payload for Rule#update. */
@@ -1210,9 +1215,9 @@ class Version
     public ?string $modifiedOn = null;
     public ?string $name = null;
     public string $owner;
-    public string $state;
+    public ?string $state = null;
     public string $value;
-    public ?string $version = null;
+    public string $version;
     public array $versions;
 }
 
@@ -1279,7 +1284,7 @@ class VersionCreateData
     public ?string $name = null;
     public string $owner;
     public string $value;
-    public ?string $version = null;
+    public string $version;
     public array $versions;
 }
 
@@ -1326,7 +1331,19 @@ class VersionRemoveMatch
 /** WellKnown entity data model. */
 class WellKnown
 {
+    public ?string $artifactId = null;
+    public ?array $capabilities = null;
+    public ?int $createdOn = null;
+    public ?string $description = null;
+    public ?string $groupId = null;
     public ?string $id = null;
+    public ?string $name = null;
+    public ?string $owner = null;
+    public ?array $parameters = null;
+    public ?array $skills = null;
+    public ?array $supportedInterfaces = null;
+    public ?string $title = null;
+    public ?string $version = null;
 }
 
 /** Request payload for WellKnown#load. */
@@ -1335,6 +1352,18 @@ class WellKnownLoadMatch
     public string $artifact_id;
     public string $group_id;
     public ?string $version = null;
+}
+
+/** Request payload for WellKnown#list. */
+class WellKnownListMatch
+{
+    public ?array $capability = null;
+    public ?array $input_mode = null;
+    public ?int $limit = null;
+    public ?string $name = null;
+    public ?int $offset = null;
+    public ?array $output_mode = null;
+    public ?array $skill = null;
 }
 
 /** WrappedVersionState entity data model. */

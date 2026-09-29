@@ -7,6 +7,10 @@ main: kit: flow: BasicRuleFlow:
   name: "BasicRuleFlow",
   step: [
     {
+      m: {
+        group_id: "group01"
+      }
+
       o: "list",
       v: [
         {

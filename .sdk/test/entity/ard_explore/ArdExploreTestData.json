@@ -2,18 +2,21 @@
   "existing": {
     "ard_explore": {
       "ARD_EXPLORE00": {
+        "facets": {},
         "query": {},
-        "resultType": {},
+        "resultType": "s20",
         "id": "ARD_EXPLORE00"
       },
       "ARD_EXPLORE01": {
+        "facets": {},
         "query": {},
-        "resultType": {},
+        "resultType": "s3e",
         "id": "ARD_EXPLORE01"
       },
       "ARD_EXPLORE02": {
+        "facets": {},
         "query": {},
-        "resultType": {},
+        "resultType": "s5c",
         "id": "ARD_EXPLORE02"
       }
     }
@@ -21,8 +24,9 @@
   "new": {
     "ard_explore": {
       "ard_explore_ref01": {
+        "facets": {},
         "query": {},
-        "resultType": {}
+        "resultType": "s7a"
       }
     }
   },

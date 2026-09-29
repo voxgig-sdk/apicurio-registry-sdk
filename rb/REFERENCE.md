@@ -153,10 +153,6 @@ Create a new `GroupRule` entity instance. Pass `nil` for no initial data.
 
 Create a new `KafkaSql` entity instance. Pass `nil` for no initial data.
 
-#### `McpTool(data = nil)`
-
-Create a new `McpTool` entity instance. Pass `nil` for no initial data.
-
 #### `Metadata(data = nil)`
 
 Create a new `Metadata` entity instance. Pass `nil` for no initial data.
@@ -340,17 +336,13 @@ agent = client.Agent
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `artifactId` | `String` | No |  |
 | `capabilities` | `Hash` | No | Capabilities of an A2A agent. |
-| `createdOn` | `Integer` | No |  |
 | `defaultInputModes` | `Array` | No |  |
 | `defaultOutputModes` | `Array` | No |  |
 | `description` | `String` | No |  |
 | `documentationUrl` | `String` | No |  |
-| `groupId` | `String` | No |  |
 | `iconUrl` | `String` | No |  |
 | `name` | `String` | No |  |
-| `owner` | `String` | No |  |
 | `protocolVersion` | `String` | No |  |
 | `provider` | `Hash` | No | Provider of an A2A agent. |
 | `securityRequirements` | `Array` | No |  |
@@ -537,8 +529,17 @@ ard_explore = client.ArdExplore
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
+| `facets` | `Hash` | No | Facets keyed by the requested facet field name. |
 | `query` | `Hash` | No | ARD search query. |
-| `resultType` | `Hash` | Yes | Requested result type for the ARD POST /explore endpoint. |
+| `resultType` | `String` | No | Requested result type for the ARD POST /explore endpoint. |
+
+### Field Usage by Operation
+
+| Field | create |
+| --- | --- |
+| `facets` | - |
+| `query` | - |
+| `resultType` | Yes |
 
 ### Operations
 
@@ -548,7 +549,6 @@ Create a new entity with the given data. Raises on error.
 
 ```ruby
 result = client.ArdExplore.create({
-  "resultType" => {}, # Hash
 })
 ```
 
@@ -1679,14 +1679,6 @@ Return the entity name.
 git_op = client.GitOp
 ```
 
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `ref` | `String` | Yes | Git ref to validate (branch name, tag, or PR ref like `refs/pull/42/head`). |
-| `repoId` | `String` | Yes | Repository ID to validate against. |
-| `type` | `String` | No | Validation type. |
-
 ### Operations
 
 #### `create(reqdata, ctrl = nil) -> result`
@@ -1695,8 +1687,6 @@ Create a new entity with the given data. Raises on error.
 
 ```ruby
 result = client.GitOp.create({
-  "ref" => "example_ref", # String
-  "repoId" => "example_repoId", # String
 })
 ```
 
@@ -1815,7 +1805,35 @@ git_ops_validate_task = client.GitOpsValidateTask
 | `type` | `String` | No | Validation type (`pull` or `push`). |
 | `versionCount` | `Integer` | No | Number of artifact versions loaded during validation. |
 
+### Field Usage by Operation
+
+| Field | load | list | create |
+| --- | --- | --- | --- |
+| `artifactCount` | - | - | - |
+| `completedAt` | - | - | - |
+| `createdAt` | - | - | - |
+| `errors` | - | - | - |
+| `groupCount` | - | - | - |
+| `ref` | - | - | Yes |
+| `repoId` | - | - | Yes |
+| `result` | - | - | - |
+| `state` | - | - | - |
+| `taskId` | - | - | - |
+| `type` | - | - | - |
+| `versionCount` | - | - | - |
+
 ### Operations
+
+#### `create(reqdata, ctrl = nil) -> result`
+
+Create a new entity with the given data. Raises on error.
+
+```ruby
+result = client.GitOpsValidateTask.create({
+  "state" => "example_state", # String
+  "taskId" => "example_taskId", # String
+})
+```
 
 #### `list(reqmatch = nil, ctrl = nil) -> Array`
 
@@ -1889,6 +1907,14 @@ result = client.GlobalRule.create({
 })
 ```
 
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
+
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
+
+```ruby
+results = client.GlobalRule.list
+```
+
 #### `remove(reqmatch, ctrl = nil) -> result`
 
 Remove the entity matching the given criteria. Raises on error.
@@ -1937,31 +1963,27 @@ group = client.Group
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `artifactsType` | `String` | No |  |
-| `createdOn` | `String` | No |  |
+| `createdOn` | `String` | Yes |  |
 | `description` | `String` | No |  |
-| `groupId` | `String` | No |  |
+| `groupId` | `String` | Yes |  |
 | `id` | `String` | No |  |
 | `labels` | `Hash` | No |  |
-| `modifiedBy` | `String` | No |  |
-| `modifiedOn` | `String` | No |  |
-| `owner` | `String` | No |  |
-| `properties` | `Hash` | No |  |
+| `modifiedBy` | `String` | Yes |  |
+| `modifiedOn` | `String` | Yes |  |
+| `owner` | `String` | Yes |  |
 
 ### Field Usage by Operation
 
 | Field | load | list | create | update | remove |
 | --- | --- | --- | --- | --- | --- |
-| `artifactsType` | - | - | - | - | - |
-| `createdOn` | - | Yes | - | - | - |
+| `createdOn` | - | - | - | - | - |
 | `description` | - | - | - | - | - |
-| `groupId` | - | Yes | Yes | - | - |
+| `groupId` | - | - | - | - | - |
 | `id` | - | - | - | - | - |
 | `labels` | - | - | - | - | - |
-| `modifiedBy` | - | Yes | - | - | - |
-| `modifiedOn` | - | Yes | - | - | - |
-| `owner` | - | Yes | - | - | - |
-| `properties` | - | - | - | - | - |
+| `modifiedBy` | - | - | - | - | - |
+| `modifiedOn` | - | - | - | - | - |
+| `owner` | - | - | - | Yes | - |
 
 ### Operations
 
@@ -1971,6 +1993,11 @@ Create a new entity with the given data. Raises on error.
 
 ```ruby
 result = client.Group.create({
+  "createdOn" => "example_createdOn", # String
+  "groupId" => "example_groupId", # String
+  "modifiedBy" => "example_modifiedBy", # String
+  "modifiedOn" => "example_modifiedOn", # String
+  "owner" => "example_owner", # String
 })
 ```
 
@@ -2158,65 +2185,6 @@ Return the entity name.
 
 ---
 
-## McpToolEntity
-
-```ruby
-mcp_tool = client.McpTool
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `artifactId` | `String` | No |  |
-| `createdOn` | `Integer` | No |  |
-| `description` | `String` | No |  |
-| `groupId` | `String` | No |  |
-| `name` | `String` | No |  |
-| `owner` | `String` | No |  |
-| `parameters` | `Array` | No |  |
-| `title` | `String` | No |  |
-
-### Operations
-
-#### `list(reqmatch = nil, ctrl = nil) -> Array`
-
-List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
-
-```ruby
-results = client.McpTool.list
-```
-
-### Common Methods
-
-#### `data_get -> Hash`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get -> Hash`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make -> Entity`
-
-Create a new `McpToolEntity` instance with the same client and
-options.
-
-#### `get_name -> String`
-
-Return the entity name.
-
-
----
-
 ## MetadataEntity
 
 ```ruby
@@ -2227,38 +2195,40 @@ metadata = client.Metadata
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `artifactId` | `String` | No |  |
-| `artifactType` | `String` | No |  |
-| `contentId` | `Integer` | No |  |
+| `artifactId` | `String` | Yes |  |
+| `artifactType` | `String` | Yes |  |
+| `contentId` | `Integer` | Yes |  |
 | `contractMetadata` | `Hash` | No | Contract metadata projected from the artifact labels. |
-| `createdOn` | `String` | No |  |
+| `createdOn` | `String` | Yes |  |
 | `description` | `String` | No |  |
-| `globalId` | `Integer` | No |  |
+| `globalId` | `Integer` | Yes |  |
 | `groupId` | `String` | No |  |
 | `labels` | `Hash` | No |  |
-| `modifiedBy` | `String` | Yes |  |
-| `modifiedOn` | `String` | Yes |  |
+| `modifiedBy` | `String` | No |  |
+| `modifiedOn` | `String` | No |  |
 | `name` | `String` | No |  |
-| `owner` | `String` | No |  |
-| `version` | `Integer` | No |  |
+| `owner` | `String` | Yes |  |
+| `state` | `String` | No |  |
+| `version` | `String` | Yes | A single version of an artifact. |
 
 ### Field Usage by Operation
 
 | Field | load | create | update |
 | --- | --- | --- | --- |
-| `artifactId` | Yes | - | - |
-| `artifactType` | Yes | - | - |
+| `artifactId` | - | - | - |
+| `artifactType` | - | - | - |
 | `contentId` | - | - | - |
 | `contractMetadata` | - | - | - |
-| `createdOn` | Yes | - | - |
+| `createdOn` | - | - | - |
 | `description` | - | - | - |
 | `globalId` | - | - | - |
 | `groupId` | Yes | - | - |
 | `labels` | - | - | - |
-| `modifiedBy` | - | - | - |
-| `modifiedOn` | - | - | - |
+| `modifiedBy` | Yes | - | - |
+| `modifiedOn` | Yes | - | - |
 | `name` | - | - | - |
-| `owner` | Yes | - | - |
+| `owner` | - | - | Yes |
+| `state` | - | - | - |
 | `version` | - | - | - |
 
 ### Operations
@@ -2272,8 +2242,13 @@ result = client.Metadata.create({
   "artifact_id" => "example_artifact_id", # String
   "group_id" => "example_group_id", # String
   "version_expression" => "example_version_expression", # String
-  "modifiedBy" => "example_modifiedBy", # String
-  "modifiedOn" => "example_modifiedOn", # String
+  "artifactId" => "example_artifactId", # String
+  "artifactType" => "example_artifactType", # String
+  "contentId" => 1, # Integer
+  "createdOn" => "example_createdOn", # String
+  "globalId" => 1, # Integer
+  "owner" => "example_owner", # String
+  "version" => "example_version", # String
 })
 ```
 
@@ -2337,10 +2312,9 @@ odcs_contract_result = client.OdcsContractResult
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `labelsApplied` | `Integer` | No | Number of contract.* labels set on the schema artifact. |
-| `rulesApplied` | `Integer` | No | Number of CEL quality rules projected onto the schema artifact. |
-| `tagsApplied` | `Integer` | No | Number of field-tag.* labels set on the schema artifact version. |
-| `warnings` | `Array` | No | Any warnings encountered during projection. |
+| `contractId` | `String` | No | The contract artifact ID. |
+| `projection` | `Hash` | No | Summary of the projection performed when an ODCS contract is applied. |
+| `version` | `String` | No | The ODCS contract version. |
 
 ### Operations
 
@@ -2520,6 +2494,17 @@ role_mapping = client.RoleMapping
 | `role` | `String` | Yes |  |
 
 ### Operations
+
+#### `create(reqdata, ctrl = nil) -> result`
+
+Create a new entity with the given data. Raises on error.
+
+```ruby
+result = client.RoleMapping.create({
+  "principalId" => "example_principalId", # String
+  "role" => "example_role", # String
+})
+```
 
 #### `list(reqmatch = nil, ctrl = nil) -> Array`
 
@@ -3004,9 +2989,9 @@ version = client.Version
 | `modifiedOn` | `String` | No |  |
 | `name` | `String` | No |  |
 | `owner` | `String` | Yes |  |
-| `state` | `String` | Yes |  |
+| `state` | `String` | No |  |
 | `value` | `String` | Yes |  |
-| `version` | `String` | No |  |
+| `version` | `String` | Yes | A single version of an artifact. |
 | `versions` | `Array` | Yes | The collection of artifact versions returned in the result set. |
 
 ### Field Usage by Operation
@@ -3030,9 +3015,9 @@ version = client.Version
 | `modifiedOn` | - | - | - | - | - |
 | `name` | - | - | - | - | - |
 | `owner` | - | - | - | - | - |
-| `state` | - | - | - | - | - |
+| `state` | - | Yes | - | - | - |
 | `value` | - | - | - | - | - |
-| `version` | - | Yes | - | - | - |
+| `version` | - | - | Yes | - | - |
 | `versions` | - | - | - | - | - |
 
 ### Operations
@@ -3052,6 +3037,7 @@ result = client.Version.create({
   "globalId" => 1, # Integer
   "owner" => "example_owner", # String
   "value" => "example_value", # String
+  "version" => "example_version", # String
   "versions" => [], # Array
 })
 ```
@@ -3134,9 +3120,29 @@ well_known = client.WellKnown
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
+| `artifactId` | `String` | No |  |
+| `capabilities` | `Hash` | No | Capabilities of an A2A agent. |
+| `createdOn` | `Integer` | No |  |
+| `description` | `String` | No |  |
+| `groupId` | `String` | No |  |
 | `id` | `String` | No |  |
+| `name` | `String` | No |  |
+| `owner` | `String` | No |  |
+| `parameters` | `Array` | No |  |
+| `skills` | `Array` | No |  |
+| `supportedInterfaces` | `Array` | No |  |
+| `title` | `String` | No |  |
+| `version` | `String` | No |  |
 
 ### Operations
+
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
+
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
+
+```ruby
+results = client.WellKnown.list
+```
 
 #### `load(reqmatch, ctrl = nil) -> result`
 

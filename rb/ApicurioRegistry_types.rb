@@ -66,14 +66,8 @@ AdminRemoveMatch = Struct.new(
 
 # Agent entity data model.
 #
-# @!attribute [rw] artifactId
-#   @return [String, nil]
-#
 # @!attribute [rw] capabilities
 #   @return [Hash, nil]
-#
-# @!attribute [rw] createdOn
-#   @return [Integer, nil]
 #
 # @!attribute [rw] defaultInputModes
 #   @return [Array, nil]
@@ -87,16 +81,10 @@ AdminRemoveMatch = Struct.new(
 # @!attribute [rw] documentationUrl
 #   @return [String, nil]
 #
-# @!attribute [rw] groupId
-#   @return [String, nil]
-#
 # @!attribute [rw] iconUrl
 #   @return [String, nil]
 #
 # @!attribute [rw] name
-#   @return [String, nil]
-#
-# @!attribute [rw] owner
 #   @return [String, nil]
 #
 # @!attribute [rw] protocolVersion
@@ -123,17 +111,13 @@ AdminRemoveMatch = Struct.new(
 # @!attribute [rw] version
 #   @return [String, nil]
 Agent = Struct.new(
-  :artifactId,
   :capabilities,
-  :createdOn,
   :defaultInputModes,
   :defaultOutputModes,
   :description,
   :documentationUrl,
-  :groupId,
   :iconUrl,
   :name,
-  :owner,
   :protocolVersion,
   :provider,
   :securityRequirements,
@@ -147,34 +131,66 @@ Agent = Struct.new(
 
 # Request payload for Agent#list.
 #
-# @!attribute [rw] capability
+# @!attribute [rw] capabilities
+#   @return [Hash, nil]
+#
+# @!attribute [rw] defaultInputModes
 #   @return [Array, nil]
 #
-# @!attribute [rw] input_mode
+# @!attribute [rw] defaultOutputModes
 #   @return [Array, nil]
 #
-# @!attribute [rw] limit
-#   @return [Integer, nil]
+# @!attribute [rw] description
+#   @return [String, nil]
+#
+# @!attribute [rw] documentationUrl
+#   @return [String, nil]
+#
+# @!attribute [rw] iconUrl
+#   @return [String, nil]
 #
 # @!attribute [rw] name
 #   @return [String, nil]
 #
-# @!attribute [rw] offset
-#   @return [Integer, nil]
+# @!attribute [rw] protocolVersion
+#   @return [String, nil]
 #
-# @!attribute [rw] output_mode
+# @!attribute [rw] provider
+#   @return [Hash, nil]
+#
+# @!attribute [rw] securityRequirements
 #   @return [Array, nil]
 #
-# @!attribute [rw] skill
+# @!attribute [rw] securitySchemes
+#   @return [Hash, nil]
+#
+# @!attribute [rw] signatures
 #   @return [Array, nil]
+#
+# @!attribute [rw] skills
+#   @return [Array, nil]
+#
+# @!attribute [rw] supportedInterfaces
+#   @return [Array, nil]
+#
+# @!attribute [rw] version
+#   @return [String, nil]
 AgentListMatch = Struct.new(
-  :capability,
-  :input_mode,
-  :limit,
+  :capabilities,
+  :defaultInputModes,
+  :defaultOutputModes,
+  :description,
+  :documentationUrl,
+  :iconUrl,
   :name,
-  :offset,
-  :output_mode,
-  :skill,
+  :protocolVersion,
+  :provider,
+  :securityRequirements,
+  :securitySchemes,
+  :signatures,
+  :skills,
+  :supportedInterfaces,
+  :version,
   keyword_init: true
 )
 
@@ -400,12 +416,16 @@ AiCatalogListMatch = Struct.new(
 
 # ArdExplore entity data model.
 #
+# @!attribute [rw] facets
+#   @return [Hash, nil]
+#
 # @!attribute [rw] query
 #   @return [Hash, nil]
 #
 # @!attribute [rw] resultType
-#   @return [Hash]
+#   @return [String, nil]
 ArdExplore = Struct.new(
+  :facets,
   :query,
   :resultType,
   keyword_init: true
@@ -413,12 +433,16 @@ ArdExplore = Struct.new(
 
 # Request payload for ArdExplore#create.
 #
+# @!attribute [rw] facets
+#   @return [Hash, nil]
+#
 # @!attribute [rw] query
 #   @return [Hash, nil]
 #
 # @!attribute [rw] resultType
-#   @return [Hash]
+#   @return [String, nil]
 ArdExploreCreateData = Struct.new(
+  :facets,
   :query,
   :resultType,
   keyword_init: true
@@ -1711,38 +1735,12 @@ DownloadRefLoadMatch = Struct.new(
 )
 
 # GitOp entity data model.
-#
-# @!attribute [rw] ref
-#   @return [String]
-#
-# @!attribute [rw] repoId
-#   @return [String]
-#
-# @!attribute [rw] type
-#   @return [String, nil]
-GitOp = Struct.new(
-  :ref,
-  :repoId,
-  :type,
-  keyword_init: true
-)
+class GitOp
+end
 
 # Request payload for GitOp#create.
-#
-# @!attribute [rw] ref
-#   @return [String]
-#
-# @!attribute [rw] repoId
-#   @return [String]
-#
-# @!attribute [rw] type
-#   @return [String, nil]
-GitOpCreateData = Struct.new(
-  :ref,
-  :repoId,
-  :type,
-  keyword_init: true
-)
+class GitOpCreateData
+end
 
 # Request payload for GitOp#remove.
 #
@@ -1902,6 +1900,59 @@ GitOpsValidateTaskListMatch = Struct.new(
   keyword_init: true
 )
 
+# Request payload for GitOpsValidateTask#create.
+#
+# @!attribute [rw] artifactCount
+#   @return [Integer, nil]
+#
+# @!attribute [rw] completedAt
+#   @return [String, nil]
+#
+# @!attribute [rw] createdAt
+#   @return [String, nil]
+#
+# @!attribute [rw] errors
+#   @return [Array, nil]
+#
+# @!attribute [rw] groupCount
+#   @return [Integer, nil]
+#
+# @!attribute [rw] ref
+#   @return [String, nil]
+#
+# @!attribute [rw] repoId
+#   @return [String, nil]
+#
+# @!attribute [rw] result
+#   @return [String, nil]
+#
+# @!attribute [rw] state
+#   @return [String]
+#
+# @!attribute [rw] taskId
+#   @return [String]
+#
+# @!attribute [rw] type
+#   @return [String, nil]
+#
+# @!attribute [rw] versionCount
+#   @return [Integer, nil]
+GitOpsValidateTaskCreateData = Struct.new(
+  :artifactCount,
+  :completedAt,
+  :createdAt,
+  :errors,
+  :groupCount,
+  :ref,
+  :repoId,
+  :result,
+  :state,
+  :taskId,
+  :type,
+  :versionCount,
+  keyword_init: true
+)
+
 # GlobalRule entity data model.
 #
 # @!attribute [rw] config
@@ -1913,6 +1964,23 @@ GitOpsValidateTaskListMatch = Struct.new(
 # @!attribute [rw] ruleType
 #   @return [String, nil]
 GlobalRule = Struct.new(
+  :config,
+  :id,
+  :ruleType,
+  keyword_init: true
+)
+
+# Request payload for GlobalRule#list.
+#
+# @!attribute [rw] config
+#   @return [String, nil]
+#
+# @!attribute [rw] id
+#   @return [String, nil]
+#
+# @!attribute [rw] ruleType
+#   @return [String, nil]
+GlobalRuleListMatch = Struct.new(
   :config,
   :id,
   :ruleType,
@@ -1947,17 +2015,14 @@ GlobalRuleRemoveMatch = Struct.new(
 
 # Group entity data model.
 #
-# @!attribute [rw] artifactsType
-#   @return [String, nil]
-#
 # @!attribute [rw] createdOn
-#   @return [String, nil]
+#   @return [String]
 #
 # @!attribute [rw] description
 #   @return [String, nil]
 #
 # @!attribute [rw] groupId
-#   @return [String, nil]
+#   @return [String]
 #
 # @!attribute [rw] id
 #   @return [String, nil]
@@ -1966,18 +2031,14 @@ GlobalRuleRemoveMatch = Struct.new(
 #   @return [Hash, nil]
 #
 # @!attribute [rw] modifiedBy
-#   @return [String, nil]
+#   @return [String]
 #
 # @!attribute [rw] modifiedOn
-#   @return [String, nil]
+#   @return [String]
 #
 # @!attribute [rw] owner
-#   @return [String, nil]
-#
-# @!attribute [rw] properties
-#   @return [Hash, nil]
+#   @return [String]
 Group = Struct.new(
-  :artifactsType,
   :createdOn,
   :description,
   :groupId,
@@ -1986,7 +2047,6 @@ Group = Struct.new(
   :modifiedBy,
   :modifiedOn,
   :owner,
-  :properties,
   keyword_init: true
 )
 
@@ -2022,17 +2082,14 @@ GroupListMatch = Struct.new(
 
 # Request payload for Group#create.
 #
-# @!attribute [rw] artifactsType
-#   @return [String, nil]
-#
 # @!attribute [rw] createdOn
-#   @return [String, nil]
+#   @return [String]
 #
 # @!attribute [rw] description
 #   @return [String, nil]
 #
 # @!attribute [rw] groupId
-#   @return [String, nil]
+#   @return [String]
 #
 # @!attribute [rw] id
 #   @return [String, nil]
@@ -2041,18 +2098,14 @@ GroupListMatch = Struct.new(
 #   @return [Hash, nil]
 #
 # @!attribute [rw] modifiedBy
-#   @return [String, nil]
+#   @return [String]
 #
 # @!attribute [rw] modifiedOn
-#   @return [String, nil]
+#   @return [String]
 #
 # @!attribute [rw] owner
-#   @return [String, nil]
-#
-# @!attribute [rw] properties
-#   @return [Hash, nil]
+#   @return [String]
 GroupCreateData = Struct.new(
-  :artifactsType,
   :createdOn,
   :description,
   :groupId,
@@ -2061,7 +2114,6 @@ GroupCreateData = Struct.new(
   :modifiedBy,
   :modifiedOn,
   :owner,
-  :properties,
   keyword_init: true
 )
 
@@ -2070,9 +2122,6 @@ GroupCreateData = Struct.new(
 # @!attribute [rw] id
 #   @return [String]
 #
-# @!attribute [rw] artifactsType
-#   @return [String, nil]
-#
 # @!attribute [rw] createdOn
 #   @return [String, nil]
 #
@@ -2093,12 +2142,8 @@ GroupCreateData = Struct.new(
 #
 # @!attribute [rw] owner
 #   @return [String, nil]
-#
-# @!attribute [rw] properties
-#   @return [Hash, nil]
 GroupUpdateData = Struct.new(
   :id,
-  :artifactsType,
   :createdOn,
   :description,
   :groupId,
@@ -2106,7 +2151,6 @@ GroupUpdateData = Struct.new(
   :modifiedBy,
   :modifiedOn,
   :owner,
-  :properties,
   keyword_init: true
 )
 
@@ -2184,86 +2228,28 @@ KafkaSqlCreateData = Struct.new(
   keyword_init: true
 )
 
-# McpTool entity data model.
-#
-# @!attribute [rw] artifactId
-#   @return [String, nil]
-#
-# @!attribute [rw] createdOn
-#   @return [Integer, nil]
-#
-# @!attribute [rw] description
-#   @return [String, nil]
-#
-# @!attribute [rw] groupId
-#   @return [String, nil]
-#
-# @!attribute [rw] name
-#   @return [String, nil]
-#
-# @!attribute [rw] owner
-#   @return [String, nil]
-#
-# @!attribute [rw] parameters
-#   @return [Array, nil]
-#
-# @!attribute [rw] title
-#   @return [String, nil]
-McpTool = Struct.new(
-  :artifactId,
-  :createdOn,
-  :description,
-  :groupId,
-  :name,
-  :owner,
-  :parameters,
-  :title,
-  keyword_init: true
-)
-
-# Request payload for McpTool#list.
-#
-# @!attribute [rw] limit
-#   @return [Integer, nil]
-#
-# @!attribute [rw] name
-#   @return [String, nil]
-#
-# @!attribute [rw] offset
-#   @return [Integer, nil]
-#
-# @!attribute [rw] parameter
-#   @return [Array, nil]
-McpToolListMatch = Struct.new(
-  :limit,
-  :name,
-  :offset,
-  :parameter,
-  keyword_init: true
-)
-
 # Metadata entity data model.
 #
 # @!attribute [rw] artifactId
-#   @return [String, nil]
+#   @return [String]
 #
 # @!attribute [rw] artifactType
-#   @return [String, nil]
+#   @return [String]
 #
 # @!attribute [rw] contentId
-#   @return [Integer, nil]
+#   @return [Integer]
 #
 # @!attribute [rw] contractMetadata
 #   @return [Hash, nil]
 #
 # @!attribute [rw] createdOn
-#   @return [String, nil]
+#   @return [String]
 #
 # @!attribute [rw] description
 #   @return [String, nil]
 #
 # @!attribute [rw] globalId
-#   @return [Integer, nil]
+#   @return [Integer]
 #
 # @!attribute [rw] groupId
 #   @return [String, nil]
@@ -2272,19 +2258,22 @@ McpToolListMatch = Struct.new(
 #   @return [Hash, nil]
 #
 # @!attribute [rw] modifiedBy
-#   @return [String]
+#   @return [String, nil]
 #
 # @!attribute [rw] modifiedOn
-#   @return [String]
+#   @return [String, nil]
 #
 # @!attribute [rw] name
 #   @return [String, nil]
 #
 # @!attribute [rw] owner
+#   @return [String]
+#
+# @!attribute [rw] state
 #   @return [String, nil]
 #
 # @!attribute [rw] version
-#   @return [Integer, nil]
+#   @return [String]
 Metadata = Struct.new(
   :artifactId,
   :artifactType,
@@ -2299,6 +2288,7 @@ Metadata = Struct.new(
   :modifiedOn,
   :name,
   :owner,
+  :state,
   :version,
   keyword_init: true
 )
@@ -2332,25 +2322,25 @@ MetadataLoadMatch = Struct.new(
 #   @return [String]
 #
 # @!attribute [rw] artifactId
-#   @return [String, nil]
+#   @return [String]
 #
 # @!attribute [rw] artifactType
-#   @return [String, nil]
+#   @return [String]
 #
 # @!attribute [rw] contentId
-#   @return [Integer, nil]
+#   @return [Integer]
 #
 # @!attribute [rw] contractMetadata
 #   @return [Hash, nil]
 #
 # @!attribute [rw] createdOn
-#   @return [String, nil]
+#   @return [String]
 #
 # @!attribute [rw] description
 #   @return [String, nil]
 #
 # @!attribute [rw] globalId
-#   @return [Integer, nil]
+#   @return [Integer]
 #
 # @!attribute [rw] groupId
 #   @return [String, nil]
@@ -2359,19 +2349,22 @@ MetadataLoadMatch = Struct.new(
 #   @return [Hash, nil]
 #
 # @!attribute [rw] modifiedBy
-#   @return [String]
+#   @return [String, nil]
 #
 # @!attribute [rw] modifiedOn
-#   @return [String]
+#   @return [String, nil]
 #
 # @!attribute [rw] name
 #   @return [String, nil]
 #
 # @!attribute [rw] owner
+#   @return [String]
+#
+# @!attribute [rw] state
 #   @return [String, nil]
 #
 # @!attribute [rw] version
-#   @return [Integer, nil]
+#   @return [String]
 MetadataCreateData = Struct.new(
   :artifact_id,
   :group_id,
@@ -2389,6 +2382,7 @@ MetadataCreateData = Struct.new(
   :modifiedOn,
   :name,
   :owner,
+  :state,
   :version,
   keyword_init: true
 )
@@ -2443,8 +2437,11 @@ MetadataCreateData = Struct.new(
 # @!attribute [rw] owner
 #   @return [String, nil]
 #
+# @!attribute [rw] state
+#   @return [String, nil]
+#
 # @!attribute [rw] version
-#   @return [Integer, nil]
+#   @return [String, nil]
 MetadataUpdateData = Struct.new(
   :artifact_id,
   :group_id,
@@ -2462,28 +2459,25 @@ MetadataUpdateData = Struct.new(
   :modifiedOn,
   :name,
   :owner,
+  :state,
   :version,
   keyword_init: true
 )
 
 # OdcsContractResult entity data model.
 #
-# @!attribute [rw] labelsApplied
-#   @return [Integer, nil]
+# @!attribute [rw] contractId
+#   @return [String, nil]
 #
-# @!attribute [rw] rulesApplied
-#   @return [Integer, nil]
+# @!attribute [rw] projection
+#   @return [Hash, nil]
 #
-# @!attribute [rw] tagsApplied
-#   @return [Integer, nil]
-#
-# @!attribute [rw] warnings
-#   @return [Array, nil]
+# @!attribute [rw] version
+#   @return [String, nil]
 OdcsContractResult = Struct.new(
-  :labelsApplied,
-  :rulesApplied,
-  :tagsApplied,
-  :warnings,
+  :contractId,
+  :projection,
+  :version,
   keyword_init: true
 )
 
@@ -2492,23 +2486,19 @@ OdcsContractResult = Struct.new(
 # @!attribute [rw] group_id
 #   @return [String]
 #
-# @!attribute [rw] labelsApplied
-#   @return [Integer, nil]
+# @!attribute [rw] contractId
+#   @return [String, nil]
 #
-# @!attribute [rw] rulesApplied
-#   @return [Integer, nil]
+# @!attribute [rw] projection
+#   @return [Hash, nil]
 #
-# @!attribute [rw] tagsApplied
-#   @return [Integer, nil]
-#
-# @!attribute [rw] warnings
-#   @return [Array, nil]
+# @!attribute [rw] version
+#   @return [String, nil]
 OdcsContractResultCreateData = Struct.new(
   :group_id,
-  :labelsApplied,
-  :rulesApplied,
-  :tagsApplied,
-  :warnings,
+  :contractId,
+  :projection,
+  :version,
   keyword_init: true
 )
 
@@ -2520,24 +2510,20 @@ OdcsContractResultCreateData = Struct.new(
 # @!attribute [rw] group_id
 #   @return [String]
 #
-# @!attribute [rw] labelsApplied
-#   @return [Integer, nil]
+# @!attribute [rw] contractId
+#   @return [String, nil]
 #
-# @!attribute [rw] rulesApplied
-#   @return [Integer, nil]
+# @!attribute [rw] projection
+#   @return [Hash, nil]
 #
-# @!attribute [rw] tagsApplied
-#   @return [Integer, nil]
-#
-# @!attribute [rw] warnings
-#   @return [Array, nil]
+# @!attribute [rw] version
+#   @return [String, nil]
 OdcsContractResultUpdateData = Struct.new(
   :contract_id,
   :group_id,
-  :labelsApplied,
-  :rulesApplied,
-  :tagsApplied,
-  :warnings,
+  :contractId,
+  :projection,
+  :version,
   keyword_init: true
 )
 
@@ -2660,6 +2646,27 @@ RoleMappingListMatch = Struct.new(
   keyword_init: true
 )
 
+# Request payload for RoleMapping#create.
+#
+# @!attribute [rw] id
+#   @return [String, nil]
+#
+# @!attribute [rw] principalId
+#   @return [String]
+#
+# @!attribute [rw] principalName
+#   @return [String, nil]
+#
+# @!attribute [rw] role
+#   @return [String]
+RoleMappingCreateData = Struct.new(
+  :id,
+  :principalId,
+  :principalName,
+  :role,
+  keyword_init: true
+)
+
 # Rule entity data model.
 #
 # @!attribute [rw] config
@@ -2696,18 +2703,14 @@ RuleLoadMatch = Struct.new(
 
 # Request payload for Rule#list.
 #
-# @!attribute [rw] config
+# @!attribute [rw] artifact_id
 #   @return [String, nil]
 #
-# @!attribute [rw] id
-#   @return [String, nil]
-#
-# @!attribute [rw] ruleType
-#   @return [String, nil]
+# @!attribute [rw] group_id
+#   @return [String]
 RuleListMatch = Struct.new(
-  :config,
-  :id,
-  :ruleType,
+  :artifact_id,
+  :group_id,
   keyword_init: true
 )
 
@@ -3078,13 +3081,13 @@ UserInterfaceConfigLoadMatch = Struct.new(
 #   @return [String]
 #
 # @!attribute [rw] state
-#   @return [String]
+#   @return [String, nil]
 #
 # @!attribute [rw] value
 #   @return [String]
 #
 # @!attribute [rw] version
-#   @return [String, nil]
+#   @return [String]
 #
 # @!attribute [rw] versions
 #   @return [Array]
@@ -3298,7 +3301,7 @@ VersionListMatch = Struct.new(
 #   @return [String]
 #
 # @!attribute [rw] version
-#   @return [String, nil]
+#   @return [String]
 #
 # @!attribute [rw] versions
 #   @return [Array]
@@ -3468,10 +3471,58 @@ VersionRemoveMatch = Struct.new(
 
 # WellKnown entity data model.
 #
+# @!attribute [rw] artifactId
+#   @return [String, nil]
+#
+# @!attribute [rw] capabilities
+#   @return [Hash, nil]
+#
+# @!attribute [rw] createdOn
+#   @return [Integer, nil]
+#
+# @!attribute [rw] description
+#   @return [String, nil]
+#
+# @!attribute [rw] groupId
+#   @return [String, nil]
+#
 # @!attribute [rw] id
 #   @return [String, nil]
+#
+# @!attribute [rw] name
+#   @return [String, nil]
+#
+# @!attribute [rw] owner
+#   @return [String, nil]
+#
+# @!attribute [rw] parameters
+#   @return [Array, nil]
+#
+# @!attribute [rw] skills
+#   @return [Array, nil]
+#
+# @!attribute [rw] supportedInterfaces
+#   @return [Array, nil]
+#
+# @!attribute [rw] title
+#   @return [String, nil]
+#
+# @!attribute [rw] version
+#   @return [String, nil]
 WellKnown = Struct.new(
+  :artifactId,
+  :capabilities,
+  :createdOn,
+  :description,
+  :groupId,
   :id,
+  :name,
+  :owner,
+  :parameters,
+  :skills,
+  :supportedInterfaces,
+  :title,
+  :version,
   keyword_init: true
 )
 
@@ -3489,6 +3540,39 @@ WellKnownLoadMatch = Struct.new(
   :artifact_id,
   :group_id,
   :version,
+  keyword_init: true
+)
+
+# Request payload for WellKnown#list.
+#
+# @!attribute [rw] capability
+#   @return [Array, nil]
+#
+# @!attribute [rw] input_mode
+#   @return [Array, nil]
+#
+# @!attribute [rw] limit
+#   @return [Integer, nil]
+#
+# @!attribute [rw] name
+#   @return [String, nil]
+#
+# @!attribute [rw] offset
+#   @return [Integer, nil]
+#
+# @!attribute [rw] output_mode
+#   @return [Array, nil]
+#
+# @!attribute [rw] skill
+#   @return [Array, nil]
+WellKnownListMatch = Struct.new(
+  :capability,
+  :input_mode,
+  :limit,
+  :name,
+  :offset,
+  :output_mode,
+  :skill,
   keyword_init: true
 )
 

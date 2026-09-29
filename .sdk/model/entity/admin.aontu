@@ -35,14 +35,14 @@ main: kit: entity: admin: {
               {
                 k: "header"
                 n: "x_registry_preserve_content_id"
-                or: "x_registry_preserve_content_id"
+                or: "X-Registry-Preserve-ContentId"
                 r: false
                 t: "`$BOOLEAN`"
               }
               {
                 k: "header"
                 n: "x_registry_preserve_global_id"
-                or: "x_registry_preserve_global_id"
+                or: "X-Registry-Preserve-GlobalId"
                 r: false
                 t: "`$BOOLEAN`"
               }
@@ -51,7 +51,7 @@ main: kit: entity: admin: {
               {
                 k: "query"
                 n: "require_empty_registry"
-                or: "require_empty_registry"
+                or: "requireEmptyRegistry"
                 r: false
                 t: "`$BOOLEAN`"
               }
@@ -80,30 +80,6 @@ main: kit: entity: admin: {
             res: "`body`"
           }
         }
-        {
-          co: {
-            id: "POST /admin/roleMappings"
-            source: "openapi3"
-            version: 2
-          }
-          m: "POST"
-          o: "/admin/roleMappings"
-          q: {
-            "$action": "role_mapping"
-          }
-          s: [
-            {
-              lit: "admin"
-            }
-            {
-              lit: "roleMappings"
-            }
-          ]
-          t: {
-            req: "`reqdata`"
-            res: "`body`"
-          }
-        }
       ]
     }
     remove: {
@@ -120,7 +96,7 @@ main: kit: entity: admin: {
               {
                 k: "param"
                 n: "principal_id"
-                or: "principal_id"
+                or: "principalId"
                 r: true
                 t: "`$STRING`"
               }
@@ -165,7 +141,7 @@ main: kit: entity: admin: {
               {
                 k: "param"
                 n: "property_name"
-                or: "property_name"
+                or: "propertyName"
                 r: true
                 t: "`$STRING`"
               }
@@ -242,7 +218,7 @@ main: kit: entity: admin: {
               {
                 k: "param"
                 n: "principal_id"
-                or: "principal_id"
+                or: "principalId"
                 r: true
                 t: "`$STRING`"
               }
@@ -287,7 +263,7 @@ main: kit: entity: admin: {
               {
                 k: "param"
                 n: "property_name"
-                or: "property_name"
+                or: "propertyName"
                 r: true
                 t: "`$STRING`"
               }

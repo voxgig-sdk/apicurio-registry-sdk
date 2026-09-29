@@ -80,7 +80,7 @@ func TestRoleMappingEntity(t *testing.T) {
 		if setup.live {
 			_mode = "live"
 		}
-		for _, _op := range []string{"list", "load"} {
+		for _, _op := range []string{"create", "list", "load"} {
 			if _shouldSkip, _reason := isControlSkipped("entityOp", "role_mapping." + _op, _mode); _shouldSkip {
 				if _reason == "" {
 					_reason = "skipped via sdk-test-control.json"
@@ -97,27 +97,38 @@ func TestRoleMappingEntity(t *testing.T) {
 		}
 		client := setup.client
 
-		// Bootstrap entity data from existing test data (no create step in flow).
-		roleMappingRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath(setup.data, "existing.role_mapping")))
-		var roleMappingRef01Data map[string]any
-		if len(roleMappingRef01DataRaw) > 0 {
-			roleMappingRef01Data = core.ToMapAny(roleMappingRef01DataRaw[0][1])
+		// CREATE
+		roleMappingRef01Ent := client.RoleMapping(nil)
+		roleMappingRef01Data := core.ToMapAny(vs.GetProp(
+			vs.GetPath(setup.data, []any{"new", "role_mapping"}), "role_mapping_ref01"))
+
+		roleMappingRef01DataResult, err := roleMappingRef01Ent.Create(roleMappingRef01Data, nil)
+		if err != nil {
+			t.Fatalf("create failed: %v", err)
 		}
-		// Discard guards against Go's unused-var check when the flow's steps
-		// happen not to consume the bootstrap data (e.g. list-only flows).
-		_ = roleMappingRef01Data
+		roleMappingRef01Data = core.ToMapAny(entityData(roleMappingRef01DataResult))
+		if roleMappingRef01Data == nil {
+			t.Fatal("expected create result to be a map")
+		}
+		if roleMappingRef01Data["id"] == nil {
+			t.Fatal("expected created entity to have an id")
+		}
 
 		// LIST
-		roleMappingRef01Ent := client.RoleMapping(nil)
 		roleMappingRef01Match := map[string]any{}
 
 		roleMappingRef01ListResult, err := roleMappingRef01Ent.List(roleMappingRef01Match, nil)
 		if err != nil {
 			t.Fatalf("list failed: %v", err)
 		}
-		_, roleMappingRef01ListOk := roleMappingRef01ListResult.([]any)
+		roleMappingRef01List, roleMappingRef01ListOk := roleMappingRef01ListResult.([]any)
 		if !roleMappingRef01ListOk {
 			t.Fatalf("expected list result to be an array, got %T", roleMappingRef01ListResult)
+		}
+
+		foundItem := vs.Select(entityListToData(roleMappingRef01List), map[string]any{"id": roleMappingRef01Data["id"]})
+		if vs.IsEmpty(foundItem) {
+			t.Fatal("expected to find created entity in list")
 		}
 
 		// LOAD

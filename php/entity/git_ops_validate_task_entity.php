@@ -309,6 +309,36 @@ class GitOpsValidateTaskEntity
 
 
     
+    /**
+     * Create a new GitOpsValidateTask.
+     *
+     * @param GitOpsValidateTaskCreateData|array|null $reqdata Body data as an assoc-array;
+     *   a typed GitOpsValidateTaskCreateData names the shape.
+     * @param mixed $ctrl Optional per-call control overrides.
+     * @return GitOpsValidateTask|array The created GitOpsValidateTask as an assoc-array at the
+     *   SDK boundary; throws ApicurioRegistryError on failure (item-5 convention).
+     */
+    public function create(?array $reqdata = null, $ctrl = null): mixed
+    {
+        $utility = $this->_utility;
+        $ctx = ($utility->make_context)([
+            "opname" => "create",
+            "ctrl" => $ctrl,
+            "match" => $this->_match,
+            "data" => $this->_data,
+            "reqdata" => $reqdata,
+        ], $this->_entctx);
+
+        return $this->_run_op($ctx, function () use ($ctx) {
+            if ($ctx->result) {
+                if ($ctx->result->resdata) {
+                    $this->_data = ApicurioRegistryHelpers::to_map(Struct::clone($ctx->result->resdata)) ?? [];
+                }
+            }
+        });
+    }
+
+
 
     
 

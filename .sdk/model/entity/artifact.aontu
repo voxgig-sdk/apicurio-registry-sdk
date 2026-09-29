@@ -117,7 +117,7 @@ main: kit: entity: artifact: {
                 ex: "AVRO"
                 k: "query"
                 n: "artifact_type"
-                or: "artifact_type"
+                or: "artifactType"
                 r: false
                 t: "`$STRING`"
               }
@@ -131,7 +131,7 @@ main: kit: entity: artifact: {
               {
                 k: "query"
                 n: "group_id"
-                or: "group_id"
+                or: "groupId"
                 r: false
                 t: "`$STRING`"
               }
@@ -169,7 +169,7 @@ main: kit: entity: artifact: {
                 ex: false
                 k: "query"
                 n: "skip_count"
-                or: "skip_count"
+                or: "skipCount"
                 r: false
                 t: "`$BOOLEAN`"
               }
@@ -218,7 +218,7 @@ main: kit: entity: artifact: {
               {
                 k: "query"
                 n: "artifact_id"
-                or: "artifact_id"
+                or: "artifactId"
                 r: false
                 t: "`$STRING`"
               }
@@ -226,14 +226,14 @@ main: kit: entity: artifact: {
                 ex: "AVRO"
                 k: "query"
                 n: "artifact_type"
-                or: "artifact_type"
+                or: "artifactType"
                 r: false
                 t: "`$STRING`"
               }
               {
                 k: "query"
                 n: "content_id"
-                or: "content_id"
+                or: "contentId"
                 r: false
                 t: "`$INTEGER`"
               }
@@ -247,21 +247,21 @@ main: kit: entity: artifact: {
               {
                 k: "query"
                 n: "global_id"
-                or: "global_id"
+                or: "globalId"
                 r: false
                 t: "`$INTEGER`"
               }
               {
                 k: "query"
                 n: "group_id"
-                or: "group_id"
+                or: "groupId"
                 r: false
                 t: "`$STRING`"
               }
               {
                 k: "query"
                 n: "label"
-                or: "label"
+                or: "labels"
                 r: false
                 t: "`$ARRAY`"
               }
@@ -306,7 +306,7 @@ main: kit: entity: artifact: {
                 ex: false
                 k: "query"
                 n: "skip_count"
-                or: "skip_count"
+                or: "skipCount"
                 r: false
                 t: "`$BOOLEAN`"
               }
@@ -356,7 +356,7 @@ main: kit: entity: artifact: {
                 ex: "\"my-group\""
                 k: "param"
                 n: "group_id"
-                or: "group_id"
+                or: "groupId"
                 r: true
                 t: "`$STRING`"
               }
@@ -394,7 +394,7 @@ main: kit: entity: artifact: {
                 ex: false
                 k: "query"
                 n: "skip_count"
-                or: "skip_count"
+                or: "skipCount"
                 r: false
                 t: "`$BOOLEAN`"
               }
@@ -449,7 +449,7 @@ main: kit: entity: artifact: {
               {
                 k: "param"
                 n: "global_id"
-                or: "global_id"
+                or: "globalId"
                 r: true
                 t: "`$INTEGER`"
               }
@@ -458,14 +458,14 @@ main: kit: entity: artifact: {
               {
                 k: "query"
                 n: "reference"
-                or: "reference"
+                or: "references"
                 r: false
                 t: "`$STRING`"
               }
               {
                 k: "query"
                 n: "return_artifact_type"
-                or: "return_artifact_type"
+                or: "returnArtifactType"
                 r: false
                 t: "`$BOOLEAN`"
               }
@@ -512,14 +512,14 @@ main: kit: entity: artifact: {
               {
                 k: "param"
                 n: "artifact_id"
-                or: "artifact_id"
+                or: "artifactId"
                 r: true
                 t: "`$STRING`"
               }
               {
                 k: "param"
                 n: "group_id"
-                or: "group_id"
+                or: "groupId"
                 r: true
                 t: "`$STRING`"
               }
@@ -572,7 +572,7 @@ main: kit: entity: artifact: {
               {
                 k: "param"
                 n: "content_hash"
-                or: "content_hash"
+                or: "contentHash"
                 r: true
                 t: "`$STRING`"
               }
@@ -617,7 +617,7 @@ main: kit: entity: artifact: {
               {
                 k: "param"
                 n: "content_id"
-                or: "content_id"
+                or: "contentId"
                 r: true
                 t: "`$INTEGER`"
               }
@@ -668,7 +668,7 @@ main: kit: entity: artifact: {
                 ex: "\"my-group\""
                 k: "param"
                 n: "group_id"
-                or: "group_id"
+                or: "groupId"
                 r: true
                 t: "`$STRING`"
               }
@@ -676,7 +676,7 @@ main: kit: entity: artifact: {
                 ex: "\"example-artifact\""
                 k: "param"
                 n: "id"
-                or: "artifact_id"
+                or: "artifactId"
                 r: true
                 t: "`$STRING`"
               }
@@ -727,7 +727,7 @@ main: kit: entity: artifact: {
                 ex: "\"my-group\""
                 k: "param"
                 n: "group_id"
-                or: "group_id"
+                or: "groupId"
                 r: true
                 t: "`$STRING`"
               }

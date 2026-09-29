@@ -15,9 +15,13 @@ predictable and low-friction for both humans and AI agents.
 
 ## Install
 This package is not yet published to npm. Install it from the GitHub
-release tag (`ts/vX.Y.Z`):
+release tag (`ts/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/apicurio-registry-sdk/releases)), or from a
+clone, which carries the compiled `dist/`:
 
-- Releases: [https://github.com/voxgig-sdk/apicurio-registry-sdk/releases](https://github.com/voxgig-sdk/apicurio-registry-sdk/releases)
+```bash
+git clone https://github.com/voxgig-sdk/apicurio-registry-sdk
+npm install ./apicurio-registry-sdk/ts
+```
 
 
 ## Tutorial: your first API call
@@ -280,7 +284,6 @@ new ApicurioRegistrySDK(options?: {
 | `Group(data?)` | `GroupEntity` | Create a Group entity instance. |
 | `GroupRule(data?)` | `GroupRuleEntity` | Create a GroupRule entity instance. |
 | `KafkaSql(data?)` | `KafkaSqlEntity` | Create a KafkaSql entity instance. |
-| `McpTool(data?)` | `McpToolEntity` | Create a McpTool entity instance. |
 | `Metadata(data?)` | `MetadataEntity` | Create a Metadata entity instance. |
 | `OdcsContractResult(data?)` | `OdcsContractResultEntity` | Create an OdcsContractResult entity instance. |
 | `OdcsContractSummary(data?)` | `OdcsContractSummaryEntity` | Create an OdcsContractSummary entity instance. |
@@ -382,17 +385,13 @@ API path: `/admin/import`
 
 | Field | Description |
 | --- | --- |
-| `artifactId` |  |
 | `capabilities` | Capabilities of an A2A agent. |
-| `createdOn` |  |
 | `defaultInputModes` |  |
 | `defaultOutputModes` |  |
 | `description` |  |
 | `documentationUrl` |  |
-| `groupId` |  |
 | `iconUrl` |  |
 | `name` |  |
-| `owner` |  |
 | `protocolVersion` |  |
 | `provider` | Provider of an A2A agent. |
 | `securityRequirements` |  |
@@ -404,7 +403,7 @@ API path: `/admin/import`
 
 Operations: list.
 
-API path: `/well-known/agents`
+API path: `/well-known/agent.json`
 
 #### AgentCard
 
@@ -453,6 +452,7 @@ API path: `/well-known/ard/agents`
 
 | Field | Description |
 | --- | --- |
+| `facets` | Facets keyed by the requested facet field name. |
 | `query` | ARD search query. |
 | `resultType` | Requested result type for the ARD POST /explore endpoint. |
 
@@ -695,9 +695,6 @@ API path: `/admin/export`
 
 | Field | Description |
 | --- | --- |
-| `ref` | Git ref to validate (branch name, tag, or PR ref like `refs/pull/42/head`). |
-| `repoId` | Repository ID to validate against. |
-| `type` | Validation type. |
 
 Operations: create, remove.
 
@@ -732,7 +729,7 @@ API path: `/admin/gitops/status`
 | `type` | Validation type (`pull` or `push`). |
 | `versionCount` | Number of artifact versions loaded during validation. |
 
-Operations: list, load.
+Operations: create, list, load.
 
 API path: `/admin/gitops/validate`
 
@@ -744,7 +741,7 @@ API path: `/admin/gitops/validate`
 | `id` |  |
 | `ruleType` |  |
 
-Operations: create, remove.
+Operations: create, list, remove.
 
 API path: `/admin/rules`
 
@@ -752,7 +749,6 @@ API path: `/admin/rules`
 
 | Field | Description |
 | --- | --- |
-| `artifactsType` |  |
 | `createdOn` |  |
 | `description` |  |
 | `groupId` |  |
@@ -761,7 +757,6 @@ API path: `/admin/rules`
 | `modifiedBy` |  |
 | `modifiedOn` |  |
 | `owner` |  |
-| `properties` |  |
 
 Operations: create, list, load, remove, update.
 
@@ -789,23 +784,6 @@ Operations: create.
 
 API path: `/admin/snapshots`
 
-#### McpTool
-
-| Field | Description |
-| --- | --- |
-| `artifactId` |  |
-| `createdOn` |  |
-| `description` |  |
-| `groupId` |  |
-| `name` |  |
-| `owner` |  |
-| `parameters` |  |
-| `title` |  |
-
-Operations: list.
-
-API path: `/well-known/mcp-tools`
-
 #### Metadata
 
 | Field | Description |
@@ -823,7 +801,8 @@ API path: `/well-known/mcp-tools`
 | `modifiedOn` |  |
 | `name` |  |
 | `owner` |  |
-| `version` |  |
+| `state` |  |
+| `version` | A single version of an artifact. |
 
 Operations: create, load, update.
 
@@ -833,10 +812,9 @@ API path: `/groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}
 
 | Field | Description |
 | --- | --- |
-| `labelsApplied` | Number of contract.* labels set on the schema artifact. |
-| `rulesApplied` | Number of CEL quality rules projected onto the schema artifact. |
-| `tagsApplied` | Number of field-tag.* labels set on the schema artifact version. |
-| `warnings` | Any warnings encountered during projection. |
+| `contractId` | The contract artifact ID. |
+| `projection` | Summary of the projection performed when an ODCS contract is applied. |
+| `version` | The ODCS contract version. |
 
 Operations: create, update.
 
@@ -875,7 +853,7 @@ API path: `/groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}
 | `principalName` | A friendly name for the principal. |
 | `role` |  |
 
-Operations: list, load.
+Operations: create, list, load.
 
 API path: `/admin/roleMappings`
 
@@ -999,7 +977,7 @@ API path: `/system/uiConfig`
 | `owner` |  |
 | `state` |  |
 | `value` |  |
-| `version` |  |
+| `version` | A single version of an artifact. |
 | `versions` | The collection of artifact versions returned in the result set. |
 
 Operations: create, list, load, remove, update.
@@ -1010,11 +988,23 @@ API path: `/search/versions`
 
 | Field | Description |
 | --- | --- |
+| `artifactId` |  |
+| `capabilities` | Capabilities of an A2A agent. |
+| `createdOn` |  |
+| `description` |  |
+| `groupId` |  |
 | `id` |  |
+| `name` |  |
+| `owner` |  |
+| `parameters` |  |
+| `skills` |  |
+| `supportedInterfaces` |  |
+| `title` |  |
+| `version` |  |
 
-Operations: load.
+Operations: list, load.
 
-API path: `/well-known/agents/{groupId}/{artifactId}`
+API path: `/well-known/agents`
 
 #### WrappedVersionState
 
@@ -1074,17 +1064,13 @@ Create an instance: `const agent = client.Agent()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `artifactId` | `string` |  |
 | `capabilities` | `Record<string, any>` | Capabilities of an A2A agent. |
-| `createdOn` | `number` |  |
 | `defaultInputModes` | `any[]` |  |
 | `defaultOutputModes` | `any[]` |  |
 | `description` | `string` |  |
 | `documentationUrl` | `string` |  |
-| `groupId` | `string` |  |
 | `iconUrl` | `string` |  |
 | `name` | `string` |  |
-| `owner` | `string` |  |
 | `protocolVersion` | `string` |  |
 | `provider` | `Record<string, any>` | Provider of an A2A agent. |
 | `securityRequirements` | `any[]` |  |
@@ -1184,14 +1170,14 @@ Create an instance: `const ard_explore = client.ArdExplore()`
 
 | Field | Type | Description |
 | --- | --- | --- |
+| `facets` | `Record<string, any>` | Facets keyed by the requested facet field name. |
 | `query` | `Record<string, any>` | ARD search query. |
-| `resultType` | `Record<string, any>` | Requested result type for the ARD POST /explore endpoint. |
+| `resultType` | `string` | Requested result type for the ARD POST /explore endpoint. |
 
 #### Example: Create
 
 ```ts
 const ard_explore = await client.ArdExplore().create({
-  resultType: {},
 })
 ```
 
@@ -1765,20 +1751,10 @@ Create an instance: `const git_op = client.GitOp()`
 | `create(data)` | Create a new entity with the given data. |
 | `remove(match)` | Remove the matching entity. |
 
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `ref` | `string` | Git ref to validate (branch name, tag, or PR ref like `refs/pull/42/head`). |
-| `repoId` | `string` | Repository ID to validate against. |
-| `type` | `string` | Validation type. |
-
 #### Example: Create
 
 ```ts
 const git_op = await client.GitOp().create({
-  ref: 'example_ref',
-  repoId: 'example_repoId',
 })
 ```
 
@@ -1816,6 +1792,7 @@ Create an instance: `const git_ops_validate_task = client.GitOpsValidateTask()`
 
 | Method | Description |
 | --- | --- |
+| `create(data)` | Create a new entity with the given data. |
 | `list(match)` | List entities matching the criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 
@@ -1848,6 +1825,15 @@ const git_ops_validate_task = await client.GitOpsValidateTask().load({ task_id: 
 const git_ops_validate_tasks = await client.GitOpsValidateTask().list()
 ```
 
+#### Example: Create
+
+```ts
+const git_ops_validate_task = await client.GitOpsValidateTask().create({
+  state: 'example_state',
+  taskId: 'example_taskId',
+})
+```
+
 
 ### GlobalRule
 
@@ -1858,6 +1844,7 @@ Create an instance: `const global_rule = client.GlobalRule()`
 | Method | Description |
 | --- | --- |
 | `create(data)` | Create a new entity with the given data. |
+| `list(match)` | List entities matching the criteria. |
 | `remove(match)` | Remove the matching entity. |
 
 #### Fields
@@ -1867,6 +1854,12 @@ Create an instance: `const global_rule = client.GlobalRule()`
 | `config` | `string` |  |
 | `id` | `string` |  |
 | `ruleType` | `string` |  |
+
+#### Example: List
+
+```ts
+const global_rules = await client.GlobalRule().list()
+```
 
 #### Example: Create
 
@@ -1895,7 +1888,6 @@ Create an instance: `const group = client.Group()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `artifactsType` | `string` |  |
 | `createdOn` | `string` |  |
 | `description` | `string` |  |
 | `groupId` | `string` |  |
@@ -1904,7 +1896,6 @@ Create an instance: `const group = client.Group()`
 | `modifiedBy` | `string` |  |
 | `modifiedOn` | `string` |  |
 | `owner` | `string` |  |
-| `properties` | `Record<string, any>` |  |
 
 #### Example: Load
 
@@ -1922,6 +1913,11 @@ const groups = await client.Group().list()
 
 ```ts
 const group = await client.Group().create({
+  createdOn: 'example_createdOn',
+  groupId: 'example_groupId',
+  modifiedBy: 'example_modifiedBy',
+  modifiedOn: 'example_modifiedOn',
+  owner: 'example_owner',
 })
 ```
 
@@ -1980,36 +1976,6 @@ const kafka_sql = await client.KafkaSql().create({
 ```
 
 
-### McpTool
-
-Create an instance: `const mcp_tool = client.McpTool()`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `list(match)` | List entities matching the criteria. |
-
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `artifactId` | `string` |  |
-| `createdOn` | `number` |  |
-| `description` | `string` |  |
-| `groupId` | `string` |  |
-| `name` | `string` |  |
-| `owner` | `string` |  |
-| `parameters` | `any[]` |  |
-| `title` | `string` |  |
-
-#### Example: List
-
-```ts
-const mcp_tools = await client.McpTool().list()
-```
-
-
 ### Metadata
 
 Create an instance: `const metadata = client.Metadata()`
@@ -2039,7 +2005,8 @@ Create an instance: `const metadata = client.Metadata()`
 | `modifiedOn` | `string` |  |
 | `name` | `string` |  |
 | `owner` | `string` |  |
-| `version` | `number` |  |
+| `state` | `string` |  |
+| `version` | `string` | A single version of an artifact. |
 
 #### Example: Load
 
@@ -2054,8 +2021,13 @@ const metadata = await client.Metadata().create({
   artifact_id: 'example_artifact_id',
   group_id: 'example_group_id',
   version_expression: 'example_version_expression',
-  modifiedBy: 'example_modifiedBy',
-  modifiedOn: 'example_modifiedOn',
+  artifactId: 'example_artifactId',
+  artifactType: 'example_artifactType',
+  contentId: 1,
+  createdOn: 'example_createdOn',
+  globalId: 1,
+  owner: 'example_owner',
+  version: 'example_version',
 })
 ```
 
@@ -2075,10 +2047,9 @@ Create an instance: `const odcs_contract_result = client.OdcsContractResult()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `labelsApplied` | `number` | Number of contract.* labels set on the schema artifact. |
-| `rulesApplied` | `number` | Number of CEL quality rules projected onto the schema artifact. |
-| `tagsApplied` | `number` | Number of field-tag.* labels set on the schema artifact version. |
-| `warnings` | `any[]` | Any warnings encountered during projection. |
+| `contractId` | `string` | The contract artifact ID. |
+| `projection` | `Record<string, any>` | Summary of the projection performed when an ODCS contract is applied. |
+| `version` | `string` | The ODCS contract version. |
 
 #### Example: Create
 
@@ -2147,6 +2118,7 @@ Create an instance: `const role_mapping = client.RoleMapping()`
 
 | Method | Description |
 | --- | --- |
+| `create(data)` | Create a new entity with the given data. |
 | `list(match)` | List entities matching the criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 
@@ -2169,6 +2141,15 @@ const role_mapping = await client.RoleMapping().load({ id: 'role_mapping_id' })
 
 ```ts
 const role_mappings = await client.RoleMapping().list()
+```
+
+#### Example: Create
+
+```ts
+const role_mapping = await client.RoleMapping().create({
+  principalId: 'example_principalId',
+  role: 'example_role',
+})
 ```
 
 
@@ -2201,7 +2182,7 @@ const rule = await client.Rule().load({ id: 'rule_id' })
 #### Example: List
 
 ```ts
-const rules = await client.Rule().list()
+const rules = await client.Rule().list({ group_id: "example" })
 ```
 
 
@@ -2405,7 +2386,7 @@ Create an instance: `const version = client.Version()`
 | `owner` | `string` |  |
 | `state` | `string` |  |
 | `value` | `string` |  |
-| `version` | `string` |  |
+| `version` | `string` | A single version of an artifact. |
 | `versions` | `any[]` | The collection of artifact versions returned in the result set. |
 
 #### Example: Load
@@ -2433,6 +2414,7 @@ const version = await client.Version().create({
   globalId: 1,
   owner: 'example_owner',
   value: 'example_value',
+  version: 'example_version',
   versions: [],
 })
 ```
@@ -2446,18 +2428,37 @@ Create an instance: `const well_known = client.WellKnown()`
 
 | Method | Description |
 | --- | --- |
+| `list(match)` | List entities matching the criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
+| `artifactId` | `string` |  |
+| `capabilities` | `Record<string, any>` | Capabilities of an A2A agent. |
+| `createdOn` | `number` |  |
+| `description` | `string` |  |
+| `groupId` | `string` |  |
 | `id` | `string` |  |
+| `name` | `string` |  |
+| `owner` | `string` |  |
+| `parameters` | `any[]` |  |
+| `skills` | `any[]` |  |
+| `supportedInterfaces` | `any[]` |  |
+| `title` | `string` |  |
+| `version` | `string` |  |
 
 #### Example: Load
 
 ```ts
 const well_known = await client.WellKnown().load({ artifact_id: 'artifact_id', group_id: 'group_id' })
+```
+
+#### Example: List
+
+```ts
+const well_knowns = await client.WellKnown().list()
 ```
 
 

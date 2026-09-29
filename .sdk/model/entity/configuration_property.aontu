@@ -93,7 +93,7 @@ main: kit: entity: configuration_property: {
               {
                 k: "param"
                 n: "id"
-                or: "property_name"
+                or: "propertyName"
                 r: true
                 t: "`$STRING`"
               }

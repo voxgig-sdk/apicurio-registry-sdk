@@ -192,7 +192,6 @@ module ApicurioRegistryConfig
           "group" => {},
           "group_rule" => {},
           "kafka_sql" => {},
-          "mcp_tool" => {},
           "metadata" => {},
           "odcs_contract_result" => {},
           "odcs_contract_summary" => {},
@@ -257,13 +256,13 @@ module ApicurioRegistryConfig
                     "header" => [
                       {
                         "name" => "x_registry_preserve_content_id",
-                        "orig" => "x_registry_preserve_content_id",
+                        "orig" => "X-Registry-Preserve-ContentId",
                         "type" => "`$BOOLEAN`",
                         "kind" => "header",
                       },
                       {
                         "name" => "x_registry_preserve_global_id",
-                        "orig" => "x_registry_preserve_global_id",
+                        "orig" => "X-Registry-Preserve-GlobalId",
                         "type" => "`$BOOLEAN`",
                         "kind" => "header",
                       },
@@ -271,7 +270,7 @@ module ApicurioRegistryConfig
                     "query" => [
                       {
                         "name" => "require_empty_registry",
-                        "orig" => "require_empty_registry",
+                        "orig" => "requireEmptyRegistry",
                         "type" => "`$BOOLEAN`",
                         "kind" => "query",
                       },
@@ -284,32 +283,6 @@ module ApicurioRegistryConfig
                       "x_registry_preserve_content_id",
                       "x_registry_preserve_global_id",
                     ],
-                  },
-                },
-                {
-                  "kind" => "http",
-                  "method" => "POST",
-                  "orig" => "/admin/roleMappings",
-                  "segments" => [
-                    {
-                      "lit" => "admin",
-                    },
-                    {
-                      "lit" => "roleMappings",
-                    },
-                  ],
-                  "parts" => [
-                    "admin",
-                    "roleMappings",
-                  ],
-                  "rename" => {},
-                  "transform" => {
-                    "req" => "`reqdata`",
-                    "res" => "`body`",
-                  },
-                  "args" => {},
-                  "select" => {
-                    "$action" => "role_mapping",
                   },
                 },
               ],
@@ -351,7 +324,7 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "principal_id",
-                        "orig" => "principal_id",
+                        "orig" => "principalId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -401,7 +374,7 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "property_name",
-                        "orig" => "property_name",
+                        "orig" => "propertyName",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -481,7 +454,7 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "principal_id",
-                        "orig" => "principal_id",
+                        "orig" => "principalId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -531,7 +504,7 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "property_name",
-                        "orig" => "property_name",
+                        "orig" => "propertyName",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -558,21 +531,10 @@ module ApicurioRegistryConfig
         "agent" => {
           "fields" => [
             {
-              "name" => "artifactId",
-              "title" => "Artifact Id",
-              "type" => "`$STRING`",
-            },
-            {
               "name" => "capabilities",
               "title" => "Capabilities",
               "type" => "`$OBJECT`",
               "short" => "Capabilities of an A2A agent.",
-            },
-            {
-              "name" => "createdOn",
-              "title" => "Created On",
-              "type" => "`$INTEGER`",
-              "format" => "int64",
             },
             {
               "name" => "defaultInputModes",
@@ -595,11 +557,6 @@ module ApicurioRegistryConfig
               "type" => "`$STRING`",
             },
             {
-              "name" => "groupId",
-              "title" => "Group Id",
-              "type" => "`$STRING`",
-            },
-            {
               "name" => "iconUrl",
               "title" => "Icon Url",
               "type" => "`$STRING`",
@@ -607,11 +564,6 @@ module ApicurioRegistryConfig
             {
               "name" => "name",
               "title" => "Name",
-              "type" => "`$STRING`",
-            },
-            {
-              "name" => "owner",
-              "title" => "Owner",
               "type" => "`$STRING`",
             },
             {
@@ -662,87 +614,6 @@ module ApicurioRegistryConfig
               "input" => "data",
               "name" => "list",
               "points" => [
-                {
-                  "kind" => "http",
-                  "method" => "GET",
-                  "orig" => "/well-known/agents",
-                  "segments" => [
-                    {
-                      "lit" => "well-known",
-                    },
-                    {
-                      "lit" => "agents",
-                    },
-                  ],
-                  "parts" => [
-                    "well-known",
-                    "agents",
-                  ],
-                  "rename" => {},
-                  "transform" => {
-                    "req" => "`reqdata`",
-                    "res" => "`body.agents`",
-                  },
-                  "args" => {
-                    "query" => [
-                      {
-                        "name" => "capability",
-                        "orig" => "capability",
-                        "type" => "`$ARRAY`",
-                        "kind" => "query",
-                      },
-                      {
-                        "name" => "input_mode",
-                        "orig" => "input_mode",
-                        "type" => "`$ARRAY`",
-                        "kind" => "query",
-                      },
-                      {
-                        "name" => "limit",
-                        "orig" => "limit",
-                        "type" => "`$INTEGER`",
-                        "kind" => "query",
-                        "example" => 20,
-                      },
-                      {
-                        "name" => "name",
-                        "orig" => "name",
-                        "type" => "`$STRING`",
-                        "kind" => "query",
-                      },
-                      {
-                        "name" => "offset",
-                        "orig" => "offset",
-                        "type" => "`$INTEGER`",
-                        "kind" => "query",
-                        "example" => 0,
-                      },
-                      {
-                        "name" => "output_mode",
-                        "orig" => "output_mode",
-                        "type" => "`$ARRAY`",
-                        "kind" => "query",
-                      },
-                      {
-                        "name" => "skill",
-                        "orig" => "skill",
-                        "type" => "`$ARRAY`",
-                        "kind" => "query",
-                      },
-                    ],
-                  },
-                  "select" => {
-                    "exist" => [
-                      "capability",
-                      "input_mode",
-                      "limit",
-                      "name",
-                      "offset",
-                      "output_mode",
-                      "skill",
-                    ],
-                  },
-                },
                 {
                   "kind" => "http",
                   "method" => "GET",
@@ -987,20 +858,20 @@ module ApicurioRegistryConfig
                       },
                       {
                         "name" => "order_by",
-                        "orig" => "order_by",
+                        "orig" => "orderBy",
                         "type" => "`$STRING`",
                         "kind" => "query",
                       },
                       {
                         "name" => "page_size",
-                        "orig" => "page_size",
+                        "orig" => "pageSize",
                         "type" => "`$INTEGER`",
                         "kind" => "query",
                         "example" => 20,
                       },
                       {
                         "name" => "page_token",
-                        "orig" => "page_token",
+                        "orig" => "pageToken",
                         "type" => "`$STRING`",
                         "kind" => "query",
                       },
@@ -1073,6 +944,12 @@ module ApicurioRegistryConfig
         "ard_explore" => {
           "fields" => [
             {
+              "name" => "facets",
+              "title" => "Facets",
+              "type" => "`$OBJECT`",
+              "short" => "Facets keyed by the requested facet field name.",
+            },
+            {
               "name" => "query",
               "title" => "Query",
               "type" => "`$OBJECT`",
@@ -1081,8 +958,13 @@ module ApicurioRegistryConfig
             {
               "name" => "resultType",
               "title" => "Result Type",
-              "type" => "`$OBJECT`",
-              "req" => true,
+              "type" => "`$STRING`",
+              "op" => {
+                "create" => {
+                  "req" => true,
+                  "type" => "`$OBJECT`",
+                },
+              },
               "short" => "Requested result type for the ARD POST /explore endpoint.",
             },
           ],
@@ -1115,7 +997,7 @@ module ApicurioRegistryConfig
                   "rename" => {},
                   "transform" => {
                     "req" => "`reqdata`",
-                    "res" => "`body.facets`",
+                    "res" => "`body`",
                   },
                   "args" => {},
                   "select" => {},
@@ -1321,7 +1203,7 @@ module ApicurioRegistryConfig
                     "query" => [
                       {
                         "name" => "artifact_type",
-                        "orig" => "artifact_type",
+                        "orig" => "artifactType",
                         "type" => "`$STRING`",
                         "kind" => "query",
                         "example" => "AVRO",
@@ -1334,7 +1216,7 @@ module ApicurioRegistryConfig
                       },
                       {
                         "name" => "group_id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "query",
                       },
@@ -1366,7 +1248,7 @@ module ApicurioRegistryConfig
                       },
                       {
                         "name" => "skip_count",
-                        "orig" => "skip_count",
+                        "orig" => "skipCount",
                         "type" => "`$BOOLEAN`",
                         "kind" => "query",
                         "example" => false,
@@ -1417,20 +1299,20 @@ module ApicurioRegistryConfig
                     "query" => [
                       {
                         "name" => "artifact_id",
-                        "orig" => "artifact_id",
+                        "orig" => "artifactId",
                         "type" => "`$STRING`",
                         "kind" => "query",
                       },
                       {
                         "name" => "artifact_type",
-                        "orig" => "artifact_type",
+                        "orig" => "artifactType",
                         "type" => "`$STRING`",
                         "kind" => "query",
                         "example" => "AVRO",
                       },
                       {
                         "name" => "content_id",
-                        "orig" => "content_id",
+                        "orig" => "contentId",
                         "type" => "`$INTEGER`",
                         "kind" => "query",
                       },
@@ -1442,19 +1324,19 @@ module ApicurioRegistryConfig
                       },
                       {
                         "name" => "global_id",
-                        "orig" => "global_id",
+                        "orig" => "globalId",
                         "type" => "`$INTEGER`",
                         "kind" => "query",
                       },
                       {
                         "name" => "group_id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "query",
                       },
                       {
                         "name" => "label",
-                        "orig" => "label",
+                        "orig" => "labels",
                         "type" => "`$ARRAY`",
                         "kind" => "query",
                       },
@@ -1492,7 +1374,7 @@ module ApicurioRegistryConfig
                       },
                       {
                         "name" => "skip_count",
-                        "orig" => "skip_count",
+                        "orig" => "skipCount",
                         "type" => "`$BOOLEAN`",
                         "kind" => "query",
                         "example" => false,
@@ -1550,7 +1432,7 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "group_id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -1584,7 +1466,7 @@ module ApicurioRegistryConfig
                       },
                       {
                         "name" => "skip_count",
-                        "orig" => "skip_count",
+                        "orig" => "skipCount",
                         "type" => "`$BOOLEAN`",
                         "kind" => "query",
                         "example" => false,
@@ -1641,7 +1523,7 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "global_id",
-                        "orig" => "global_id",
+                        "orig" => "globalId",
                         "type" => "`$INTEGER`",
                         "kind" => "param",
                         "reqd" => true,
@@ -1650,13 +1532,13 @@ module ApicurioRegistryConfig
                     "query" => [
                       {
                         "name" => "reference",
-                        "orig" => "reference",
+                        "orig" => "references",
                         "type" => "`$STRING`",
                         "kind" => "query",
                       },
                       {
                         "name" => "return_artifact_type",
-                        "orig" => "return_artifact_type",
+                        "orig" => "returnArtifactType",
                         "type" => "`$BOOLEAN`",
                         "kind" => "query",
                       },
@@ -1712,14 +1594,14 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "artifact_id",
-                        "orig" => "artifact_id",
+                        "orig" => "artifactId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
                       },
                       {
                         "name" => "group_id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -1766,7 +1648,7 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "content_hash",
-                        "orig" => "content_hash",
+                        "orig" => "contentHash",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -1812,7 +1694,7 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "content_id",
-                        "orig" => "content_id",
+                        "orig" => "contentId",
                         "type" => "`$INTEGER`",
                         "kind" => "param",
                         "reqd" => true,
@@ -1869,7 +1751,7 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "group_id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -1877,7 +1759,7 @@ module ApicurioRegistryConfig
                       },
                       {
                         "name" => "id",
-                        "orig" => "artifact_id",
+                        "orig" => "artifactId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -1925,7 +1807,7 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "group_id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -2033,7 +1915,7 @@ module ApicurioRegistryConfig
                     "query" => [
                       {
                         "name" => "artifact_type",
-                        "orig" => "artifact_type",
+                        "orig" => "artifactType",
                         "type" => "`$STRING`",
                         "kind" => "query",
                       },
@@ -2102,7 +1984,7 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "artifact_id",
-                        "orig" => "artifact_id",
+                        "orig" => "artifactId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -2110,7 +1992,7 @@ module ApicurioRegistryConfig
                       },
                       {
                         "name" => "group_id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -2118,7 +2000,7 @@ module ApicurioRegistryConfig
                       },
                       {
                         "name" => "version_expression",
-                        "orig" => "version_expression",
+                        "orig" => "versionExpression",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -2127,7 +2009,7 @@ module ApicurioRegistryConfig
                     "query" => [
                       {
                         "name" => "ref_type",
-                        "orig" => "ref_type",
+                        "orig" => "refType",
                         "type" => "`$STRING`",
                         "kind" => "query",
                         "example" => "\"INBOUND\"",
@@ -2180,7 +2062,7 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "global_id_id",
-                        "orig" => "global_id",
+                        "orig" => "globalId",
                         "type" => "`$INTEGER`",
                         "kind" => "param",
                         "reqd" => true,
@@ -2189,7 +2071,7 @@ module ApicurioRegistryConfig
                     "query" => [
                       {
                         "name" => "ref_type",
-                        "orig" => "ref_type",
+                        "orig" => "refType",
                         "type" => "`$STRING`",
                         "kind" => "query",
                         "example" => "\"INBOUND\"",
@@ -2240,7 +2122,7 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "content_hash_id",
-                        "orig" => "content_hash",
+                        "orig" => "contentHash",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -2290,7 +2172,7 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "content_id_id",
-                        "orig" => "content_id",
+                        "orig" => "contentId",
                         "type" => "`$INTEGER`",
                         "kind" => "param",
                         "reqd" => true,
@@ -2387,7 +2269,7 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "group_id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -2395,7 +2277,7 @@ module ApicurioRegistryConfig
                       },
                       {
                         "name" => "id",
-                        "orig" => "artifact_id",
+                        "orig" => "artifactId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -2463,7 +2345,7 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "artifact_id",
-                        "orig" => "artifact_id",
+                        "orig" => "artifactId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -2471,7 +2353,7 @@ module ApicurioRegistryConfig
                       },
                       {
                         "name" => "group_id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -2479,7 +2361,7 @@ module ApicurioRegistryConfig
                       },
                       {
                         "name" => "id",
-                        "orig" => "rule_type",
+                        "orig" => "ruleType",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -2536,7 +2418,7 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "group_id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -2544,7 +2426,7 @@ module ApicurioRegistryConfig
                       },
                       {
                         "name" => "id",
-                        "orig" => "artifact_id",
+                        "orig" => "artifactId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -2752,7 +2634,7 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "artifact_id",
-                        "orig" => "artifact_id",
+                        "orig" => "artifactId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -2760,7 +2642,7 @@ module ApicurioRegistryConfig
                       },
                       {
                         "name" => "group_id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -2768,7 +2650,7 @@ module ApicurioRegistryConfig
                       },
                       {
                         "name" => "id",
-                        "orig" => "branch_id",
+                        "orig" => "branchId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -2827,7 +2709,7 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "artifact_id",
-                        "orig" => "artifact_id",
+                        "orig" => "artifactId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -2835,7 +2717,7 @@ module ApicurioRegistryConfig
                       },
                       {
                         "name" => "group_id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -2903,7 +2785,7 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "artifact_id",
-                        "orig" => "artifact_id",
+                        "orig" => "artifactId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -2911,7 +2793,7 @@ module ApicurioRegistryConfig
                       },
                       {
                         "name" => "group_id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -2919,7 +2801,7 @@ module ApicurioRegistryConfig
                       },
                       {
                         "name" => "id",
-                        "orig" => "branch_id",
+                        "orig" => "branchId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -2988,7 +2870,7 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "artifact_id",
-                        "orig" => "artifact_id",
+                        "orig" => "artifactId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -2996,7 +2878,7 @@ module ApicurioRegistryConfig
                       },
                       {
                         "name" => "group_id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -3004,7 +2886,7 @@ module ApicurioRegistryConfig
                       },
                       {
                         "name" => "id",
-                        "orig" => "branch_id",
+                        "orig" => "branchId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -3073,7 +2955,7 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "artifact_id",
-                        "orig" => "artifact_id",
+                        "orig" => "artifactId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -3081,7 +2963,7 @@ module ApicurioRegistryConfig
                       },
                       {
                         "name" => "group_id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -3089,7 +2971,7 @@ module ApicurioRegistryConfig
                       },
                       {
                         "name" => "id",
-                        "orig" => "branch_id",
+                        "orig" => "branchId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -3156,7 +3038,7 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "artifact_id",
-                        "orig" => "artifact_id",
+                        "orig" => "artifactId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -3164,7 +3046,7 @@ module ApicurioRegistryConfig
                       },
                       {
                         "name" => "group_id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -3172,7 +3054,7 @@ module ApicurioRegistryConfig
                       },
                       {
                         "name" => "id",
-                        "orig" => "branch_id",
+                        "orig" => "branchId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -3286,7 +3168,7 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "artifact_id",
-                        "orig" => "artifact_id",
+                        "orig" => "artifactId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -3294,7 +3176,7 @@ module ApicurioRegistryConfig
                       },
                       {
                         "name" => "group_id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -3302,7 +3184,7 @@ module ApicurioRegistryConfig
                       },
                       {
                         "name" => "version_expression",
-                        "orig" => "version_expression",
+                        "orig" => "versionExpression",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -3374,7 +3256,7 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "artifact_id",
-                        "orig" => "artifact_id",
+                        "orig" => "artifactId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -3382,7 +3264,7 @@ module ApicurioRegistryConfig
                       },
                       {
                         "name" => "group_id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -3390,7 +3272,7 @@ module ApicurioRegistryConfig
                       },
                       {
                         "name" => "version_expression",
-                        "orig" => "version_expression",
+                        "orig" => "versionExpression",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -3537,7 +3419,7 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "id",
-                        "orig" => "property_name",
+                        "orig" => "propertyName",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -3634,14 +3516,14 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "artifact_id",
-                        "orig" => "artifact_id",
+                        "orig" => "artifactId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
                       },
                       {
                         "name" => "group_id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -3699,7 +3581,7 @@ module ApicurioRegistryConfig
                     "query" => [
                       {
                         "name" => "artifact_type",
-                        "orig" => "artifact_type",
+                        "orig" => "artifactType",
                         "type" => "`$STRING`",
                         "kind" => "query",
                         "reqd" => true,
@@ -3853,21 +3735,21 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "artifact_id",
-                        "orig" => "artifact_id",
+                        "orig" => "artifactId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
                       },
                       {
                         "name" => "group_id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
                       },
                       {
                         "name" => "version_id",
-                        "orig" => "version_expression",
+                        "orig" => "versionExpression",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -3929,14 +3811,14 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "artifact_id",
-                        "orig" => "artifact_id",
+                        "orig" => "artifactId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
                       },
                       {
                         "name" => "group_id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -3997,14 +3879,14 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "artifact_id",
-                        "orig" => "artifact_id",
+                        "orig" => "artifactId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
                       },
                       {
                         "name" => "group_id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -4065,14 +3947,14 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "artifact_id",
-                        "orig" => "artifact_id",
+                        "orig" => "artifactId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
                       },
                       {
                         "name" => "group_id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -4118,7 +4000,7 @@ module ApicurioRegistryConfig
                     "query" => [
                       {
                         "name" => "compatibility_group",
-                        "orig" => "compatibility_group",
+                        "orig" => "compatibilityGroup",
                         "type" => "`$STRING`",
                         "kind" => "query",
                       },
@@ -4150,7 +4032,7 @@ module ApicurioRegistryConfig
                       },
                       {
                         "name" => "owner_team",
-                        "orig" => "owner_team",
+                        "orig" => "ownerTeam",
                         "type" => "`$STRING`",
                         "kind" => "query",
                       },
@@ -4220,14 +4102,14 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "artifact_id",
-                        "orig" => "artifact_id",
+                        "orig" => "artifactId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
                       },
                       {
                         "name" => "group_id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -4312,14 +4194,14 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "artifact_id",
-                        "orig" => "artifact_id",
+                        "orig" => "artifactId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
                       },
                       {
                         "name" => "group_id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -4328,7 +4210,7 @@ module ApicurioRegistryConfig
                     "query" => [
                       {
                         "name" => "contract_id",
-                        "orig" => "contract_id",
+                        "orig" => "contractId",
                         "type" => "`$STRING`",
                         "kind" => "query",
                         "reqd" => true,
@@ -4390,14 +4272,14 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "artifact_id",
-                        "orig" => "artifact_id",
+                        "orig" => "artifactId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
                       },
                       {
                         "name" => "group_id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -4406,7 +4288,7 @@ module ApicurioRegistryConfig
                     "query" => [
                       {
                         "name" => "contract_id",
-                        "orig" => "contract_id",
+                        "orig" => "contractId",
                         "type" => "`$STRING`",
                         "kind" => "query",
                         "reqd" => true,
@@ -4468,14 +4350,14 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "artifact_id",
-                        "orig" => "artifact_id",
+                        "orig" => "artifactId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
                       },
                       {
                         "name" => "group_id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -4536,14 +4418,14 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "artifact_id",
-                        "orig" => "artifact_id",
+                        "orig" => "artifactId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
                       },
                       {
                         "name" => "group_id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -4596,14 +4478,14 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "group_id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
                       },
                       {
                         "name" => "id",
-                        "orig" => "contract_id",
+                        "orig" => "contractId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -4678,21 +4560,21 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "artifact_id",
-                        "orig" => "artifact_id",
+                        "orig" => "artifactId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
                       },
                       {
                         "name" => "group_id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
                       },
                       {
                         "name" => "version_id",
-                        "orig" => "version_expression",
+                        "orig" => "versionExpression",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -4754,14 +4636,14 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "artifact_id",
-                        "orig" => "artifact_id",
+                        "orig" => "artifactId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
                       },
                       {
                         "name" => "group_id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -4814,14 +4696,14 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "group_id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
                       },
                       {
                         "name" => "id",
-                        "orig" => "contract_id",
+                        "orig" => "contractId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -4887,14 +4769,14 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "artifact_id",
-                        "orig" => "artifact_id",
+                        "orig" => "artifactId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
                       },
                       {
                         "name" => "group_id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -4955,14 +4837,14 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "artifact_id",
-                        "orig" => "artifact_id",
+                        "orig" => "artifactId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
                       },
                       {
                         "name" => "group_id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -5163,21 +5045,21 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "artifact_id",
-                        "orig" => "artifact_id",
+                        "orig" => "artifactId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
                       },
                       {
                         "name" => "group_id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
                       },
                       {
                         "name" => "version_id",
-                        "orig" => "version_expression",
+                        "orig" => "versionExpression",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -5238,14 +5120,14 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "artifact_id",
-                        "orig" => "artifact_id",
+                        "orig" => "artifactId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
                       },
                       {
                         "name" => "group_id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -5348,21 +5230,21 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "artifact_id",
-                        "orig" => "artifact_id",
+                        "orig" => "artifactId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
                       },
                       {
                         "name" => "group_id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
                       },
                       {
                         "name" => "version_id",
-                        "orig" => "version_expression",
+                        "orig" => "versionExpression",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -5423,14 +5305,14 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "artifact_id",
-                        "orig" => "artifact_id",
+                        "orig" => "artifactId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
                       },
                       {
                         "name" => "group_id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -5575,7 +5457,7 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "group_id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -5591,13 +5473,13 @@ module ApicurioRegistryConfig
                       },
                       {
                         "name" => "dry_run",
-                        "orig" => "dry_run",
+                        "orig" => "dryRun",
                         "type" => "`$BOOLEAN`",
                         "kind" => "query",
                       },
                       {
                         "name" => "if_exist",
-                        "orig" => "if_exist",
+                        "orig" => "ifExists",
                         "type" => "`$STRING`",
                         "kind" => "query",
                       },
@@ -5704,14 +5586,14 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "artifact_id",
-                        "orig" => "artifact_id",
+                        "orig" => "artifactId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
                       },
                       {
                         "name" => "group_id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -5790,13 +5672,13 @@ module ApicurioRegistryConfig
                     "query" => [
                       {
                         "name" => "for_browser",
-                        "orig" => "for_browser",
+                        "orig" => "forBrowser",
                         "type" => "`$BOOLEAN`",
                         "kind" => "query",
                       },
                       {
                         "name" => "group_id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "query",
                       },
@@ -5817,28 +5699,7 @@ module ApicurioRegistryConfig
           },
         },
         "git_op" => {
-          "fields" => [
-            {
-              "name" => "ref",
-              "title" => "Ref",
-              "type" => "`$STRING`",
-              "req" => true,
-              "short" => "Git ref to validate (branch name, tag, or PR ref like `refs/pull/42/head`).",
-            },
-            {
-              "name" => "repoId",
-              "title" => "Repo Id",
-              "type" => "`$STRING`",
-              "req" => true,
-              "short" => "Repository ID to validate against.",
-            },
-            {
-              "name" => "type",
-              "title" => "Type",
-              "type" => "`$STRING`",
-              "short" => "Validation type.",
-            },
-          ],
+          "fields" => [],
           "name" => "git_op",
           "op" => {
             "create" => {
@@ -5864,34 +5725,6 @@ module ApicurioRegistryConfig
                     "admin",
                     "gitops",
                     "sync",
-                  ],
-                  "rename" => {},
-                  "transform" => {
-                    "req" => "`reqdata`",
-                    "res" => "`body`",
-                  },
-                  "args" => {},
-                  "select" => {},
-                },
-                {
-                  "kind" => "http",
-                  "method" => "POST",
-                  "orig" => "/admin/gitops/validate",
-                  "segments" => [
-                    {
-                      "lit" => "admin",
-                    },
-                    {
-                      "lit" => "gitops",
-                    },
-                    {
-                      "lit" => "validate",
-                    },
-                  ],
-                  "parts" => [
-                    "admin",
-                    "gitops",
-                    "validate",
                   ],
                   "rename" => {},
                   "transform" => {
@@ -5944,7 +5777,7 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "task_id",
-                        "orig" => "task_id",
+                        "orig" => "taskId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -6067,12 +5900,24 @@ module ApicurioRegistryConfig
               "name" => "ref",
               "title" => "Ref",
               "type" => "`$STRING`",
+              "op" => {
+                "create" => {
+                  "req" => true,
+                  "type" => "`$STRING`",
+                },
+              },
               "short" => "Git ref being validated.",
             },
             {
               "name" => "repoId",
               "title" => "Repo Id",
               "type" => "`$STRING`",
+              "op" => {
+                "create" => {
+                  "req" => true,
+                  "type" => "`$STRING`",
+                },
+              },
               "short" => "Repository ID being validated.",
             },
             {
@@ -6111,6 +5956,40 @@ module ApicurioRegistryConfig
           ],
           "name" => "git_ops_validate_task",
           "op" => {
+            "create" => {
+              "input" => "data",
+              "name" => "create",
+              "points" => [
+                {
+                  "kind" => "http",
+                  "method" => "POST",
+                  "orig" => "/admin/gitops/validate",
+                  "segments" => [
+                    {
+                      "lit" => "admin",
+                    },
+                    {
+                      "lit" => "gitops",
+                    },
+                    {
+                      "lit" => "validate",
+                    },
+                  ],
+                  "parts" => [
+                    "admin",
+                    "gitops",
+                    "validate",
+                  ],
+                  "rename" => {},
+                  "transform" => {
+                    "req" => "`reqdata`",
+                    "res" => "`body`",
+                  },
+                  "args" => {},
+                  "select" => {},
+                },
+              ],
+            },
             "list" => {
               "input" => "data",
               "name" => "list",
@@ -6186,7 +6065,7 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "task_id",
-                        "orig" => "task_id",
+                        "orig" => "taskId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -6261,6 +6140,36 @@ module ApicurioRegistryConfig
                 },
               ],
             },
+            "list" => {
+              "input" => "data",
+              "name" => "list",
+              "points" => [
+                {
+                  "kind" => "http",
+                  "method" => "GET",
+                  "orig" => "/admin/rules",
+                  "segments" => [
+                    {
+                      "lit" => "admin",
+                    },
+                    {
+                      "lit" => "rules",
+                    },
+                  ],
+                  "parts" => [
+                    "admin",
+                    "rules",
+                  ],
+                  "rename" => {},
+                  "transform" => {
+                    "req" => "`reqdata`",
+                    "res" => "`body`",
+                  },
+                  "args" => {},
+                  "select" => {},
+                },
+              ],
+            },
             "remove" => {
               "input" => "data",
               "name" => "remove",
@@ -6298,7 +6207,7 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "id",
-                        "orig" => "rule_type",
+                        "orig" => "ruleType",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -6346,20 +6255,10 @@ module ApicurioRegistryConfig
         "group" => {
           "fields" => [
             {
-              "name" => "artifactsType",
-              "title" => "Artifacts Type",
-              "type" => "`$STRING`",
-            },
-            {
               "name" => "createdOn",
               "title" => "Created On",
               "type" => "`$STRING`",
-              "op" => {
-                "list" => {
-                  "req" => true,
-                  "type" => "`$STRING`",
-                },
-              },
+              "req" => true,
               "format" => "date-time",
             },
             {
@@ -6371,16 +6270,7 @@ module ApicurioRegistryConfig
               "name" => "groupId",
               "title" => "Group Id",
               "type" => "`$STRING`",
-              "op" => {
-                "create" => {
-                  "req" => true,
-                  "type" => "`$STRING`",
-                },
-                "list" => {
-                  "req" => true,
-                  "type" => "`$STRING`",
-                },
-              },
+              "req" => true,
             },
             {
               "name" => "id",
@@ -6396,40 +6286,25 @@ module ApicurioRegistryConfig
               "name" => "modifiedBy",
               "title" => "Modified By",
               "type" => "`$STRING`",
-              "op" => {
-                "list" => {
-                  "req" => true,
-                  "type" => "`$STRING`",
-                },
-              },
+              "req" => true,
             },
             {
               "name" => "modifiedOn",
               "title" => "Modified On",
               "type" => "`$STRING`",
-              "op" => {
-                "list" => {
-                  "req" => true,
-                  "type" => "`$STRING`",
-                },
-              },
+              "req" => true,
               "format" => "date-time",
             },
             {
               "name" => "owner",
               "title" => "Owner",
               "type" => "`$STRING`",
+              "req" => true,
               "op" => {
-                "list" => {
-                  "req" => true,
+                "update" => {
                   "type" => "`$STRING`",
                 },
               },
-            },
-            {
-              "name" => "properties",
-              "title" => "Properties",
-              "type" => "`$OBJECT`",
             },
           ],
           "id" => {
@@ -6457,7 +6332,7 @@ module ApicurioRegistryConfig
                   "rename" => {},
                   "transform" => {
                     "req" => "`reqdata`",
-                    "res" => "`body.labels`",
+                    "res" => "`body`",
                   },
                   "args" => {},
                   "select" => {},
@@ -6551,13 +6426,13 @@ module ApicurioRegistryConfig
                   },
                   "transform" => {
                     "req" => "`reqdata`",
-                    "res" => "`body.labels`",
+                    "res" => "`body`",
                   },
                   "args" => {
                     "params" => [
                       {
                         "name" => "id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -6606,7 +6481,7 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -6655,7 +6530,7 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -6738,7 +6613,7 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -6796,7 +6671,7 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "group_id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -6804,7 +6679,7 @@ module ApicurioRegistryConfig
                       },
                       {
                         "name" => "id",
-                        "orig" => "rule_type",
+                        "orig" => "ruleType",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -6851,7 +6726,7 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -6922,151 +6797,26 @@ module ApicurioRegistryConfig
             "ancestors" => [],
           },
         },
-        "mcp_tool" => {
-          "fields" => [
-            {
-              "name" => "artifactId",
-              "title" => "Artifact Id",
-              "type" => "`$STRING`",
-            },
-            {
-              "name" => "createdOn",
-              "title" => "Created On",
-              "type" => "`$INTEGER`",
-              "format" => "int64",
-            },
-            {
-              "name" => "description",
-              "title" => "Description",
-              "type" => "`$STRING`",
-            },
-            {
-              "name" => "groupId",
-              "title" => "Group Id",
-              "type" => "`$STRING`",
-            },
-            {
-              "name" => "name",
-              "title" => "Name",
-              "type" => "`$STRING`",
-            },
-            {
-              "name" => "owner",
-              "title" => "Owner",
-              "type" => "`$STRING`",
-            },
-            {
-              "name" => "parameters",
-              "title" => "Parameters",
-              "type" => "`$ARRAY`",
-            },
-            {
-              "name" => "title",
-              "title" => "Title",
-              "type" => "`$STRING`",
-            },
-          ],
-          "name" => "mcp_tool",
-          "op" => {
-            "list" => {
-              "input" => "data",
-              "name" => "list",
-              "points" => [
-                {
-                  "kind" => "http",
-                  "method" => "GET",
-                  "orig" => "/well-known/mcp-tools",
-                  "segments" => [
-                    {
-                      "lit" => "well-known",
-                    },
-                    {
-                      "lit" => "mcp-tools",
-                    },
-                  ],
-                  "parts" => [
-                    "well-known",
-                    "mcp-tools",
-                  ],
-                  "rename" => {},
-                  "transform" => {
-                    "req" => "`reqdata`",
-                    "res" => "`body.tools`",
-                  },
-                  "args" => {
-                    "query" => [
-                      {
-                        "name" => "limit",
-                        "orig" => "limit",
-                        "type" => "`$INTEGER`",
-                        "kind" => "query",
-                        "example" => 20,
-                      },
-                      {
-                        "name" => "name",
-                        "orig" => "name",
-                        "type" => "`$STRING`",
-                        "kind" => "query",
-                      },
-                      {
-                        "name" => "offset",
-                        "orig" => "offset",
-                        "type" => "`$INTEGER`",
-                        "kind" => "query",
-                        "example" => 0,
-                      },
-                      {
-                        "name" => "parameter",
-                        "orig" => "parameter",
-                        "type" => "`$ARRAY`",
-                        "kind" => "query",
-                      },
-                    ],
-                  },
-                  "select" => {
-                    "exist" => [
-                      "limit",
-                      "name",
-                      "offset",
-                      "parameter",
-                    ],
-                  },
-                },
-              ],
-            },
-          },
-          "relations" => {
-            "ancestors" => [],
-          },
-        },
         "metadata" => {
           "fields" => [
             {
               "name" => "artifactId",
               "title" => "Artifact Id",
               "type" => "`$STRING`",
-              "op" => {
-                "load" => {
-                  "req" => true,
-                  "type" => "`$STRING`",
-                },
-              },
+              "req" => true,
             },
             {
               "name" => "artifactType",
               "title" => "Artifact Type",
               "type" => "`$STRING`",
-              "op" => {
-                "load" => {
-                  "req" => true,
-                  "type" => "`$STRING`",
-                },
-              },
+              "req" => true,
             },
             {
               "name" => "contentId",
               "title" => "Content Id",
               "type" => "`$INTEGER`",
+              "req" => true,
+              "format" => "int64",
             },
             {
               "name" => "contractMetadata",
@@ -7078,12 +6828,7 @@ module ApicurioRegistryConfig
               "name" => "createdOn",
               "title" => "Created On",
               "type" => "`$STRING`",
-              "op" => {
-                "load" => {
-                  "req" => true,
-                  "type" => "`$STRING`",
-                },
-              },
+              "req" => true,
               "format" => "date-time",
             },
             {
@@ -7095,6 +6840,8 @@ module ApicurioRegistryConfig
               "name" => "globalId",
               "title" => "Global Id",
               "type" => "`$INTEGER`",
+              "req" => true,
+              "format" => "int64",
             },
             {
               "name" => "groupId",
@@ -7116,13 +6863,23 @@ module ApicurioRegistryConfig
               "name" => "modifiedBy",
               "title" => "Modified By",
               "type" => "`$STRING`",
-              "req" => true,
+              "op" => {
+                "load" => {
+                  "req" => true,
+                  "type" => "`$STRING`",
+                },
+              },
             },
             {
               "name" => "modifiedOn",
               "title" => "Modified On",
               "type" => "`$STRING`",
-              "req" => true,
+              "op" => {
+                "load" => {
+                  "req" => true,
+                  "type" => "`$STRING`",
+                },
+              },
               "format" => "date-time",
             },
             {
@@ -7134,17 +6891,24 @@ module ApicurioRegistryConfig
               "name" => "owner",
               "title" => "Owner",
               "type" => "`$STRING`",
+              "req" => true,
               "op" => {
-                "load" => {
-                  "req" => true,
+                "update" => {
                   "type" => "`$STRING`",
                 },
               },
             },
             {
+              "name" => "state",
+              "title" => "State",
+              "type" => "`$STRING`",
+            },
+            {
               "name" => "version",
               "title" => "Version",
-              "type" => "`$INTEGER`",
+              "type" => "`$STRING`",
+              "req" => true,
+              "short" => "A single version of an artifact.",
             },
           ],
           "name" => "metadata",
@@ -7204,7 +6968,7 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "artifact_id",
-                        "orig" => "artifact_id",
+                        "orig" => "artifactId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -7212,7 +6976,7 @@ module ApicurioRegistryConfig
                       },
                       {
                         "name" => "group_id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -7220,7 +6984,7 @@ module ApicurioRegistryConfig
                       },
                       {
                         "name" => "version_expression",
-                        "orig" => "version_expression",
+                        "orig" => "versionExpression",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -7283,13 +7047,13 @@ module ApicurioRegistryConfig
                   },
                   "transform" => {
                     "req" => "`reqdata`",
-                    "res" => "`body.labels`",
+                    "res" => "`body`",
                   },
                   "args" => {
                     "params" => [
                       {
                         "name" => "artifact_id",
-                        "orig" => "artifact_id",
+                        "orig" => "artifactId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -7297,7 +7061,7 @@ module ApicurioRegistryConfig
                       },
                       {
                         "name" => "group_id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -7305,7 +7069,7 @@ module ApicurioRegistryConfig
                       },
                       {
                         "name" => "version_expression",
-                        "orig" => "version_expression",
+                        "orig" => "versionExpression",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -7358,7 +7122,7 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "artifact_id",
-                        "orig" => "artifact_id",
+                        "orig" => "artifactId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -7366,7 +7130,7 @@ module ApicurioRegistryConfig
                       },
                       {
                         "name" => "group_id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -7438,7 +7202,7 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "artifact_id",
-                        "orig" => "artifact_id",
+                        "orig" => "artifactId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -7446,7 +7210,7 @@ module ApicurioRegistryConfig
                       },
                       {
                         "name" => "group_id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -7454,7 +7218,7 @@ module ApicurioRegistryConfig
                       },
                       {
                         "name" => "version_expression",
-                        "orig" => "version_expression",
+                        "orig" => "versionExpression",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -7463,7 +7227,7 @@ module ApicurioRegistryConfig
                     "query" => [
                       {
                         "name" => "dry_run",
-                        "orig" => "dry_run",
+                        "orig" => "dryRun",
                         "type" => "`$BOOLEAN`",
                         "kind" => "query",
                       },
@@ -7526,7 +7290,7 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "artifact_id",
-                        "orig" => "artifact_id",
+                        "orig" => "artifactId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -7534,7 +7298,7 @@ module ApicurioRegistryConfig
                       },
                       {
                         "name" => "group_id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -7542,7 +7306,7 @@ module ApicurioRegistryConfig
                       },
                       {
                         "name" => "version_expression",
-                        "orig" => "version_expression",
+                        "orig" => "versionExpression",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -7608,7 +7372,7 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "artifact_id",
-                        "orig" => "artifact_id",
+                        "orig" => "artifactId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -7616,7 +7380,7 @@ module ApicurioRegistryConfig
                       },
                       {
                         "name" => "group_id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -7624,7 +7388,7 @@ module ApicurioRegistryConfig
                       },
                       {
                         "name" => "version_expression",
-                        "orig" => "version_expression",
+                        "orig" => "versionExpression",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -7678,7 +7442,7 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "artifact_id",
-                        "orig" => "artifact_id",
+                        "orig" => "artifactId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -7686,7 +7450,7 @@ module ApicurioRegistryConfig
                       },
                       {
                         "name" => "group_id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -7721,31 +7485,22 @@ module ApicurioRegistryConfig
         "odcs_contract_result" => {
           "fields" => [
             {
-              "name" => "labelsApplied",
-              "title" => "Labels Applied",
-              "type" => "`$INTEGER`",
-              "short" => "Number of contract.* labels set on the schema artifact.",
-              "format" => "int32",
+              "name" => "contractId",
+              "title" => "Contract Id",
+              "type" => "`$STRING`",
+              "short" => "The contract artifact ID.",
             },
             {
-              "name" => "rulesApplied",
-              "title" => "Rules Applied",
-              "type" => "`$INTEGER`",
-              "short" => "Number of CEL quality rules projected onto the schema artifact.",
-              "format" => "int32",
+              "name" => "projection",
+              "title" => "Projection",
+              "type" => "`$OBJECT`",
+              "short" => "Summary of the projection performed when an ODCS contract is applied.",
             },
             {
-              "name" => "tagsApplied",
-              "title" => "Tags Applied",
-              "type" => "`$INTEGER`",
-              "short" => "Number of field-tag.* labels set on the schema artifact version.",
-              "format" => "int32",
-            },
-            {
-              "name" => "warnings",
-              "title" => "Warnings",
-              "type" => "`$ARRAY`",
-              "short" => "Any warnings encountered during projection.",
+              "name" => "version",
+              "title" => "Version",
+              "type" => "`$STRING`",
+              "short" => "The ODCS contract version.",
             },
           ],
           "name" => "odcs_contract_result",
@@ -7781,13 +7536,13 @@ module ApicurioRegistryConfig
                   },
                   "transform" => {
                     "req" => "`reqdata`",
-                    "res" => "`body.projection`",
+                    "res" => "`body`",
                   },
                   "args" => {
                     "params" => [
                       {
                         "name" => "group_id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -7838,20 +7593,20 @@ module ApicurioRegistryConfig
                   },
                   "transform" => {
                     "req" => "`reqdata`",
-                    "res" => "`body.projection`",
+                    "res" => "`body`",
                   },
                   "args" => {
                     "params" => [
                       {
                         "name" => "contract_id",
-                        "orig" => "contract_id",
+                        "orig" => "contractId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
                       },
                       {
                         "name" => "group_id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -7934,7 +7689,7 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "group_id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -8066,7 +7821,7 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "artifact_id",
-                        "orig" => "artifact_id",
+                        "orig" => "artifactId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -8074,7 +7829,7 @@ module ApicurioRegistryConfig
                       },
                       {
                         "name" => "group_id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -8082,7 +7837,7 @@ module ApicurioRegistryConfig
                       },
                       {
                         "name" => "version_id",
-                        "orig" => "version_expression",
+                        "orig" => "versionExpression",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -8160,6 +7915,38 @@ module ApicurioRegistryConfig
           },
           "name" => "role_mapping",
           "op" => {
+            "create" => {
+              "input" => "data",
+              "name" => "create",
+              "points" => [
+                {
+                  "kind" => "http",
+                  "method" => "POST",
+                  "orig" => "/admin/roleMappings",
+                  "segments" => [
+                    {
+                      "lit" => "admin",
+                    },
+                    {
+                      "lit" => "roleMappings",
+                    },
+                  ],
+                  "parts" => [
+                    "admin",
+                    "roleMappings",
+                  ],
+                  "rename" => {},
+                  "transform" => {
+                    "req" => "`reqdata`",
+                    "res" => "`body`",
+                  },
+                  "args" => {},
+                  "select" => {
+                    "$action" => "role_mapping",
+                  },
+                },
+              ],
+            },
             "list" => {
               "input" => "data",
               "name" => "list",
@@ -8202,6 +7989,7 @@ module ApicurioRegistryConfig
                     ],
                   },
                   "select" => {
+                    "$action" => "role_mapping",
                     "exist" => [
                       "limit",
                       "offset",
@@ -8247,7 +8035,7 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "id",
-                        "orig" => "principal_id",
+                        "orig" => "principalId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -8338,7 +8126,7 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "artifact_id",
-                        "orig" => "artifact_id",
+                        "orig" => "artifactId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -8346,7 +8134,7 @@ module ApicurioRegistryConfig
                       },
                       {
                         "name" => "group_id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -8394,7 +8182,7 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "group_id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -8407,30 +8195,6 @@ module ApicurioRegistryConfig
                       "group_id",
                     ],
                   },
-                },
-                {
-                  "kind" => "http",
-                  "method" => "GET",
-                  "orig" => "/admin/rules",
-                  "segments" => [
-                    {
-                      "lit" => "admin",
-                    },
-                    {
-                      "lit" => "rules",
-                    },
-                  ],
-                  "parts" => [
-                    "admin",
-                    "rules",
-                  ],
-                  "rename" => {},
-                  "transform" => {
-                    "req" => "`reqdata`",
-                    "res" => "`body`",
-                  },
-                  "args" => {},
-                  "select" => {},
                 },
               ],
             },
@@ -8485,7 +8249,7 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "artifact_id",
-                        "orig" => "artifact_id",
+                        "orig" => "artifactId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -8493,7 +8257,7 @@ module ApicurioRegistryConfig
                       },
                       {
                         "name" => "group_id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -8501,7 +8265,7 @@ module ApicurioRegistryConfig
                       },
                       {
                         "name" => "id",
-                        "orig" => "rule_type",
+                        "orig" => "ruleType",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -8554,7 +8318,7 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "group_id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -8562,7 +8326,7 @@ module ApicurioRegistryConfig
                       },
                       {
                         "name" => "id",
-                        "orig" => "rule_type",
+                        "orig" => "ruleType",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -8609,7 +8373,7 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "id",
-                        "orig" => "rule_type",
+                        "orig" => "ruleType",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -8676,7 +8440,7 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "artifact_id",
-                        "orig" => "artifact_id",
+                        "orig" => "artifactId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -8684,7 +8448,7 @@ module ApicurioRegistryConfig
                       },
                       {
                         "name" => "group_id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -8692,7 +8456,7 @@ module ApicurioRegistryConfig
                       },
                       {
                         "name" => "id",
-                        "orig" => "rule_type",
+                        "orig" => "ruleType",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -8745,7 +8509,7 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "group_id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -8753,7 +8517,7 @@ module ApicurioRegistryConfig
                       },
                       {
                         "name" => "id",
-                        "orig" => "rule_type",
+                        "orig" => "ruleType",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -8800,7 +8564,7 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "id",
-                        "orig" => "rule_type",
+                        "orig" => "ruleType",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -8935,7 +8699,7 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "artifact_id",
-                        "orig" => "artifact_id",
+                        "orig" => "artifactId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -8943,7 +8707,7 @@ module ApicurioRegistryConfig
                       },
                       {
                         "name" => "group_id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -9068,13 +8832,13 @@ module ApicurioRegistryConfig
                       },
                       {
                         "name" => "group_id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "query",
                       },
                       {
                         "name" => "label",
-                        "orig" => "label",
+                        "orig" => "labels",
                         "type" => "`$ARRAY`",
                         "kind" => "query",
                       },
@@ -9476,7 +9240,12 @@ module ApicurioRegistryConfig
               "name" => "state",
               "title" => "State",
               "type" => "`$STRING`",
-              "req" => true,
+              "op" => {
+                "list" => {
+                  "req" => true,
+                  "type" => "`$STRING`",
+                },
+              },
             },
             {
               "name" => "value",
@@ -9488,12 +9257,13 @@ module ApicurioRegistryConfig
               "name" => "version",
               "title" => "Version",
               "type" => "`$STRING`",
+              "req" => true,
               "op" => {
-                "list" => {
-                  "req" => true,
+                "create" => {
                   "type" => "`$STRING`",
                 },
               },
+              "short" => "A single version of an artifact.",
             },
             {
               "name" => "versions",
@@ -9538,14 +9308,14 @@ module ApicurioRegistryConfig
                     "query" => [
                       {
                         "name" => "artifact_id",
-                        "orig" => "artifact_id",
+                        "orig" => "artifactId",
                         "type" => "`$STRING`",
                         "kind" => "query",
                         "example" => "\"example-artifact\"",
                       },
                       {
                         "name" => "artifact_type",
-                        "orig" => "artifact_type",
+                        "orig" => "artifactType",
                         "type" => "`$STRING`",
                         "kind" => "query",
                         "example" => "AVRO",
@@ -9558,7 +9328,7 @@ module ApicurioRegistryConfig
                       },
                       {
                         "name" => "group_id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "query",
                         "example" => "\"my-group\"",
@@ -9591,7 +9361,7 @@ module ApicurioRegistryConfig
                       },
                       {
                         "name" => "skip_count",
-                        "orig" => "skip_count",
+                        "orig" => "skipCount",
                         "type" => "`$BOOLEAN`",
                         "kind" => "query",
                         "example" => false,
@@ -9654,16 +9424,14 @@ module ApicurioRegistryConfig
                     },
                   },
                   "transform" => {
-                    "req" => {
-                      "version" => "`reqdata`",
-                    },
-                    "res" => "`body.labels`",
+                    "req" => "`reqdata`",
+                    "res" => "`body`",
                   },
                   "args" => {
                     "params" => [
                       {
                         "name" => "artifact_id",
-                        "orig" => "artifact_id",
+                        "orig" => "artifactId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -9671,7 +9439,7 @@ module ApicurioRegistryConfig
                       },
                       {
                         "name" => "group_id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -9681,7 +9449,7 @@ module ApicurioRegistryConfig
                     "query" => [
                       {
                         "name" => "dry_run",
-                        "orig" => "dry_run",
+                        "orig" => "dryRun",
                         "type" => "`$BOOLEAN`",
                         "kind" => "query",
                       },
@@ -9726,14 +9494,14 @@ module ApicurioRegistryConfig
                     "query" => [
                       {
                         "name" => "artifact_id",
-                        "orig" => "artifact_id",
+                        "orig" => "artifactId",
                         "type" => "`$STRING`",
                         "kind" => "query",
                         "example" => "\"example-artifact\"",
                       },
                       {
                         "name" => "artifact_type",
-                        "orig" => "artifact_type",
+                        "orig" => "artifactType",
                         "type" => "`$STRING`",
                         "kind" => "query",
                         "example" => "AVRO",
@@ -9746,7 +9514,7 @@ module ApicurioRegistryConfig
                       },
                       {
                         "name" => "content_id",
-                        "orig" => "content_id",
+                        "orig" => "contentId",
                         "type" => "`$INTEGER`",
                         "kind" => "query",
                       },
@@ -9758,20 +9526,20 @@ module ApicurioRegistryConfig
                       },
                       {
                         "name" => "global_id",
-                        "orig" => "global_id",
+                        "orig" => "globalId",
                         "type" => "`$INTEGER`",
                         "kind" => "query",
                       },
                       {
                         "name" => "group_id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "query",
                         "example" => "\"my-group\"",
                       },
                       {
                         "name" => "label",
-                        "orig" => "label",
+                        "orig" => "labels",
                         "type" => "`$ARRAY`",
                         "kind" => "query",
                       },
@@ -9809,7 +9577,7 @@ module ApicurioRegistryConfig
                       },
                       {
                         "name" => "skip_count",
-                        "orig" => "skip_count",
+                        "orig" => "skipCount",
                         "type" => "`$BOOLEAN`",
                         "kind" => "query",
                         "example" => false,
@@ -9899,7 +9667,7 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "artifact_id",
-                        "orig" => "artifact_id",
+                        "orig" => "artifactId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -9907,7 +9675,7 @@ module ApicurioRegistryConfig
                       },
                       {
                         "name" => "group_id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -9941,7 +9709,7 @@ module ApicurioRegistryConfig
                       },
                       {
                         "name" => "skip_count",
-                        "orig" => "skip_count",
+                        "orig" => "skipCount",
                         "type" => "`$BOOLEAN`",
                         "kind" => "query",
                         "example" => false,
@@ -10011,7 +9779,7 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "artifact_id",
-                        "orig" => "artifact_id",
+                        "orig" => "artifactId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -10019,7 +9787,7 @@ module ApicurioRegistryConfig
                       },
                       {
                         "name" => "branch_id",
-                        "orig" => "branch_id",
+                        "orig" => "branchId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -10027,7 +9795,7 @@ module ApicurioRegistryConfig
                       },
                       {
                         "name" => "group_id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -10116,7 +9884,7 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "artifact_id",
-                        "orig" => "artifact_id",
+                        "orig" => "artifactId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -10124,7 +9892,7 @@ module ApicurioRegistryConfig
                       },
                       {
                         "name" => "group_id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -10132,7 +9900,7 @@ module ApicurioRegistryConfig
                       },
                       {
                         "name" => "version_expression",
-                        "orig" => "version_expression",
+                        "orig" => "versionExpression",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -10147,7 +9915,7 @@ module ApicurioRegistryConfig
                       },
                       {
                         "name" => "reference",
-                        "orig" => "reference",
+                        "orig" => "references",
                         "type" => "`$STRING`",
                         "kind" => "query",
                       },
@@ -10215,7 +9983,7 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "artifact_id",
-                        "orig" => "artifact_id",
+                        "orig" => "artifactId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -10223,7 +9991,7 @@ module ApicurioRegistryConfig
                       },
                       {
                         "name" => "group_id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -10231,7 +9999,7 @@ module ApicurioRegistryConfig
                       },
                       {
                         "name" => "version_expression",
-                        "orig" => "version_expression",
+                        "orig" => "versionExpression",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -10309,7 +10077,7 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "artifact_id",
-                        "orig" => "artifact_id",
+                        "orig" => "artifactId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -10317,14 +10085,14 @@ module ApicurioRegistryConfig
                       },
                       {
                         "name" => "comment_id",
-                        "orig" => "comment_id",
+                        "orig" => "commentId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
                       },
                       {
                         "name" => "group_id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -10332,7 +10100,7 @@ module ApicurioRegistryConfig
                       },
                       {
                         "name" => "version_id",
-                        "orig" => "version_expression",
+                        "orig" => "versionExpression",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -10395,7 +10163,7 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "artifact_id",
-                        "orig" => "artifact_id",
+                        "orig" => "artifactId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -10403,7 +10171,7 @@ module ApicurioRegistryConfig
                       },
                       {
                         "name" => "group_id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -10411,7 +10179,7 @@ module ApicurioRegistryConfig
                       },
                       {
                         "name" => "id",
-                        "orig" => "version_expression",
+                        "orig" => "versionExpression",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -10488,7 +10256,7 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "artifact_id",
-                        "orig" => "artifact_id",
+                        "orig" => "artifactId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -10496,14 +10264,14 @@ module ApicurioRegistryConfig
                       },
                       {
                         "name" => "comment_id",
-                        "orig" => "comment_id",
+                        "orig" => "commentId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
                       },
                       {
                         "name" => "group_id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -10511,7 +10279,7 @@ module ApicurioRegistryConfig
                       },
                       {
                         "name" => "version_id",
-                        "orig" => "version_expression",
+                        "orig" => "versionExpression",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -10556,13 +10324,79 @@ module ApicurioRegistryConfig
         "well_known" => {
           "fields" => [
             {
+              "name" => "artifactId",
+              "title" => "Artifact Id",
+              "type" => "`$STRING`",
+            },
+            {
+              "name" => "capabilities",
+              "title" => "Capabilities",
+              "type" => "`$OBJECT`",
+              "short" => "Capabilities of an A2A agent.",
+            },
+            {
+              "name" => "createdOn",
+              "title" => "Created On",
+              "type" => "`$INTEGER`",
+              "format" => "int64",
+            },
+            {
+              "name" => "description",
+              "title" => "Description",
+              "type" => "`$STRING`",
+            },
+            {
+              "name" => "groupId",
+              "title" => "Group Id",
+              "type" => "`$STRING`",
+            },
+            {
               "name" => "id",
               "title" => "Id",
+              "type" => "`$STRING`",
+            },
+            {
+              "name" => "name",
+              "title" => "Name",
+              "type" => "`$STRING`",
+            },
+            {
+              "name" => "owner",
+              "title" => "Owner",
+              "type" => "`$STRING`",
+            },
+            {
+              "name" => "parameters",
+              "title" => "Parameters",
+              "type" => "`$ARRAY`",
+            },
+            {
+              "name" => "skills",
+              "title" => "Skills",
+              "type" => "`$ARRAY`",
+            },
+            {
+              "name" => "supportedInterfaces",
+              "title" => "Supported Interfaces",
+              "type" => "`$ARRAY`",
+            },
+            {
+              "name" => "title",
+              "title" => "Title",
+              "type" => "`$STRING`",
+            },
+            {
+              "name" => "version",
+              "title" => "Version",
               "type" => "`$STRING`",
             },
           ],
           "id" => {
             "field" => "id",
+            "from" => {
+              "artifact_id" => "artifactId",
+              "group_id" => "groupId",
+            },
             "name" => "id",
             "parts" => [
               "group_id",
@@ -10572,6 +10406,153 @@ module ApicurioRegistryConfig
           },
           "name" => "well_known",
           "op" => {
+            "list" => {
+              "input" => "data",
+              "name" => "list",
+              "points" => [
+                {
+                  "kind" => "http",
+                  "method" => "GET",
+                  "orig" => "/well-known/agents",
+                  "segments" => [
+                    {
+                      "lit" => "well-known",
+                    },
+                    {
+                      "lit" => "agents",
+                    },
+                  ],
+                  "parts" => [
+                    "well-known",
+                    "agents",
+                  ],
+                  "rename" => {},
+                  "transform" => {
+                    "req" => "`reqdata`",
+                    "res" => "`body.agents`",
+                  },
+                  "args" => {
+                    "query" => [
+                      {
+                        "name" => "capability",
+                        "orig" => "capability",
+                        "type" => "`$ARRAY`",
+                        "kind" => "query",
+                      },
+                      {
+                        "name" => "input_mode",
+                        "orig" => "inputMode",
+                        "type" => "`$ARRAY`",
+                        "kind" => "query",
+                      },
+                      {
+                        "name" => "limit",
+                        "orig" => "limit",
+                        "type" => "`$INTEGER`",
+                        "kind" => "query",
+                        "example" => 20,
+                      },
+                      {
+                        "name" => "name",
+                        "orig" => "name",
+                        "type" => "`$STRING`",
+                        "kind" => "query",
+                      },
+                      {
+                        "name" => "offset",
+                        "orig" => "offset",
+                        "type" => "`$INTEGER`",
+                        "kind" => "query",
+                        "example" => 0,
+                      },
+                      {
+                        "name" => "output_mode",
+                        "orig" => "outputMode",
+                        "type" => "`$ARRAY`",
+                        "kind" => "query",
+                      },
+                      {
+                        "name" => "skill",
+                        "orig" => "skill",
+                        "type" => "`$ARRAY`",
+                        "kind" => "query",
+                      },
+                    ],
+                  },
+                  "select" => {
+                    "exist" => [
+                      "capability",
+                      "input_mode",
+                      "limit",
+                      "name",
+                      "offset",
+                      "output_mode",
+                      "skill",
+                    ],
+                  },
+                },
+                {
+                  "kind" => "http",
+                  "method" => "GET",
+                  "orig" => "/well-known/mcp-tools",
+                  "segments" => [
+                    {
+                      "lit" => "well-known",
+                    },
+                    {
+                      "lit" => "mcp-tools",
+                    },
+                  ],
+                  "parts" => [
+                    "well-known",
+                    "mcp-tools",
+                  ],
+                  "rename" => {},
+                  "transform" => {
+                    "req" => "`reqdata`",
+                    "res" => "`body.tools`",
+                  },
+                  "args" => {
+                    "query" => [
+                      {
+                        "name" => "limit",
+                        "orig" => "limit",
+                        "type" => "`$INTEGER`",
+                        "kind" => "query",
+                        "example" => 20,
+                      },
+                      {
+                        "name" => "name",
+                        "orig" => "name",
+                        "type" => "`$STRING`",
+                        "kind" => "query",
+                      },
+                      {
+                        "name" => "offset",
+                        "orig" => "offset",
+                        "type" => "`$INTEGER`",
+                        "kind" => "query",
+                        "example" => 0,
+                      },
+                      {
+                        "name" => "parameter",
+                        "orig" => "parameter",
+                        "type" => "`$ARRAY`",
+                        "kind" => "query",
+                      },
+                    ],
+                  },
+                  "select" => {
+                    "exist" => [
+                      "limit",
+                      "name",
+                      "offset",
+                      "parameter",
+                    ],
+                  },
+                },
+              ],
+            },
             "load" => {
               "input" => "data",
               "name" => "load",
@@ -10614,14 +10595,14 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "artifact_id",
-                        "orig" => "artifact_id",
+                        "orig" => "artifactId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
                       },
                       {
                         "name" => "group_id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -10682,14 +10663,14 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "artifact_id",
-                        "orig" => "artifact_id",
+                        "orig" => "artifactId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
                       },
                       {
                         "name" => "group_id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -10749,7 +10730,7 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "schema_type",
-                        "orig" => "schema_type",
+                        "orig" => "schemaType",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -10777,9 +10758,6 @@ module ApicurioRegistryConfig
             "ancestors" => [
               [
                 "$.main.kit.entity.agent",
-              ],
-              [
-                "$.main.kit.entity.mcp_tool",
               ],
             ],
           },
@@ -10851,7 +10829,7 @@ module ApicurioRegistryConfig
                     "params" => [
                       {
                         "name" => "artifact_id",
-                        "orig" => "artifact_id",
+                        "orig" => "artifactId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -10859,7 +10837,7 @@ module ApicurioRegistryConfig
                       },
                       {
                         "name" => "group_id",
-                        "orig" => "group_id",
+                        "orig" => "groupId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -10867,7 +10845,7 @@ module ApicurioRegistryConfig
                       },
                       {
                         "name" => "version_expression",
-                        "orig" => "version_expression",
+                        "orig" => "versionExpression",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,

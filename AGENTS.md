@@ -31,7 +31,7 @@ Each feature is generated into every SDK target — as a directory
 `<lang>/src/feature/<name>/` (ts/js) or a flat file in the `<lang>/feature/`
 package (other languages). Each target's guide documents its features.
 
-**Entities** (44): `Admin`, `Agent`, `AgentCard`, `AiCatalog`, `ArdExplore`, `ArdSearch`, `Artifact`, `ArtifactReference`, `ArtifactRule`, `ArtifactType`, `Branch`, `Comment`, `ConfigurationProperty`, `ConsumerVersionHeatmap`, `Content`, `Contract`, `ContractRule`, `ContractRuleSet`, `CreateArtifact`, `DeprecationReadiness`, `DownloadRef`, `GitOp`, `GitOpsStatus`, `GitOpsValidateTask`, `GlobalRule`, `Group`, `GroupRule`, `KafkaSql`, `McpTool`, `Metadata`, `OdcsContractResult`, `OdcsContractSummary`, `ReferenceGraph`, `RoleMapping`, `Rule`, `SearchedBranch`, `SearchedGroup`, `SystemInfo`, `UsageSummary`, `UserInfo`, `UserInterfaceConfig`, `Version`, `WellKnown`, `WrappedVersionState`.
+**Entities** (43): `Admin`, `Agent`, `AgentCard`, `AiCatalog`, `ArdExplore`, `ArdSearch`, `Artifact`, `ArtifactReference`, `ArtifactRule`, `ArtifactType`, `Branch`, `Comment`, `ConfigurationProperty`, `ConsumerVersionHeatmap`, `Content`, `Contract`, `ContractRule`, `ContractRuleSet`, `CreateArtifact`, `DeprecationReadiness`, `DownloadRef`, `GitOp`, `GitOpsStatus`, `GitOpsValidateTask`, `GlobalRule`, `Group`, `GroupRule`, `KafkaSql`, `Metadata`, `OdcsContractResult`, `OdcsContractSummary`, `ReferenceGraph`, `RoleMapping`, `Rule`, `SearchedBranch`, `SearchedGroup`, `SystemInfo`, `UsageSummary`, `UserInfo`, `UserInterfaceConfig`, `Version`, `WellKnown`, `WrappedVersionState`.
 
 ## Generating and updating the SDK
 

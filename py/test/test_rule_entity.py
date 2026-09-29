@@ -82,7 +82,9 @@ class TestRuleEntity:
 
         # LIST
         rule_ref01_ent = client.Rule(None)
-        rule_ref01_match = {}
+        rule_ref01_match = {
+            "group_id": setup["idmap"]["group01"],
+        }
 
         rule_ref01_list_result = rule_ref01_ent.list(rule_ref01_match, None)
         assert isinstance(rule_ref01_list_result, list)

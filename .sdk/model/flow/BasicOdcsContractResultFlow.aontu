@@ -26,7 +26,8 @@ main: kit: flow: BasicOdcsContractResultFlow:
       i: {
         ref: "odcs_contract_result_ref01",
         srcdatavar: "odcs_contract_result_ref01_data",
-        suffix: "_up0"
+        suffix: "_up0",
+        textfield: "contractId"
       }
 
       o: "update",

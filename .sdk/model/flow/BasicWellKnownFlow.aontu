@@ -7,6 +7,18 @@ main: kit: flow: BasicWellKnownFlow:
   name: "BasicWellKnownFlow",
   step: [
     {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "well_known_ref01"
+          }
+        }
+      ]
+    }
+
+    {
       i: {
         ref: "well_known_ref01",
         srcdatavar: "well_known_ref01_data",

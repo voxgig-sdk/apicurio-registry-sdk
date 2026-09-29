@@ -98,7 +98,7 @@ class TestGroupEntity:
             "id": group_ref01_data["id"],
         }
 
-        group_ref01_markdef_up0_name = "artifactsType"
+        group_ref01_markdef_up0_name = "createdOn"
         group_ref01_markdef_up0_value = "Mark01-group_ref01_" + str(setup["now"])
         group_ref01_data_up0_up[group_ref01_markdef_up0_name] = group_ref01_markdef_up0_value
 

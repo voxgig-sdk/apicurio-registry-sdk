@@ -30,7 +30,6 @@ const GlobalRuleEntity_1 = require("./entity/GlobalRuleEntity");
 const GroupEntity_1 = require("./entity/GroupEntity");
 const GroupRuleEntity_1 = require("./entity/GroupRuleEntity");
 const KafkaSqlEntity_1 = require("./entity/KafkaSqlEntity");
-const McpToolEntity_1 = require("./entity/McpToolEntity");
 const MetadataEntity_1 = require("./entity/MetadataEntity");
 const OdcsContractResultEntity_1 = require("./entity/OdcsContractResultEntity");
 const OdcsContractSummaryEntity_1 = require("./entity/OdcsContractSummaryEntity");
@@ -448,13 +447,6 @@ class ApicurioRegistrySDK {
     KafkaSql(entopts) {
         const self = this;
         return new KafkaSqlEntity_1.KafkaSqlEntity(self, entopts);
-    }
-    // Entity access: `client.McpTool().list()` / `client.McpTool().load({ id })`.
-    // The argument is the entity OPTIONS object (passed to the entity
-    // constructor as entopts), not initial entity data.
-    McpTool(entopts) {
-        const self = this;
-        return new McpToolEntity_1.McpToolEntity(self, entopts);
     }
     // Entity access: `client.Metadata().list()` / `client.Metadata().load({ id })`.
     // The argument is the entity OPTIONS object (passed to the entity

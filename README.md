@@ -12,13 +12,13 @@ Learn more about Voxgig SDKs at [voxgig.com/sdk](https://voxgig.com/sdk/).
 
 > TypeScript, Python, PHP, Golang, Ruby, Lua SDKs, a CLI with an interactive REPL, and an MCP server for AI agents — all generated from one OpenAPI spec by [@voxgig/sdkgen](https://github.com/voxgig/sdkgen).
 
-> **Features:** `undefined`, `undefined`, `undefined`, `undefined`, `undefined`, `undefined`, `undefined`, `undefined` — opt-in,
+> **Features:** `debug`, `idempotency`, `metrics`, `paging`, `ratelimit`, `retry`, `test`, `timeout` — opt-in,
 > inactive until switched on, and configured per client. See the Features
 > section of any SDK README below for what each one does.
 
 ## Entities, not endpoints
 
-This SDK exposes the API as **44 semantic entities** that you
+This SDK exposes the API as **43 semantic entities** that you
 call directly, instead of assembling URL paths and query strings. See the [Entities](#entities) table below for the full list. Entities are
 **Capitalised** to mark them as the primary surface, each with the operations they
 support (`list`, `load`, `create`, `update`, `remove`):
@@ -106,12 +106,12 @@ local results, err = client:ContractRule():list()
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/apicurio-registry-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/apicurio-registry-sdk/tags) |
-| Python | `voxgig-sdk-apicurio-registry-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/apicurio-registry-sdk/tags) |
-| PHP | `voxgig-sdk/apicurio-registry-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/apicurio-registry-sdk/tags) |
+| TypeScript | `@voxgig-sdk/apicurio-registry-sdk` | publish pending — [install from source](ts/README.md#install) |
+| Python | `voxgig-sdk-apicurio-registry-sdk` | publish pending — [install from source](py/README.md#install) |
+| PHP | `voxgig-sdk/apicurio-registry-sdk` | publish pending — [install from source](php/README.md#install) |
 | Golang | `github.com/voxgig-sdk/apicurio-registry-sdk/go` | `go get github.com/voxgig-sdk/apicurio-registry-sdk/go@latest` |
-| Ruby | `voxgig-sdk-apicurio-registry-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/apicurio-registry-sdk/tags) |
-| Lua | `voxgig-sdk-apicurio-registry-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/apicurio-registry-sdk/tags) |
+| Ruby | `voxgig-sdk-apicurio-registry-sdk` | publish pending — [install from source](rb/README.md#install) |
+| Lua | `voxgig-sdk-apicurio-registry-sdk` | publish pending — [install from source](lua/README.md#install) |
 | Go CLI | `github.com/voxgig-sdk/apicurio-registry-sdk/go-cli` | `go install github.com/voxgig-sdk/apicurio-registry-sdk/go-cli/cmd/apicurio-registry@latest` |
 | Go MCP server | `github.com/voxgig-sdk/apicurio-registry-sdk/go-mcp` | `go get github.com/voxgig-sdk/apicurio-registry-sdk/go-mcp@latest` |
 
@@ -171,12 +171,12 @@ Then add it to your agent's MCP config (Claude Desktop, Cursor, etc.):
 
 ## Entities
 
-The API exposes 44 entities:
+The API exposes 43 entities:
 
 | Entity | Description | API path |
 | --- | --- | --- |
 | **Admin** | The Admin entity (create, remove, update). | `/admin/import` |
-| **Agent** | The Agent entity (list). | `/well-known/agents` |
+| **Agent** | The Agent entity (list). | `/well-known/agent.json` |
 | **AgentCard** | The AgentCard entity (list). | `/well-known/agent-card.json` |
 | **AiCatalog** | The AiCatalog entity (list). | `/well-known/ard/agents` |
 | **ArdExplore** | The ArdExplore entity (create). | `/well-known/ard/explore` |
@@ -198,17 +198,16 @@ The API exposes 44 entities:
 | **DownloadRef** | The DownloadRef entity (load). | `/admin/export` |
 | **GitOp** | The GitOp entity (create, remove). | `/admin/gitops/sync` |
 | **GitOpsStatus** | The GitOpsStatus entity (list). | `/admin/gitops/status` |
-| **GitOpsValidateTask** | The GitOpsValidateTask entity (list, load). | `/admin/gitops/validate` |
-| **GlobalRule** | The GlobalRule entity (create, remove). | `/admin/rules` |
+| **GitOpsValidateTask** | The GitOpsValidateTask entity (create, list, load). | `/admin/gitops/validate` |
+| **GlobalRule** | The GlobalRule entity (create, list, remove). | `/admin/rules` |
 | **Group** | The Group entity (create, list, load, remove, update). | `/groups` |
 | **GroupRule** | The GroupRule entity (create, remove). | `/groups/{groupId}/rules` |
 | **KafkaSql** | The KafkaSql entity (create). | `/admin/snapshots` |
-| **McpTool** | The McpTool entity (list). | `/well-known/mcp-tools` |
 | **Metadata** | The Metadata entity (create, load, update). | `/groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}` |
 | **OdcsContractResult** | The OdcsContractResult entity (create, update). | `/groups/{groupId}/contracts` |
 | **OdcsContractSummary** | The OdcsContractSummary entity (list). | `/groups/{groupId}/contracts` |
 | **ReferenceGraph** | The ReferenceGraph entity (list). | `/groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}/references/graph` |
-| **RoleMapping** | The RoleMapping entity (list, load). | `/admin/roleMappings` |
+| **RoleMapping** | The RoleMapping entity (create, list, load). | `/admin/roleMappings` |
 | **Rule** | The Rule entity (list, load, update). | `/groups/{groupId}/artifacts/{artifactId}/rules` |
 | **SearchedBranch** | The SearchedBranch entity (list). | `/groups/{groupId}/artifacts/{artifactId}/branches` |
 | **SearchedGroup** | The SearchedGroup entity (list). | `/search/groups` |
@@ -217,7 +216,7 @@ The API exposes 44 entities:
 | **UserInfo** | The UserInfo entity (load). | `/users/me` |
 | **UserInterfaceConfig** | The UserInterfaceConfig entity (load). | `/system/uiConfig` |
 | **Version** | The Version entity (create, list, load, remove, update). | `/search/versions` |
-| **WellKnown** | The WellKnown entity (load). | `/well-known/agents/{groupId}/{artifactId}` |
+| **WellKnown** | The WellKnown entity (list, load). | `/well-known/agents` |
 | **WrappedVersionState** | The WrappedVersionState entity (load). | `/groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}/state` |
 
 The operations available across these entities are **load**, **list**, **create**, **update**, **remove** — see each entity's

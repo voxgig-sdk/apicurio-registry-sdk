@@ -20,7 +20,7 @@ import {
 loadEnvLocal(__dirname + '/../../../.env.local')
 
 
-describe('McpToolDirect', async () => {
+describe('GlobalRuleDirect', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
   // `test.live.delayMs`; only sleeps when APICURIO_REGISTRY_TEST_LIVE=TRUE.
@@ -36,17 +36,17 @@ describe('McpToolDirect', async () => {
   })
 
 
-  test('direct-list-mcp_tool', async (t: any) => {
+  test('direct-list-global_rule', async (t: any) => {
     if (liveScenariosActive()) { t.skip('Covered by live operation scenarios'); return }
     const setup = directSetup([{ id: 'direct01' }, { id: 'direct02' }])
-    if (maybeSkipControl(t, 'direct', 'direct-list-mcp_tool', setup.live)) return
+    if (maybeSkipControl(t, 'direct', 'direct-list-global_rule', setup.live)) return
     const { client, calls } = setup
 
     const params: any = {}
     const query: any = {}
 
     const result: any = await client.direct({
-      path: 'well-known/mcp-tools',
+      path: 'admin/rules',
       method: 'GET',
       params,
       query,
@@ -86,7 +86,7 @@ function directSetup(mockres?: any) {
   const calls: any[] = []
 
   const env = envOverride({
-    'APICURIO_REGISTRY_TEST_MCP_TOOL_ENTID': {},
+    'APICURIO_REGISTRY_TEST_GLOBAL_RULE_ENTID': {},
     'APICURIO_REGISTRY_TEST_LIVE': 'FALSE',
     'APICURIO_REGISTRY_SERVER_REGISTRY': "MY-REGISTRY-URL",
   })
@@ -104,7 +104,7 @@ function directSetup(mockres?: any) {
       },
       }))
 
-    let idmap: any = env['APICURIO_REGISTRY_TEST_MCP_TOOL_ENTID']
+    let idmap: any = env['APICURIO_REGISTRY_TEST_GLOBAL_RULE_ENTID']
     if ('string' === typeof idmap && idmap.startsWith('{')) {
       idmap = JSON.parse(idmap)
     }

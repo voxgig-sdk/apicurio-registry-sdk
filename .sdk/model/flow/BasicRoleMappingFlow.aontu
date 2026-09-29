@@ -7,6 +7,14 @@ main: kit: flow: BasicRoleMappingFlow:
   name: "BasicRoleMappingFlow",
   step: [
     {
+      i: {
+        ref: "role_mapping_ref01"
+      }
+
+      o: "create"
+    }
+
+    {
       o: "list",
       v: [
         {

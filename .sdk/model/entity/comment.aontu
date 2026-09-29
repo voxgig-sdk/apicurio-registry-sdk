@@ -49,7 +49,7 @@ main: kit: entity: comment: {
                 ex: "\"example-artifact\""
                 k: "param"
                 n: "artifact_id"
-                or: "artifact_id"
+                or: "artifactId"
                 r: true
                 t: "`$STRING`"
               }
@@ -57,14 +57,14 @@ main: kit: entity: comment: {
                 ex: "\"my-group\""
                 k: "param"
                 n: "group_id"
-                or: "group_id"
+                or: "groupId"
                 r: true
                 t: "`$STRING`"
               }
               {
                 k: "param"
                 n: "version_expression"
-                or: "version_expression"
+                or: "versionExpression"
                 r: true
                 t: "`$STRING`"
               }
@@ -131,7 +131,7 @@ main: kit: entity: comment: {
                 ex: "\"example-artifact\""
                 k: "param"
                 n: "artifact_id"
-                or: "artifact_id"
+                or: "artifactId"
                 r: true
                 t: "`$STRING`"
               }
@@ -139,14 +139,14 @@ main: kit: entity: comment: {
                 ex: "\"my-group\""
                 k: "param"
                 n: "group_id"
-                or: "group_id"
+                or: "groupId"
                 r: true
                 t: "`$STRING`"
               }
               {
                 k: "param"
                 n: "version_expression"
-                or: "version_expression"
+                or: "versionExpression"
                 r: true
                 t: "`$STRING`"
               }

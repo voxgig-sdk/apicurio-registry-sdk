@@ -12,9 +12,18 @@ The SDK exposes the API as capitalised, semantic **Entities** — for example `c
 
 ## Install
 This package is not yet published to RubyGems. Install it from the
-GitHub release tag (`rb/vX.Y.Z`):
+GitHub release tag (`rb/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/apicurio-registry-sdk/releases)), or
+from a clone:
 
-- Releases: [https://github.com/voxgig-sdk/apicurio-registry-sdk/releases](https://github.com/voxgig-sdk/apicurio-registry-sdk/releases)
+```bash
+git clone https://github.com/voxgig-sdk/apicurio-registry-sdk
+```
+
+Then add it to your `Gemfile` by path, and run `bundle install`:
+
+```ruby
+gem "voxgig-sdk-apicurio-registry-sdk", path: "./apicurio-registry-sdk/rb"
+```
 
 
 ## Tutorial: your first API call
@@ -239,7 +248,6 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | `Group` | `(data) -> GroupEntity` | Create a Group entity instance. |
 | `GroupRule` | `(data) -> GroupRuleEntity` | Create a GroupRule entity instance. |
 | `KafkaSql` | `(data) -> KafkaSqlEntity` | Create a KafkaSql entity instance. |
-| `McpTool` | `(data) -> McpToolEntity` | Create a McpTool entity instance. |
 | `Metadata` | `(data) -> MetadataEntity` | Create a Metadata entity instance. |
 | `OdcsContractResult` | `(data) -> OdcsContractResultEntity` | Create an OdcsContractResult entity instance. |
 | `OdcsContractSummary` | `(data) -> OdcsContractSummaryEntity` | Create an OdcsContractSummary entity instance. |
@@ -308,17 +316,13 @@ API path: `/admin/import`
 
 | Field | Description |
 | --- | --- |
-| `artifactId` |  |
 | `capabilities` | Capabilities of an A2A agent. |
-| `createdOn` |  |
 | `defaultInputModes` |  |
 | `defaultOutputModes` |  |
 | `description` |  |
 | `documentationUrl` |  |
-| `groupId` |  |
 | `iconUrl` |  |
 | `name` |  |
-| `owner` |  |
 | `protocolVersion` |  |
 | `provider` | Provider of an A2A agent. |
 | `securityRequirements` |  |
@@ -330,7 +334,7 @@ API path: `/admin/import`
 
 Operations: List.
 
-API path: `/well-known/agents`
+API path: `/well-known/agent.json`
 
 #### AgentCard
 
@@ -379,6 +383,7 @@ API path: `/well-known/ard/agents`
 
 | Field | Description |
 | --- | --- |
+| `facets` | Facets keyed by the requested facet field name. |
 | `query` | ARD search query. |
 | `resultType` | Requested result type for the ARD POST /explore endpoint. |
 
@@ -621,9 +626,6 @@ API path: `/admin/export`
 
 | Field | Description |
 | --- | --- |
-| `ref` | Git ref to validate (branch name, tag, or PR ref like `refs/pull/42/head`). |
-| `repoId` | Repository ID to validate against. |
-| `type` | Validation type. |
 
 Operations: Create, Remove.
 
@@ -658,7 +660,7 @@ API path: `/admin/gitops/status`
 | `type` | Validation type (`pull` or `push`). |
 | `versionCount` | Number of artifact versions loaded during validation. |
 
-Operations: List, Load.
+Operations: Create, List, Load.
 
 API path: `/admin/gitops/validate`
 
@@ -670,7 +672,7 @@ API path: `/admin/gitops/validate`
 | `id` |  |
 | `ruleType` |  |
 
-Operations: Create, Remove.
+Operations: Create, List, Remove.
 
 API path: `/admin/rules`
 
@@ -678,7 +680,6 @@ API path: `/admin/rules`
 
 | Field | Description |
 | --- | --- |
-| `artifactsType` |  |
 | `createdOn` |  |
 | `description` |  |
 | `groupId` |  |
@@ -687,7 +688,6 @@ API path: `/admin/rules`
 | `modifiedBy` |  |
 | `modifiedOn` |  |
 | `owner` |  |
-| `properties` |  |
 
 Operations: Create, List, Load, Remove, Update.
 
@@ -715,23 +715,6 @@ Operations: Create.
 
 API path: `/admin/snapshots`
 
-#### McpTool
-
-| Field | Description |
-| --- | --- |
-| `artifactId` |  |
-| `createdOn` |  |
-| `description` |  |
-| `groupId` |  |
-| `name` |  |
-| `owner` |  |
-| `parameters` |  |
-| `title` |  |
-
-Operations: List.
-
-API path: `/well-known/mcp-tools`
-
 #### Metadata
 
 | Field | Description |
@@ -749,7 +732,8 @@ API path: `/well-known/mcp-tools`
 | `modifiedOn` |  |
 | `name` |  |
 | `owner` |  |
-| `version` |  |
+| `state` |  |
+| `version` | A single version of an artifact. |
 
 Operations: Create, Load, Update.
 
@@ -759,10 +743,9 @@ API path: `/groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}
 
 | Field | Description |
 | --- | --- |
-| `labelsApplied` | Number of contract.* labels set on the schema artifact. |
-| `rulesApplied` | Number of CEL quality rules projected onto the schema artifact. |
-| `tagsApplied` | Number of field-tag.* labels set on the schema artifact version. |
-| `warnings` | Any warnings encountered during projection. |
+| `contractId` | The contract artifact ID. |
+| `projection` | Summary of the projection performed when an ODCS contract is applied. |
+| `version` | The ODCS contract version. |
 
 Operations: Create, Update.
 
@@ -801,7 +784,7 @@ API path: `/groups/{groupId}/artifacts/{artifactId}/versions/{versionExpression}
 | `principalName` | A friendly name for the principal. |
 | `role` |  |
 
-Operations: List, Load.
+Operations: Create, List, Load.
 
 API path: `/admin/roleMappings`
 
@@ -925,7 +908,7 @@ API path: `/system/uiConfig`
 | `owner` |  |
 | `state` |  |
 | `value` |  |
-| `version` |  |
+| `version` | A single version of an artifact. |
 | `versions` | The collection of artifact versions returned in the result set. |
 
 Operations: Create, List, Load, Remove, Update.
@@ -936,11 +919,23 @@ API path: `/search/versions`
 
 | Field | Description |
 | --- | --- |
+| `artifactId` |  |
+| `capabilities` | Capabilities of an A2A agent. |
+| `createdOn` |  |
+| `description` |  |
+| `groupId` |  |
 | `id` |  |
+| `name` |  |
+| `owner` |  |
+| `parameters` |  |
+| `skills` |  |
+| `supportedInterfaces` |  |
+| `title` |  |
+| `version` |  |
 
-Operations: Load.
+Operations: List, Load.
 
-API path: `/well-known/agents/{groupId}/{artifactId}`
+API path: `/well-known/agents`
 
 #### WrappedVersionState
 
@@ -1000,17 +995,13 @@ Create an instance: `agent = client.Agent`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `artifactId` | `String` |  |
 | `capabilities` | `Hash` | Capabilities of an A2A agent. |
-| `createdOn` | `Integer` |  |
 | `defaultInputModes` | `Array` |  |
 | `defaultOutputModes` | `Array` |  |
 | `description` | `String` |  |
 | `documentationUrl` | `String` |  |
-| `groupId` | `String` |  |
 | `iconUrl` | `String` |  |
 | `name` | `String` |  |
-| `owner` | `String` |  |
 | `protocolVersion` | `String` |  |
 | `provider` | `Hash` | Provider of an A2A agent. |
 | `securityRequirements` | `Array` |  |
@@ -1113,14 +1104,14 @@ Create an instance: `ard_explore = client.ArdExplore`
 
 | Field | Type | Description |
 | --- | --- | --- |
+| `facets` | `Hash` | Facets keyed by the requested facet field name. |
 | `query` | `Hash` | ARD search query. |
-| `resultType` | `Hash` | Requested result type for the ARD POST /explore endpoint. |
+| `resultType` | `String` | Requested result type for the ARD POST /explore endpoint. |
 
 #### Example: Create
 
 ```ruby
 ard_explore = client.ArdExplore.create({
-  "resultType" => {}, # Hash
 })
 ```
 
@@ -1709,20 +1700,10 @@ Create an instance: `git_op = client.GitOp`
 | `create(data)` | Create a new entity with the given data. |
 | `remove(match)` | Remove the matching entity. |
 
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `ref` | `String` | Git ref to validate (branch name, tag, or PR ref like `refs/pull/42/head`). |
-| `repoId` | `String` | Repository ID to validate against. |
-| `type` | `String` | Validation type. |
-
 #### Example: Create
 
 ```ruby
 git_op = client.GitOp.create({
-  "ref" => "example_ref", # String
-  "repoId" => "example_repoId", # String
 })
 ```
 
@@ -1761,6 +1742,7 @@ Create an instance: `git_ops_validate_task = client.GitOpsValidateTask`
 
 | Method | Description |
 | --- | --- |
+| `create(data)` | Create a new entity with the given data. |
 | `list(match)` | List entities matching the criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 
@@ -1795,6 +1777,15 @@ git_ops_validate_task = client.GitOpsValidateTask.load({ "task_id" => "task_id" 
 git_ops_validate_tasks = client.GitOpsValidateTask.list
 ```
 
+#### Example: Create
+
+```ruby
+git_ops_validate_task = client.GitOpsValidateTask.create({
+  "state" => "example_state", # String
+  "taskId" => "example_taskId", # String
+})
+```
+
 
 ### GlobalRule
 
@@ -1805,6 +1796,7 @@ Create an instance: `global_rule = client.GlobalRule`
 | Method | Description |
 | --- | --- |
 | `create(data)` | Create a new entity with the given data. |
+| `list(match)` | List entities matching the criteria. |
 | `remove(match)` | Remove the matching entity. |
 
 #### Fields
@@ -1814,6 +1806,13 @@ Create an instance: `global_rule = client.GlobalRule`
 | `config` | `String` |  |
 | `id` | `String` |  |
 | `ruleType` | `String` |  |
+
+#### Example: List
+
+```ruby
+# list returns an Array of GlobalRule records (raises on error).
+global_rules = client.GlobalRule.list
+```
 
 #### Example: Create
 
@@ -1842,7 +1841,6 @@ Create an instance: `group = client.Group`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `artifactsType` | `String` |  |
 | `createdOn` | `String` |  |
 | `description` | `String` |  |
 | `groupId` | `String` |  |
@@ -1851,7 +1849,6 @@ Create an instance: `group = client.Group`
 | `modifiedBy` | `String` |  |
 | `modifiedOn` | `String` |  |
 | `owner` | `String` |  |
-| `properties` | `Hash` |  |
 
 #### Example: Load
 
@@ -1871,6 +1868,11 @@ groups = client.Group.list
 
 ```ruby
 group = client.Group.create({
+  "createdOn" => "example_createdOn", # String
+  "groupId" => "example_groupId", # String
+  "modifiedBy" => "example_modifiedBy", # String
+  "modifiedOn" => "example_modifiedOn", # String
+  "owner" => "example_owner", # String
 })
 ```
 
@@ -1929,37 +1931,6 @@ kafka_sql = client.KafkaSql.create({
 ```
 
 
-### McpTool
-
-Create an instance: `mcp_tool = client.McpTool`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `list(match)` | List entities matching the criteria. |
-
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `artifactId` | `String` |  |
-| `createdOn` | `Integer` |  |
-| `description` | `String` |  |
-| `groupId` | `String` |  |
-| `name` | `String` |  |
-| `owner` | `String` |  |
-| `parameters` | `Array` |  |
-| `title` | `String` |  |
-
-#### Example: List
-
-```ruby
-# list returns an Array of McpTool records (raises on error).
-mcp_tools = client.McpTool.list
-```
-
-
 ### Metadata
 
 Create an instance: `metadata = client.Metadata`
@@ -1989,7 +1960,8 @@ Create an instance: `metadata = client.Metadata`
 | `modifiedOn` | `String` |  |
 | `name` | `String` |  |
 | `owner` | `String` |  |
-| `version` | `Integer` |  |
+| `state` | `String` |  |
+| `version` | `String` | A single version of an artifact. |
 
 #### Example: Load
 
@@ -2005,8 +1977,13 @@ metadata = client.Metadata.create({
   "artifact_id" => "example_artifact_id", # String
   "group_id" => "example_group_id", # String
   "version_expression" => "example_version_expression", # String
-  "modifiedBy" => "example_modifiedBy", # String
-  "modifiedOn" => "example_modifiedOn", # String
+  "artifactId" => "example_artifactId", # String
+  "artifactType" => "example_artifactType", # String
+  "contentId" => 1, # Integer
+  "createdOn" => "example_createdOn", # String
+  "globalId" => 1, # Integer
+  "owner" => "example_owner", # String
+  "version" => "example_version", # String
 })
 ```
 
@@ -2026,10 +2003,9 @@ Create an instance: `odcs_contract_result = client.OdcsContractResult`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `labelsApplied` | `Integer` | Number of contract.* labels set on the schema artifact. |
-| `rulesApplied` | `Integer` | Number of CEL quality rules projected onto the schema artifact. |
-| `tagsApplied` | `Integer` | Number of field-tag.* labels set on the schema artifact version. |
-| `warnings` | `Array` | Any warnings encountered during projection. |
+| `contractId` | `String` | The contract artifact ID. |
+| `projection` | `Hash` | Summary of the projection performed when an ODCS contract is applied. |
+| `version` | `String` | The ODCS contract version. |
 
 #### Example: Create
 
@@ -2100,6 +2076,7 @@ Create an instance: `role_mapping = client.RoleMapping`
 
 | Method | Description |
 | --- | --- |
+| `create(data)` | Create a new entity with the given data. |
 | `list(match)` | List entities matching the criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 
@@ -2124,6 +2101,15 @@ role_mapping = client.RoleMapping.load({ "id" => "role_mapping_id" })
 ```ruby
 # list returns an Array of RoleMapping records (raises on error).
 role_mappings = client.RoleMapping.list
+```
+
+#### Example: Create
+
+```ruby
+role_mapping = client.RoleMapping.create({
+  "principalId" => "example_principalId", # String
+  "role" => "example_role", # String
+})
 ```
 
 
@@ -2368,7 +2354,7 @@ Create an instance: `version = client.Version`
 | `owner` | `String` |  |
 | `state` | `String` |  |
 | `value` | `String` |  |
-| `version` | `String` |  |
+| `version` | `String` | A single version of an artifact. |
 | `versions` | `Array` | The collection of artifact versions returned in the result set. |
 
 #### Example: Load
@@ -2398,6 +2384,7 @@ version = client.Version.create({
   "globalId" => 1, # Integer
   "owner" => "example_owner", # String
   "value" => "example_value", # String
+  "version" => "example_version", # String
   "versions" => [], # Array
 })
 ```
@@ -2411,19 +2398,39 @@ Create an instance: `well_known = client.WellKnown`
 
 | Method | Description |
 | --- | --- |
+| `list(match)` | List entities matching the criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
+| `artifactId` | `String` |  |
+| `capabilities` | `Hash` | Capabilities of an A2A agent. |
+| `createdOn` | `Integer` |  |
+| `description` | `String` |  |
+| `groupId` | `String` |  |
 | `id` | `String` |  |
+| `name` | `String` |  |
+| `owner` | `String` |  |
+| `parameters` | `Array` |  |
+| `skills` | `Array` |  |
+| `supportedInterfaces` | `Array` |  |
+| `title` | `String` |  |
+| `version` | `String` |  |
 
 #### Example: Load
 
 ```ruby
 # load returns the ENTITY — call data_get for the WellKnown record (raises on error).
 well_known = client.WellKnown.load({ "artifact_id" => "artifact_id", "group_id" => "group_id" })
+```
+
+#### Example: List
+
+```ruby
+# list returns an Array of WellKnown records (raises on error).
+well_knowns = client.WellKnown.list
 ```
 
 

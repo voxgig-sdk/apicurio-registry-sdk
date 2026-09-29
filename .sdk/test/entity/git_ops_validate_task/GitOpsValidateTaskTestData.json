@@ -70,6 +70,11 @@
     }
   },
   "requests": {
+    "POST /admin/gitops/validate": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
     "GET /admin/gitops/validate": {
       "provenance": "operation-contract",
       "version": 2,

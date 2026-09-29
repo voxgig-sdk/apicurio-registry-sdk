@@ -2,6 +2,7 @@ package sdktest
 
 import (
 	"encoding/json"
+	"fmt"
 	"os"
 	"path/filepath"
 	"runtime"
@@ -69,6 +70,10 @@ func TestOdcsContractResultEntity(t *testing.T) {
 			"group_id": setup.idmap["group_id"],
 		}
 
+		odcsContractResultRef01MarkdefUp0Name := "contractId"
+		odcsContractResultRef01MarkdefUp0Value := fmt.Sprintf("Mark01-odcs_contract_result_ref01_%d", setup.now)
+		odcsContractResultRef01DataUp0Up[odcsContractResultRef01MarkdefUp0Name] = odcsContractResultRef01MarkdefUp0Value
+
 		odcsContractResultRef01ResdataUp0Result, err := odcsContractResultRef01Ent.Update(odcsContractResultRef01DataUp0Up, nil)
 		if err != nil {
 			t.Fatalf("update failed: %v", err)
@@ -76,6 +81,9 @@ func TestOdcsContractResultEntity(t *testing.T) {
 		odcsContractResultRef01ResdataUp0 := core.ToMapAny(entityData(odcsContractResultRef01ResdataUp0Result))
 		if odcsContractResultRef01ResdataUp0 == nil {
 			t.Fatal("expected update result to be a map")
+		}
+		if odcsContractResultRef01ResdataUp0[odcsContractResultRef01MarkdefUp0Name] != odcsContractResultRef01MarkdefUp0Value {
+			t.Fatalf("expected %s to be updated, got %v", odcsContractResultRef01MarkdefUp0Name, odcsContractResultRef01ResdataUp0[odcsContractResultRef01MarkdefUp0Name])
 		}
 
 	})

@@ -18,12 +18,51 @@ class WellKnownEntityTest extends TestCase
         $this->assertNotNull($ent);
     }
 
+    // Feature #4: the entity stream(action, ...) method runs the op pipeline
+    // and yields result items. With the streaming feature active it yields the
+    // feature's incremental output; otherwise it falls back to the materialised
+    // list so stream always yields.
+    public function test_stream(): void
+    {
+        $seed = [
+            "entity" => [
+                "well_known" => [
+                    "s1" => ["id" => "s1"],
+                    "s2" => ["id" => "s2"],
+                    "s3" => ["id" => "s3"],
+                ],
+            ],
+        ];
+
+        // Fallback: streaming inactive -> yields the materialised list items.
+        $base = ApicurioRegistrySDK::test($seed, null);
+        $seen = iterator_to_array($base->WellKnown(null)->stream("list", null, null), false);
+        $this->assertCount(3, $seen);
+
+        // Inbound: streaming active -> yields each item from the feature.
+        $cfg = ApicurioRegistryConfig::shared_config();
+        if (isset($cfg["feature"]) && is_array($cfg["feature"]) && isset($cfg["feature"]["streaming"])) {
+            $sdk = ApicurioRegistrySDK::test($seed, ["feature" => ["streaming" => ["active" => true]]]);
+            $got = [];
+            foreach ($sdk->WellKnown(null)->stream("list", null, null) as $item) {
+                if (is_array($item) && array_is_list($item)) {
+                    foreach ($item as $sub) {
+                        $got[] = $sub;
+                    }
+                } else {
+                    $got[] = $item;
+                }
+            }
+            $this->assertCount(3, $got);
+        }
+    }
+
     public function test_basic_flow(): void
     {
         $setup = well_known_basic_setup(null);
         // Per-op sdk-test-control.json skip.
         $_live = !empty($setup["live"]);
-        foreach (["load"] as $_op) {
+        foreach (["list", "load"] as $_op) {
             [$_shouldSkip, $_reason] = Runner::is_control_skipped("entityOp", "well_known." . $_op, $_live ? "live" : "unit");
             if ($_shouldSkip) {
                 $this->markTestSkipped($_reason ?? "skipped via sdk-test-control.json");
@@ -46,8 +85,14 @@ class WellKnownEntityTest extends TestCase
             $well_known_ref01_data = Helpers::to_map($well_known_ref01_data_raw[0][1]);
         }
 
-        // LOAD
+        // LIST
         $well_known_ref01_ent = $client->WellKnown(null);
+        $well_known_ref01_match = [];
+
+        $well_known_ref01_list_result = $well_known_ref01_ent->list($well_known_ref01_match, null);
+        $this->assertIsArray($well_known_ref01_list_result);
+
+        // LOAD
         $well_known_ref01_match_dt0 = [
             "id" => $well_known_ref01_data["id"],
         ];
@@ -74,7 +119,7 @@ function well_known_basic_setup($extra)
 
     // Generate idmap.
     $idmap = [];
-    foreach (["well_known01", "well_known02", "well_known03", "agent01", "agent02", "agent03", "mcp_tool01", "mcp_tool02", "mcp_tool03", "schema_type01"] as $k) {
+    foreach (["well_known01", "well_known02", "well_known03", "agent01", "agent02", "agent03", "schema_type01"] as $k) {
         $idmap[$k] = strtoupper($k);
     }
 

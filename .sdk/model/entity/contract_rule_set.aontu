@@ -37,21 +37,21 @@ main: kit: entity: contract_rule_set: {
               {
                 k: "param"
                 n: "artifact_id"
-                or: "artifact_id"
+                or: "artifactId"
                 r: true
                 t: "`$STRING`"
               }
               {
                 k: "param"
                 n: "group_id"
-                or: "group_id"
+                or: "groupId"
                 r: true
                 t: "`$STRING`"
               }
               {
                 k: "param"
                 n: "version_id"
-                or: "version_expression"
+                or: "versionExpression"
                 r: true
                 t: "`$STRING`"
               }
@@ -115,14 +115,14 @@ main: kit: entity: contract_rule_set: {
               {
                 k: "param"
                 n: "artifact_id"
-                or: "artifact_id"
+                or: "artifactId"
                 r: true
                 t: "`$STRING`"
               }
               {
                 k: "param"
                 n: "group_id"
-                or: "group_id"
+                or: "groupId"
                 r: true
                 t: "`$STRING`"
               }
@@ -207,21 +207,21 @@ main: kit: entity: contract_rule_set: {
               {
                 k: "param"
                 n: "artifact_id"
-                or: "artifact_id"
+                or: "artifactId"
                 r: true
                 t: "`$STRING`"
               }
               {
                 k: "param"
                 n: "group_id"
-                or: "group_id"
+                or: "groupId"
                 r: true
                 t: "`$STRING`"
               }
               {
                 k: "param"
                 n: "version_id"
-                or: "version_expression"
+                or: "versionExpression"
                 r: true
                 t: "`$STRING`"
               }
@@ -285,14 +285,14 @@ main: kit: entity: contract_rule_set: {
               {
                 k: "param"
                 n: "artifact_id"
-                or: "artifact_id"
+                or: "artifactId"
                 r: true
                 t: "`$STRING`"
               }
               {
                 k: "param"
                 n: "group_id"
-                or: "group_id"
+                or: "groupId"
                 r: true
                 t: "`$STRING`"
               }

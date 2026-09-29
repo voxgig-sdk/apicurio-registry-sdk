@@ -76,8 +76,6 @@ var NewGroupRuleEntityFunc func(client *ApicurioRegistrySDK, entopts map[string]
 
 var NewKafkaSqlEntityFunc func(client *ApicurioRegistrySDK, entopts map[string]any) ApicurioRegistryEntity
 
-var NewMcpToolEntityFunc func(client *ApicurioRegistrySDK, entopts map[string]any) ApicurioRegistryEntity
-
 var NewMetadataEntityFunc func(client *ApicurioRegistrySDK, entopts map[string]any) ApicurioRegistryEntity
 
 var NewOdcsContractResultEntityFunc func(client *ApicurioRegistrySDK, entopts map[string]any) ApicurioRegistryEntity

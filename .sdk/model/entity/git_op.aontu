@@ -4,30 +4,6 @@ main: kit: entity: git_op: {
 
   alias: field: {}
 
-  fields: {
-    ref: {
-      h: "Ref"
-      n: "ref"
-      r: true
-      sh: "Git ref to validate (branch name, tag, or PR ref like `refs/pull/42/head`)."
-      t: "`$STRING`"
-    }
-    repoId: {
-      h: "Repo Id"
-      n: "repoId"
-      r: true
-      sh: "Repository ID to validate against."
-      t: "`$STRING`"
-    }
-    type: {
-      h: "Type"
-      n: "type"
-      r: false
-      sh: "Validation type."
-      t: "`$STRING`"
-    }
-  }
-
   name: "git_op"
   op: {
     create: {
@@ -57,30 +33,6 @@ main: kit: entity: git_op: {
             res: "`body`"
           }
         }
-        {
-          co: {
-            id: "POST /admin/gitops/validate"
-            source: "openapi3"
-            version: 2
-          }
-          m: "POST"
-          o: "/admin/gitops/validate"
-          s: [
-            {
-              lit: "admin"
-            }
-            {
-              lit: "gitops"
-            }
-            {
-              lit: "validate"
-            }
-          ]
-          t: {
-            req: "`reqdata`"
-            res: "`body`"
-          }
-        }
       ]
     }
     remove: {
@@ -97,7 +49,7 @@ main: kit: entity: git_op: {
               {
                 k: "param"
                 n: "task_id"
-                or: "task_id"
+                or: "taskId"
                 r: true
                 t: "`$STRING`"
               }
@@ -136,6 +88,9 @@ main: kit: entity: git_op: {
         }
       ]
     }
+  }
+
+  fields: {
   }
 
 

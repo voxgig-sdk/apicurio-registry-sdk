@@ -21,13 +21,47 @@ class TestGlobalRuleEntity:
         ent = testsdk.GlobalRule(None)
         assert ent is not None
 
+    def test_should_stream(self):
+        # Feature #4: the entity stream(action, ...) method runs the op
+        # pipeline and yields result items. With the streaming feature active
+        # it yields the feature's incremental output; otherwise it falls back
+        # to the materialised list so stream always yields.
+        seed = {
+            "entity": {
+                "global_rule": {
+                    "s1": {"id": "s1"},
+                    "s2": {"id": "s2"},
+                    "s3": {"id": "s3"},
+                }
+            }
+        }
+
+        # Fallback: streaming inactive -> yields the materialised list items.
+        base = ApicurioRegistrySDK.test(seed, None)
+        seen = list(base.GlobalRule(None).stream("list", None, None))
+        assert len(seen) == 3
+
+        # Inbound: streaming active -> yields each item from the feature.
+        from apicurioregistry_sdk.config import shared_config
+        cfg = shared_config()
+        if isinstance(cfg.get("feature"), dict) and "streaming" in cfg["feature"]:
+            sdk = ApicurioRegistrySDK.test(
+                seed, {"feature": {"streaming": {"active": True}}})
+            got = []
+            for item in sdk.GlobalRule(None).stream("list", None, None):
+                if isinstance(item, list):
+                    got.extend(item)
+                else:
+                    got.append(item)
+            assert len(got) == 3
+
     def test_should_run_basic_flow(self):
         setup = _global_rule_basic_setup(None)
         # Per-op sdk-test-control.json skip — basic test exercises a flow with
         # multiple ops; skipping any one skips the whole flow (steps depend
         # on each other).
         _live = setup.get("live", False)
-        for _op in ["create", "remove"]:
+        for _op in ["create", "list", "remove"]:
             _skip, _reason = runner.is_control_skipped("entityOp", "global_rule." + _op, "live" if _live else "unit")
             if _skip:
                 pytest.skip(_reason or "skipped via sdk-test-control.json")
@@ -48,11 +82,33 @@ class TestGlobalRuleEntity:
         assert global_rule_ref01_data is not None
         assert global_rule_ref01_data["id"] is not None
 
+        # LIST
+        global_rule_ref01_match = {}
+
+        global_rule_ref01_list_result = global_rule_ref01_ent.list(global_rule_ref01_match, None)
+        assert isinstance(global_rule_ref01_list_result, list)
+
+        found_item = vs.select(
+            runner.entity_list_to_data(global_rule_ref01_list_result),
+            {"id": global_rule_ref01_data["id"]})
+        assert not vs.isempty(found_item)
+
         # REMOVE
         global_rule_ref01_match_rm0 = {
             "id": global_rule_ref01_data["id"],
         }
         global_rule_ref01_ent.remove(global_rule_ref01_match_rm0, None)
+
+        # LIST
+        global_rule_ref01_match_rt0 = {}
+
+        global_rule_ref01_list_rt0_result = global_rule_ref01_ent.list(global_rule_ref01_match_rt0, None)
+        assert isinstance(global_rule_ref01_list_rt0_result, list)
+
+        not_found_item = vs.select(
+            runner.entity_list_to_data(global_rule_ref01_list_rt0_result),
+            {"id": global_rule_ref01_data["id"]})
+        assert vs.isempty(not_found_item)
 
 
 

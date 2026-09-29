@@ -61,7 +61,7 @@ class TestRoleMappingEntity:
         # multiple ops; skipping any one skips the whole flow (steps depend
         # on each other).
         _live = setup.get("live", False)
-        for _op in ["list", "load"]:
+        for _op in ["create", "list", "load"]:
             _skip, _reason = runner.is_control_skipped("entityOp", "role_mapping." + _op, "live" if _live else "unit")
             if _skip:
                 pytest.skip(_reason or "skipped via sdk-test-control.json")
@@ -73,19 +73,25 @@ class TestRoleMappingEntity:
                         "set APICURIO_REGISTRY_TEST_ROLE_MAPPING_ENTID JSON to run live")
         client = setup["client"]
 
-        # Bootstrap entity data from existing test data.
-        role_mapping_ref01_data_raw = vs.items(helpers.to_map(
-            vs.getpath(setup["data"], "existing.role_mapping")))
-        role_mapping_ref01_data = None
-        if len(role_mapping_ref01_data_raw) > 0:
-            role_mapping_ref01_data = helpers.to_map(role_mapping_ref01_data_raw[0][1])
+        # CREATE
+        role_mapping_ref01_ent = client.RoleMapping(None)
+        role_mapping_ref01_data = helpers.to_map(vs.getprop(
+            vs.getpath(setup["data"], "new.role_mapping"), "role_mapping_ref01"))
+
+        role_mapping_ref01_data = helpers.to_map(runner.entity_data(role_mapping_ref01_ent.create(role_mapping_ref01_data, None)))
+        assert role_mapping_ref01_data is not None
+        assert role_mapping_ref01_data["id"] is not None
 
         # LIST
-        role_mapping_ref01_ent = client.RoleMapping(None)
         role_mapping_ref01_match = {}
 
         role_mapping_ref01_list_result = role_mapping_ref01_ent.list(role_mapping_ref01_match, None)
         assert isinstance(role_mapping_ref01_list_result, list)
+
+        found_item = vs.select(
+            runner.entity_list_to_data(role_mapping_ref01_list_result),
+            {"id": role_mapping_ref01_data["id"]})
+        assert not vs.isempty(found_item)
 
         # LOAD
         role_mapping_ref01_match_dt0 = {

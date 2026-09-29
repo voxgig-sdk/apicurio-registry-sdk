@@ -137,9 +137,6 @@ func init() {
 	core.NewKafkaSqlEntityFunc = func(client *core.ApicurioRegistrySDK, entopts map[string]any) core.ApicurioRegistryEntity {
 		return entity.NewKafkaSqlEntity(client, entopts)
 	}
-	core.NewMcpToolEntityFunc = func(client *core.ApicurioRegistrySDK, entopts map[string]any) core.ApicurioRegistryEntity {
-		return entity.NewMcpToolEntity(client, entopts)
-	}
 	core.NewMetadataEntityFunc = func(client *core.ApicurioRegistrySDK, entopts map[string]any) core.ApicurioRegistryEntity {
 		return entity.NewMetadataEntity(client, entopts)
 	}

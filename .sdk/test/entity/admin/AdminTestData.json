@@ -38,11 +38,6 @@
       "version": 2,
       "source": "openapi3"
     },
-    "POST /admin/roleMappings": {
-      "provenance": "operation-contract",
-      "version": 2,
-      "source": "openapi3"
-    },
     "DELETE /admin/roleMappings/{principalId}": {
       "provenance": "operation-contract",
       "version": 2,

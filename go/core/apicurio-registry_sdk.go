@@ -550,14 +550,6 @@ func (sdk *ApicurioRegistrySDK) KafkaSql(data map[string]any) ApicurioRegistryEn
 }
 
 
-// McpTool returns a McpTool entity bound to this client.
-// Idiomatic usage: client.McpTool(nil).List(nil, nil) or
-// client.McpTool(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *ApicurioRegistrySDK) McpTool(data map[string]any) ApicurioRegistryEntity {
-	return NewMcpToolEntityFunc(sdk, data)
-}
-
-
 // Metadata returns a Metadata entity bound to this client.
 // Idiomatic usage: client.Metadata(nil).List(nil, nil) or
 // client.Metadata(nil).Load(map[string]any{"id": ...}, nil).

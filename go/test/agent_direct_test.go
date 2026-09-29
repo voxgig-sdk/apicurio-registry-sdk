@@ -31,7 +31,7 @@ func TestAgentDirect(t *testing.T) {
 
 
 		result, err := client.Direct(map[string]any{
-			"path":   "well-known/agents",
+			"path":   "well-known/agent.json",
 			"method": "GET",
 			"params": map[string]any{},
 		})

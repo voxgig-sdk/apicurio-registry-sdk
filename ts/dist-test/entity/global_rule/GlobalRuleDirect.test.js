@@ -9,7 +9,7 @@ const live_runner_1 = require("../../live-runner");
 const __1 = require("../../..");
 const utility_1 = require("../../utility");
 (0, utility_1.loadEnvLocal)(__dirname + '/../../../.env.local');
-(0, node_test_1.describe)('McpToolDirect', async () => {
+(0, node_test_1.describe)('GlobalRuleDirect', async () => {
     // Per-test live pacing. Delay is read from sdk-test-control.json's
     // `test.live.delayMs`; only sleeps when APICURIO_REGISTRY_TEST_LIVE=TRUE.
     (0, node_test_1.afterEach)((0, utility_1.liveDelay)('APICURIO_REGISTRY_TEST_LIVE'));
@@ -21,19 +21,19 @@ const utility_1 = require("../../utility");
         (0, node_assert_1.default)('function' === typeof sdk.direct);
         (0, node_assert_1.default)('function' === typeof sdk.prepare);
     });
-    (0, node_test_1.test)('direct-list-mcp_tool', async (t) => {
+    (0, node_test_1.test)('direct-list-global_rule', async (t) => {
         if (liveScenariosActive()) {
             t.skip('Covered by live operation scenarios');
             return;
         }
         const setup = directSetup([{ id: 'direct01' }, { id: 'direct02' }]);
-        if ((0, utility_1.maybeSkipControl)(t, 'direct', 'direct-list-mcp_tool', setup.live))
+        if ((0, utility_1.maybeSkipControl)(t, 'direct', 'direct-list-global_rule', setup.live))
             return;
         const { client, calls } = setup;
         const params = {};
         const query = {};
         const result = await client.direct({
-            path: 'well-known/mcp-tools',
+            path: 'admin/rules',
             method: 'GET',
             params,
             query,
@@ -67,7 +67,7 @@ function liveScenariosActive() { return false && process.env.APICURIO_REGISTRY_T
 function directSetup(mockres) {
     const calls = [];
     const env = (0, utility_1.envOverride)({
-        'APICURIO_REGISTRY_TEST_MCP_TOOL_ENTID': {},
+        'APICURIO_REGISTRY_TEST_GLOBAL_RULE_ENTID': {},
         'APICURIO_REGISTRY_TEST_LIVE': 'FALSE',
         'APICURIO_REGISTRY_SERVER_REGISTRY': "MY-REGISTRY-URL",
     });
@@ -81,7 +81,7 @@ function directSetup(mockres) {
                 registry: env.APICURIO_REGISTRY_SERVER_REGISTRY,
             },
         }));
-        let idmap = env['APICURIO_REGISTRY_TEST_MCP_TOOL_ENTID'];
+        let idmap = env['APICURIO_REGISTRY_TEST_GLOBAL_RULE_ENTID'];
         if ('string' === typeof idmap && idmap.startsWith('{')) {
             idmap = JSON.parse(idmap);
         }
@@ -118,4 +118,4 @@ function unwrapListData(data) {
     }
     return null;
 }
-//# sourceMappingURL=McpToolDirect.test.js.map
+//# sourceMappingURL=GlobalRuleDirect.test.js.map

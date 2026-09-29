@@ -60,7 +60,7 @@ describe("GitOpsValidateTaskEntity", function()
     local setup = git_ops_validate_task_basic_setup(nil)
     -- Per-op sdk-test-control.json skip.
     local _live = setup.live or false
-    for _, _op in ipairs({"list", "load"}) do
+    for _, _op in ipairs({"create", "list", "load"}) do
       local _should_skip, _reason = runner.is_control_skipped("entityOp", "git_ops_validate_task." .. _op, _live and "live" or "unit")
       if _should_skip then
         pending(_reason or "skipped via sdk-test-control.json")
@@ -75,16 +75,17 @@ describe("GitOpsValidateTaskEntity", function()
     end
     local client = setup.client
 
-    -- Bootstrap entity data from existing test data.
-    local git_ops_validate_task_ref01_data_raw = vs.items(helpers.to_map(
-      vs.getpath(setup.data, "existing.git_ops_validate_task")))
-    local git_ops_validate_task_ref01_data = nil
-    if #git_ops_validate_task_ref01_data_raw > 0 then
-      git_ops_validate_task_ref01_data = helpers.to_map(git_ops_validate_task_ref01_data_raw[1][2])
-    end
+    -- CREATE
+    local git_ops_validate_task_ref01_ent = client:GitOpsValidateTask(nil)
+    local git_ops_validate_task_ref01_data = helpers.to_map(vs.getprop(
+      vs.getpath(setup.data, "new.git_ops_validate_task"), "git_ops_validate_task_ref01"))
+
+    local git_ops_validate_task_ref01_data_result, err = git_ops_validate_task_ref01_ent:create(git_ops_validate_task_ref01_data, nil)
+    assert.is_nil(err)
+    git_ops_validate_task_ref01_data = helpers.to_map(type(git_ops_validate_task_ref01_data_result) == 'table' and git_ops_validate_task_ref01_data_result.data_get and git_ops_validate_task_ref01_data_result:data_get() or git_ops_validate_task_ref01_data_result)
+    assert.is_not_nil(git_ops_validate_task_ref01_data)
 
     -- LIST
-    local git_ops_validate_task_ref01_ent = client:GitOpsValidateTask(nil)
     local git_ops_validate_task_ref01_match = {}
 
     local git_ops_validate_task_ref01_list_result, err = git_ops_validate_task_ref01_ent:list(git_ops_validate_task_ref01_match, nil)

@@ -159,10 +159,6 @@ Create a new `GroupRule` entity instance. Pass `nil` for no initial data.
 
 Create a new `KafkaSql` entity instance. Pass `nil` for no initial data.
 
-#### `McpTool(data map[string]any) ApicurioRegistryEntity`
-
-Create a new `McpTool` entity instance. Pass `nil` for no initial data.
-
 #### `Metadata(data map[string]any) ApicurioRegistryEntity`
 
 Create a new `Metadata` entity instance. Pass `nil` for no initial data.
@@ -352,17 +348,13 @@ fmt.Println(agent.GetName()) // "agent"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `artifactId` | `string` | No |  |
 | `capabilities` | `map[string]any` | No | Capabilities of an A2A agent. |
-| `createdOn` | `int` | No |  |
 | `defaultInputModes` | `[]any` | No |  |
 | `defaultOutputModes` | `[]any` | No |  |
 | `description` | `string` | No |  |
 | `documentationUrl` | `string` | No |  |
-| `groupId` | `string` | No |  |
 | `iconUrl` | `string` | No |  |
 | `name` | `string` | No |  |
-| `owner` | `string` | No |  |
 | `protocolVersion` | `string` | No |  |
 | `provider` | `map[string]any` | No | Provider of an A2A agent. |
 | `securityRequirements` | `[]any` | No |  |
@@ -546,8 +538,17 @@ fmt.Println(ardExplore.GetName()) // "ard_explore"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
+| `facets` | `map[string]any` | No | Facets keyed by the requested facet field name. |
 | `query` | `map[string]any` | No | ARD search query. |
-| `resultType` | `map[string]any` | Yes | Requested result type for the ARD POST /explore endpoint. |
+| `resultType` | `string` | No | Requested result type for the ARD POST /explore endpoint. |
+
+### Field Usage by Operation
+
+| Field | create |
+| --- | --- |
+| `facets` | - |
+| `query` | - |
+| `resultType` | Yes |
 
 ### Operations
 
@@ -557,7 +558,6 @@ Create a new entity with the given data.
 
 ```go
 result, err := client.ArdExplore(nil).Create(map[string]any{
-    "resultType": map[string]any{},
 }, nil)
 if err != nil {
     panic(err)
@@ -1731,14 +1731,6 @@ gitOp := client.GitOp(nil)
 fmt.Println(gitOp.GetName()) // "git_op"
 ```
 
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `ref` | `string` | Yes | Git ref to validate (branch name, tag, or PR ref like `refs/pull/42/head`). |
-| `repoId` | `string` | Yes | Repository ID to validate against. |
-| `type` | `string` | No | Validation type. |
-
 ### Operations
 
 #### `Create(reqdata, ctrl map[string]any) (any, error)`
@@ -1747,8 +1739,6 @@ Create a new entity with the given data.
 
 ```go
 result, err := client.GitOp(nil).Create(map[string]any{
-    "ref": "example_ref",
-    "repoId": "example_repoId",
 }, nil)
 if err != nil {
     panic(err)
@@ -1869,6 +1859,23 @@ fmt.Println(gitOpsValidateTask.GetName()) // "git_ops_validate_task"
 | `type` | `string` | No | Validation type (`pull` or `push`). |
 | `versionCount` | `int` | No | Number of artifact versions loaded during validation. |
 
+### Field Usage by Operation
+
+| Field | load | list | create |
+| --- | --- | --- | --- |
+| `artifactCount` | - | - | - |
+| `completedAt` | - | - | - |
+| `createdAt` | - | - | - |
+| `errors` | - | - | - |
+| `groupCount` | - | - | - |
+| `ref` | - | - | Yes |
+| `repoId` | - | - | Yes |
+| `result` | - | - | - |
+| `state` | - | - | - |
+| `taskId` | - | - | - |
+| `type` | - | - | - |
+| `versionCount` | - | - | - |
+
 ### Operations
 
 #### `List(reqmatch, ctrl map[string]any) (any, error)`
@@ -1889,6 +1896,21 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.GitOpsValidateTask(nil).Load(map[string]any{"task_id": "task_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
+```
+
+#### `Create(reqdata, ctrl map[string]any) (any, error)`
+
+Create a new entity with the given data.
+
+```go
+result, err := client.GitOpsValidateTask(nil).Create(map[string]any{
+    "state": "example_state",
+    "taskId": "example_taskId",
+}, nil)
 if err != nil {
     panic(err)
 }
@@ -1935,6 +1957,18 @@ fmt.Println(globalRule.GetName()) // "global_rule"
 | `ruleType` | `string` | No |  |
 
 ### Operations
+
+#### `List(reqmatch, ctrl map[string]any) (any, error)`
+
+List entities matching the given criteria. Returns an array.
+
+```go
+results, err := client.GlobalRule(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(results)
+```
 
 #### `Create(reqdata, ctrl map[string]any) (any, error)`
 
@@ -1997,31 +2031,27 @@ fmt.Println(group.GetName()) // "group"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `artifactsType` | `string` | No |  |
-| `createdOn` | `string` | No |  |
+| `createdOn` | `string` | Yes |  |
 | `description` | `string` | No |  |
-| `groupId` | `string` | No |  |
+| `groupId` | `string` | Yes |  |
 | `id` | `string` | No |  |
 | `labels` | `map[string]any` | No |  |
-| `modifiedBy` | `string` | No |  |
-| `modifiedOn` | `string` | No |  |
-| `owner` | `string` | No |  |
-| `properties` | `map[string]any` | No |  |
+| `modifiedBy` | `string` | Yes |  |
+| `modifiedOn` | `string` | Yes |  |
+| `owner` | `string` | Yes |  |
 
 ### Field Usage by Operation
 
 | Field | load | list | create | update | remove |
 | --- | --- | --- | --- | --- | --- |
-| `artifactsType` | - | - | - | - | - |
-| `createdOn` | - | Yes | - | - | - |
+| `createdOn` | - | - | - | - | - |
 | `description` | - | - | - | - | - |
-| `groupId` | - | Yes | Yes | - | - |
+| `groupId` | - | - | - | - | - |
 | `id` | - | - | - | - | - |
 | `labels` | - | - | - | - | - |
-| `modifiedBy` | - | Yes | - | - | - |
-| `modifiedOn` | - | Yes | - | - | - |
-| `owner` | - | Yes | - | - | - |
-| `properties` | - | - | - | - | - |
+| `modifiedBy` | - | - | - | - | - |
+| `modifiedOn` | - | - | - | - | - |
+| `owner` | - | - | - | Yes | - |
 
 ### Operations
 
@@ -2055,6 +2085,11 @@ Create a new entity with the given data.
 
 ```go
 result, err := client.Group(nil).Create(map[string]any{
+    "createdOn": "example_createdOn",
+    "groupId": "example_groupId",
+    "modifiedBy": "example_modifiedBy",
+    "modifiedOn": "example_modifiedOn",
+    "owner": "example_owner",
 }, nil)
 if err != nil {
     panic(err)
@@ -2234,64 +2269,6 @@ Return the entity name.
 
 ---
 
-## McpToolEntity
-
-```go
-mcpTool := client.McpTool(nil)
-fmt.Println(mcpTool.GetName()) // "mcp_tool"
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `artifactId` | `string` | No |  |
-| `createdOn` | `int` | No |  |
-| `description` | `string` | No |  |
-| `groupId` | `string` | No |  |
-| `name` | `string` | No |  |
-| `owner` | `string` | No |  |
-| `parameters` | `[]any` | No |  |
-| `title` | `string` | No |  |
-
-### Operations
-
-#### `List(reqmatch, ctrl map[string]any) (any, error)`
-
-List entities matching the given criteria. Returns an array.
-
-```go
-results, err := client.McpTool(nil).List(nil, nil)
-if err != nil {
-    panic(err)
-}
-fmt.Println(results)
-```
-
-### Common Methods
-
-#### `Data(args ...any) any`
-
-Get or set the entity data. When called with data, sets the entity's
-internal data and returns the current data. When called without
-arguments, returns a copy of the current data.
-
-#### `Match(args ...any) any`
-
-Get or set the entity match criteria. Works the same as `Data()`.
-
-#### `Make() Entity`
-
-Create a new `McpToolEntity` instance with the same client and
-options.
-
-#### `GetName() string`
-
-Return the entity name.
-
-
----
-
 ## MetadataEntity
 
 ```go
@@ -2303,38 +2280,40 @@ fmt.Println(metadata.GetName()) // "metadata"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `artifactId` | `string` | No |  |
-| `artifactType` | `string` | No |  |
-| `contentId` | `int` | No |  |
+| `artifactId` | `string` | Yes |  |
+| `artifactType` | `string` | Yes |  |
+| `contentId` | `int` | Yes |  |
 | `contractMetadata` | `map[string]any` | No | Contract metadata projected from the artifact labels. |
-| `createdOn` | `string` | No |  |
+| `createdOn` | `string` | Yes |  |
 | `description` | `string` | No |  |
-| `globalId` | `int` | No |  |
+| `globalId` | `int` | Yes |  |
 | `groupId` | `string` | No |  |
 | `labels` | `map[string]any` | No |  |
-| `modifiedBy` | `string` | Yes |  |
-| `modifiedOn` | `string` | Yes |  |
+| `modifiedBy` | `string` | No |  |
+| `modifiedOn` | `string` | No |  |
 | `name` | `string` | No |  |
-| `owner` | `string` | No |  |
-| `version` | `int` | No |  |
+| `owner` | `string` | Yes |  |
+| `state` | `string` | No |  |
+| `version` | `string` | Yes | A single version of an artifact. |
 
 ### Field Usage by Operation
 
 | Field | load | create | update |
 | --- | --- | --- | --- |
-| `artifactId` | Yes | - | - |
-| `artifactType` | Yes | - | - |
+| `artifactId` | - | - | - |
+| `artifactType` | - | - | - |
 | `contentId` | - | - | - |
 | `contractMetadata` | - | - | - |
-| `createdOn` | Yes | - | - |
+| `createdOn` | - | - | - |
 | `description` | - | - | - |
 | `globalId` | - | - | - |
 | `groupId` | Yes | - | - |
 | `labels` | - | - | - |
-| `modifiedBy` | - | - | - |
-| `modifiedOn` | - | - | - |
+| `modifiedBy` | Yes | - | - |
+| `modifiedOn` | Yes | - | - |
 | `name` | - | - | - |
-| `owner` | Yes | - | - |
+| `owner` | - | - | Yes |
+| `state` | - | - | - |
 | `version` | - | - | - |
 
 ### Operations
@@ -2360,8 +2339,13 @@ result, err := client.Metadata(nil).Create(map[string]any{
     "artifact_id": "example_artifact_id",
     "group_id": "example_group_id",
     "version_expression": "example_version_expression",
-    "modifiedBy": "example_modifiedBy",
-    "modifiedOn": "example_modifiedOn",
+    "artifactId": "example_artifactId",
+    "artifactType": "example_artifactType",
+    "contentId": 1,
+    "createdOn": "example_createdOn",
+    "globalId": 1,
+    "owner": "example_owner",
+    "version": "example_version",
 }, nil)
 if err != nil {
     panic(err)
@@ -2420,10 +2404,9 @@ fmt.Println(odcsContractResult.GetName()) // "odcs_contract_result"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `labelsApplied` | `int` | No | Number of contract.* labels set on the schema artifact. |
-| `rulesApplied` | `int` | No | Number of CEL quality rules projected onto the schema artifact. |
-| `tagsApplied` | `int` | No | Number of field-tag.* labels set on the schema artifact version. |
-| `warnings` | `[]any` | No | Any warnings encountered during projection. |
+| `contractId` | `string` | No | The contract artifact ID. |
+| `projection` | `map[string]any` | No | Summary of the projection performed when an ODCS contract is applied. |
+| `version` | `string` | No | The ODCS contract version. |
 
 ### Operations
 
@@ -2623,6 +2606,21 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.RoleMapping(nil).Load(map[string]any{"id": "role_mapping_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
+```
+
+#### `Create(reqdata, ctrl map[string]any) (any, error)`
+
+Create a new entity with the given data.
+
+```go
+result, err := client.RoleMapping(nil).Create(map[string]any{
+    "principalId": "example_principalId",
+    "role": "example_role",
+}, nil)
 if err != nil {
     panic(err)
 }
@@ -3092,9 +3090,9 @@ fmt.Println(version.GetName()) // "version"
 | `modifiedOn` | `string` | No |  |
 | `name` | `string` | No |  |
 | `owner` | `string` | Yes |  |
-| `state` | `string` | Yes |  |
+| `state` | `string` | No |  |
 | `value` | `string` | Yes |  |
-| `version` | `string` | No |  |
+| `version` | `string` | Yes | A single version of an artifact. |
 | `versions` | `[]any` | Yes | The collection of artifact versions returned in the result set. |
 
 ### Field Usage by Operation
@@ -3118,9 +3116,9 @@ fmt.Println(version.GetName()) // "version"
 | `modifiedOn` | - | - | - | - | - |
 | `name` | - | - | - | - | - |
 | `owner` | - | - | - | - | - |
-| `state` | - | - | - | - | - |
+| `state` | - | Yes | - | - | - |
 | `value` | - | - | - | - | - |
-| `version` | - | Yes | - | - | - |
+| `version` | - | - | Yes | - | - |
 | `versions` | - | - | - | - | - |
 
 ### Operations
@@ -3164,6 +3162,7 @@ result, err := client.Version(nil).Create(map[string]any{
     "globalId": 1,
     "owner": "example_owner",
     "value": "example_value",
+    "version": "example_version",
     "versions": []any{},
 }, nil)
 if err != nil {
@@ -3237,9 +3236,33 @@ fmt.Println(wellKnown.GetName()) // "well_known"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
+| `artifactId` | `string` | No |  |
+| `capabilities` | `map[string]any` | No | Capabilities of an A2A agent. |
+| `createdOn` | `int` | No |  |
+| `description` | `string` | No |  |
+| `groupId` | `string` | No |  |
 | `id` | `string` | No |  |
+| `name` | `string` | No |  |
+| `owner` | `string` | No |  |
+| `parameters` | `[]any` | No |  |
+| `skills` | `[]any` | No |  |
+| `supportedInterfaces` | `[]any` | No |  |
+| `title` | `string` | No |  |
+| `version` | `string` | No |  |
 
 ### Operations
+
+#### `List(reqmatch, ctrl map[string]any) (any, error)`
+
+List entities matching the given criteria. Returns an array.
+
+```go
+results, err := client.WellKnown(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(results)
+```
 
 #### `Load(reqmatch, ctrl map[string]any) (any, error)`
 

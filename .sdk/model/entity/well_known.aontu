@@ -5,9 +5,83 @@ main: kit: entity: well_known: {
   alias: field: {}
 
   fields: {
+    artifactId: {
+      h: "Artifact Id"
+      n: "artifactId"
+      r: false
+      t: "`$STRING`"
+    }
+    capabilities: {
+      h: "Capabilities"
+      n: "capabilities"
+      r: false
+      sh: "Capabilities of an A2A agent."
+      t: "`$OBJECT`"
+    }
+    createdOn: {
+      fo: "int64"
+      h: "Created On"
+      n: "createdOn"
+      r: false
+      t: "`$INTEGER`"
+    }
+    description: {
+      h: "Description"
+      n: "description"
+      r: false
+      t: "`$STRING`"
+    }
+    groupId: {
+      h: "Group Id"
+      n: "groupId"
+      r: false
+      t: "`$STRING`"
+    }
     id: {
       h: "Id"
       n: "id"
+      r: false
+      t: "`$STRING`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      r: false
+      t: "`$STRING`"
+    }
+    owner: {
+      h: "Owner"
+      n: "owner"
+      r: false
+      t: "`$STRING`"
+    }
+    parameters: {
+      h: "Parameters"
+      n: "parameters"
+      r: false
+      t: "`$ARRAY`"
+    }
+    skills: {
+      h: "Skills"
+      n: "skills"
+      r: false
+      t: "`$ARRAY`"
+    }
+    supportedInterfaces: {
+      h: "Supported Interfaces"
+      n: "supportedInterfaces"
+      r: false
+      t: "`$ARRAY`"
+    }
+    title: {
+      h: "Title"
+      n: "title"
+      r: false
+      t: "`$STRING`"
+    }
+    version: {
+      h: "Version"
+      n: "version"
       r: false
       t: "`$STRING`"
     }
@@ -15,6 +89,10 @@ main: kit: entity: well_known: {
 
   id: {
     field: "id"
+    from: {
+      artifact_id: "artifactId"
+      group_id: "groupId"
+    }
     name: "id"
     parts: [
       "group_id"
@@ -25,6 +103,161 @@ main: kit: entity: well_known: {
 
   name: "well_known"
   op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /well-known/agents"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "capability"
+                or: "capability"
+                r: false
+                t: "`$ARRAY`"
+              }
+              {
+                k: "query"
+                n: "input_mode"
+                or: "inputMode"
+                r: false
+                t: "`$ARRAY`"
+              }
+              {
+                ex: 20
+                k: "query"
+                n: "limit"
+                or: "limit"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "name"
+                or: "name"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: 0
+                k: "query"
+                n: "offset"
+                or: "offset"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "output_mode"
+                or: "outputMode"
+                r: false
+                t: "`$ARRAY`"
+              }
+              {
+                k: "query"
+                n: "skill"
+                or: "skill"
+                r: false
+                t: "`$ARRAY`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/well-known/agents"
+          q: {
+            exist: [
+              "capability"
+              "input_mode"
+              "limit"
+              "name"
+              "offset"
+              "output_mode"
+              "skill"
+            ]
+          }
+          s: [
+            {
+              lit: "well-known"
+            }
+            {
+              lit: "agents"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.agents`"
+          }
+        }
+        {
+          co: {
+            id: "GET /well-known/mcp-tools"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                ex: 20
+                k: "query"
+                n: "limit"
+                or: "limit"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "name"
+                or: "name"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: 0
+                k: "query"
+                n: "offset"
+                or: "offset"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "parameter"
+                or: "parameter"
+                r: false
+                t: "`$ARRAY`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/well-known/mcp-tools"
+          q: {
+            exist: [
+              "limit"
+              "name"
+              "offset"
+              "parameter"
+            ]
+          }
+          s: [
+            {
+              lit: "well-known"
+            }
+            {
+              lit: "mcp-tools"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.tools`"
+          }
+        }
+      ]
+    }
     load: {
       name: "load"
       points: [
@@ -39,14 +272,14 @@ main: kit: entity: well_known: {
               {
                 k: "param"
                 n: "artifact_id"
-                or: "artifact_id"
+                or: "artifactId"
                 r: true
                 t: "`$STRING`"
               }
               {
                 k: "param"
                 n: "group_id"
-                or: "group_id"
+                or: "groupId"
                 r: true
                 t: "`$STRING`"
               }
@@ -106,14 +339,14 @@ main: kit: entity: well_known: {
               {
                 k: "param"
                 n: "artifact_id"
-                or: "artifact_id"
+                or: "artifactId"
                 r: true
                 t: "`$STRING`"
               }
               {
                 k: "param"
                 n: "group_id"
-                or: "group_id"
+                or: "groupId"
                 r: true
                 t: "`$STRING`"
               }
@@ -173,7 +406,7 @@ main: kit: entity: well_known: {
               {
                 k: "param"
                 n: "schema_type"
-                or: "schema_type"
+                or: "schemaType"
                 r: true
                 t: "`$STRING`"
               }
@@ -225,7 +458,6 @@ main: kit: entity: well_known: {
 
   relations: ancestors: [
     [path("$.main.kit.entity.agent")]
-    [path("$.main.kit.entity.mcp_tool")]
   ]
 
 }

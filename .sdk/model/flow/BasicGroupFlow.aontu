@@ -31,7 +31,7 @@ main: kit: flow: BasicGroupFlow:
         ref: "group_ref01",
         srcdatavar: "group_ref01_data",
         suffix: "_up0",
-        textfield: "artifactsType"
+        textfield: "createdOn"
       }
 
       o: "update",

@@ -2,23 +2,14 @@
   "existing": {
     "git_op": {
       "GIT_OP00": {
-        "ref": "s1e",
-        "repoId": "s1f",
-        "type": "s20",
         "task_id": "TASK01",
         "id": "GIT_OP00"
       },
       "GIT_OP01": {
-        "ref": "s3c",
-        "repoId": "s3d",
-        "type": "s3e",
         "task_id": "TASK01",
         "id": "GIT_OP01"
       },
       "GIT_OP02": {
-        "ref": "s5a",
-        "repoId": "s5b",
-        "type": "s5c",
         "task_id": "TASK01",
         "id": "GIT_OP02"
       }
@@ -26,20 +17,11 @@
   },
   "new": {
     "git_op": {
-      "git_op_ref01": {
-        "ref": "s78",
-        "repoId": "s79",
-        "type": "s7a"
-      }
+      "git_op_ref01": {}
     }
   },
   "requests": {
     "POST /admin/gitops/sync": {
-      "provenance": "operation-contract",
-      "version": 2,
-      "source": "openapi3"
-    },
-    "POST /admin/gitops/validate": {
       "provenance": "operation-contract",
       "version": 2,
       "source": "openapi3"

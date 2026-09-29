@@ -5,36 +5,26 @@ main: kit: entity: odcs_contract_result: {
   alias: field: {}
 
   fields: {
-    labelsApplied: {
-      fo: "int32"
-      h: "Labels Applied"
-      n: "labelsApplied"
+    contractId: {
+      h: "Contract Id"
+      n: "contractId"
       r: false
-      sh: "Number of contract.* labels set on the schema artifact."
-      t: "`$INTEGER`"
+      sh: "The contract artifact ID."
+      t: "`$STRING`"
     }
-    rulesApplied: {
-      fo: "int32"
-      h: "Rules Applied"
-      n: "rulesApplied"
+    projection: {
+      h: "Projection"
+      n: "projection"
       r: false
-      sh: "Number of CEL quality rules projected onto the schema artifact."
-      t: "`$INTEGER`"
+      sh: "Summary of the projection performed when an ODCS contract is applied."
+      t: "`$OBJECT`"
     }
-    tagsApplied: {
-      fo: "int32"
-      h: "Tags Applied"
-      n: "tagsApplied"
+    version: {
+      h: "Version"
+      n: "version"
       r: false
-      sh: "Number of field-tag.* labels set on the schema artifact version."
-      t: "`$INTEGER`"
-    }
-    warnings: {
-      h: "Warnings"
-      n: "warnings"
-      r: false
-      sh: "Any warnings encountered during projection."
-      t: "`$ARRAY`"
+      sh: "The ODCS contract version."
+      t: "`$STRING`"
     }
   }
 
@@ -54,7 +44,7 @@ main: kit: entity: odcs_contract_result: {
               {
                 k: "param"
                 n: "group_id"
-                or: "group_id"
+                or: "groupId"
                 r: true
                 t: "`$STRING`"
               }
@@ -85,7 +75,7 @@ main: kit: entity: odcs_contract_result: {
           ]
           t: {
             req: "`reqdata`"
-            res: "`body.projection`"
+            res: "`body`"
           }
         }
       ]
@@ -104,14 +94,14 @@ main: kit: entity: odcs_contract_result: {
               {
                 k: "param"
                 n: "contract_id"
-                or: "contract_id"
+                or: "contractId"
                 r: true
                 t: "`$STRING`"
               }
               {
                 k: "param"
                 n: "group_id"
-                or: "group_id"
+                or: "groupId"
                 r: true
                 t: "`$STRING`"
               }
@@ -147,7 +137,7 @@ main: kit: entity: odcs_contract_result: {
           ]
           t: {
             req: "`reqdata`"
-            res: "`body.projection`"
+            res: "`body`"
           }
         }
       ]

@@ -845,24 +845,6 @@ class ApicurioRegistrySDK
     }
 
 
-    private $_mcp_tool = null;
-
-    // Canonical facade: $client->McpTool()->list() / ->load(["id" => ...]).
-    // PHP method names are case-insensitive, so lowercase $client->mcp_tool()
-    // resolves here too.
-    public function McpTool($data = null)
-    {
-        require_once __DIR__ . '/entity/mcp_tool_entity.php';
-        if ($data === null) {
-            if ($this->_mcp_tool === null) {
-                $this->_mcp_tool = new McpToolEntity($this, null);
-            }
-            return $this->_mcp_tool;
-        }
-        return new McpToolEntity($this, $data);
-    }
-
-
     private $_metadata = null;
 
     // Canonical facade: $client->Metadata()->list() / ->load(["id" => ...]).

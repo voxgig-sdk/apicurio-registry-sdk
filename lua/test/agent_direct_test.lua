@@ -21,7 +21,7 @@ describe("AgentDirect", function()
 
 
     local result, err = client:direct({
-      path = "well-known/agents",
+      path = "well-known/agent.json",
       method = "GET",
       params = {},
     })

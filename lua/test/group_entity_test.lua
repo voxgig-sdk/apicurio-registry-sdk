@@ -103,7 +103,7 @@ describe("GroupEntity", function()
       id = group_ref01_data["id"],
     }
 
-    local group_ref01_markdef_up0_name = "artifactsType"
+    local group_ref01_markdef_up0_name = "createdOn"
     local group_ref01_markdef_up0_value = "Mark01-group_ref01_" .. tostring(setup.now)
     group_ref01_data_up0_up[group_ref01_markdef_up0_name] = group_ref01_markdef_up0_value
 

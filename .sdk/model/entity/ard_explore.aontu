@@ -5,6 +5,13 @@ main: kit: entity: ard_explore: {
   alias: field: {}
 
   fields: {
+    facets: {
+      h: "Facets"
+      n: "facets"
+      r: false
+      sh: "Facets keyed by the requested facet field name."
+      t: "`$OBJECT`"
+    }
     query: {
       h: "Query"
       n: "query"
@@ -15,9 +22,15 @@ main: kit: entity: ard_explore: {
     resultType: {
       h: "Result Type"
       n: "resultType"
-      r: true
+      op: {
+        create: {
+          req: true
+          type: "`$OBJECT`"
+        }
+      }
+      r: false
       sh: "Requested result type for the ARD POST /explore endpoint."
-      t: "`$OBJECT`"
+      t: "`$STRING`"
     }
   }
 
@@ -47,7 +60,7 @@ main: kit: entity: ard_explore: {
           ]
           t: {
             req: "`reqdata`"
-            res: "`body.facets`"
+            res: "`body`"
           }
         }
       ]
